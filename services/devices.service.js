@@ -216,9 +216,10 @@ const getDeviceBySpaceID_ByRoomName = async (spaceID, roomName) => {
 
 
 const setRoomDeviceState = async (id, state) => {
+
   try {
     const response = await RoomDevice.updateOne(
-      { id },
+      { device_id: id },
       { state: state ? "on" : "off" }
     );
     console.log(response);

@@ -186,7 +186,7 @@ class CommandFactory {
     static async searchDevicesInAction(action) {
         // Implementation for searching devices in action text
         // Adjust the search logic according to your application's needs
-        const devices = ['AC', 'light', 'Fan', 'Bulb', 'Projector', 'TV']; // Example devices
+        const devices = ['AC', 'light', 'Fan', 'Bulb', 'Projector', 'TV','tap']; // Example devices
         return devices.filter(device => action.toLowerCase().includes(device.toLowerCase()));
     }
 

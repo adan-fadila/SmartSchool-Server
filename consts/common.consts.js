@@ -21,7 +21,8 @@ const SENSORS = {
     AC_STATUS: 'ac_status',
     HEATER_SWITCH: 'heater_switch',
     LAUNDRY_MATCHINE: 'laundry_machine',
-    PUMP: 'pump'
+    PUMP: 'pump',
+    TAP: 'tap'
   }
 
   const SEASONS = {

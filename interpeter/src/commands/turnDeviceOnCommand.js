@@ -18,7 +18,7 @@
 
 
 //         // Assuming this.details is a string like "25 DEGREES"
-    
+
 //         // //Extract the numeric part from the string
 //     //     const targetTemperature = parseInt(this.details.split(' ')[0], 10); // Convert to integer
 //     //     console.log(targetTemperature)
@@ -34,35 +34,35 @@
 //     //             mode: this.mode
 //     //         }
 //     //     };
-        
+
 //     //     try {
 //     //         const response = await axios.post(deviceUrl, payload, {
 //     //             headers: { 'Content-Type': 'application/json' }
 //     //         });
-            
+
 //     //         console.log(`Device ${this.device} turned on successfully with temperature: ${targetTemperature} degrees. Response:`, response.data);
-            
+
 //     //         // Update the device state in your local database
 //     //         const updateResultDevice = await Device.updateOne(
 //     //             { device_id: device_id }, // Assuming device_id is the filter criteria
 //     //             { $set: { state: "on", lastUpdated: new Date() }}
 //     //         );
-            
+
 //     //         const updateResultRoomDevice = await RoomDevice.updateOne(
 //     //             { device_id: device_id },
 //     //             { $set: { state: "on", lastUpdated: new Date() }}
 //     //         );
-            
+
 //     //         console.log("Device Database update result:", updateResultDevice);
 //     //         console.log("RoomDevice Database update result:", updateResultRoomDevice);
 //     //     } catch (error) {
 //     //         console.error(`Failed to turn on ${this.device}. Error:`, error.message);
 //     //     }
 //     // }
-    
+
 
 //     // //add new Device turn on 
-    
+
 //     // Turn_lights(device,details,place){
 //     //     this.details =device;
 //     //     this.details = details;
@@ -86,11 +86,11 @@ const axios = require('axios');
 require('dotenv').config();
 const {
     TurnON_OFF_LIGHT,
-  } = require("./../../../api/sensibo.js");
+} = require("./../../../api/sensibo.js");
 
 const fs = require('fs').promises;
 const path = require('path');
-  
+
 class TurnDeviceOnCommand extends BaseCommand {
     constructor(deviceid, mode, temperature, device, state, data, res, ControlFlag) {
         super();
@@ -127,6 +127,9 @@ class TurnDeviceOnCommand extends BaseCommand {
             case 'tv':
                 await this.turnTVOn();
                 break;
+            case 'tap':
+                await this.turnTapOn();
+                break;
             default:
                 console.log(`Device type ${this.device} is not supported.`);
                 break;
@@ -139,7 +142,7 @@ class TurnDeviceOnCommand extends BaseCommand {
         // Extract the numeric part from the string if necessary
         const targetTemperature = parseInt(this.temperature, 10); // Convert to integer
         console.log(targetTemperature);
-        const  apiKey = process.env.SENSIBO_API_KEY ; // Assuming you add device_id and apiKey to this.details if necessary
+        const apiKey = process.env.SENSIBO_API_KEY; // Assuming you add device_id and apiKey to this.details if necessary
         // Use default values or values from parsed details
         const deviceUrl = `https://home.sensibo.com/api/v2/pods/${this.deviceid}/acStates?apiKey=${apiKey}`;
         const payload = {
@@ -161,12 +164,12 @@ class TurnDeviceOnCommand extends BaseCommand {
             // // Update the device state in your local database
             const updateResultDevice = await Device.updateOne(
                 { device_id: this.deviceid }, // Assuming deviceid is the filter criteria
-                { $set: { state: "on", lastUpdated: new Date() }}
+                { $set: { state: "on", lastUpdated: new Date() } }
             );
 
             const updateResultRoomDevice = await RoomDevice.updateOne(
                 { device_id: this.deviceid },
-                { $set: { state: "on", lastUpdated: new Date() }}
+                { $set: { state: "on", lastUpdated: new Date() } }
             );
 
             // console.log("Device Database update result:", updateResultDevice);
@@ -185,7 +188,7 @@ class TurnDeviceOnCommand extends BaseCommand {
         }
     }
 
-     async turnLightOn(raspberryPiIP) {
+    async turnLightOn(raspberryPiIP) {
         console.log(`Executing Turn On for light with RaspberryPi IP: ${raspberryPiIP}`);
         if (this.ControlFlag === 'manual') {
             try {
@@ -217,7 +220,7 @@ class TurnDeviceOnCommand extends BaseCommand {
 
         const apiUrl = `${endpoint}/api-mindolife/change_feature_state`;
         try {
-            const response = await axios.post(apiUrl, { deviceId:deviceId, state:state });
+            const response = await axios.post(apiUrl, { deviceId: deviceId, state: state });
 
             console.log("Response from Flask server:", response.data);
             if (response.status === 200) {
@@ -232,7 +235,7 @@ class TurnDeviceOnCommand extends BaseCommand {
                     { room_id: roomId, device_id: deviceId },
                     { $set: { state, lastUpdated: new Date() } }
                 );
-                console.log(`Device state updated for Device ID:, ${deviceId}` );
+                console.log(`Device state updated for Device ID:, ${deviceId}`);
                 return { statusCode: 200, data: response.data };
             } else {
                 throw new Error("Failed to change feature state via API.");
@@ -257,11 +260,15 @@ class TurnDeviceOnCommand extends BaseCommand {
         console.log(`Turning TV on with details: ${this.details}`);
         await this.updateDeviceState("on");
     }
+    async turnTapOn() {
+        console.log(`Turning Tap on `);
+        await this.updateDeviceState("on");
+    }
 
     async updateDeviceState(state) {
         const updateResultDevice = await Device.updateOne({ device_id: this.deviceid }, { $set: { state, lastUpdated: new Date() } });
         const updateResultRoomDevice = await RoomDevice.updateOne({ device_id: this.deviceid }, { $set: { state, lastUpdated: new Date() } });
-        console.log(`Device state updated for Device ID:, ${this.deviceid }` );
+        console.log(`Device state updated for Device ID:, ${this.deviceid}`);
     }
 
     async getNgrokUrl(rasp_ip) {

@@ -40,7 +40,7 @@ class TurnDeviceOnOffCommand extends BaseCommand {
 
     async execute() {
         console.log(`Executing Turn ${this.deviceid} ${this.state} for ${this.device} in mode ${this.mode} with value ${this.temperature}`);
-        
+
         switch (this.device.toLowerCase()) {
             case 'ac':
                 await this.turnAc();
@@ -60,6 +60,10 @@ class TurnDeviceOnOffCommand extends BaseCommand {
             case 'tv':
                 await this.turnTV();
                 break;
+            case 'tap':
+                console.log("turn Tap");
+                await this.turnTap();
+                break;
             default:
                 console.log(`Device type ${this.device} is not supported.`);
                 break;
@@ -71,7 +75,7 @@ class TurnDeviceOnOffCommand extends BaseCommand {
         // Extract the numeric part from the string if necessary
         const targetTemperature = parseInt(this.temperature, 10); // Convert to integer
         console.log(targetTemperature);
-        const  apiKey = process.env.SENSIBO_API_KEY ; // Assuming you add device_id and apiKey to this.details if necessary
+        const apiKey = process.env.SENSIBO_API_KEY; // Assuming you add device_id and apiKey to this.details if necessary
         // Use default values or values from parsed details
         const deviceUrl = `https://home.sensibo.com/api/v2/pods/${this.deviceid}/acStates?apiKey=${apiKey}`;
         const payload = {
@@ -93,12 +97,12 @@ class TurnDeviceOnOffCommand extends BaseCommand {
             // Update the device state in your local database
             const updateResultDevice = await Device.updateOne(
                 { device_id: this.deviceid }, // Assuming deviceid is the filter criteria
-                { $set: { state: "off", lastUpdated: new Date() }}
+                { $set: { state: "off", lastUpdated: new Date() } }
             );
 
             const updateResultRoomDevice = await RoomDevice.updateOne(
                 { device_id: this.deviceid },
-                { $set: { state: "off", lastUpdated: new Date() }}
+                { $set: { state: "off", lastUpdated: new Date() } }
             );
 
             // console.log("Device Database update result:", updateResultDevice);
@@ -143,7 +147,7 @@ class TurnDeviceOnOffCommand extends BaseCommand {
 
         const apiUrl = `${endpoint}/api-mindolife/change_feature_state`;
         try {
-            const valuePost= state ? 'on' : 'off';
+            const valuePost = state ? 'on' : 'off';
             const response = await axios.post(apiUrl, { deviceId, state: valuePost });
 
             console.log("Response from Flask server:", response.data);
@@ -179,16 +183,26 @@ class TurnDeviceOnOffCommand extends BaseCommand {
         console.log(`Turning projector ${this.state}`);
         await this.updateDeviceState(this.state);
     }
+    async turnProjector() {
+        console.log(`Turning projector ${this.state}`);
+        await this.updateDeviceState(this.state);
+    }
+
 
     async turnTV() {
         console.log(`Turning TV ${this.state}`);
         await this.updateDeviceState(this.state);
     }
+    async turnTap() {
+        console.log(`Turning Tap ${this.state}`);
+        await this.updateDeviceState(this.state);
+    }
+
 
     async updateDeviceState(state) {
         const updateResultDevice = await Device.updateOne({ device_id: this.deviceid }, { $set: { state, lastUpdated: new Date() } });
         const updateResultRoomDevice = await RoomDevice.updateOne({ device_id: this.deviceid }, { $set: { state, lastUpdated: new Date() } });
-        console.log(`Device state updated for Device ID:, ${this.deviceid }` );
+        console.log(`Device state updated for Device ID:, ${this.deviceid}`);
     }
 
     async getNgrokUrl(rasp_ip) {

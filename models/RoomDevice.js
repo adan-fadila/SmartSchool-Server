@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const roomDeviceSchema = new mongoose.Schema({
   id: {
-    type: String.prototype,
+    type: String,
     required: true
   },
   space_id: {

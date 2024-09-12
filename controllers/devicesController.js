@@ -104,6 +104,7 @@ exports.devicescontrollers = {
   async updateRoomDeviceState(req, res) {
     try {
         const { state, id } = req.body;
+        console.log(req.body);
         //const response = await setRoomDeviceState(id, state);
         const response = await setRoomDeviceState(id, state);
     
