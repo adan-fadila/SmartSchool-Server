@@ -35,7 +35,6 @@ function getCurrentActivity() {
 function getCurrentSeason() {
   const now = new Date();
   const month = now.getMonth() + 1; // getMonth() returns month from 0 (January) to 11 (December), so add 1 for clarity
-
   if (month >= 3 && month <= 5) {
     return SEASONS.SPRING;
   } else if (month >= 6 && month <= 8) {

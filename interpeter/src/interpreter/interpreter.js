@@ -438,7 +438,6 @@ async function processData(parsed, data, res, Context) {
                 space_id: data.space_id,
                 control : 'manual',
             };
-            // console.log(context);
         } else {
             context = {
                 detection: data.motionState,
@@ -448,7 +447,6 @@ async function processData(parsed, data, res, Context) {
                 roomid: data.roomId,
                 space_id: data.spaceId,
             };
-            // console.log(context);
         }
     }
   
@@ -623,6 +621,7 @@ async function interpretRuleByNameCalendar(Condition, data, shouldSendRes = fals
 
         if (rules.length > 0) {
             for (const rule of rules) {
+                console.log("in the by calender");
                 await Interpret(rule.description, data, shouldSendRes, res, Context); // Process each rule found
             }
         } else {
