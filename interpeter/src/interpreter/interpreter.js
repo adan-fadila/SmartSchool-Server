@@ -363,7 +363,7 @@ function evaluateCondition(parsed, context) {
 }
 
 
-async function GetRoomNameFromDatabase(parsed) {
+async function GetRoomNameFromDatabase(parsed,spaceId) {
     const cachedRoomNames = cache.get('roomNames');
     let roomNames;
     if (cachedRoomNames) {
@@ -383,7 +383,7 @@ async function GetRoomNameFromDatabase(parsed) {
         const matchedName = roomNameMatch[0].trim();
         const roomName = roomNames.find(name => name.toLowerCase() === matchedName);
         if (roomName) {
-            const roomDetails = await getRoomByName(roomName);
+            const roomDetails = await getRoomByName(roomName,spaceId);
             return { roomName, roomDetails };
         }
     }
@@ -450,13 +450,15 @@ async function processData(parsed, data, res, Context) {
         }
     }
   
-    const { roomName, roomDetails } = await GetRoomNameFromDatabase(context.room_Name);
+    const { roomName, roomDetails } = await GetRoomNameFromDatabase(context.room_Name,context.space_id);
     if (!roomDetails) {
         console.error("Failed to fetch the room ID");
         return;
     }
   
     const roomDevicesResult = await getDevicesByRoomId(roomDetails.id);
+    console.log("roomDetails: ",roomDetails);
+    console.log("roomDevicesResult: ",roomDevicesResult);
     if (roomDevicesResult.statusCode !== 200) {
         console.error("Failed to fetch room devices:", roomDevicesResult.message);
         return;
@@ -600,7 +602,7 @@ async function interpretRuleByNameHumD(Condition, data, shouldSendRes = false, r
 async function interpretRuleByNameCalendar(Condition, data, shouldSendRes = false, res = null, Context, alreadyTried = false) {
     try {
         // console.log(Condition);
-        // console.log(data.space_id);
+         console.log("data in interpretRuleByNameCalendar ",data);
         const regex = new RegExp(escapeRegex(Condition), 'i');
 
         let mainCondition;
@@ -621,7 +623,6 @@ async function interpretRuleByNameCalendar(Condition, data, shouldSendRes = fals
 
         if (rules.length > 0) {
             for (const rule of rules) {
-                console.log("in the by calender");
                 await Interpret(rule.description, data, shouldSendRes, res, Context); // Process each rule found
             }
         } else {

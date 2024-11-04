@@ -123,6 +123,7 @@ class CommandFactory {
 
         const commandTypeMatch = action.match(commandTypePattern);
         const deviceMatches = await this.searchDevicesInAction(action); // Ensuring this is correct
+        console.log(deviceMatches);
         const stateMatch = action.match(statePattern);
         const modeMatch = action.match(modePattern);
         const temperatureMatch = action.match(temperaturePattern);

@@ -62,7 +62,7 @@ class TurnDeviceOnOffCommand extends BaseCommand {
                 break;
             case 'tap':
                 console.log("turn Tap");
-                await this.turnTap();
+                await this.turnTap(this.data.raspberryPiIP);
                 break;
             default:
                 console.log(`Device type ${this.device} is not supported.`);
@@ -173,6 +173,37 @@ class TurnDeviceOnOffCommand extends BaseCommand {
             throw error;
         }
     }
+    async changeFeatureStateMock(deviceId, state, rasp_ip) {
+        const endpoint = await this.getNgrokUrl(rasp_ip);
+
+        const apiUrl = `${endpoint}/api-mock/change_state`;
+        try {
+            const valuePost = state ? 'on' : 'off';
+            const response = await axios.post(apiUrl, { deviceId, state: valuePost });
+
+            console.log("Response from Flask server:", response.data);
+            if (response.status === 200) {
+                console.log("Feature state changed successfully", response.data);
+                const roomId = "38197016";
+
+                const updateResultDevice = await Device.updateOne(
+                    { device_id: deviceId },
+                    { $set: { state, lastUpdated: new Date() } }
+                );
+                const updateResultRoomDevice = await RoomDevice.updateOne(
+                    {  device_id: deviceId },
+                    { $set: { state, lastUpdated: new Date() } }
+                );
+                console.log("Database update result:", updateResultDevice, updateResultRoomDevice);
+                return { statusCode: 200, data: response.data };
+            } else {
+                throw new Error("Failed to change feature state via API.");
+            }
+        } catch (error) {
+            console.error(` ${deviceId}: ${error.message}`);
+            throw error;
+        }
+    }
 
     async turnFan() {
         console.log(`Turning fan ${this.state}`);
@@ -193,9 +224,9 @@ class TurnDeviceOnOffCommand extends BaseCommand {
         console.log(`Turning TV ${this.state}`);
         await this.updateDeviceState(this.state);
     }
-    async turnTap() {
+    async turnTap(raspberryPiIP) {
         console.log(`Turning Tap ${this.state}`);
-        await this.updateDeviceState(this.state);
+        await  this.changeFeatureStateMock(this.deviceid, this.state, raspberryPiIP);
     }
 
 

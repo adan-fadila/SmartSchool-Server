@@ -14,6 +14,7 @@ mindolifeRouter.get('/:id/endpoints', gatewayController.getGatewayEndpoints);
 mindolifeRouter.post('/change-feature-state', gatewayController.changeFeature);
 mindolifeRouter.post('/login', gatewayController.loginGateway);
 mindolifeRouter.post('/:id/bind', gatewayController.bindGateway);
+mindolifeRouter.post('/change-state', gatewayController.changeFeatureMock);
 
 // DELETE
 mindolifeRouter.delete('/:id/unbind', gatewayController.unbindGateway);

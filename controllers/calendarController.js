@@ -20,8 +20,8 @@ const fetchDeviceMap = async (space_id) => {
   return deviceMap;
 };
 
-const fetchRoomIdByName = async (roomName) => {
-  const room = await Room.findOne({ name: roomName });
+const fetchRoomIdByName = async (roomName,spaceID) => {
+  const room = await Room.findOne({ name: roomName , space_id: spaceID});
   if (!room) {
     throw new Error(`Room not found: ${roomName}`);
   }
@@ -50,7 +50,7 @@ const addEvent = async (req, res) => {
       return deviceId;
     });
 
-    const room_id = await fetchRoomIdByName(roomName);
+    const room_id = await fetchRoomIdByName(roomName,space_id);
 
     const { startEvent, endEvent } = await createEvent({
       title,
@@ -69,7 +69,6 @@ const addEvent = async (req, res) => {
       raspberryPiIP,
       state
     });
-
     eventsLinkedList.add(startEvent._id.toString(), startEvent._doc);
     eventsLinkedList.add(endEvent._id.toString(), endEvent._doc);
 

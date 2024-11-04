@@ -222,6 +222,8 @@ const setRoomDeviceState = async (id, state) => {
       { device_id: id },
       { state: state ? "on" : "off" }
     );
+    console.log(state);
+    console.log(id);
     console.log(response);
     
     if (response.modifiedCount === 0) {

@@ -413,6 +413,59 @@ const changeFeatureState = async (deviceId, state, rasp_ip) => {
     throw error; // Rethrow the error to handle it outside this function or to inform the caller.
   }
 };
+
+
+
+
+const changeFeatureStateMock = async (deviceId, state, rasp_ip) => {
+  const config = await loadConfig();
+
+  // Search for the IP address in the cached JSON data
+  const ngrokUrl = config[rasp_ip];
+
+  if (!ngrokUrl) {
+    throw new Error(`IP address ${rasp_ip} not found in the configuration file`);
+  }
+
+  const endpoint = `${ngrokUrl}`;
+
+  // console.log(rasp_ip);
+  const flaskAppUrl = `${endpoint}/api-mock/change_state`;
+  try {
+    const valueToPost = state ? 'on' : 'off'; // Prepare the value for the external API
+    // Parameters sent in the request body for a POST request
+    const response = await axios.post(flaskAppUrl, {
+      deviceId: deviceId,
+      state: state  // Here state is expected to be a boolean (true or false)
+     });
+
+    console.log("Response from Flask server:", response.data);
+    if (response.status === 200) {
+      console.log("Feature state changed successfully", response.data);
+      // const roomId = "38197016"; // Example roomId
+
+      // Determine the string representation of the state
+      // Update the device state in your local database for both Device and RoomDevice
+      const updateResultDevice = await Device.updateOne(
+        { device_id: deviceId }, // Use the correct property name as per your schema
+        { $set: { state: valueToPost, lastUpdated: new Date() } }
+      );
+      const updateResultRoomDevice = await RoomDevice.updateOne(
+        { device_id: deviceId }, // Use the correct property name as per your schema
+        { $set: { state: valueToPost, lastUpdated: new Date() } }
+      );
+      console.log("database update details",deviceId)
+      console.log("Database update result:", updateResultDevice, updateResultRoomDevice);
+      return { statusCode: 200, data: response.data };
+    } else {
+      throw new Error("Failed to change feature state via API.");
+    }
+  } catch (error) {
+    console.error(` ${deviceId}: ${error.message}`);
+    throw error; // Rethrow the error to handle it outside this function or to inform the caller.
+  }
+};
+
 // const changeFeatureState = async (deviceId, state) => {
 //   const flaskAppUrl = 'http://10.100.102.14:5009/api-mindolife/change_feature_state';
 //   try {
@@ -444,5 +497,6 @@ module.exports = {
     loginGateway,
     MindolifefetchAndTransformIoTDevicesData,
     MindolifefetchAndTransformIoTDeviceDataById,
-    changeFeatureState
+    changeFeatureState,
+    changeFeatureStateMock
 };

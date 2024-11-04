@@ -11,6 +11,7 @@ const {
     getGatewayEndpoints,
     loginGateway,
     changeFeatureState,
+    changeFeatureStateMock,
     MindolifefetchAndTransformIoTDevicesData,
     MindolifefetchAndTransformIoTDeviceDataById
 } = require("./../services/gateways.service.js"); // Adjust path as necessary
@@ -46,6 +47,20 @@ exports.gatewayController = {
             res.status(500).json({ error: error.message });
           }
     },
+
+    changeFeatureMock: async (req, res)=>{
+        try {
+            const { deviceId ,state, rasp_ip } = req.body;
+            // console.log( state);
+            // console.log(deviceId);
+            // console.log(rasp_ip);
+            const result = await changeFeatureStateMock(deviceId, state, rasp_ip); // directly call the imported function
+            res.json(result);
+          } catch (error) {
+            res.status(500).json({ error: error.message });
+          }
+    },
+
     getAllGateways: async (req, res) => {
         try {
             const gateways = await getAllGateways();

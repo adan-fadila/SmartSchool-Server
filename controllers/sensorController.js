@@ -103,6 +103,7 @@ exports.sensorControllers={
     async TurnON_OFF_LIGHT(req,res) {
       const { state, rasp_ip, id ,Control } = req.body;
       try {
+        console.log(req.body)
         const switchResponse = await TurnON_OFF_LIGHT(state, rasp_ip, id, Control);
         res.status(200).json(switchResponse); // Respond with the switchResponse data
       } catch (error) {

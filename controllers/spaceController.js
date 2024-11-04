@@ -27,7 +27,7 @@ const {
           if (!space) {
             return res.status(404).send({ message: 'Space not found' });
           }
-      
+          console.log(space);
           return res.status(200).send(space);
         } catch (err) {
           console.error("Server error when fetching space:", err);

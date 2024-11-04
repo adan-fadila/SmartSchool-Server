@@ -53,9 +53,9 @@ const getAllRoomNames = async () => {
   }
 };
 
-const getRoomByName = async(roomName) => {
+const getRoomByName = async(roomName,spaceID) => {
   try {
-      const room = await Room.findOne({ name: roomName });
+      const room = await Room.findOne({ name: roomName ,space_id:spaceID});
       if(!room) return null; 
       return room;
   } catch (err) {
