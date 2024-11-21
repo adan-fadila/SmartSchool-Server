@@ -10,7 +10,7 @@ const detectAnomalies = async (req, res) => {
     console.log('Request payload:', JSON.stringify(req.body));
 
     // Make a POST request to the Flask server
-    const response = await axios.post('http://localhost:5000/detect_anomalies', req.body, {
+    const response = await axios.post('http://127.0.0.1:5000/detect_anomalies', req.body, {
       headers: {
         'Content-Type': 'application/json',
       },
