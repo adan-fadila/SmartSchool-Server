@@ -142,6 +142,12 @@ server.use('/api-anomaly', anomalyRouter); // Add the anomaly route
 
 // Test API endpoint
 
+server.post('/api/recommendations', (req, res) => {
+    const recommendations = req.body.recommendations;
+    console.log("Received Recommendations:", recommendations);
+    res.status(200).send('Recommendations received');
+});
+
 
 
 
