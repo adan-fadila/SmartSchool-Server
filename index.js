@@ -140,16 +140,21 @@ server.use('/api-calendar', calendarRouter);
 server.use('/api-endpoint', endpointRouter);
 server.use('/api-anomaly', anomalyRouter); // Add the anomaly route
 
-// Test API endpoint
+// Add this near the top of the file with other global variables
+let latestRecommendations = [];
 
+// Replace the existing recommendations endpoint
 server.post('/api/recommendations', (req, res) => {
     const recommendations = req.body.recommendations;
+    latestRecommendations = recommendations; // Store the recommendations
     console.log("Received Recommendations:", recommendations);
     res.status(200).send('Recommendations received');
 });
 
-
-
+// Add a new GET endpoint to retrieve recommendations
+server.get('/api/recommendations', (req, res) => {
+    res.status(200).json(latestRecommendations);
+});
 
 server.use((req, res) => {
     res.status(400).send('Something is broken!');
