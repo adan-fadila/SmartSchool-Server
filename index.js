@@ -114,6 +114,7 @@ const {mindolifeRouter} = require('./routers/gatewaysRouter');
 const {activityRouter} = require('./routers/activityRouter');
 const {calendarRouter} = require('./routers/calendarRouter');
 const {endpointRouter} = require('./routers/endpointRouter');
+const {recommendationsRouter} = require('./routers/recommendationsRouter');
 
 // Connect to MongoDB 
 connectDB();
@@ -139,22 +140,9 @@ server.use('/api-activities', activityRouter);
 server.use('/api-calendar', calendarRouter);
 server.use('/api-endpoint', endpointRouter);
 server.use('/api-anomaly', anomalyRouter); // Add the anomaly route
+server.use('/api-recommendations', recommendationsRouter); // Add the recommendations route
 
-// Add this near the top of the file with other global variables
-let latestRecommendations = [];
 
-// Replace the existing recommendations endpoint
-server.post('/api/recommendations', (req, res) => {
-    const recommendations = req.body.recommendations;
-    latestRecommendations = recommendations; // Store the recommendations
-    console.log("Received Recommendations:", recommendations);
-    res.status(200).send('Recommendations received');
-});
-
-// Add a new GET endpoint to retrieve recommendations
-server.get('/api/recommendations', (req, res) => {
-    res.status(200).json(latestRecommendations);
-});
 
 server.use((req, res) => {
     res.status(400).send('Something is broken!');
