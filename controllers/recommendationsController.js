@@ -1,7 +1,7 @@
 const axios = require('axios');
 let latestRecommendations = [];
 
-const FLASK_URL = 'http://127.0.0.1:5000/recommend_rules';
+const FLASK_URL = 'http://127.0.0.1:5000/api/v1/recommendation/recommend_rules';
 
 const getRecommendations = (req, res) => {
     res.status(200).json(latestRecommendations);
