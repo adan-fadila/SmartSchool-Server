@@ -126,6 +126,7 @@ server.use(express.json());
 server.use(express.urlencoded({extended: true}));  // hundel post reqs with body
 server.use(bodyParser.json());
 
+
 server.use('/api-test', testRouter);  // Add the test route
 
 server.use('/api-login', loginRouter);
@@ -140,7 +141,7 @@ server.use('/api-activities', activityRouter);
 server.use('/api-calendar', calendarRouter);
 server.use('/api-endpoint', endpointRouter);
 server.use('/api-anomaly', anomalyRouter); // Add the anomaly route
-server.use('/api-recommendations', recommendationsRouter); // Add the recommendations route
+server.use('/api/recommendations', recommendationsRouter); // Add the recommendations route
 
 
 
