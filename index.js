@@ -101,7 +101,6 @@ const testRouter = require('./routers/testRouter');  // Import the test router
 
 
 // import Routers
-const anomalyRouter = require('./routers/anomalyRouter');  // Import the anomaly router
 
 const {devicesRouter} = require("./routers/devicesRouter");
 const {loginRouter} = require("./routers/loginRouter");
@@ -114,7 +113,8 @@ const {mindolifeRouter} = require('./routers/gatewaysRouter');
 const {activityRouter} = require('./routers/activityRouter');
 const {calendarRouter} = require('./routers/calendarRouter');
 const {endpointRouter} = require('./routers/endpointRouter');
-const {recommendationsRouter} = require('./routers/recommendationsRouter');
+const { recommendationRouter } = require('./routers/recommendationRouter.js');
+const { anomalyRouter } = require('./routers/anomalyRouter');
 
 // Connect to MongoDB 
 connectDB();
@@ -140,8 +140,8 @@ server.use('/api-mindolife', mindolifeRouter);
 server.use('/api-activities', activityRouter); 
 server.use('/api-calendar', calendarRouter);
 server.use('/api-endpoint', endpointRouter);
-server.use('/api-anomaly', anomalyRouter); // Add the anomaly route
-server.use('/api/recommendations', recommendationsRouter); // Add the recommendations route
+server.use(recommendationRouter);
+server.use(anomalyRouter);
 
 
 

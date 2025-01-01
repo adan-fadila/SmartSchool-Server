@@ -1,11 +1,8 @@
-// routers/anomalyRouter.js
-
 const express = require('express');
-const { detectAnomalies } = require('../controllers/anomalyController');
+const { handleAnomalyResponse } = require('../controllers/anomalyController');
+const anomalyRouter = express.Router();
 
-const router = express.Router();
+// Route to handle anomaly detection responses
+anomalyRouter.post('/anomaly_response', handleAnomalyResponse);
 
-// Define the route for anomaly detection
-router.post('/', detectAnomalies);
-
-module.exports = router;
+module.exports = { anomalyRouter };
