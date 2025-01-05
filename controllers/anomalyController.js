@@ -4,10 +4,12 @@ const path = require('path');
 
 const handleAnomalyResponse = (req, res) => {
   try {
-    const { anomalies, plot_image } = req.body; // JSON payload sent by Python script
+    
+    const { anomalies, plot_image} = req.body; // JSON payload sent by Python script
 
     // Ensure anomalies and plot_image are received
     if (!anomalies || !plot_image) {
+      console.log("Anomalies or image data missing");
       return res.status(400).json({ message: 'Anomalies or image data missing' });
     }
 
@@ -16,7 +18,7 @@ const handleAnomalyResponse = (req, res) => {
     // Step 1: Process the image data
     const imageBuffer = Buffer.from(plot_image, 'base64');
     const imagePath = path.join(__dirname, 'anomaly_plot.png');
-
+    
     // Save the image to the filesystem
     fs.writeFile(imagePath, imageBuffer, (err) => {
       if (err) {
@@ -25,10 +27,8 @@ const handleAnomalyResponse = (req, res) => {
       }
       console.log('Image saved successfully at', imagePath);
       
-      // Step 2: Process anomalies (e.g., store in DB, log, etc.)
-      // You can store anomalies in your database, or log them to the console for debugging
-      // For now, we just log them:
       console.log("Processing anomalies...");
+      
       
       // Sending response after processing image and anomalies
       res.status(200).json({
@@ -36,11 +36,50 @@ const handleAnomalyResponse = (req, res) => {
         anomalies: anomalies,  // Send anomalies back as part of the response if needed
       });
     });
-
+    
   } catch (error) {
     console.error("Error handling anomalies:", error);
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
-module.exports = { handleAnomalyResponse };
+
+
+const handleCollectiveAnomalyResponse = (req, res) => {
+  try {
+
+    const { collective_plot} = req.body; // JSON payload sent by Python script
+    // Ensure anomalies and plot_image are received
+    if (!collective_plot) {
+      return res.status(400).json({ message: 'image data missing' });
+    }
+
+    
+
+    // Step 1: Process the image data
+    const collective_plot_img= Buffer.from(collective_plot, 'base64');
+    const collective_plot_path = path.join(__dirname, 'collective_plot.png');
+    // Save the image to the filesystem
+    
+    fs.writeFile(collective_plot_path, collective_plot_img, (err) => {
+      if (err) {
+        console.error('Error saving the collective image:', err);
+        return res.status(500).json({ message: 'Error saving the collective image' });
+      }
+      console.log('collective Image saved successfully at', collective_plot_path);
+      
+      console.log("Processing anomalies...");
+      
+      
+      // Sending response after processing image and anomalies
+      res.status(200).json({
+        message: 'collective Data received and image saved successfully',
+      });
+    });
+  } catch (error) {
+    console.error("Error handling collective anomalies:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+module.exports = { handleAnomalyResponse ,handleCollectiveAnomalyResponse};
