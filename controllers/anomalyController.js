@@ -1,79 +1,96 @@
 // Handle anomaly detection response
 const fs = require('fs');
 const path = require('path');
+const { broadcastAnomalyData, clients } = require('../ws');
+
+// Create a state object to store temporary data
+let anomalyState = {
+  anomalies: null,
+  plot_image: null,
+  collective_plot: null,
+  timestamp: null
+};
 
 const handleAnomalyResponse = (req, res) => {
   try {
-    
-    const { anomalies, plot_image} = req.body; // JSON payload sent by Python script
+    const { anomalies, plot_image } = req.body;
+    //console.log(req.body);
 
-    // Ensure anomalies and plot_image are received
     if (!anomalies || !plot_image) {
-      console.log("Anomalies or image data missing");
       return res.status(400).json({ message: 'Anomalies or image data missing' });
     }
 
-    console.log("Received anomalies:", anomalies);
+    // Update state
+    anomalyState.anomalies = anomalies;
+    anomalyState.plot_image = plot_image;
+    anomalyState.timestamp = new Date().toISOString();
 
-    // Step 1: Process the image data
+    // Save the image
     const imageBuffer = Buffer.from(plot_image, 'base64');
     const imagePath = path.join(__dirname, 'anomaly_plot.png');
     
-    // Save the image to the filesystem
     fs.writeFile(imagePath, imageBuffer, (err) => {
       if (err) {
         console.error('Error saving the image:', err);
         return res.status(500).json({ message: 'Error saving the image' });
       }
-      console.log('Image saved successfully at', imagePath);
-      
-      console.log("Processing anomalies...");
-      
-      
-      // Sending response after processing image and anomalies
+
+      // Check if we have all necessary data to broadcast
+      if (anomalyState.collective_plot) {
+        broadcastAnomalyData(anomalyState);
+        // Reset state after broadcasting
+        anomalyState = {
+          anomalies: null,
+          plot_image: null,
+          collective_plot: null,
+          timestamp: null
+        };
+      }
+
       res.status(200).json({
-        message: 'Data received and image saved successfully',
-        anomalies: anomalies,  // Send anomalies back as part of the response if needed
+        message: 'Data received and image saved successfully'
       });
     });
-    
   } catch (error) {
     console.error("Error handling anomalies:", error);
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
-
-
 const handleCollectiveAnomalyResponse = (req, res) => {
   try {
+    const { collective_plot } = req.body;
 
-    const { collective_plot} = req.body; // JSON payload sent by Python script
-    // Ensure anomalies and plot_image are received
     if (!collective_plot) {
       return res.status(400).json({ message: 'image data missing' });
     }
 
-    
+    // Update state
+    anomalyState.collective_plot = collective_plot;
 
-    // Step 1: Process the image data
-    const collective_plot_img= Buffer.from(collective_plot, 'base64');
+    const collective_plot_img = Buffer.from(collective_plot, 'base64');
     const collective_plot_path = path.join(__dirname, 'collective_plot.png');
-    // Save the image to the filesystem
     
     fs.writeFile(collective_plot_path, collective_plot_img, (err) => {
       if (err) {
         console.error('Error saving the collective image:', err);
         return res.status(500).json({ message: 'Error saving the collective image' });
       }
-      console.log('collective Image saved successfully at', collective_plot_path);
-      
-      console.log("Processing anomalies...");
-      
-      
-      // Sending response after processing image and anomalies
+
+      // Check if we have all necessary data to broadcast
+      if (anomalyState.anomalies && anomalyState.plot_image) {
+        broadcastAnomalyData(anomalyState);
+        // Reset state after broadcasting
+        anomalyState = {
+          anomalies: null,
+          plot_image: null,
+          collective_plot: null,
+          timestamp: null
+        };
+      }
+
       res.status(200).json({
-        message: 'collective Data received and image saved successfully',
+        message: 'collective Data received and image saved successfully'
       });
     });
   } catch (error) {

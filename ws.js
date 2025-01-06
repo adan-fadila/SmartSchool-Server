@@ -1,27 +1,3 @@
-// // const WebSocket = require("ws");
-
-// const clients = [];
-
-// const connectToWs = () => {
-//   const wss = new WebSocket.Server({ port: 8080 });
-
-//   wss.on("connection", (ws) => {
-//     clients.push(ws);
-//     ws.send('Welcome to the WebSocket Server!');
-
-//     // Send a message to all connected clients
-//     wss.clients.forEach((client) => {
-//       if (client.readyState === WebSocket.OPEN) {
-//         client.send('Hello, client!');
-//       }
-//     });
-//   });
-
-//   console.log("ws connected")
-// };
-
-// module.exports = { connectToWs, clients };
-
 const WebSocket = require("ws");
 
 const clients = [];
@@ -68,51 +44,44 @@ function broadcast(wss, message) {
   });
 }
 
-module.exports = { connectToWs, clients };
+// New function to broadcast anomaly data
+function broadcastAnomalyData(anomalyState) {
+  const anomalyData = {
+    type: 'anomaly_update',
+    data: {
+      anomalies: anomalyState.anomalies.map(anomaly => ({
+        timestamp: anomaly.timestamp,
+        value: anomaly.value,
+        voting_algorithms: anomaly.voting_algorithms,
+        anomaly_val: anomaly.anomaly_val
+      })),
+      plot_image: anomalyState.plot_image,
+      collective_plot: anomalyState.collective_plot,
+      timestamp: anomalyState.timestamp,
+      spaceId: '61097711',
+      roomId: '38197016',
+      deviceType: 'AC'
+    }
+  };
 
-// const WebSocket = require("ws");
+  console.log('Broadcasting anomaly data:', {
+    timestamp: anomalyData.data.timestamp,
+    hasPlotImage: !!anomalyData.data.plot_image,
+    hasCollectivePlot: !!anomalyData.data.collective_plot,
+    anomaliesCount: anomalyData.data.anomalies?.length
+  });
 
-// const clients = [];
+  clients.forEach((client) => {
+    if (client.readyState === WebSocket.OPEN) {
+      client.send(JSON.stringify(anomalyData));
+      console.log('Sent anomaly data to client');
+    }
+  });
+}
 
-// const connectToWs = (server) => {
-//   const wss = new WebSocket.Server({ server: server });
-
-//   wss.on("connection", (ws) => {
-//     clients.push(ws);
-//     console.log("New client connected");
-
-//     // Send welcome message to only the newly connected client
-//     ws.send('Welcome to the WebSocket Server!');
-
-//     // Broadcast a message to all connected clients
-//     broadcast(wss, 'Hello, client!');
-
-// ws.on('message', (message) => {
-//   console.log(`Received message => ${message}`);
-//   // Handle incoming messages here
-// });
-
-// // Handle close event
-// ws.on('close', () => {
-//   console.log("Client has disconnected");
-//   // Remove the client from the array
-//   const index = clients.indexOf(ws);
-//   if (index > -1) {
-//     clients.splice(index, 1);
-//   }
-// });
-// });
-
-// console.log("WebSocket server started on port 8002");
-// };
-
-// // Function to broadcast messages to all connected clients
-// function broadcast(wss, message) {
-// wss.clients.forEach((client) => {
-// if (client.readyState === WebSocket.OPEN) {
-//   client.send(message);
-// }
-// });
-// }
-
-// module.exports = { connectToWs, clients };
+module.exports = { 
+  connectToWs, 
+  clients, 
+  broadcast,
+  broadcastAnomalyData
+};
