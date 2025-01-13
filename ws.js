@@ -79,9 +79,33 @@ function broadcastAnomalyData(anomalyState) {
   });
 }
 
+// New function to broadcast recommendation data
+function broadcastRecommendationData(recommendations) {
+    const recommendationData = {
+        type: 'recommendation_update',
+        data: {
+            recommendations: recommendations,
+            timestamp: new Date().toISOString()
+        }
+    };
+
+    console.log('Broadcasting recommendation data:', {
+        timestamp: recommendationData.data.timestamp,
+        recommendationsCount: recommendations?.length
+    });
+
+    clients.forEach((client) => {
+        if (client.readyState === WebSocket.OPEN) {
+            client.send(JSON.stringify(recommendationData));
+            console.log('Sent recommendation data to client');
+        }
+    });
+}
+
 module.exports = { 
   connectToWs, 
   clients, 
   broadcast,
-  broadcastAnomalyData
+  broadcastAnomalyData,
+  broadcastRecommendationData
 };
