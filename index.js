@@ -116,6 +116,10 @@ const {endpointRouter} = require('./routers/endpointRouter');
 const { recommendationRouter } = require('./routers/recommendationRouter.js');
 const { anomalyRouter } = require('./routers/anomalyRouter');
 
+
+const testRaspiRouter = require('./routers/testRaspiRouter.js')
+
+
 // Connect to MongoDB 
 connectDB();
 connectToWs();
@@ -142,6 +146,7 @@ server.use('/api-calendar', calendarRouter);
 server.use('/api-endpoint', endpointRouter);
 server.use(recommendationRouter);
 server.use(anomalyRouter);
+server.use('/api-testRaspiRouter',testRaspiRouter)
 
 
 
