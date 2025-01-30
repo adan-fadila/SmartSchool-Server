@@ -11,6 +11,7 @@ const { parse } = require('../parser/parser');
 const NodeCache = require('node-cache');
 const { log } = require('util');
 const cache = new NodeCache({ stdTTL: 300 }); // Cache for 5 minutes
+const Room = require("../../../models/Room");
 
 // Debounce mechanism
 let debounceTimeout = null;
@@ -388,108 +389,202 @@ async function GetRoomNameFromDatabase(parsed) {
         }
     }
 
-    return { roomName: "", roomDetails: null };
+    return  { roomName: "", roomDetails: null };
 }
 
-async function processData(parsed, data, res, Context) {
-    if (!parsed || !parsed.conditions || !Array.isArray(parsed.conditions)) {
-        console.error("Parsed rule is undefined or has no conditions.");
-        return;
-    }
-  
-    const currentActivity = await getCurrentActivity();
-    const currentSeason = await getCurrentSeason();
-    console.log(parsed.conditions);
-    console.log(parsed.conditions[0]);
-    console.log(parsed.specialOperators.condition_operators);
-    console.log(parsed.actions);
-  
-    const extractMainCondition = (condition) => {
-      const regex = /(\w+)(?: in | not in | is | start | end)/;
-      const match = condition.match(regex);
-      return match ? match[1] : null;
-    };
-  
-    let mainContext;
-    if (parsed.conditions.length > 0) {
-        mainContext = extractMainCondition(parsed.conditions[0]);
-    }
-  
-    let context = {};
-    if (mainContext === 'temperature' || mainContext === 'humidity' || mainContext === 'hour') {
-        const temperatureStr = String(data.temperature);
-        const humidityStr = String(data.humidity);
-        context = {
-            room_Name: data.roomName.trim().toLowerCase(),
+// Context preparation functions
+async function prepareBaseContext(data) {
+    try {
+        const roomName = data.roomName?.trim().toLowerCase() || '';
+        return {
+            room_Name: roomName,
             roomid: data.roomId,
             space_id: data.spaceId,
+        };
+    } catch (error) {
+        console.error('Error preparing base context:', error);
+        throw new Error('Failed to prepare base context');
+    }
+}
+
+async function prepareEnvironmentalContext(data) {
+    try {
+        const baseContext = await prepareBaseContext(data);
+        const temperatureStr = String(data.temperature);
+        const humidityStr = String(data.humidity);
+        
+        return {
+            ...baseContext,
             temperature: parseInt(temperatureStr.split(' ')[0], 10),
             humidity: parseInt(humidityStr.split(' ')[0], 10),
         };
-    } else {
-        if (mainContext === 'party' || mainContext === 'weekend' || mainContext === 'lecture' || mainContext === 'holiday') {
-            // console.log(mainContext);
-            const parsedState = data.state === 'on' ? true : false;
-            context = {
-                detection: parsedState,
-                season: currentSeason,
-                room_Name: data.roomName.trim().toLowerCase(),
-                roomid: data.room_id,
-                space_id: data.space_id,
-                control : 'manual',
-            };
-            // console.log(context);
-        } else {
-            context = {
-                detection: data.motionState,
-                activity: Context.activity || currentActivity,
-                season: currentSeason,
-                room_Name: data.RoomName.trim().toLowerCase(),
-                roomid: data.roomId,
-                space_id: data.spaceId,
-            };
-            // console.log(context);
+    } catch (error) {
+        console.error('Error preparing environmental context:', error);
+        throw new Error('Failed to prepare environmental context');
+    }
+}
+
+async function prepareEventContext(data, currentSeason) {
+    try {
+        const baseContext = await prepareBaseContext(data);
+        const parsedState = data.state === 'on';
+        
+        return {
+            ...baseContext,
+            detection: parsedState,
+            season: currentSeason,
+            control: 'manual',
+        };
+    } catch (error) {
+        console.error('Error preparing event context:', error);
+        throw new Error('Failed to prepare event context');
+    }
+}
+
+async function prepareActivityContext(data, Context, currentActivity, currentSeason) {
+    try {
+        const baseContext = await prepareBaseContext(data);
+        
+        return {
+            ...baseContext,
+            detection: data.motionState,
+            activity: Context.activity || currentActivity,
+            season: currentSeason,
+        };
+    } catch (error) {
+        console.error('Error preparing activity context:', error);
+        throw new Error('Failed to prepare activity context');
+    }
+}
+
+// Condition extraction function
+function extractMainCondition(condition) {
+    try {
+        const regex = /(\w+)(?: in | not in | is | start | end)/;
+        const match = condition.match(regex);
+        return match ? match[1] : null;
+    } catch (error) {
+        console.error('Error extracting main condition:', error);
+        throw new Error('Failed to extract main condition');
+    }
+}
+
+// Room and device fetching functions
+async function fetchRoomDetails(roomId) {
+    try {
+        const room = await Room.findOne({ id: roomId });
+        if (!room) {
+            throw new Error(`Room not found with ID: ${roomId}`);
         }
+        const { name: roomName, ...roomDetails } = room._doc;
+        return { roomName, roomDetails };
+    } catch (error) {
+        console.error('Error fetching room details:', error);
+        throw new Error('Failed to fetch room details');
     }
-  
-    const { roomName, roomDetails } = await GetRoomNameFromDatabase(context.room_Name);
-    if (!roomDetails) {
-        console.error("Failed to fetch the room ID");
-        return;
-    }
-  
-    const roomDevicesResult = await getDevicesByRoomId(roomDetails.id);
-    if (roomDevicesResult.statusCode !== 200) {
-        console.error("Failed to fetch room devices:", roomDevicesResult.message);
-        return;
-    }
-  
-    let evaluationConditionResult = {};
-    if (mainContext === 'temperature' || mainContext === 'humidity' || mainContext === 'hour') {
-       evaluationConditionResult = evaluateConditionTemp(parsed, context);
-    } else if (mainContext === 'party' || mainContext === 'weekend' || mainContext === 'lecture' || mainContext === 'holiday') {
-       evaluationConditionResult = evaluateConditionCalendar(parsed, context);
-    } else {
-       evaluationConditionResult = evaluateCondition(parsed, context);
-    }
-  
-    const convertedOperatorsCondition = convertOperators(parsed.specialOperators.condition_operators);
-    const result = evaluateLogic(evaluationConditionResult, convertedOperatorsCondition);
-  
-    if (result) {
-        if (context.room_Name === roomName.toLowerCase()) {
-            for (const action of parsed.actions) {
-                const commandExecuted = await CommandFactory.createCommand(action, roomDetails.id, roomDevicesResult.data,context, context.room_Name, data, res);
-                console.log(commandExecuted ? "Command was executed successfully." : 'Action could not be executed:', action);
-            }
-        } else {
-            console.log("Room name mismatch or undefined. No actions executed.");
+}
+
+async function fetchRoomDevices(roomId) {
+    try {
+        const roomDevicesResult = await getDevicesByRoomId(roomId);
+        if (roomDevicesResult.statusCode !== 200) {
+            throw new Error(roomDevicesResult.message);
         }
-    } else {
-        console.error("Conditions not met, no actions executed.");
+        return roomDevicesResult;
+    } catch (error) {
+        console.error('Error fetching room devices:', error);
+        throw new Error('Failed to fetch room devices');
     }
-  }
-  
+}
+
+// Condition evaluation function
+async function evaluateConditions(parsed, context, mainContext) {
+    try {
+        let evaluationResult;
+        
+        if (['temperature', 'humidity', 'hour'].includes(mainContext)) {
+            evaluationResult = evaluateConditionTemp(parsed, context);
+        } else if (['party', 'weekend', 'lecture', 'holiday'].includes(mainContext)) {
+            evaluationResult = evaluateConditionCalendar(parsed, context);
+        } else {
+            evaluationResult = evaluateCondition(parsed, context);
+        }
+        
+        const convertedOperators = convertOperators(parsed.specialOperators.condition_operators);
+        return evaluateLogic(evaluationResult, convertedOperators);
+    } catch (error) {
+        console.error('Error evaluating conditions:', error);
+        throw new Error('Failed to evaluate conditions');
+    }
+}
+
+// Action execution function
+async function executeActions(actions, roomDetails, roomDevicesResult, data, roomName, res) {
+    try {
+        for (const action of actions) {
+            const commandExecuted = await CommandFactory.createCommand(
+                action,
+                roomDetails.id,
+                roomDevicesResult.data,
+                data,
+                roomName,
+                data,
+                res
+            );
+            console.log(commandExecuted ? "Command was executed successfully." : 'Action could not be executed:', action);
+        }
+    } catch (error) {
+        console.error('Error executing actions:', error);
+        throw new Error('Failed to execute actions');
+    }
+}
+
+// Main process function
+async function processData(parsed, data, res, Context) {
+    try {
+        // Validate input
+        if (!parsed?.conditions?.length) {
+            throw new Error("Parsed rule is undefined or has no conditions");
+        }
+
+        // Get current activity and season
+        const currentActivity = await getCurrentActivity();
+        const currentSeason = await getCurrentSeason();
+
+        // Extract main condition and prepare context
+        const mainContext = extractMainCondition(parsed.conditions[0]);
+        let context;
+
+        // Prepare appropriate context based on main condition
+        if (['temperature', 'humidity', 'hour'].includes(mainContext)) {
+            context = await prepareEnvironmentalContext(data);
+        } else if (['party', 'weekend', 'lecture', 'holiday'].includes(mainContext)) {
+            context = await prepareEventContext(data, currentSeason);
+        } else {
+            context = await prepareActivityContext(data, Context, currentActivity, currentSeason);
+        }
+
+        // Fetch room details and devices
+        const { roomName, roomDetails } = await fetchRoomDetails(data.roomId);
+        const roomDevicesResult = await fetchRoomDevices(roomDetails.id);
+
+        // Evaluate conditions
+        const result = await evaluateConditions(parsed, context, mainContext);
+
+        // Execute actions if conditions are met and room names match
+        if (result && context.room_Name === roomName.toLowerCase()) {
+            await executeActions(parsed.actions, roomDetails, roomDevicesResult, data, context.room_Name, res);
+        } else {
+            console.log("Conditions not met or room name mismatch. No actions executed.");
+        }
+    } catch (error) {
+        console.error('Error in processData:', error);
+        throw error;
+    }
+}
+
+
+
 function escapeRegex(text) {
     return text.replace(/[-[\]/{}()*+?.\\^$|]/g, "\\$&");
 }
@@ -545,7 +640,10 @@ async function interpret(ruleDescriptionQuery, data, res, Context) {
         await processData(parsed, data, res, Context);
     } catch (error) {
         if (!res.headersSent) {
+            // console.log("+*+*+*+*+*+*+*+*+*+*+*+*")
             res.status(500).json({ error: `Failed to interpret rule due to error: ${error.message}` });
+            // console.log("+*+*+*+*+*+*+*+*+*+*+*+*")
+
         }
     }
 }
@@ -645,14 +743,52 @@ async function interpretRuleByNameCalendar(Condition, data, shouldSendRes = fals
 
 async function Interpret(ruleDescriptionQuery, data, shouldSendRes = false, res = null, Context) {
     try {
+        console.log("*/*/*/*/**/*/*/*/*/*/")
+        console.log("data in intterpret is :::",data)
+        console.log("*/*/*/*/**/*/*/*/*/*/")
+        console.log("rule description is :::",ruleDescriptionQuery)
+        console.log("*/*/*/*/**/*/*/*/*/*/")
+
+        console.log("*/*/*/*/**/*/*/*/*/*/")
         const tokens = tokenize(ruleDescriptionQuery); // Tokenize the rule description
+        console.log("tokens is :: ",tokens)
+        console.log("*/*/*/*/**/*/*/*/*/*/")
+
         const parsed = parse(tokens); // Convert tokens to a structured format
-        await processData(parsed, data, shouldSendRes ? res : null, Context);
+        console.log("parsed is  is :: ",tokens)
+        console.log("*/*/*/*/**/*/*/*/*/*/")
+        const room = await Room.findOne({ id: data.roomId });
+
+        if (room) {
+            // Destructuring the roomName and roomDetails
+            const { name: roomName, ...roomDetails } = room._doc;  // Access plain data
+
+            console.log("Room Name:", roomName);
+            console.log("Room Details:", roomDetails);  // E
+        
+        }
+
+        try {
+            await processData(parsed, data, shouldSendRes ? res : null, Context);
+        } catch (processDataError) {
+            console.error("Error inside processData:", processDataError);
+            if (shouldSendRes && res && !res.headersSent) {
+                res.status(500).json({ error: `Failed to process data: ${processDataError.message}` });
+            }
+        }
     } catch (error) {
         if (shouldSendRes && res && !res.headersSent) {
+            // console.log("+*+*+*+*+*+*+*+*+*+*+*+*")
+
             res.status(500).json({ error: `Failed to interpret rule due to error: ${error.message}` });
+            // console.log("+*+*+*+*+*+*+*+*+*+*+*+*")
+
         } else {
+            console.log("+*+*+*+*+*+*+*+*+*+*+*+*")
+
             console.error(`Failed to interpret rule due to error: ${error.message}`);
+            console.log("+*+*+*+*+*+*+*+*+*+*+*+*")
+
         }
     }
 }

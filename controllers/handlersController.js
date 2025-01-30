@@ -18,12 +18,12 @@ const stateManager = new StateManager();
 // List of configurations for each room and device
 const configurations = [
   {
-    roomId: '38197016',
+    roomId: '41413915-5245',
     roomName: 'Living Room',
-    spaceId: '61097711',
-    deviceId: '4ahpAkJ9',
-    raspberryPiIP: '192.168.1.109',
-    user_oid: '65b76f020db757311fe54f38',
+    spaceId: '41413915',
+    deviceId: 'JArdX73w',
+    raspberryPiIP: '192.168.0.121',
+    user_oid: '6648b1dd3da69ac2341e4e36',
   },
   // {
   //   roomId: '67822610-8768',
@@ -176,7 +176,7 @@ exports.handleControllers = {
           config.raspberryPiIP,
           config.user_oid
         );
-      },300000); // 300000 ms = 5 minutes
+      },5000); // 300000 ms = 5 minutes
     });
   },
 };
