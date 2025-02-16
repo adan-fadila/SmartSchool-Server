@@ -1,9 +1,16 @@
-const { StateManager } = require('../statemanager/stateManager');
-const { getSensiboSensors } = require('../api/sensibo');
-const Room = require('./../models/Room');
-const Device = require('./../models/Device');
-const RoomDevice = require('./../models/RoomDevice');
+const StateManager = require('../src/core/managers/StateManager');
+const { getSensiboSensors, loadConfig } = require('../api/sensibo');
+const Room = require('../models/Room');
+const Device = require('../models/Device');
+const RoomDevice = require('../models/RoomDevice');
+const SystemManager = require('../src/core/managers/SystemManager');
+const RuleModel = require('../src/core/models/RuleModel');
+const { execute } = require('../interpeter/src/execute/execute');
+const { processData } = require('../interpeter/src/interpreter/interpreter');
+const fs = require('fs');
+const path = require('path');
 
+// Global variables
 let motionState = false; // This should reflect the real motion state, possibly stored in a database
 let RoomID = '';
 let RoomName = '';
@@ -13,7 +20,9 @@ let clientIp = '';
 let _User_Oid = '';
 let Person = '';
 
+// Create single instances of managers
 const stateManager = new StateManager();
+const systemManager = new SystemManager();
 
 // List of configurations for each room and device
 const configurations = [
@@ -36,6 +45,17 @@ const configurations = [
   // Add more configurations as needed
 ];
 
+// Export the systemManager instance
+exports.systemManager = systemManager;
+
+// Function to get Raspberry Pi configuration
+function getRaspberryPiConfig(raspberryPiIP) {
+  const configPath = path.join(__dirname, '../api/endpoint/rasp_pi.json');
+  const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+  return config[raspberryPiIP];
+}
+
+// Export the handlers
 exports.handleControllers = {
   async get_MotionState(req, res) {
     res.status(200).json({
@@ -47,6 +67,46 @@ exports.handleControllers = {
       CLIENT_IP: clientIp,
       _User_Oid_: _User_Oid,
     });
+  },
+
+  async initialize(req, res) {
+    try {
+      if (!configurations || configurations.length === 0) {
+        throw new Error('No configurations provided');
+      }
+
+      console.log('Starting system initialization...');
+      
+      // First, ensure all rules in the database are active for this room
+      const roomId = '41413915-5245'; // Living Room ID
+      await RuleModel.updateMany(
+        { roomId: roomId },
+        { $set: { isActive: true } }
+      );
+
+      // Then initialize the system
+      await systemManager.initialize(configurations);
+      
+      // Verify rules are loaded
+      const activeRules = await RuleModel.find({ 
+        roomId: roomId,
+        isActive: true 
+      });
+      console.log(`Found ${activeRules.length} rules for room ${roomId}:`, 
+        activeRules.map(r => r.ruleString));
+      
+      res.status(200).json({ 
+        message: 'System initialized successfully',
+        configurations: configurations,
+        activeRules: activeRules
+      });
+    } catch (error) {
+      console.error('Initialization error:', error);
+      res.status(500).json({ 
+        error: error.message,
+        details: 'Failed to initialize system'
+      });
+    }
   },
 
   async update_Motion_DetectedState(req, res) {
@@ -61,37 +121,21 @@ exports.handleControllers = {
       }
 
       if (Control === 'auto') {
-        motionState = lightState === 'on';
-        RoomID = roomId;
-        RoomName = roomName;
-        SpaceID = spaceId;
-        DeviceID = deviceId;
-        clientIp = raspberryPiIP;
-        _User_Oid = user_oid;
-        Person = 'Movement';
-
-        const event = {
-          event: `${Person} ${lightState} ${roomName}`,
+        // Handle through new system
+        systemManager.handleMotionEvent({
           lightState,
           roomId,
           roomName,
           spaceId,
           deviceId,
           raspberryPiIP,
-          user_oid,
-          motionState: lightState === 'on',
-          Person: 'Movement',
-        };
+          user_oid
+        });
 
-        console.log(`Event to be sent: ${event.Person} ${lightState} ${roomName}`);
-        stateManager.updateState('motion', 
-        {
-          event: `${Person} ${lightState} ${roomName}`,
-          lightState: lightState, roomId: roomId, RoomName, spaceId: spaceId, 
-          deviceId: deviceId, raspberryPiIP: raspberryPiIP, res: res, motionState: lightState === 'on',
-          _User_Oid
-          }
-        );
+        res.status(200).json({ 
+          message: `Motion event processed for ${roomName}`,
+          state: lightState 
+        });
       } else if (Control === 'manual') {
         motionState = lightState === 'on';
         // Update the room's 'motionDetected' field
@@ -109,76 +153,82 @@ exports.handleControllers = {
         res.status(200).json({ message: `Light turned ${lightState}, request received successfully`, motionState });
       }
     } catch (error) {
-      console.error('Error updating motion detected state:', error);
-      res.status(500).json({ error: 'Internal server error' });
+      console.error('Error in motion update:', error);
+      res.status(500).json({ error: error.message });
     }
   },
 
   // Combined function to update temperature and humidity state
-  async updateSensorData(roomId, roomName, spaceId, deviceId, raspberryPiIP, user_oid) {
+  async updateSensorData(roomId, roomName, spaceId, deviceId, raspberryPiIP) {
     try {
-      console.log(`Requesting sensor data for Room ID: ${roomId}, Room Name: ${roomName}, Space ID: ${spaceId}, Device ID: ${deviceId}, Raspberry Pi: ${raspberryPiIP}, User: ${user_oid}`);
-
-      // Get the temperature and humidity data using the getSensorData function
+      // Get sensor data from Raspberry Pi
       const sensorData = await getSensiboSensors(raspberryPiIP);
-
-      if (sensorData) {
-        const { temperature, humidity } = sensorData;
-
-        console.log(`Received sensor data: Temperature ${temperature}, Humidity ${humidity} in ${roomName}`);
-
-        const temperatureEvent = {
-          event: `temperature in ${roomName}`,
-          temperature,
-          humidity,
-          roomId,
-          roomName,
-          spaceId,
-          deviceId,
-          raspberryPiIP,
-          user_oid,
-        };
-
-        const humidityEvent = {
-          event: `humidity in ${roomName}`,
-          temperature,
-          humidity,
-          roomId,
-          roomName,
-          spaceId,
-          deviceId,
-          raspberryPiIP,
-          user_oid,
-        };
-
-        console.log(`Temperature Event to be sent: Temperature ${temperature}, Humidity ${humidity} in ${roomName}`);
-        stateManager.updateState('temperature', temperatureEvent);
-
-        // console.log(`Humidity Event to be sent: Temperature ${temperature}, Humidity ${humidity} in ${roomName}`);
-        // stateManager.updateState('humidity', humidityEvent);
-      } else {
-        console.error('Failed to fetch sensor data');
+      if (!sensorData) {
+        console.error('No sensor data received from', raspberryPiIP);
+        return;
       }
+
+      // Update state through SystemManager
+      await systemManager.handleTemperatureEvent({
+        temperature: sensorData.temperature,
+        humidity: sensorData.humidity,
+        roomId,
+        roomName,
+        spaceId
+      });
+
+      console.log(`Updated sensor data for room ${roomName}`);
     } catch (error) {
-      console.error('Error updating temperature and humidity state:', error);
+      console.error('Error updating sensor data:', error);
     }
   },
 
   // Function to start updating state for all configurations
-  async startUpdatingStateForAll(configurations) {
+  startUpdatingStateForAll(configurations) {
     configurations.forEach(config => {
-      setInterval(() => {
-        this.updateSensorData(
+      setInterval(async () => {
+        await this.updateSensorData(
           config.roomId,
           config.roomName,
           config.spaceId,
           config.deviceId,
-          config.raspberryPiIP,
-          config.user_oid
+          config.raspberryPiIP
         );
-      },5000); // 300000 ms = 5 minutes
+      }, 5000);
     });
   },
+
+  // Add rule management methods
+  async addRule(req, res) {
+    try {
+      const { ruleString, deviceId, raspberryPiIP, roomId, spaceId } = req.body;
+      await systemManager.saveRule(ruleString, deviceId, raspberryPiIP, roomId, spaceId);
+      res.status(200).json({ message: 'Rule added successfully' });
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  },
+
+  async getRules(req, res) {
+    try {
+      const rules = await RuleModel.find({ isActive: true });
+      
+      // Filter out invalid rules
+      const validRules = rules.filter(rule => rule && rule.ruleString);
+      
+      if (validRules.length === 0) {
+        return res.json({ rules: [], message: 'No active rules found' });
+      }
+      
+      res.status(200).json({ rules: validRules });
+    } catch (error) {
+      console.error('Error fetching rules:', error);
+      res.status(500).json({ 
+        error: 'Failed to fetch rules',
+        details: error.message 
+      });
+    }
+  }
 };
 
 // Start updating state for all configurations

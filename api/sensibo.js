@@ -34,176 +34,147 @@ const validateDegree = (temperature) => {
   return temperature >= 16 && temperature <= 30;
 };
 
-
 const getAcState = async (rasp_ip, device_id) => {
   const config = await loadConfig();
+  const raspConfig = config[rasp_ip];
 
-  // Search for the IP address in the cached JSON data
-  const ngrokUrl = config[rasp_ip];
-
-  if (!ngrokUrl) {
-    throw new Error(`IP address ${rasp_ip} not found in the configuration file`);
+  if (!raspConfig) {
+    throw new Error(`Raspberry Pi IP ${rasp_ip} not found in the configuration file`);
   }
 
-  const endpoint = `${ngrokUrl}`;
+  const endpoint = raspConfig.url;
+  console.log("Requesting AC state from:", endpoint);
 
-  console.log("Requesting AC state for IP:", rasp_ip);
   try {
-    const flaskUrl = `${endpoint}/api-sensibo/get_ac_state`;
-
-    // Send a GET request to the Flask app
+    const flaskUrl = `${endpoint}api-sensibo/get_ac_state`;
     const response = await axios.get(flaskUrl);
     console.log("AC State Retrieved from Flask:", response.data);
 
     if (response.data && response.data.success) {
-      return response.data.acState; // Accessing the AC state returned by the Flask app
+      return response.data.acState;
     } else {
       console.log("No AC state found in the response from Flask");
-      return null; // Consider returning a default state or null if no state is found
+      return null;
     }
   } catch (err) {
-    // Handle errors in the request to the Flask app
     console.error("Error retrieving AC state from Flask:", err.response ? err.response.data : err.message);
-    return null; // Return null or a default state object in case of an error
+    return null;
   }
 };
 
-const TurnON_OFF_LIGHT = async (state, rasp_ip, id, Control) => {
+const TurnON_OFF_LIGHT = async (state, rasp_ip, device_id, Control) => {
   try {
-    console.log(Control);
     const config = await loadConfig();
+    const raspConfig = config[rasp_ip];
 
-    // Search for the IP address in the cached JSON data
-    const ngrokUrl = config[rasp_ip];
-
-    if (!ngrokUrl) {
-      throw new Error(`IP address ${rasp_ip} not found in the configuration file`);
+    if (!raspConfig) {
+      throw new Error(`Raspberry Pi IP ${rasp_ip} not found in the configuration file`);
     }
-    const endpoint = `${ngrokUrl}/${state}`; // Construct the endpoint URL
+
+    if (!raspConfig.devices.includes(device_id)) {
+      throw new Error(`Device ${device_id} is not managed by Raspberry Pi at ${rasp_ip}`);
+    }
+
+    const endpoint = raspConfig.url;
+    const endpointUrl = `${endpoint}/${state}`; // Construct the endpoint URL
 
     // Make a POST request to the endpoint
-    const response = await axios.post(endpoint, { Control });
+    const response = await axios.post(endpointUrl, { Control });
     console.log(response.data); // Log the response data
     return response.data; // Return the response data if needed
   } catch (error) {
-    console.error('Error turning on/off light:', error);
-    throw error; // Throw the error to handle it in the calling function if needed
+    console.error("Error in TurnON_OFF_LIGHT:", error);
+    throw error;
   }
 };
 
-const switchAcState = async (id, state, rasp_ip, temperature = null) => {
-  const config = await loadConfig();
-
-  // Search for the IP address in the cached JSON data
-  const ngrokUrl = config[rasp_ip];
-
-  if (!ngrokUrl) {
-    throw new Error(`IP address ${rasp_ip} not found in the configuration file`);
-  }
-
-  const endpoint = `${ngrokUrl}`;
-  console.log(endpoint);
-  const apiUrl = `${endpoint}/api-sensibo/switch_ac_state`; // Ensure this matches your Flask server URL
-  console.log(id);
-  const actualDeviceId = id === "YNahUQcM" ? "YNahUQcM" : process.env.SENSIBO_DEVICE_ID;
-  const actualApiKey = id === "YNahUQcM" ? "sS94OndxNNoKiBXwLU59Y08r27fyHW" : process.env.SENSIBO_API_KEY;
-
-  // Construct the payload including the actualDeviceId and actualApiKey
-  const payload = {
-    id: actualDeviceId,
-    apiKey: actualApiKey,
-    state: state,
-    temperature: temperature
-  };
-  console.log(payload);
-
-  console.log("Attempting to switch AC state:", state, "with temperature:", temperature);
-
-  try {
-    // Validate the temperature if it's not null
-    if (temperature !== null && !validateDegree(temperature)) {
-      throw new Error("Temperature has to be between 16 and 30");
-    }
-    const response = await axios.post(apiUrl, payload, {
-      headers: { 'Content-Type': 'application/json' }
-    });
-    // Check if the API call was successful
-    if (response.status === 200) {
-      console.log("AC state changed successfully", response.data);
-
-      // Update the device state in your local database
-      const updateResult = await Device.updateOne(
-        { 
-          device_id: actualDeviceId // Use device_id to find the document
-        }, 
-        { 
-          $set: { 
-            state: state ? "on" : "off", // Update state field
-            lastUpdated: new Date() // Optional: track when the update was made
-          } 
-        }
-      );
-      const updateResultRoomDevices = await RoomDevice.updateOne(
-        { device_id: actualDeviceId }, // Use device_id to find the document
-        { 
-          $set: { 
-            state: state ? "on" : "off", // Update state field
-            lastUpdated: new Date() // Optional: track when the update was made
-          } 
-        }
-      );
-      console.log("Database update result:", updateResult, updateResultRoomDevices);
-
-      return { statusCode: 200, data: response.data }; // Adjust according to your data handling needs
-    } else {
-      throw new Error("Failed to update AC state via API.");
-    }
-  } catch (err) {
-    const statusCode = err.response?.status || 500;
-    let errorMessage = err.message;
-    let detailedError = {};
-
-    if (err.response && err.response.data) {
-      errorMessage = `Error switching AC state: ${err.response.statusText}`;
-      detailedError = err.response.data; // Assuming Sensibo API error details are in data
-
-      // Log detailed error message if available
-      console.error("Detailed Sensibo API error:", detailedError);
-    }
-
-    console.error(errorMessage);
-    return { statusCode, data: detailedError };
-  }
-};
-
-const getSensiboSensors = async (raspPiIP) => {
+const switchAcState = async (state, rasp_ip, device_id, Control) => {
   try {
     const config = await loadConfig();
+    const raspConfig = config[rasp_ip];
 
-    // Search for the IP address in the cached JSON data
-    const ngrokUrl = config[raspPiIP];
-
-    if (!ngrokUrl) {
-      throw new Error(`IP address ${raspPiIP} not found in the configuration file`);
+    if (!raspConfig) {
+      throw new Error(`Raspberry Pi IP ${rasp_ip} not found in the configuration file`);
     }
 
-    const endpoint = `${ngrokUrl}`;
-    const flaskUrl = `${endpoint}/api-sensibo/get_sensor_data`;
-    console.log(flaskUrl);
-    // Send a GET request to the Flask app
-    const response = await axios.get(flaskUrl);
+    // Ensure the URL is properly formatted
+    const baseUrl = raspConfig.url.endsWith('/') ? raspConfig.url : `${raspConfig.url}/`;
+    const endpoint = `${baseUrl}api-sensibo/switch_ac_state`;
+    
+    console.log(`Sending AC command to: ${endpoint}`);
+    console.log('Command details:', { state, device_id, Control });
 
-    // Check if the response has the necessary fields
-    if (response.data && response.data.success) {
-      const { temperature, humidity } = response.data;
-      return { temperature, humidity };
+    // Update request body to match Flask endpoint expectations
+    const requestBody = {
+      id: device_id,
+      apiKey: process.env.SENSIBO_API_KEY, // Make sure this env var is set
+      state: state === 'on', // Convert to boolean
+      temperature: Control?.temperature
+    };
+
+    console.log('Request body:', requestBody);
+
+    const response = await axios.post(endpoint, requestBody);
+
+    if (response.data.statusCode === 200) {
+      console.log('AC control successful:', response.data);
+      return { success: true, data: response.data.data };
     } else {
-      console.log('No measurements found.');
-      return null; // Return null to indicate no data found
+      console.error('Failed to update AC state:', response.data);
+      return { success: false, message: response.data.error || "Failed to update AC state via API" };
     }
-  } catch (err) {
-    console.error("Error fetching sensor data from Flask:", err.message);
-    return null; // Return null to indicate failure
+  } catch (error) {
+    console.error("Error controlling AC:", error.message);
+    if (error.response) {
+      console.error('Response data:', error.response.data);
+      console.error('Response status:', error.response.status);
+    }
+    return { success: false, message: error.message };
+  }
+};
+
+const getSensiboSensors = async (rasp_ip) => {
+  try {
+    console.log('Getting sensor data for Raspberry Pi:', rasp_ip);
+    
+    const config = await loadConfig();
+    console.log('Loaded config:', config);
+    
+    const raspConfig = config[rasp_ip];
+    if (!raspConfig) {
+      throw new Error(`No configuration found for Raspberry Pi IP: ${rasp_ip}`);
+    }
+
+    if (!raspConfig.url) {
+      throw new Error(`No URL configured for Raspberry Pi IP: ${rasp_ip}`);
+    }
+
+    // Ensure URL is properly formatted
+    const baseUrl = raspConfig.url.endsWith('/') ? raspConfig.url : `${raspConfig.url}/`;
+    const sensorUrl = `${baseUrl}api-sensibo/get_sensor_data`;
+    
+    console.log('Requesting sensor data from:', sensorUrl);
+
+    const response = await axios.get(sensorUrl);
+    
+    if (response.data && response.data.success) {
+      console.log('Received sensor data:', response.data);
+      return {
+        temperature: response.data.temperature,
+        humidity: response.data.humidity
+      };
+    }
+    
+    throw new Error('Invalid response from sensor API');
+  } catch (error) {
+    console.error('Error in getSensiboSensors:', {
+      message: error.message,
+      config: error.config,
+      response: error.response?.data
+    });
+    
+    // Don't throw the error, return null instead
+    return null;
   }
 };
 
@@ -273,27 +244,26 @@ const updateAcMode = async (mode) => {
 const updateSensiboMode = async (deviceId, mode, rasp_ip) => {
   const config = await loadConfig();
 
-  // Search for the IP address in the cached JSON data
-  const ngrokUrl = config[rasp_ip];
+  // Use deviceId to look up configuration
+  const deviceConfig = config[deviceId];
 
-  if (!ngrokUrl) {
-    throw new Error(`IP address ${rasp_ip} not found in the configuration file`);
+  if (!deviceConfig) {
+    throw new Error(`Device ID ${deviceId} not found in the configuration file`);
   }
 
-  const endpoint = `${ngrokUrl}`;
+  const endpoint = deviceConfig.ip;
   try {
-    const response = await axios.post(`${endpoint}/api-sensibo/update_mode`, {
+    const response = await axios.post(`${endpoint}api-sensibo/update_mode`, {
       deviceId: deviceId,
       mode: mode
     });
 
     if (response.data.success) {
-      const updateDB = await updateDeviceModeInDatabase(deviceId, mode);  // Your existing function to update the DB
+      const updateDB = await updateDeviceModeInDatabase(deviceId, mode);
       return { success: true, data: response.data };
     } else {
       return { success: false, message: "Failed to update mode via API" };
     }
-
   } catch (error) {
     console.error("Error updating Sensibo mode:", error);
     return { success: false, message: "Error updating mode" };
@@ -308,5 +278,6 @@ module.exports = {
   // analyzeFunc,
   updateAcMode,
   updateSensiboMode,
-  TurnON_OFF_LIGHT
+  TurnON_OFF_LIGHT,
+  loadConfig
 };

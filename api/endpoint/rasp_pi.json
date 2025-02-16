@@ -1,3 +1,6 @@
 {
-  "192.168.0.121": "https://577e-193-58-150-10.ngrok-free.app"
+  "192.168.0.121": {
+    "url": "https://9e93-193-58-150-6.ngrok-free.app/",
+    "deviceId": "JArdX73w"
+  }
 }

@@ -64,17 +64,11 @@ function execute() {
       
       eventEmitter.on('temperatureEvent', debounce(async (data) => {
         try {
-          const { event, temperature, humidity, roomId, roomName, spaceId, deviceId, raspberryPiIP, user_oid } = data;
-      
-          console.log('Temperature Event Data:', data);
+          const { event, temperature, humidity, roomId, roomName } = data;
           let Condition = event;
-          console.log('Event Data Condition:', Condition);
-      
-          await interpretRuleByNameHumD(Condition, data, false); // false indicates that `res` should not be passed
-          resolve();
+          await interpretRuleByNameHumD(Condition, data, false);
         } catch (error) {
           console.error("Error processing temperatureEvent:", error);
-          reject(error);
         }
       }, 1000));
       eventEmitter.on('humidityEvent', debounce(async (data) => {
@@ -213,6 +207,26 @@ async function getCurrentActivityForUser(userId) {
 
 async function simulateLightControl(deviceId, state) {
   return new Promise(resolve => setTimeout(() => resolve(true), 1000));
+}
+
+async function interpretRules(rules) {
+    try {
+        for (const rule of rules) {
+            if (!rule || !rule.ruleString) {
+                console.warn('Skipping invalid rule:', rule);
+                continue;
+            }
+
+            try {
+                await interpretRuleByName(rule.ruleString, {}, null, {}, true);
+                console.log(`Rule "${rule.ruleString}" interpreted successfully.`);
+            } catch (error) {
+                console.error(`Error interpreting rule "${rule.ruleString}":`, error);
+            }
+        }
+    } catch (error) {
+        console.error('Error in rule interpretation:', error);
+    }
 }
 
 module.exports = {

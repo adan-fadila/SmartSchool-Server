@@ -137,36 +137,28 @@ exports.sensorControllers={
           console.log("-----------sensibo---------------");
       
           const { state, temperature, rasp_ip, id } = req.body;
-          console.log(id);
+          console.log("Received request:", { state, temperature, rasp_ip, id });
+      
           const actualDeviceId = id === "YNahUQcM" ? "YNahUQcM" : process.env.SENSIBO_DEVICE_ID;
           const actualApiKey = id === "YNahUQcM" ? "VqP5EIaNb3MrI62s19pYpbIX5zdClO" : process.env.SENSIBO_API_KEY;
       
-          // Debugging: Log the environment variables to ensure they're being read correctly
-          console.log("Device ID:", actualDeviceId, "API Key:", actualApiKey);
+          // Create Control object only if temperature is provided
+          const Control = temperature ? { temperature } : undefined;
       
-          // Adjusted call to match the switchAcState function signature
-          const switchResponse = await switchAcState(actualDeviceId, state, rasp_ip, temperature);
-          // This is where you should insert the detailed error logging
-          if (switchResponse.statusCode !== 200) {
-            if (switchResponse.data && typeof switchResponse.data === 'string') {
-              try {
-                const errorDetails = JSON.parse(switchResponse.data);
-                console.error("Detailed error from Sensibo API:", errorDetails);
-              } catch (e) {
-                console.error("Error parsing Sensibo API response:", switchResponse.data);
-              }
-            }
-            // Respond with the error to the client
-            res.status(switchResponse.statusCode).json({ success: false, message: "Failed to update AC state via API.", details: switchResponse.data });
+          const switchResponse = await switchAcState(state, rasp_ip, actualDeviceId, Control);
+      
+          if (!switchResponse.success) {
+            res.status(500).json(switchResponse);
             return;
           }
-
-          // Handle successful response
-          res.json({ success: true, data: switchResponse.data });
+      
+          res.json(switchResponse);
         } catch (err) {
           console.error("Error in /sensibo route:", err);
-          // Send a structured error response
-          res.status(500).json({ success: false, message: err.message || "Server error occurred." });
+          res.status(500).json({ 
+            success: false, 
+            message: err.message || "Server error occurred." 
+          });
         }
       },
       async get_Temperature (req, res) {
