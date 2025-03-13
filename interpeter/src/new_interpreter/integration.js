@@ -168,6 +168,7 @@ async function loadRulesFromDatabase() {
         let skippedRules = 0;
         let errorRules = 0;
         
+        // First, try to process only simple temperature rules that we're sure will work
         for (const dbRule of rules) {
             try {
                 // Skip inactive rules
@@ -184,12 +185,31 @@ async function loadRulesFromDatabase() {
                     continue;
                 }
                 
+                // Only process simple temperature rules in this first pass
+                const tempPattern = /temperature\s+in\s+(.+?)\s+([><]=?|==|!=)\s+(\d+)/i;
+                
                 // Use the new event and action fields if available, otherwise use the description
                 let ruleText;
                 if (dbRule.event && dbRule.action) {
                     console.log(`Creating rule from database using event and action fields: "${dbRule.event}" -> "${dbRule.action}"`);
+                    if (!tempPattern.test(dbRule.event)) {
+                        console.log(`Skipping non-temperature rule in first pass: "${dbRule.event}"`);
+                        continue;
+                    }
                     ruleText = `if ${dbRule.event} then ${dbRule.action}`;
                 } else {
+                    let eventPart = '';
+                    
+                    // Extract the event part from the description
+                    if (dbRule.description.toLowerCase().includes('if ') && dbRule.description.toLowerCase().includes(' then ')) {
+                        eventPart = dbRule.description.split(/\s+then\s+/i)[0].replace(/^if\s+/i, '');
+                    }
+                    
+                    if (!eventPart || !tempPattern.test(eventPart)) {
+                        console.log(`Skipping non-temperature rule in first pass: "${dbRule.description}"`);
+                        continue;
+                    }
+                    
                     console.log(`Creating rule from database using description: "${dbRule.description}"`);
                     ruleText = dbRule.description;
                     
@@ -203,6 +223,7 @@ async function loadRulesFromDatabase() {
                 }
                 
                 // Create the rule
+                console.log(`Creating rule: ${ruleText}`);
                 const rule = Interpreter.createRule(ruleText);
                 console.log(`Rule created from database: ${rule.toString()}`);
                 console.log(`Rule ID: ${rule.id}, Event: ${rule.event.getConditionString()}, Action: ${rule.action.toString()}`);
@@ -224,6 +245,8 @@ async function loadRulesFromDatabase() {
         console.log(`Total rules registered: ${allRules.length}`);
         allRules.forEach((rule, index) => {
             console.log(`Rule ${index + 1}: ${rule.toString()}`);
+            console.log(`Rule ${index + 1} Event: ${rule.event.getConditionString()}`);
+            console.log(`Rule ${index + 1} Action: ${rule.action.toString()}`);
         });
         
         console.log(`Finished loading rules from database. Created: ${createdRules}, Skipped: ${skippedRules}, Errors: ${errorRules}`);

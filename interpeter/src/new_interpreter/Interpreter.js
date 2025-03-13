@@ -143,26 +143,16 @@ class Interpreter {
             const operator = tempMatch[2].trim();
             const threshold = parseInt(tempMatch[3].trim(), 10);
             
-            // Get the temperature event from the registry
-            const event = EventRegistry.getAll().find(e => 
-                e.type === 'temperature' && 
-                e.location === location
-            );
+            // Create a NEW temperature event for each rule
+            // This ensures each rule has its own event with the specific threshold
+            const TemperatureEvent = require('./events/TemperatureEvent');
+            const newEvent = new TemperatureEvent(location, operator, threshold);
             
-            if (!event) {
-                // Create a new temperature event
-                const TemperatureEvent = require('./events/TemperatureEvent');
-                const newEvent = new TemperatureEvent(location, operator, threshold);
-                EventRegistry.register(newEvent);
-                
-                return newEvent;
-            }
+            // Register the new event
+            EventRegistry.register(newEvent);
             
-            // Set the condition
-            event.operator = operator;
-            event.threshold = threshold;
-            
-            return event;
+            console.log(`[INTERPRETER] Created new temperature event: ${newEvent.getConditionString()}`);
+            return newEvent;
         }
         
         // Add more event types as needed
@@ -384,12 +374,11 @@ class Interpreter {
     resetEventRegistrations() {
         console.log('[INTERPRETER] Resetting all event registrations...');
         
-        // Get all active rules
-        const allRules = RuleRegistry.getAll();
+        // Get all events
+        const allEvents = EventRegistry.getAll();
         
         // Clear all event registrations
         console.log('[INTERPRETER] Clearing all event registrations...');
-        const allEvents = EventRegistry.getAll();
         
         // Detach all observers from all events
         for (const event of allEvents) {
@@ -403,14 +392,44 @@ class Interpreter {
             }
         }
         
-        // Re-register all actions with their events
+        // Get all active rules
+        const allRules = RuleRegistry.getAll();
+        
+        // Re-register all actions with their correct events
         console.log('[INTERPRETER] Re-registering all actions with their events...');
         for (const rule of allRules) {
             if (rule.active) {
-                console.log(`[INTERPRETER] Re-attaching action for rule: ${rule.toString()}`);
-                rule.event.attach(rule.action);
+                // Store the reference to the rule in the action
+                rule.action._triggeredByRule = rule.toString();
+                
+                // Find the correct event for this rule
+                const eventCondition = rule.event.getConditionString();
+                const matchingEvent = allEvents.find(e => e.getConditionString() === eventCondition);
+                
+                if (matchingEvent) {
+                    console.log(`[INTERPRETER] Re-attaching action for rule: ${rule.toString()}`);
+                    console.log(`[INTERPRETER] Event condition: ${eventCondition}`);
+                    matchingEvent.attach(rule.action);
+                } else {
+                    console.log(`[INTERPRETER] Error: No matching event found for rule: ${rule.toString()}`);
+                    console.log(`[INTERPRETER] Looking for event condition: ${eventCondition}`);
+                    
+                    // If no matching event is found, use the event from the rule directly
+                    console.log(`[INTERPRETER] Using rule's event directly: ${rule.event.getConditionString()}`);
+                    rule.event.attach(rule.action);
+                }
             } else {
                 console.log(`[INTERPRETER] Skipping inactive rule: ${rule.toString()}`);
+            }
+        }
+        
+        // Print the current status of all events and their observers
+        console.log('[INTERPRETER] Current event registrations:');
+        for (const event of EventRegistry.getAll()) {
+            console.log(`[INTERPRETER] Event: ${event.getConditionString()}`);
+            console.log(`[INTERPRETER] Observers: ${event.observers.length}`);
+            for (const observer of event.observers) {
+                console.log(`[INTERPRETER] -- Observer: ${observer.toString()}`);
             }
         }
         
