@@ -94,11 +94,19 @@ const bodyParser = require('body-parser');
 
 const port = process.env.PORT || 3000;
 require("dotenv").config();
-require('./statemanager/stateManager')
+require('./statemanager/stateManager');
 
+// Initialize the new interpreter
+const { initializeAndIntegrate } = require('./interpeter/src/new_interpreter/integration');
+
+// Comment out the old interpreter execution
+// const { execute } = require('./interpeter/src/execute/execute');
+// execute().catch(err => console.error('Error executing interpreter:', err));
+
+// Initialize the new interpreter
+initializeAndIntegrate().catch(err => console.error('Error initializing new interpreter:', err));
 
 const testRouter = require('./routers/testRouter');  // Import the test router
-
 
 // import Routers
 

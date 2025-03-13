@@ -484,31 +484,89 @@ function interpret(input) {
 
 
 const add_new_Rule = async (ruleData) => {
-  console.log("add new Rule");
-  
-  // Assuming ruleData is structured correctly according to your ruleSchema,
-  // e.g., ruleData has description, condition (with variable, operator, value), action, and id
-  const newRule = new Rule({
-    description: ruleData.description,
-    condition: ruleData.condition,
-    id: ruleData.id || Math.floor(10000000 + Math.random() * 90000000).toString(),
-    space_id: ruleData.space_id
-  });
-
-  console.log("rule going to save in the database");
-
   try {
-    await newRule.save();
-    console.log('Rule saved successfully');
+    // Validate the rule data
+    if (!ruleData.description && (!ruleData.event || !ruleData.action)) {
+      return {
+        statusCode: 400,
+        data: { message: "Rule must have either a description or both event and action fields" }
+      };
+    }
+
+    // Generate a random ID if not provided
+    if (!ruleData.id) {
+      ruleData.id = Math.random().toString(36).substring(2, 15);
+    }
+
+    // If description is not provided but event and action are, create the description
+    if (!ruleData.description && ruleData.event && ruleData.action) {
+      ruleData.description = `if ${ruleData.event} then ${ruleData.action}`;
+    }
+
+    // If event and action are not provided but description is, try to extract them
+    if (ruleData.description && (!ruleData.event || !ruleData.action)) {
+      const descriptionLower = ruleData.description.toLowerCase();
+      if (descriptionLower.includes('if') && descriptionLower.includes('then')) {
+        const parts = descriptionLower.split(/\s+then\s+/i);
+        if (parts.length === 2) {
+          const eventPart = parts[0].replace(/^if\s+/i, '').trim();
+          const actionPart = parts[1].trim();
+          
+          if (!ruleData.event) ruleData.event = eventPart;
+          if (!ruleData.action) ruleData.action = actionPart;
+        }
+      }
+    }
+
+    // Set default values for missing fields
+    if (!ruleData.space_id) {
+      ruleData.space_id = "default";
+    }
+    
+    if (ruleData.isActive === undefined) {
+      ruleData.isActive = true;
+    }
+
+    // Create the rule
+    const rule = new Rule({
+      id: ruleData.id,
+      description: ruleData.description,
+      condition: ruleData.condition,
+      event: ruleData.event,
+      action: ruleData.action,
+      space_id: ruleData.space_id,
+      room_id: ruleData.room_id,
+      isStrict: ruleData.isStrict || false,
+      isActive: ruleData.isActive,
+      isHidden: ruleData.isHidden || false
+    });
+
+    // Save the rule to the database
+    await rule.save();
+    
+    // Try to reload rules in the interpreter if it's available
+    try {
+      // Check if the interpreter module is available
+      const { Interpreter } = require('../interpeter/src/new_interpreter/index');
+      const { loadRulesFromDatabase } = require('../interpeter/src/new_interpreter/integration');
+      
+      // Reload rules from the database
+      console.log('Reloading rules in the interpreter after adding a new rule...');
+      await loadRulesFromDatabase();
+      console.log('Rules reloaded successfully');
+    } catch (interpreterError) {
+      console.warn('Could not reload rules in the interpreter:', interpreterError.message);
+    }
+
     return {
-      statusCode: 200,
-      message: "Rule added successfully",
+      statusCode: 201,
+      data: { message: "Rule added successfully", rule }
     };
   } catch (error) {
-    console.error('Error saving rule:', error);
+    console.error("Error adding rule:", error);
     return {
       statusCode: 500,
-      message: `Error adding rule - ${error}`,
+      data: { message: error.message }
     };
   }
 };
@@ -516,9 +574,40 @@ const add_new_Rule = async (ruleData) => {
 const getAllRules = async () => {
   try {
     const rules = await Rule.find();
+    
+    // Process rules to ensure they have event and action fields
+    const processedRules = rules.map(rule => {
+      const ruleObj = rule.toObject();
+      
+      // If event and action are not present but description is, try to extract them
+      if (!ruleObj.event || !ruleObj.action) {
+        if (ruleObj.description) {
+          const descriptionLower = ruleObj.description.toLowerCase();
+          // Extract event and action from description if possible
+          if (descriptionLower.includes('if') && descriptionLower.includes('then')) {
+            const parts = descriptionLower.split(/\s+then\s+/i);
+            if (parts.length === 2) {
+              const eventPart = parts[0].replace(/^if\s+/i, '').trim();
+              const actionPart = parts[1].trim();
+              
+              if (!ruleObj.event) ruleObj.event = eventPart;
+              if (!ruleObj.action) ruleObj.action = actionPart;
+            }
+          }
+        }
+      }
+      
+      // Ensure all rules have isActive field
+      if (ruleObj.isActive === undefined) {
+        ruleObj.isActive = true;
+      }
+      
+      return ruleObj;
+    });
+    
     return {
       statusCode: 200,
-      data: rules,
+      data: processedRules,
     };
   } catch (error) {
     return {
@@ -532,9 +621,40 @@ const getRulesBySpaceId = async (space_id) => {
   try {
     // Modify the query to filter rules based on the space ID
     const rules = await Rule.find({ space_id: space_id });
+    
+    // Process rules to ensure they have event and action fields
+    const processedRules = rules.map(rule => {
+      const ruleObj = rule.toObject();
+      
+      // If event and action are not present but description is, try to extract them
+      if (!ruleObj.event || !ruleObj.action) {
+        if (ruleObj.description) {
+          const descriptionLower = ruleObj.description.toLowerCase();
+          // Extract event and action from description if possible
+          if (descriptionLower.includes('if') && descriptionLower.includes('then')) {
+            const parts = descriptionLower.split(/\s+then\s+/i);
+            if (parts.length === 2) {
+              const eventPart = parts[0].replace(/^if\s+/i, '').trim();
+              const actionPart = parts[1].trim();
+              
+              if (!ruleObj.event) ruleObj.event = eventPart;
+              if (!ruleObj.action) ruleObj.action = actionPart;
+            }
+          }
+        }
+      }
+      
+      // Ensure all rules have isActive field
+      if (ruleObj.isActive === undefined) {
+        ruleObj.isActive = true;
+      }
+      
+      return ruleObj;
+    });
+    
     return {
       statusCode: 200,
-      data: rules,
+      data: processedRules,
     };
   } catch (error) {
     return {
@@ -630,70 +750,72 @@ const validateSensor = async (condition) => {
 
 const updateRule = async (ruleId, updateFields) => {
   try {
-    // Process and validate the 'rule' field if it exists
-    if (updateFields.rule) {
-      const formattedRule = await ruleFormatter(updateFields.rule);
-      const ruleValidation = await validateRule(formattedRule);
-      if (ruleValidation.statusCode === 400) {
-        return ruleValidation;
-      }
-      // Update the 'rule' field in updateFields
-      updateFields.rule = formattedRule;
+    // Find the rule by ID
+    const rule = await Rule.findOne({ id: ruleId });
+    
+    if (!rule) {
+      return {
+        statusCode: 404,
+        data: { message: "Rule not found" }
+      };
     }
-
-    // Update and validate the description and action based on the target temperature
+    
+    // Update the description if provided
     if (updateFields.description) {
-      const formattedDescription = await descriptionFormatter(updateFields.description);
-      updateFields.description = formattedDescription;
-
-      // Extract the target temperature, assuming it's mentioned after the action context in the description
-      const targetTempMatch = formattedDescription.match(/to (\d+)°C/);
-      if (targetTempMatch) {
-        const newTargetTemp = targetTempMatch[1];
-
-        // Ensure the action array is updated with the new temperature
-        if (!updateFields.action) {
-          // If action is not present in updateFields, retrieve current action from database
-          const currentRule = await Rule.findOne({ id: ruleId });
-          updateFields.action = currentRule.action;
-        }
-
-        let acActionUpdated = false;
-        updateFields.action = updateFields.action.map((act) => {
-          if (act.action.includes("Turn AC ON to cool mode at")) {
-            acActionUpdated = true;
-            return { action: `Turn AC ON to cool mode at ${newTargetTemp}` };
-          }
-          return act;
-        });
-
-        // If AC action was not found and updated, add it to the actions
-        if (!acActionUpdated) {
-          updateFields.action.push({
-            action: `Turn AC ON to cool mode at ${newTargetTemp}`,
-          });
+      rule.description = updateFields.description;
+    }
+    
+    // Parse the description to extract event and action if they're not provided
+    if (rule.description && (!updateFields.event || !updateFields.action)) {
+      const descriptionLower = rule.description.toLowerCase();
+      if (descriptionLower.includes('if') && descriptionLower.includes('then')) {
+        const parts = descriptionLower.split(/\s+then\s+/i);
+        if (parts.length === 2) {
+          const eventPart = parts[0].replace(/^if\s+/i, '').trim();
+          const actionPart = parts[1].trim();
+          
+          if (!updateFields.event) updateFields.event = eventPart;
+          if (!updateFields.action) updateFields.action = actionPart;
         }
       }
     }
-
-    // Validate the sensor condition if it's being updated
-    if (updateFields.condition) {
-      const sensorValidation = await validateSensor(updateFields.condition);
-      if (sensorValidation.statusCode === 400) {
-        return sensorValidation;
-      }
+    
+    // Update other fields if provided
+    if (updateFields.event) rule.event = updateFields.event;
+    if (updateFields.action) rule.action = updateFields.action;
+    if (updateFields.condition) rule.condition = updateFields.condition;
+    if (updateFields.space_id) rule.space_id = updateFields.space_id;
+    if (updateFields.room_id) rule.room_id = updateFields.room_id;
+    if (updateFields.isStrict !== undefined) rule.isStrict = updateFields.isStrict;
+    if (updateFields.isActive !== undefined) rule.isActive = updateFields.isActive;
+    if (updateFields.isHidden !== undefined) rule.isHidden = updateFields.isHidden;
+    
+    // Save the updated rule
+    await rule.save();
+    
+    // Try to reload rules in the interpreter if it's available
+    try {
+      // Check if the interpreter module is available
+      const { Interpreter } = require('../interpeter/src/new_interpreter/index');
+      const { loadRulesFromDatabase } = require('../interpeter/src/new_interpreter/integration');
+      
+      // Reload rules from the database
+      console.log('Reloading rules in the interpreter after updating a rule...');
+      await loadRulesFromDatabase();
+      console.log('Rules reloaded successfully');
+    } catch (interpreterError) {
+      console.warn('Could not reload rules in the interpreter:', interpreterError.message);
     }
-
-    // Update the rule in the database
-    await Rule.updateOne({ id: ruleId }, { $set: updateFields });
+    
     return {
       statusCode: 200,
-      message: "Rule updated successfully",
+      data: { message: "Rule updated successfully", rule }
     };
   } catch (error) {
+    console.error("Error updating rule:", error);
     return {
       statusCode: 500,
-      message: `Error updating rule - ${error}`,
+      data: { message: error.message }
     };
   }
 };
@@ -701,16 +823,40 @@ const updateRule = async (ruleId, updateFields) => {
 
 async function deleteRuleById(ruleId) {
   try {
+    // First check if the rule exists
+    const rule = await Rule.findOne({ id: ruleId });
+    if (!rule) {
+      return { status: 404, message: "Rule not found" };
+    }
+    
+    // Delete the rule
     const result = await Rule.deleteOne({ id: ruleId });
+    
+    // Delete any related rules if they exist
     await Rule.deleteMany({ relatedRule: ruleId });
+    
     if (result.deletedCount === 1) {
-      return { status: 200 };
+      // Try to reload rules in the interpreter if it's available
+      try {
+        // Check if the interpreter module is available
+        const { Interpreter } = require('../interpeter/src/new_interpreter/index');
+        const { loadRulesFromDatabase } = require('../interpeter/src/new_interpreter/integration');
+        
+        // Reload rules from the database
+        console.log('Reloading rules in the interpreter after deleting a rule...');
+        await loadRulesFromDatabase();
+        console.log('Rules reloaded successfully');
+      } catch (interpreterError) {
+        console.warn('Could not reload rules in the interpreter:', interpreterError.message);
+      }
+      
+      return { status: 200, message: "Rule deleted successfully" };
     } else {
-      return { status: 400 };
+      return { status: 400, message: "Error deleting the rule" };
     }
   } catch (error) {
     console.error("Error deleting rule:", error);
-    return { status: 500 };
+    return { status: 500, message: error.message };
   }
 }
 

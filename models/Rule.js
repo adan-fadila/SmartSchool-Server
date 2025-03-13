@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 
 const ruleSchema = new mongoose.Schema({
-
   description: String,
-  condition: String ,
+  condition: String,
+  event: String,
+  action: String,
   id: {
     type: String,
     required: true
@@ -11,6 +12,9 @@ const ruleSchema = new mongoose.Schema({
   space_id: {
     type: String,
     required: true
+  },
+  room_id: {
+    type: String
   },
   isStrict: {
     type: Boolean,

@@ -37,34 +37,78 @@ exports.ruleControllers={
     },
     // Define the route for adding a new rule
     async add_Rule(req, res){
-
-        const rule  = req.body;
-        console.log( rule );
-        const response = await add_new_Rule(rule);
-        res.status(response.statusCode).send(response.message);
+        try {
+            const ruleData = req.body;
+            
+            // Ensure the rule has the required fields
+            if (!ruleData.description && (!ruleData.event || !ruleData.action)) {
+                return res.status(400).json({ message: "Rule must have either a description or both event and action fields" });
+            }
+            
+            // If description is not provided but event and action are, create the description
+            if (!ruleData.description && ruleData.event && ruleData.action) {
+                ruleData.description = `if ${ruleData.event} then ${ruleData.action}`;
+            }
+            
+            // Add the rule
+            const response = await add_new_Rule(ruleData);
+            
+            return res.status(response.statusCode).json(response.data);
+        } catch (error) {
+            console.error("Error adding rule:", error);
+            return res.status(500).json({ message: error.message });
+        }
     },
     async update_Rule(req, res){
-        const updateFields = { ...req.body }; // Includes isActive and any other fields
-        const id = req.params.id;
-        const response = await updateRule(id, updateFields);
-        return res.status(response.statusCode).send(response.message);
-
+        try {
+            const ruleId = req.params.id;
+            const updateFields = req.body;
+            
+            // If description is not provided but event and action are, create the description
+            if (!updateFields.description && updateFields.event && updateFields.action) {
+                updateFields.description = `if ${updateFields.event} then ${updateFields.action}`;
+            }
+            
+            // Update the rule
+            const response = await updateRule(ruleId, updateFields);
+            
+            return res.status(response.statusCode).json(response.data);
+        } catch (error) {
+            console.error("Error updating rule:", error);
+            return res.status(500).json({ message: error.message });
+        }
     },
     async delete_Rule_ByID(req, res){
         const id = req.params.id;
         try {
-          // Assuming you have a function to delete the rule by its ID
-          const response = await deleteRuleById(id);
-      
-          if (response.status === 200) {
-            res.status(200).json({ message: "Rule deleted successfully" });
-          } else {
-            res.status(400).json({ message: "Error deleting the rule" });
-          }
+            const response = await deleteRuleById(id);
+            
+            if (response.status === 200) {
+                return res.status(200).json({ message: "Rule deleted successfully" });
+            } else if (response.status === 404) {
+                return res.status(404).json({ message: "Rule not found" });
+            } else {
+                return res.status(400).json({ message: "Error deleting the rule" });
+            }
         } catch (error) {
-          res.status(500).json({ message: "Server error" });
+            console.error("Error deleting rule:", error);
+            return res.status(500).json({ message: "Server error", error: error.message });
         }
-
     },
-
+    async reload_Rules(req, res) {
+        try {
+            // Import the loadRulesFromDatabase function from the integration module
+            const { loadRulesFromDatabase } = require('../interpeter/src/new_interpreter/integration');
+            
+            // Reload rules from the database
+            console.log('Manually reloading rules from the database...');
+            await loadRulesFromDatabase();
+            console.log('Rules reloaded successfully');
+            
+            return res.status(200).json({ message: "Rules reloaded successfully" });
+        } catch (error) {
+            console.error("Error reloading rules:", error);
+            return res.status(500).json({ message: "Error reloading rules", error: error.message });
+        }
+    },
 }

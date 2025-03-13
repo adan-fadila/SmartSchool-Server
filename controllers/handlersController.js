@@ -166,6 +166,8 @@ exports.handleControllers = {
 
   // Function to start updating state for all configurations
   async startUpdatingStateForAll(configurations) {
+    // Comment out the old polling mechanism to avoid conflicts with the new interpreter
+    /*
     configurations.forEach(config => {
       setInterval(() => {
         this.updateSensorData(
@@ -178,8 +180,11 @@ exports.handleControllers = {
         );
       },5000); // 300000 ms = 5 minutes
     });
+    */
+    console.log('Old interpreter polling disabled. Using new interpreter instead.');
   },
 };
 
 // Start updating state for all configurations
-exports.handleControllers.startUpdatingStateForAll(configurations);
+// Comment out the old polling mechanism to avoid conflicts with the new interpreter
+// exports.handleControllers.startUpdatingStateForAll(configurations);
