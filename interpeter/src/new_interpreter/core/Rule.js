@@ -17,6 +17,9 @@ class Rule {
         this.createdAt = new Date();
         this.active = true;
 
+        // Set the rule reference in the action
+        this.action._triggeredByRule = this.toString();
+
         // Connect the event and action
         this.event.attach(this.action);
     }

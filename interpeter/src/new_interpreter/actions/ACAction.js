@@ -26,13 +26,15 @@ class ACAction extends BaseAction {
      */
     async execute() {
         try {
-            console.log(`Executing AC action: ${this.command} for ${this.location} (Device ID: ${this.deviceId})`);
+            console.log(`[AC ACTION] Executing AC action: ${this.command} for ${this.location} (Device ID: ${this.deviceId})`);
+            console.log(`[AC ACTION] Action triggered by rule: ${this._triggeredByRule || 'Unknown'}`);
+            console.log(`[AC ACTION] Stack trace:`, new Error().stack);
             
             // Convert command to boolean state
             const state = this.command.toLowerCase() === 'on';
             
             // Log the action details
-            console.log(`AC Action Details:
+            console.log(`[AC ACTION] AC Action Details:
                 - Location: ${this.location}
                 - Command: ${this.command} (state: ${state})
                 - Device ID: ${this.deviceId}
@@ -42,7 +44,7 @@ class ACAction extends BaseAction {
             `);
             
             // Call the API function to control the AC
-            console.log(`Sending command to Sensibo API via switchAcState...`);
+            console.log(`[AC ACTION] Sending command to Sensibo API via switchAcState...`);
             const result = await switchAcState(
                 this.deviceId,
                 state,
@@ -50,27 +52,27 @@ class ACAction extends BaseAction {
                 state ? this.temperature : null // Only send temperature if turning on
             );
             
-            console.log(`Sensibo API response:`, result);
+            console.log(`[AC ACTION] Sensibo API response:`, result);
             
             // If turning on and mode is specified, update the mode
             if (state && this.mode && this.mode.trim() !== '') {
                 try {
-                    console.log(`Setting AC mode to ${this.mode}...`);
+                    console.log(`[AC ACTION] Setting AC mode to ${this.mode}...`);
                     // Import the updateSensiboMode function dynamically to avoid circular dependencies
                     const { updateSensiboMode } = require('../../../../api/sensibo');
                     const modeResult = await updateSensiboMode(this.deviceId, this.mode, this.raspberryPiIP);
-                    console.log(`Mode update result:`, modeResult);
+                    console.log(`[AC ACTION] Mode update result:`, modeResult);
                 } catch (modeError) {
-                    console.error(`Error setting AC mode:`, modeError);
+                    console.error(`[AC ACTION] Error setting AC mode:`, modeError);
                     // Continue execution even if mode setting fails
                 }
             }
             
-            console.log(`AC action completed successfully`);
+            console.log(`[AC ACTION] AC action completed successfully`);
             
             return result;
         } catch (error) {
-            console.error(`Error executing AC action:`, error);
+            console.error(`[AC ACTION] Error executing AC action:`, error);
             throw error;
         }
     }

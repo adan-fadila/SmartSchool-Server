@@ -2,6 +2,7 @@ const { Interpreter } = require('./index');
 const { StateManager, eventEmitter } = require('../../../statemanager/stateManager');
 const { getSensiboSensors } = require('../../../api/sensibo');
 const Rule = require('../../../models/Rule'); // Import the Rule model
+const mongoose = require('mongoose');
 
 /**
  * Initialize and integrate the new interpreter with the existing system
@@ -78,6 +79,9 @@ async function initializeAndIntegrate() {
         // Load rules from the database
         await loadRulesFromDatabase();
         
+        // Set up a watcher for rule changes
+        setupRuleChangeWatcher();
+        
         // Listen for temperature events from the state manager
         console.log('Setting up event listeners for state manager events...');
         eventEmitter.on('temperatureEvent', (data) => {
@@ -148,24 +152,35 @@ async function loadRulesFromDatabase() {
         
         console.log(`Found ${rules.length} rules in the database.`);
         
-        // Clear existing rules first
-        console.log('Clearing existing rules...');
-        const RuleRegistry = require('./registry/RuleRegistry');
-        RuleRegistry.clear();
-        console.log('Existing rules cleared.');
+        // Clear all existing rules and events
+        console.log('Clearing all existing rules and events...');
+        Interpreter.clearAll();
+        console.log('All existing rules and events cleared.');
+        
+        // Count active and inactive rules
+        const activeRules = rules.filter(rule => rule.isActive === true);
+        const inactiveRules = rules.filter(rule => rule.isActive === false);
+        
+        console.log(`Found ${activeRules.length} active rules and ${inactiveRules.length} inactive rules.`);
         
         // Create each rule in our interpreter
+        let createdRules = 0;
+        let skippedRules = 0;
+        let errorRules = 0;
+        
         for (const dbRule of rules) {
             try {
                 // Skip inactive rules
                 if (dbRule.isActive === false) {
-                    console.log(`Skipping inactive rule with ID ${dbRule._id}`);
+                    console.log(`Skipping inactive rule with ID ${dbRule._id}: "${dbRule.description || (dbRule.event + ' -> ' + dbRule.action)}"`);
+                    skippedRules++;
                     continue;
                 }
                 
                 // Check if the rule has the necessary fields
-                if (!dbRule.description) {
-                    console.log(`Skipping rule with ID ${dbRule._id} because it has no description.`);
+                if (!dbRule.description && (!dbRule.event || !dbRule.action)) {
+                    console.log(`Skipping rule with ID ${dbRule._id} because it has no description or event/action.`);
+                    skippedRules++;
                     continue;
                 }
                 
@@ -191,11 +206,18 @@ async function loadRulesFromDatabase() {
                 const rule = Interpreter.createRule(ruleText);
                 console.log(`Rule created from database: ${rule.toString()}`);
                 console.log(`Rule ID: ${rule.id}, Event: ${rule.event.getConditionString()}, Action: ${rule.action.toString()}`);
+                createdRules++;
             } catch (error) {
-                console.error(`Error creating rule from database: ${dbRule.description || dbRule.event + ' -> ' + dbRule.action}`, error);
+                console.error(`Error creating rule from database: ${dbRule.description || (dbRule.event + ' -> ' + dbRule.action)}`, error);
+                errorRules++;
                 // Continue with the next rule
             }
         }
+        
+        // Reset event registrations to ensure all rules are properly connected
+        console.log('Resetting event registrations...');
+        Interpreter.resetEventRegistrations();
+        console.log('Event registrations reset complete.');
         
         // Log all registered rules
         const allRules = Interpreter.getAllRules();
@@ -204,7 +226,7 @@ async function loadRulesFromDatabase() {
             console.log(`Rule ${index + 1}: ${rule.toString()}`);
         });
         
-        console.log('Finished loading rules from database.');
+        console.log(`Finished loading rules from database. Created: ${createdRules}, Skipped: ${skippedRules}, Errors: ${errorRules}`);
     } catch (error) {
         console.error('Error loading rules from database:', error);
     }
@@ -334,8 +356,98 @@ function startTemperaturePolling() {
     return intervalId;
 }
 
+/**
+ * Set up a watcher for changes in the rules collection
+ */
+function setupRuleChangeWatcher() {
+    try {
+        console.log('Setting up rule change watcher...');
+        
+        // Get the Rule collection
+        const ruleCollection = mongoose.connection.collection('rules');
+        
+        // Create a change stream
+        const changeStream = ruleCollection.watch();
+        
+        // Listen for changes
+        changeStream.on('change', async (change) => {
+            console.log('Detected change in rules collection:', change.operationType);
+            console.log('Change details:', JSON.stringify(change, null, 2));
+            
+            // Handle different types of changes
+            switch (change.operationType) {
+                case 'insert':
+                    // A new rule was added
+                    console.log('New rule added. Reloading rules...');
+                    await loadRulesFromDatabase();
+                    break;
+                    
+                case 'delete':
+                    // A rule was deleted
+                    console.log('Rule deleted. Reloading rules...');
+                    await loadRulesFromDatabase();
+                    break;
+                    
+                case 'update':
+                    // A rule was updated
+                    if (change.updateDescription && change.updateDescription.updatedFields) {
+                        const updatedFields = change.updateDescription.updatedFields;
+                        
+                        // Check if isActive field was changed
+                        if ('isActive' in updatedFields) {
+                            const ruleId = change.documentKey._id;
+                            const isActive = updatedFields.isActive;
+                            
+                            console.log(`Rule ${ruleId} isActive changed to ${isActive}. Handling rule activation/deactivation...`);
+                            
+                            // Get the rule from the database to get all its details
+                            const rule = await Rule.findById(ruleId);
+                            
+                            if (rule) {
+                                console.log(`Rule details: ${rule.description || (rule.event + ' -> ' + rule.action)}`);
+                                
+                                // Force a complete reload of all rules
+                                console.log('Performing a full reload of all rules to ensure proper rule activation/deactivation...');
+                                await loadRulesFromDatabase();
+                                console.log('Rules reloaded successfully after activation/deactivation.');
+                            } else {
+                                console.log(`Rule with ID ${ruleId} not found in the database. Reloading all rules...`);
+                                await loadRulesFromDatabase();
+                            }
+                        } else {
+                            // Other fields were updated, reload all rules
+                            console.log('Rule updated. Reloading rules...');
+                            await loadRulesFromDatabase();
+                        }
+                    } else {
+                        // Unknown update, reload all rules
+                        console.log('Rule updated (unknown fields). Reloading rules...');
+                        await loadRulesFromDatabase();
+                    }
+                    break;
+                    
+                case 'replace':
+                    // A rule was replaced
+                    console.log('Rule replaced. Reloading rules...');
+                    await loadRulesFromDatabase();
+                    break;
+                    
+                default:
+                    // Unknown operation
+                    console.log(`Unknown operation: ${change.operationType}. Reloading rules...`);
+                    await loadRulesFromDatabase();
+            }
+        });
+        
+        console.log('Rule change watcher set up successfully.');
+    } catch (error) {
+        console.error('Error setting up rule change watcher:', error);
+    }
+}
+
 // Export the functions
 module.exports = {
     initializeAndIntegrate,
-    loadRulesFromDatabase
+    loadRulesFromDatabase,
+    setupRuleChangeWatcher
 }; 

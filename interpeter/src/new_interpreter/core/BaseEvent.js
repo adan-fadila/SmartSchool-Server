@@ -49,8 +49,22 @@ class BaseEvent extends Subject {
      */
     setState(newState) {
         if (this.state !== newState) {
+            console.log(`[EVENT] Event state changed for ${this.type} in ${this.location}: ${this.state} -> ${newState}`);
             this.state = newState;
             this.lastUpdated = new Date();
+            
+            if (newState) {
+                console.log(`[EVENT] Event triggered: ${this.getConditionString()}`);
+                console.log(`[EVENT] Notifying ${this.observers.length} observers`);
+                
+                // Log each observer
+                this.observers.forEach((observer, index) => {
+                    console.log(`[EVENT] Observer ${index + 1}: ${observer.toString ? observer.toString() : 'Unknown'}`);
+                });
+            } else {
+                console.log(`[EVENT] Event condition no longer met: ${this.getConditionString()}`);
+            }
+            
             this.notify();
         }
     }

@@ -1,7 +1,6 @@
 const EventRegistry = require('./registry/EventRegistry');
 const ActionRegistry = require('./registry/ActionRegistry');
 const RuleRegistry = require('./registry/RuleRegistry');
-const RuleParser = require('./parser/RuleParser');
 const Rule = require('./core/Rule');
 const { getSensiboSensors } = require('../../../api/sensibo');
 const Room = require('../../../models/Room');
@@ -93,11 +92,29 @@ class Interpreter {
         }
         
         try {
-            // Parse the rule string
-            const { ruleId, event, action, ruleString: parsedRuleString } = RuleParser.parseRule(ruleString, this.deviceMap);
+            // Since RuleParser is removed, we need to handle rule creation directly
+            // Basic parsing of rule string (if [event] then [action])
+            const rulePattern = /if\s+(.+?)\s+then\s+(.+)/i;
+            const match = ruleString.match(rulePattern);
+            
+            if (!match) {
+                throw new Error(`Invalid rule format: ${ruleString}`);
+            }
+            
+            const eventStr = match[1].trim();
+            const actionStr = match[2].trim();
+            
+            // Generate a unique rule ID
+            const ruleId = `rule_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
+            
+            // Parse the event
+            const event = this.parseEvent(eventStr);
+            
+            // Parse the action
+            const action = this.parseAction(actionStr);
             
             // Create a new rule
-            const rule = new Rule(ruleId, event, action, parsedRuleString);
+            const rule = new Rule(ruleId, event, action, ruleString);
             
             // Register the rule
             RuleRegistry.register(rule);
@@ -109,6 +126,115 @@ class Interpreter {
             console.error('Error creating rule:', error);
             throw error;
         }
+    }
+    
+    /**
+     * Parse an event string into an Event object
+     * @param {string} eventStr - The event string to parse
+     * @returns {Event} The parsed event
+     */
+    parseEvent(eventStr) {
+        // Check for temperature condition
+        const tempPattern = /temperature\s+in\s+(.+?)\s+([><]=?|==|!=)\s+(\d+)/i;
+        const tempMatch = eventStr.match(tempPattern);
+        
+        if (tempMatch) {
+            const location = tempMatch[1].trim().toLowerCase();
+            const operator = tempMatch[2].trim();
+            const threshold = parseInt(tempMatch[3].trim(), 10);
+            
+            // Get the temperature event from the registry
+            const event = EventRegistry.getAll().find(e => 
+                e.type === 'temperature' && 
+                e.location === location
+            );
+            
+            if (!event) {
+                // Create a new temperature event
+                const TemperatureEvent = require('./events/TemperatureEvent');
+                const newEvent = new TemperatureEvent(location, operator, threshold);
+                EventRegistry.register(newEvent);
+                
+                return newEvent;
+            }
+            
+            // Set the condition
+            event.operator = operator;
+            event.threshold = threshold;
+            
+            return event;
+        }
+        
+        // Add more event types as needed
+        
+        throw new Error(`Unsupported event: ${eventStr}`);
+    }
+    
+    /**
+     * Parse an action string into an Action object
+     * @param {string} actionStr - The action string to parse
+     * @returns {Action} The parsed action
+     */
+    parseAction(actionStr) {
+        // Check for AC action
+        const acPattern = /ac\s+in\s+(.+?)\s+(on|off)(?:\s+(\d+))?(?:\s+(cool|heat|fan|auto))?/i;
+        const acMatch = actionStr.match(acPattern);
+        
+        if (acMatch) {
+            const location = acMatch[1].trim().toLowerCase();
+            const state = acMatch[2].trim().toLowerCase();
+            const temperature = acMatch[3] ? parseInt(acMatch[3].trim(), 10) : undefined;
+            const mode = acMatch[4] ? acMatch[4].trim().toLowerCase() : undefined;
+            
+            // Find the device in the device map
+            if (!this.deviceMap[location]) {
+                throw new Error(`No devices found for location: ${location}`);
+            }
+            
+            // Find an AC device in the location
+            const acDevice = this.deviceMap[location].find(device => device.type === 'ac');
+            
+            if (!acDevice) {
+                throw new Error(`No AC device found for location: ${location}`);
+            }
+            
+            console.log(`Found AC device for ${location}:`, acDevice);
+            
+            // Create AC action with device information
+            const ACAction = require('./actions/ACAction');
+            return new ACAction(location, state, acDevice.deviceId, acDevice.raspberryPiIP, temperature, mode);
+        }
+        
+        // Check for light action
+        const lightPattern = /light\s+in\s+(.+?)\s+(on|off)/i;
+        const lightMatch = actionStr.match(lightPattern);
+        
+        if (lightMatch) {
+            const location = lightMatch[1].trim().toLowerCase();
+            const state = lightMatch[2].trim().toLowerCase();
+            
+            // Find the device in the device map
+            if (!this.deviceMap[location]) {
+                throw new Error(`No devices found for location: ${location}`);
+            }
+            
+            // Find a light device in the location
+            const lightDevice = this.deviceMap[location].find(device => device.type === 'light');
+            
+            if (!lightDevice) {
+                throw new Error(`No light device found for location: ${location}`);
+            }
+            
+            console.log(`Found light device for ${location}:`, lightDevice);
+            
+            // Create light action with device information
+            const LightAction = require('./actions/LightAction');
+            return new LightAction(location, state, lightDevice.deviceId, lightDevice.raspberryPiIP);
+        }
+        
+        // Add more action types as needed
+        
+        throw new Error(`Unsupported action: ${actionStr}`);
     }
 
     /**
@@ -227,9 +353,11 @@ class Interpreter {
     activateRule(ruleId) {
         const rule = RuleRegistry.getById(ruleId);
         if (rule) {
+            console.log(`[INTERPRETER] Activating rule: ${rule.toString()}`);
             rule.activate();
             return true;
         }
+        console.log(`[INTERPRETER] Rule not found: ${ruleId}`);
         return false;
     }
 
@@ -241,10 +369,63 @@ class Interpreter {
     deactivateRule(ruleId) {
         const rule = RuleRegistry.getById(ruleId);
         if (rule) {
+            console.log(`[INTERPRETER] Deactivating rule: ${rule.toString()}`);
             rule.deactivate();
             return true;
         }
+        console.log(`[INTERPRETER] Rule not found: ${ruleId}`);
         return false;
+    }
+
+    /**
+     * Reset all event registrations
+     * This is useful when rules are added or removed
+     */
+    resetEventRegistrations() {
+        console.log('[INTERPRETER] Resetting all event registrations...');
+        
+        // Get all active rules
+        const allRules = RuleRegistry.getAll();
+        
+        // Clear all event registrations
+        console.log('[INTERPRETER] Clearing all event registrations...');
+        const allEvents = EventRegistry.getAll();
+        
+        // Detach all observers from all events
+        for (const event of allEvents) {
+            // Create a copy of the observers array to avoid modification during iteration
+            const observers = [...event.observers];
+            
+            // Detach each observer
+            for (const observer of observers) {
+                console.log(`[INTERPRETER] Detaching observer ${observer.toString()} from event ${event.getConditionString()}`);
+                event.detach(observer);
+            }
+        }
+        
+        // Re-register all actions with their events
+        console.log('[INTERPRETER] Re-registering all actions with their events...');
+        for (const rule of allRules) {
+            if (rule.active) {
+                console.log(`[INTERPRETER] Re-attaching action for rule: ${rule.toString()}`);
+                rule.event.attach(rule.action);
+            } else {
+                console.log(`[INTERPRETER] Skipping inactive rule: ${rule.toString()}`);
+            }
+        }
+        
+        console.log('[INTERPRETER] Event registrations reset complete.');
+    }
+    
+    /**
+     * Clear all rules and events
+     * This is useful when reloading rules from the database
+     */
+    clearAll() {
+        console.log('[INTERPRETER] Clearing all rules and events...');
+        RuleRegistry.clear();
+        EventRegistry.clear();
+        console.log('[INTERPRETER] All rules and events cleared.');
     }
 }
 

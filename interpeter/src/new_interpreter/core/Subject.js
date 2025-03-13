@@ -33,7 +33,10 @@ class Subject {
      * Notify all observers about a state change
      */
     notify() {
+        console.log(`[SUBJECT] Notifying ${this.observers.length} observers`);
+        
         for (const observer of this.observers) {
+            console.log(`[SUBJECT] Notifying observer: ${observer.toString ? observer.toString() : 'Unknown'}`);
             observer.update(this);
         }
     }

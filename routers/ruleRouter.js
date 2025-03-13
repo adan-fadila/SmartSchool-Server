@@ -20,5 +20,9 @@ ruleRouter.post('/rules/:id', ruleControllers.update_Rule);
 //DELETE
 ruleRouter.delete('/rules/:id', ruleControllers.delete_Rule_ByID);
 
+// Activate/Deactivate rules
+ruleRouter.post('/rules/:id/activate', ruleControllers.activate_Rule);
+ruleRouter.post('/rules/:id/deactivate', ruleControllers.deactivate_Rule);
+
 
 module.exports = { ruleRouter };

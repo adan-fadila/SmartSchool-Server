@@ -13,6 +13,7 @@ const {
     removeRuleFromDB,
   } = require("./../services/rules.service.js");
 
+const Rule = require('../models/Rule'); // Import the Rule model
   
 exports.ruleControllers={
 // --------------------------------- Rules ---------------------------------
@@ -111,4 +112,82 @@ exports.ruleControllers={
             return res.status(500).json({ message: "Error reloading rules", error: error.message });
         }
     },
+    
+    // Activate a rule
+    async activate_Rule(req, res) {
+        try {
+            const ruleId = req.params.id;
+            
+            // Find the rule
+            const rule = await Rule.findById(ruleId);
+            
+            if (!rule) {
+                return res.status(404).json({ message: "Rule not found" });
+            }
+            
+            // Check if the rule is already active
+            if (rule.isActive) {
+                return res.status(200).json({ message: "Rule is already active" });
+            }
+            
+            // Activate the rule in the database
+            rule.isActive = true;
+            await rule.save();
+            
+            // Log the activation
+            console.log(`Rule ${ruleId} activated in the database: ${rule.description || (rule.event + ' -> ' + rule.action)}`);
+            
+            // Import the loadRulesFromDatabase function to ensure all rules are properly reloaded
+            const { loadRulesFromDatabase } = require('../interpeter/src/new_interpreter/integration');
+            
+            // Reload all rules to ensure the rule is properly activated
+            console.log(`Reloading all rules to ensure proper activation of rule ${ruleId}...`);
+            await loadRulesFromDatabase();
+            console.log('Rules reloaded successfully after activation');
+            
+            return res.status(200).json({ message: "Rule activated successfully" });
+        } catch (error) {
+            console.error("Error activating rule:", error);
+            return res.status(500).json({ message: "Error activating rule", error: error.message });
+        }
+    },
+    
+    // Deactivate a rule
+    async deactivate_Rule(req, res) {
+        try {
+            const ruleId = req.params.id;
+            
+            // Find the rule
+            const rule = await Rule.findById(ruleId);
+            
+            if (!rule) {
+                return res.status(404).json({ message: "Rule not found" });
+            }
+            
+            // Check if the rule is already inactive
+            if (!rule.isActive) {
+                return res.status(200).json({ message: "Rule is already inactive" });
+            }
+            
+            // Deactivate the rule in the database
+            rule.isActive = false;
+            await rule.save();
+            
+            // Log the deactivation
+            console.log(`Rule ${ruleId} deactivated in the database: ${rule.description || (rule.event + ' -> ' + rule.action)}`);
+            
+            // Import the loadRulesFromDatabase function to ensure all rules are properly reloaded
+            const { loadRulesFromDatabase } = require('../interpeter/src/new_interpreter/integration');
+            
+            // Reload all rules to ensure the rule is properly deactivated
+            console.log(`Reloading all rules to ensure proper deactivation of rule ${ruleId}...`);
+            await loadRulesFromDatabase();
+            console.log('Rules reloaded successfully after deactivation');
+            
+            return res.status(200).json({ message: "Rule deactivated successfully" });
+        } catch (error) {
+            console.error("Error deactivating rule:", error);
+            return res.status(500).json({ message: "Error deactivating rule", error: error.message });
+        }
+    }
 }
