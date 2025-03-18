@@ -196,6 +196,9 @@ const getSensiboSensors = async (raspPiIP) => {
     // Check if the response has the necessary fields
     if (response.data && response.data.success) {
       const { temperature, humidity } = response.data;
+      console.log("================")
+      console.log(response.data)
+      console.log("================")
       return { temperature, humidity };
     } else {
       console.log('No measurements found.');
