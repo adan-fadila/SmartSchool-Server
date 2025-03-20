@@ -492,7 +492,11 @@ const add_new_Rule = async (ruleData) => {
     description: ruleData.description,
     condition: ruleData.condition,
     id: ruleData.id || Math.floor(10000000 + Math.random() * 90000000).toString(),
-    space_id: ruleData.space_id
+    space_id: ruleData.space_id,
+    // Add interpreter-specific fields if they exist
+    interpreterId: ruleData.interpreterId || null,
+    ruleString: ruleData.ruleString || null,
+    isActive: ruleData.hasOwnProperty('isActive') ? ruleData.isActive : true
   });
 
   console.log("rule going to save in the database");
@@ -732,6 +736,19 @@ const toggleActiveStatus = async (ruleId, isActive) => {
   }
 };
 
+// Get a rule by ID
+const getRuleById = async (id) => {
+  try {
+    const rule = await Rule.findOne({ id: id });
+    if (!rule) {
+      return null;
+    }
+    return rule;
+  } catch (error) {
+    console.error(`Error getting rule by ID ${id}:`, error);
+    return null;
+  }
+};
 
 module.exports = {
   // insertRuleToDB,
@@ -741,7 +758,8 @@ module.exports = {
   toggleActiveStatus,
   // removeRuleFromDB,
   deleteRuleById,
-  getRulesBySpaceId
+  getRulesBySpaceId,
+  getRuleById
   // validateRule,
   // insertRuleToDBMiddleware,
   // removeAllRules,

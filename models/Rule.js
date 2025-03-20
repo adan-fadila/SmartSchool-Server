@@ -24,6 +24,14 @@ const ruleSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
+  interpreterId: {
+    type: String,
+    default: null
+  },
+  ruleString: {
+    type: String,
+    default: null
+  }
 });
 
 const Rule = mongoose.model('rules', ruleSchema);

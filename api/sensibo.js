@@ -105,8 +105,8 @@ const switchAcState = async (id, state, rasp_ip, temperature = null) => {
   console.log(endpoint);
   const apiUrl = `${endpoint}/api-sensibo/switch_ac_state`; // Ensure this matches your Flask server URL
   console.log(id);
-  const actualDeviceId = id === "YNahUQcM" ? "YNahUQcM" : process.env.SENSIBO_DEVICE_ID;
-  const actualApiKey = id === "YNahUQcM" ? "sS94OndxNNoKiBXwLU59Y08r27fyHW" : process.env.SENSIBO_API_KEY;
+  const actualDeviceId = process.env.SENSIBO_DEVICE_ID;
+  const actualApiKey = process.env.SENSIBO_API_KEY;
 
   // Construct the payload including the actualDeviceId and actualApiKey
   const payload = {
@@ -194,8 +194,25 @@ const getSensiboSensors = async (raspPiIP) => {
     const response = await axios.get(flaskUrl);
 
     // Check if the response has the necessary fields
-    if (response.data && response.data.success) {
-      const { temperature, humidity } = response.data;
+    if (response.data && response.data.success && response.data.sensors) {
+      console.log("================")
+      console.log(response.data)
+      console.log("================")
+      
+      // Extract temperature and humidity from the sensors array
+      let temperature = null;
+      let humidity = null;
+      
+      // Loop through the sensors array to find temperature and humidity values
+      for (const sensor of response.data.sensors) {
+        if (sensor.sensor === 'temperature') {
+          temperature = sensor.value;
+        } else if (sensor.sensor === 'humidity') {
+          humidity = sensor.value;
+        }
+      }
+      
+      console.log(`Extracted values - Temperature: ${temperature}, Humidity: ${humidity}`);
       return { temperature, humidity };
     } else {
       console.log('No measurements found.');

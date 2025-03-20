@@ -1,0 +1,816 @@
+mongodb+srv://waleedyounis:YPHTBAn5hOTDXs4y@cluster0.v386sjg.mongodb.net/smart_school_db
+Active devices found: 0
+Devices state map: Map(0) {}
+Interpreter router module loaded
+Starting interpreter initialization...
+Initializing interpreter on server start...
+Initializing interpreter...
+WebSocket server started on port 8002
+Registering interpreter router...
+Interpreter router registered
+(node:42643) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+listening on port 8001
+Loaded Raspberry Pi configuration: { '192.168.0.121': 'https://68eb-193-58-150-12.ngrok-free.app' }
+Loaded Raspberry Pi endpoint: 192.168.0.121 -> https://68eb-193-58-150-12.ngrok-free.app
+Fetching events from Raspberry Pi at 192.168.0.121 (https://68eb-193-58-150-12.ngrok-free.app)
+Created TemperatureEvent: Living Room Temperature for location: Living Room
+Registered event: Living Room Temperature
+Created HumidityEvent: Living Room Humidity for location: Living Room
+Registered event: Living Room Humidity
+All events initialized successfully
+Interpreter initialized successfully
+Initialized 2 events:
+- Living Room Temperature (temperature) for location: Living Room
+- Living Room Humidity (humidity) for location: Living Room
+Available action types:
+- ACAction
+- LightAction
+Initializing actions registry...
+[ACTION REGISTRY] Initializing actions...
+[ACTION REGISTRY] Fetching actions from Raspberry Pi at 192.168.0.121
+[ACTION REGISTRY] Received 1 actions from 192.168.0.121
+[ACTION REGISTRY] Registered action: Living Room AC (ac) in Living Room
+[ACTION REGISTRY] Created 1 actions from 192.168.0.121
+[ACTION REGISTRY] Initialized 1 actions from 1 Raspberry Pis
+[ACTION REGISTRY] - Living Room AC (ac) in Living Room
+[ACTION REGISTRY] Fetching current device states...
+/Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+Loading configuration from: /Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+Requesting AC state for IP: 192.168.0.121
+MongoDB connected...
+AC State Retrieved from Flask: {
+  acState: {
+    fanLevel: 'low',
+    horizontalSwing: 'rangeFull',
+    mode: 'cool',
+    on: false,
+    swing: 'fixedMiddle',
+    targetTemperature: 25,
+    temperatureUnit: 'C',
+    timestamp: { secondsAgo: 0, time: '2025-03-20T20:44:36.106157Z' }
+  },
+  success: true
+}
+[ACTION REGISTRY] Updated state for ac JArdX73w: {
+  state: false,
+  temperature: 25,
+  mode: 'cool',
+  lastUpdated: '2025-03-20T20:44:36.103Z'
+}
+[ACTION REGISTRY] Device states initialized: 1
+Loading rules from database...
+Found 9 active rules in database
+Processing rule: If end party in bathroom then turn tap off
+Rule rejected - does not match required format: If end party in bathroom then turn tap off
+Processing rule: If start party in Living Room and season is Fall then turn AC cool mode 20 on and turn light on
+Rule rejected - does not match required format: If start party in Living Room and season is Fall then turn AC cool mode 20 on and turn light on
+Processing rule: If Zachi  in Living Room and season is Spring then turn light on
+Rule rejected - does not match required format: If Zachi  in Living Room and season is Spring then turn light on
+Processing rule: If start party in Living Room and season is Winter then turn light on
+Rule rejected - does not match required format: If start party in Living Room and season is Winter then turn light on
+Processing rule: If start party in bathroom and season is Winter then turn tap on
+Rule rejected - does not match required format: If start party in bathroom and season is Winter then turn tap on
+Processing rule: If start party in bathroom or season is Winter then turn tap on
+Rule rejected - does not match required format: If start party in bathroom or season is Winter then turn tap on
+Processing rule: if temperature in living room > 15 then ac in living room off
+Event "temperature in living room" not found in EventRegistry
+Failed to create rule from string: if temperature in living room > 15 then ac in living room off Error: Event not found: temperature in living room
+    at new Rule (/Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/interpreter/src/rules/Rule.js:35:19)
+    at RuleManager.createRule (/Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/interpreter/src/rules/RuleManager.js:21:26)
+    at loadRulesFromDatabase (/Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/interpreter/src/server-integration.js:79:48)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Object.initializeInterpreter (/Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/interpreter/src/server-integration.js:31:9)
+    at async initializeInterpreter (/Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/routers/interpreter.router.js:14:7)
+Error processing rule p79zicpl66e: Error: Event not found: temperature in living room
+    at new Rule (/Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/interpreter/src/rules/Rule.js:35:19)
+    at RuleManager.createRule (/Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/interpreter/src/rules/RuleManager.js:21:26)
+    at loadRulesFromDatabase (/Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/interpreter/src/server-integration.js:79:48)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Object.initializeInterpreter (/Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/interpreter/src/server-integration.js:31:9)
+    at async initializeInterpreter (/Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/routers/interpreter.router.js:14:7)
+Processing rule: if Living Room Temperature > 20 then living room light on
+Rule added as observer to event Living Room Temperature
+Rule added as observer to event Living Room Temperature
+Rule created and registered with ID: rule_1742503476744_955
+[ACTION REGISTRY] Found 0 actions for rule: rule_1742503476744_955
+Rule rule_1742503476744_955 connected to 0 actions
+Active devices found: 1
+Devices state map: { YNahUQcM: 'on' }
+descriptionResult: { statusCode: 201, message: 'No active rules found' }
+Failed to get rule descriptions: No active rules found
+Active devices found: 1
+Devices state map: { YNahUQcM: 'on' }
+descriptionResult: { statusCode: 201, message: 'No active rules found' }
+Failed to get rule descriptions: No active rules found
+in checkInterpreterCondition Function, interpretResult: No active rules
+Loaded rule from database: if Living Room Temperature > 20 then living room light on (ID: rule_1742503476744_955)
+Processing rule: if living room temperature > 15 then living room ac off
+Case-insensitive match found for event: living room temperature -> Living Room Temperature
+Rule added as observer to event Living Room Temperature
+Rule added as observer to event living room temperature
+Rule created and registered with ID: rule_1742503476900_23
+[ACTION REGISTRY] Found 1 actions for rule: rule_1742503476900_23
+Action Living Room AC (ac) now observing rule rule_1742503476900_23
+[ACTION AC] Started observing rule: rule_1742503476900_23 - if living room temperature > 15 then living room ac off
+Rule rule_1742503476900_23 connected to 1 actions
+Loaded rule from database: if living room temperature > 15 then living room ac off (ID: rule_1742503476900_23)
+Successfully loaded 2 rules into interpreter
+Failed to load 7 rules:
+- Rule 96857099: Invalid format (If end party in bathroom then turn tap off)
+- Rule 48287740: Invalid format (If start party in Living Room and season is Fall then turn AC cool mode 20 on and turn light on)
+- Rule 68084751: Invalid format (If Zachi  in Living Room and season is Spring then turn light on)
+- Rule 81003343: Invalid format (If start party in Living Room and season is Winter then turn light on)
+- Rule 69947022: Invalid format (If start party in bathroom and season is Winter then turn tap on)
+- Rule 23893949: Invalid format (If start party in bathroom or season is Winter then turn tap on)
+- Rule p79zicpl66e: Event not found: temperature in living room (if temperature in living room > 15 then ac in living room off)
+Interpreter initialized successfully
+Starting sensor polling for Raspberry Pi at 192.168.0.121 with interval 30000ms
+Starting sensor polling with interval: 30000ms
+Interpreter initialized through router
+Requesting sensor data for Room ID: 41413915-5245, Room Name: Living Room, Space ID: 41413915, Device ID: JArdX73w, Raspberry Pi: 192.168.0.121, User: 6648b1dd3da69ac2341e4e36
+/Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+Loading configuration from: /Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+https://68eb-193-58-150-12.ngrok-free.app/api-sensibo/get_sensor_data
+================
+{
+  sensors: [
+    { room: 'Living Room', sensor: 'temperature', value: 19.4 },
+    { room: 'Living Room', sensor: 'humidity', value: 78.9 }
+  ],
+  success: true
+}
+================
+Extracted values - Temperature: 19.4, Humidity: 78.9
+Received sensor data: Temperature 19.4, Humidity 78.9 in Living Room
+Temperature Event to be sent: Temperature 19.4, Humidity 78.9 in Living Room
+Requesting sensor data for Room ID: 41413915-5245, Room Name: Living Room, Space ID: 41413915, Device ID: JArdX73w, Raspberry Pi: 192.168.0.121, User: 6648b1dd3da69ac2341e4e36
+/Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+Loading configuration from: /Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+https://68eb-193-58-150-12.ngrok-free.app/api-sensibo/get_sensor_data
+================
+{
+  sensors: [
+    { room: 'Living Room', sensor: 'temperature', value: 19.4 },
+    { room: 'Living Room', sensor: 'humidity', value: 78.9 }
+  ],
+  success: true
+}
+================
+Extracted values - Temperature: 19.4, Humidity: 78.9
+Received sensor data: Temperature 19.4, Humidity 78.9 in Living Room
+Temperature Event to be sent: Temperature 19.4, Humidity 78.9 in Living Room
+Requesting sensor data for Room ID: 41413915-5245, Room Name: Living Room, Space ID: 41413915, Device ID: JArdX73w, Raspberry Pi: 192.168.0.121, User: 6648b1dd3da69ac2341e4e36
+/Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+Loading configuration from: /Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+https://68eb-193-58-150-12.ngrok-free.app/api-sensibo/get_sensor_data
+================
+{
+  sensors: [
+    { room: 'Living Room', sensor: 'temperature', value: 19.4 },
+    { room: 'Living Room', sensor: 'humidity', value: 78.9 }
+  ],
+  success: true
+}
+================
+Extracted values - Temperature: 19.4, Humidity: 78.9
+Received sensor data: Temperature 19.4, Humidity 78.9 in Living Room
+Temperature Event to be sent: Temperature 19.4, Humidity 78.9 in Living Room
+Requesting sensor data for Room ID: 41413915-5245, Room Name: Living Room, Space ID: 41413915, Device ID: JArdX73w, Raspberry Pi: 192.168.0.121, User: 6648b1dd3da69ac2341e4e36
+/Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+Loading configuration from: /Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+https://68eb-193-58-150-12.ngrok-free.app/api-sensibo/get_sensor_data
+================
+{
+  sensors: [
+    { room: 'Living Room', sensor: 'temperature', value: 19.4 },
+    { room: 'Living Room', sensor: 'humidity', value: 78.9 }
+  ],
+  success: true
+}
+================
+Extracted values - Temperature: 19.4, Humidity: 78.9
+Received sensor data: Temperature 19.4, Humidity 78.9 in Living Room
+Temperature Event to be sent: Temperature 19.4, Humidity 78.9 in Living Room
+Requesting sensor data for Room ID: 41413915-5245, Room Name: Living Room, Space ID: 41413915, Device ID: JArdX73w, Raspberry Pi: 192.168.0.121, User: 6648b1dd3da69ac2341e4e36
+/Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+Loading configuration from: /Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+https://68eb-193-58-150-12.ngrok-free.app/api-sensibo/get_sensor_data
+================
+{
+  sensors: [
+    { room: 'Living Room', sensor: 'temperature', value: 19.4 },
+    { room: 'Living Room', sensor: 'humidity', value: 78.9 }
+  ],
+  success: true
+}
+================
+Extracted values - Temperature: 19.4, Humidity: 78.9
+Received sensor data: Temperature 19.4, Humidity 78.9 in Living Room
+Temperature Event to be sent: Temperature 19.4, Humidity 78.9 in Living Room
+Requesting sensor data for Room ID: 41413915-5245, Room Name: Living Room, Space ID: 41413915, Device ID: JArdX73w, Raspberry Pi: 192.168.0.121, User: 6648b1dd3da69ac2341e4e36
+/Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+Loading configuration from: /Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+https://68eb-193-58-150-12.ngrok-free.app/api-sensibo/get_sensor_data
+================
+{
+  sensors: [
+    { room: 'Living Room', sensor: 'temperature', value: 19.4 },
+    { room: 'Living Room', sensor: 'humidity', value: 78.9 }
+  ],
+  success: true
+}
+================
+Extracted values - Temperature: 19.4, Humidity: 78.9
+Received sensor data: Temperature 19.4, Humidity 78.9 in Living Room
+Temperature Event to be sent: Temperature 19.4, Humidity 78.9 in Living Room
+Polling for sensor data...
+Fetching sensor data from Raspberry Pi at 192.168.0.121
+/Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+Loading configuration from: /Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+https://68eb-193-58-150-12.ngrok-free.app/api-sensibo/get_sensor_data
+================
+{
+  sensors: [
+    { room: 'Living Room', sensor: 'temperature', value: 19.4 },
+    { room: 'Living Room', sensor: 'humidity', value: 78.9 }
+  ],
+  success: true
+}
+================
+Extracted values - Temperature: 19.4, Humidity: 78.9
+Received sensor data: { temperature: 19.4, humidity: 78.9 }
+Updating temperature for Living Room Temperature to 19.4celsius
+Event Living Room Temperature notifying 2 observers with value: 19.4
+Rule rule_1742503476744_955 evaluation: > 20 with event value 19.4
+Rule rule_1742503476744_955 condition met: false
+Case-insensitive match found for event: living room temperature -> Living Room Temperature
+Rule rule_1742503476900_23 evaluation: > 15 with event value 19.4
+Rule rule_1742503476900_23 condition met: true
+Rule rule_1742503476900_23 notifying 1 observing actions
+[ACTION AC] Rule triggered: rule_1742503476900_23 - if living room temperature > 15 then living room ac off
+[ACTION AC] Parsed AC action: state=false, temp=null, mode=cool
+[ACTION AC] Executing AC action for Living Room AC
+Successfully updated event: Living Room Temperature = 19.4
+Updating humidity for Living Room Humidity to 78.9%
+Event Living Room Humidity notifying 0 observers with value: 78.9
+Successfully updated event: Living Room Humidity = 78.9
+[ACTION AC] Error getting Raspberry Pi IP: Raspberry Pi IP not found for room: Living Room
+[ACTION AC] Using fallback Raspberry Pi IP: 192.168.0.121
+/Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+Loading configuration from: /Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+https://68eb-193-58-150-12.ngrok-free.app
+JArdX73w
+{
+  id: 'JArdX73w',
+  apiKey: 'lrDSdZHWkAHZBvTzXPe2Sp7wrcPujO',
+  state: false,
+  temperature: null
+}
+Attempting to switch AC state: false with temperature: null
+AC state changed successfully {
+  data: {
+    result: {
+      acState: [Object],
+      changedProperties: [],
+      failureReason: null,
+      id: 'k6Tinezied',
+      reason: 'UserRequest',
+      status: 'Success',
+      time: [Object]
+    },
+    status: 'success'
+  },
+  statusCode: 200
+}
+Database update result: {
+  acknowledged: true,
+  modifiedCount: 0,
+  upsertedId: null,
+  upsertedCount: 0,
+  matchedCount: 1
+} {
+  acknowledged: true,
+  modifiedCount: 0,
+  upsertedId: null,
+  upsertedCount: 0,
+  matchedCount: 1
+}
+[ACTION AC] Successfully changed AC state for Living Room
+[ACTION REGISTRY] Updated state for ac JArdX73w: {
+  state: false,
+  temperature: null,
+  mode: 'cool',
+  lastUpdated: '2025-03-20T20:45:09.439Z'
+}
+Action Living Room AC executed successfully: AC in Living Room turned off
+Requesting sensor data for Room ID: 41413915-5245, Room Name: Living Room, Space ID: 41413915, Device ID: JArdX73w, Raspberry Pi: 192.168.0.121, User: 6648b1dd3da69ac2341e4e36
+/Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+Loading configuration from: /Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+https://68eb-193-58-150-12.ngrok-free.app/api-sensibo/get_sensor_data
+================
+{
+  sensors: [
+    { room: 'Living Room', sensor: 'temperature', value: 19.4 },
+    { room: 'Living Room', sensor: 'humidity', value: 78.9 }
+  ],
+  success: true
+}
+================
+Extracted values - Temperature: 19.4, Humidity: 78.9
+Received sensor data: Temperature 19.4, Humidity 78.9 in Living Room
+Temperature Event to be sent: Temperature 19.4, Humidity 78.9 in Living Room
+Requesting sensor data for Room ID: 41413915-5245, Room Name: Living Room, Space ID: 41413915, Device ID: JArdX73w, Raspberry Pi: 192.168.0.121, User: 6648b1dd3da69ac2341e4e36
+/Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+Loading configuration from: /Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+https://68eb-193-58-150-12.ngrok-free.app/api-sensibo/get_sensor_data
+================
+{
+  sensors: [
+    { room: 'Living Room', sensor: 'temperature', value: 19.4 },
+    { room: 'Living Room', sensor: 'humidity', value: 78.9 }
+  ],
+  success: true
+}
+================
+Extracted values - Temperature: 19.4, Humidity: 78.9
+Received sensor data: Temperature 19.4, Humidity 78.9 in Living Room
+Temperature Event to be sent: Temperature 19.4, Humidity 78.9 in Living Room
+Requesting sensor data for Room ID: 41413915-5245, Room Name: Living Room, Space ID: 41413915, Device ID: JArdX73w, Raspberry Pi: 192.168.0.121, User: 6648b1dd3da69ac2341e4e36
+/Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+Loading configuration from: /Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+https://68eb-193-58-150-12.ngrok-free.app/api-sensibo/get_sensor_data
+================
+{
+  sensors: [
+    { room: 'Living Room', sensor: 'temperature', value: 19.4 },
+    { room: 'Living Room', sensor: 'humidity', value: 78.9 }
+  ],
+  success: true
+}
+================
+Extracted values - Temperature: 19.4, Humidity: 78.9
+Received sensor data: Temperature 19.4, Humidity 78.9 in Living Room
+Temperature Event to be sent: Temperature 19.4, Humidity 78.9 in Living Room
+Requesting sensor data for Room ID: 41413915-5245, Room Name: Living Room, Space ID: 41413915, Device ID: JArdX73w, Raspberry Pi: 192.168.0.121, User: 6648b1dd3da69ac2341e4e36
+/Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+Loading configuration from: /Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+https://68eb-193-58-150-12.ngrok-free.app/api-sensibo/get_sensor_data
+================
+{
+  sensors: [
+    { room: 'Living Room', sensor: 'temperature', value: 19.4 },
+    { room: 'Living Room', sensor: 'humidity', value: 78.9 }
+  ],
+  success: true
+}
+================
+Extracted values - Temperature: 19.4, Humidity: 78.9
+Received sensor data: Temperature 19.4, Humidity 78.9 in Living Room
+Temperature Event to be sent: Temperature 19.4, Humidity 78.9 in Living Room
+Requesting sensor data for Room ID: 41413915-5245, Room Name: Living Room, Space ID: 41413915, Device ID: JArdX73w, Raspberry Pi: 192.168.0.121, User: 6648b1dd3da69ac2341e4e36
+/Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+Loading configuration from: /Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+https://68eb-193-58-150-12.ngrok-free.app/api-sensibo/get_sensor_data
+================
+{
+  sensors: [
+    { room: 'Living Room', sensor: 'temperature', value: 19.4 },
+    { room: 'Living Room', sensor: 'humidity', value: 78.8 }
+  ],
+  success: true
+}
+================
+Extracted values - Temperature: 19.4, Humidity: 78.8
+Received sensor data: Temperature 19.4, Humidity 78.8 in Living Room
+Temperature Event to be sent: Temperature 19.4, Humidity 78.8 in Living Room
+Requesting sensor data for Room ID: 41413915-5245, Room Name: Living Room, Space ID: 41413915, Device ID: JArdX73w, Raspberry Pi: 192.168.0.121, User: 6648b1dd3da69ac2341e4e36
+/Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+Loading configuration from: /Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+https://68eb-193-58-150-12.ngrok-free.app/api-sensibo/get_sensor_data
+================
+{
+  sensors: [
+    { room: 'Living Room', sensor: 'temperature', value: 19.4 },
+    { room: 'Living Room', sensor: 'humidity', value: 78.8 }
+  ],
+  success: true
+}
+================
+Extracted values - Temperature: 19.4, Humidity: 78.8
+Received sensor data: Temperature 19.4, Humidity 78.8 in Living Room
+Temperature Event to be sent: Temperature 19.4, Humidity 78.8 in Living Room
+Polling for sensor data...
+Fetching sensor data from Raspberry Pi at 192.168.0.121
+/Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+Loading configuration from: /Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+https://68eb-193-58-150-12.ngrok-free.app/api-sensibo/get_sensor_data
+================
+{
+  sensors: [
+    { room: 'Living Room', sensor: 'temperature', value: 19.4 },
+    { room: 'Living Room', sensor: 'humidity', value: 78.8 }
+  ],
+  success: true
+}
+================
+Extracted values - Temperature: 19.4, Humidity: 78.8
+Received sensor data: { temperature: 19.4, humidity: 78.8 }
+Updating temperature for Living Room Temperature to 19.4celsius
+Event Living Room Temperature notifying 2 observers with value: 19.4
+Rule rule_1742503476744_955 evaluation: > 20 with event value 19.4
+Rule rule_1742503476744_955 condition met: false
+Case-insensitive match found for event: living room temperature -> Living Room Temperature
+Rule rule_1742503476900_23 evaluation: > 15 with event value 19.4
+Rule rule_1742503476900_23 condition met: true
+Rule rule_1742503476900_23 notifying 1 observing actions
+[ACTION AC] Rule triggered: rule_1742503476900_23 - if living room temperature > 15 then living room ac off
+[ACTION AC] Parsed AC action: state=false, temp=null, mode=cool
+[ACTION AC] Executing AC action for Living Room AC
+Successfully updated event: Living Room Temperature = 19.4
+Updating humidity for Living Room Humidity to 78.8%
+Event Living Room Humidity notifying 0 observers with value: 78.8
+Successfully updated event: Living Room Humidity = 78.8
+[ACTION AC] Error getting Raspberry Pi IP: Raspberry Pi IP not found for room: Living Room
+[ACTION AC] Using fallback Raspberry Pi IP: 192.168.0.121
+[ACTION AC] No state change needed for Living Room AC. Current state already matches target state.
+Action Living Room AC executed successfully: AC in Living Room already in desired state (off, temp: null, mode: cool)
+Requesting sensor data for Room ID: 41413915-5245, Room Name: Living Room, Space ID: 41413915, Device ID: JArdX73w, Raspberry Pi: 192.168.0.121, User: 6648b1dd3da69ac2341e4e36
+/Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+Loading configuration from: /Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+https://68eb-193-58-150-12.ngrok-free.app/api-sensibo/get_sensor_data
+================
+{
+  sensors: [
+    { room: 'Living Room', sensor: 'temperature', value: 19.4 },
+    { room: 'Living Room', sensor: 'humidity', value: 78.8 }
+  ],
+  success: true
+}
+================
+Extracted values - Temperature: 19.4, Humidity: 78.8
+Received sensor data: Temperature 19.4, Humidity 78.8 in Living Room
+Temperature Event to be sent: Temperature 19.4, Humidity 78.8 in Living Room
+Requesting sensor data for Room ID: 41413915-5245, Room Name: Living Room, Space ID: 41413915, Device ID: JArdX73w, Raspberry Pi: 192.168.0.121, User: 6648b1dd3da69ac2341e4e36
+/Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+Loading configuration from: /Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+https://68eb-193-58-150-12.ngrok-free.app/api-sensibo/get_sensor_data
+================
+{
+  sensors: [
+    { room: 'Living Room', sensor: 'temperature', value: 19.4 },
+    { room: 'Living Room', sensor: 'humidity', value: 78.8 }
+  ],
+  success: true
+}
+================
+Extracted values - Temperature: 19.4, Humidity: 78.8
+Received sensor data: Temperature 19.4, Humidity 78.8 in Living Room
+Temperature Event to be sent: Temperature 19.4, Humidity 78.8 in Living Room
+Updating rule active state in interpreter: rule_1742503476900_23 -> false
+Rule rule_1742503476900_23 deactivated
+Requesting sensor data for Room ID: 41413915-5245, Room Name: Living Room, Space ID: 41413915, Device ID: JArdX73w, Raspberry Pi: 192.168.0.121, User: 6648b1dd3da69ac2341e4e36
+/Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+Loading configuration from: /Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+https://68eb-193-58-150-12.ngrok-free.app/api-sensibo/get_sensor_data
+================
+{
+  sensors: [
+    { room: 'Living Room', sensor: 'temperature', value: 19.4 },
+    { room: 'Living Room', sensor: 'humidity', value: 78.8 }
+  ],
+  success: true
+}
+================
+Extracted values - Temperature: 19.4, Humidity: 78.8
+Received sensor data: Temperature 19.4, Humidity 78.8 in Living Room
+Temperature Event to be sent: Temperature 19.4, Humidity 78.8 in Living Room
+Rule added as observer to event Living Room Temperature
+Rule added as observer to event Living Room Temperature
+Rule created and registered with ID: rule_1742503552743_292
+[ACTION REGISTRY] Found 1 actions for rule: rule_1742503552743_292
+Action Living Room AC (ac) now observing rule rule_1742503552743_292
+[ACTION AC] Started observing rule: rule_1742503552743_292 - if Living Room Temperature > 15 then living room ac on 25 cool
+Rule rule_1742503552743_292 connected to 1 actions
+Requesting sensor data for Room ID: 41413915-5245, Room Name: Living Room, Space ID: 41413915, Device ID: JArdX73w, Raspberry Pi: 192.168.0.121, User: 6648b1dd3da69ac2341e4e36
+/Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+Loading configuration from: /Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+https://68eb-193-58-150-12.ngrok-free.app/api-sensibo/get_sensor_data
+================
+{
+  sensors: [
+    { room: 'Living Room', sensor: 'temperature', value: 19.4 },
+    { room: 'Living Room', sensor: 'humidity', value: 78.8 }
+  ],
+  success: true
+}
+================
+Extracted values - Temperature: 19.4, Humidity: 78.8
+Received sensor data: Temperature 19.4, Humidity 78.8 in Living Room
+Temperature Event to be sent: Temperature 19.4, Humidity 78.8 in Living Room
+Requesting sensor data for Room ID: 41413915-5245, Room Name: Living Room, Space ID: 41413915, Device ID: JArdX73w, Raspberry Pi: 192.168.0.121, User: 6648b1dd3da69ac2341e4e36
+/Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+Loading configuration from: /Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+https://68eb-193-58-150-12.ngrok-free.app/api-sensibo/get_sensor_data
+================
+{
+  sensors: [
+    { room: 'Living Room', sensor: 'temperature', value: 19.4 },
+    { room: 'Living Room', sensor: 'humidity', value: 78.8 }
+  ],
+  success: true
+}
+================
+Extracted values - Temperature: 19.4, Humidity: 78.8
+Received sensor data: Temperature 19.4, Humidity 78.8 in Living Room
+Temperature Event to be sent: Temperature 19.4, Humidity 78.8 in Living Room
+Updating temperature for Living Room Temperature to 20celsius
+Event Living Room Temperature notifying 3 observers with value: 20
+Rule rule_1742503476744_955 evaluation: > 20 with event value 20
+Rule rule_1742503476744_955 condition met: false
+Rule rule_1742503476900_23 is not active, skipping evaluation
+Rule rule_1742503552743_292 evaluation: > 15 with event value 20
+Rule rule_1742503552743_292 condition met: true
+Rule rule_1742503552743_292 notifying 1 observing actions
+[ACTION AC] Rule triggered: rule_1742503552743_292 - if Living Room Temperature > 15 then living room ac on 25 cool
+[ACTION AC] Parsed AC action: state=true, temp=25, mode=cool
+[ACTION AC] Executing AC action for Living Room AC
+[ACTION AC] Error getting Raspberry Pi IP: Raspberry Pi IP not found for room: Living Room
+[ACTION AC] Using fallback Raspberry Pi IP: 192.168.0.121
+/Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+Loading configuration from: /Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+https://68eb-193-58-150-12.ngrok-free.app
+JArdX73w
+{
+  id: 'JArdX73w',
+  apiKey: 'lrDSdZHWkAHZBvTzXPe2Sp7wrcPujO',
+  state: true,
+  temperature: 25
+}
+Attempting to switch AC state: true with temperature: 25
+AC state changed successfully {
+  data: {
+    result: {
+      acState: [Object],
+      changedProperties: [Array],
+      failureReason: null,
+      id: '6NPn7QRk4y',
+      reason: 'UserRequest',
+      status: 'Success',
+      time: [Object]
+    },
+    status: 'success'
+  },
+  statusCode: 200
+}
+Database update result: {
+  acknowledged: true,
+  modifiedCount: 1,
+  upsertedId: null,
+  upsertedCount: 0,
+  matchedCount: 1
+} {
+  acknowledged: true,
+  modifiedCount: 1,
+  upsertedId: null,
+  upsertedCount: 0,
+  matchedCount: 1
+}
+[ACTION AC] Successfully changed AC state for Living Room
+[ACTION REGISTRY] Updated state for ac JArdX73w: {
+  state: true,
+  temperature: 25,
+  mode: 'cool',
+  lastUpdated: '2025-03-20T20:46:04.248Z'
+}
+Action Living Room AC executed successfully: AC in Living Room turned on
+Requesting sensor data for Room ID: 41413915-5245, Room Name: Living Room, Space ID: 41413915, Device ID: JArdX73w, Raspberry Pi: 192.168.0.121, User: 6648b1dd3da69ac2341e4e36
+/Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+Loading configuration from: /Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+https://68eb-193-58-150-12.ngrok-free.app/api-sensibo/get_sensor_data
+================
+{
+  sensors: [
+    { room: 'Living Room', sensor: 'temperature', value: 19.4 },
+    { room: 'Living Room', sensor: 'humidity', value: 78.8 }
+  ],
+  success: true
+}
+================
+Extracted values - Temperature: 19.4, Humidity: 78.8
+Received sensor data: Temperature 19.4, Humidity 78.8 in Living Room
+Temperature Event to be sent: Temperature 19.4, Humidity 78.8 in Living Room
+Polling for sensor data...
+Fetching sensor data from Raspberry Pi at 192.168.0.121
+/Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+Loading configuration from: /Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+https://68eb-193-58-150-12.ngrok-free.app/api-sensibo/get_sensor_data
+================
+{
+  sensors: [
+    { room: 'Living Room', sensor: 'temperature', value: 19.4 },
+    { room: 'Living Room', sensor: 'humidity', value: 78.8 }
+  ],
+  success: true
+}
+================
+Extracted values - Temperature: 19.4, Humidity: 78.8
+Received sensor data: { temperature: 19.4, humidity: 78.8 }
+Updating temperature for Living Room Temperature to 19.4celsius
+Event Living Room Temperature notifying 3 observers with value: 19.4
+Rule rule_1742503476744_955 evaluation: > 20 with event value 19.4
+Rule rule_1742503476744_955 condition met: false
+Rule rule_1742503476900_23 is not active, skipping evaluation
+Rule rule_1742503552743_292 evaluation: > 15 with event value 19.4
+Rule rule_1742503552743_292 condition met: true
+Rule rule_1742503552743_292 notifying 1 observing actions
+[ACTION AC] Rule triggered: rule_1742503552743_292 - if Living Room Temperature > 15 then living room ac on 25 cool
+[ACTION AC] Parsed AC action: state=true, temp=25, mode=cool
+[ACTION AC] Executing AC action for Living Room AC
+Successfully updated event: Living Room Temperature = 19.4
+Updating humidity for Living Room Humidity to 78.8%
+Event Living Room Humidity notifying 0 observers with value: 78.8
+Successfully updated event: Living Room Humidity = 78.8
+[ACTION AC] Error getting Raspberry Pi IP: Raspberry Pi IP not found for room: Living Room
+[ACTION AC] Using fallback Raspberry Pi IP: 192.168.0.121
+[ACTION AC] No state change needed for Living Room AC. Current state already matches target state.
+Action Living Room AC executed successfully: AC in Living Room already in desired state (on, temp: 25, mode: cool)
+Requesting sensor data for Room ID: 41413915-5245, Room Name: Living Room, Space ID: 41413915, Device ID: JArdX73w, Raspberry Pi: 192.168.0.121, User: 6648b1dd3da69ac2341e4e36
+/Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+Loading configuration from: /Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+https://68eb-193-58-150-12.ngrok-free.app/api-sensibo/get_sensor_data
+================
+{
+  sensors: [
+    { room: 'Living Room', sensor: 'temperature', value: 19.4 },
+    { room: 'Living Room', sensor: 'humidity', value: 78.8 }
+  ],
+  success: true
+}
+================
+Extracted values - Temperature: 19.4, Humidity: 78.8
+Received sensor data: Temperature 19.4, Humidity 78.8 in Living Room
+Temperature Event to be sent: Temperature 19.4, Humidity 78.8 in Living Room
+Requesting sensor data for Room ID: 41413915-5245, Room Name: Living Room, Space ID: 41413915, Device ID: JArdX73w, Raspberry Pi: 192.168.0.121, User: 6648b1dd3da69ac2341e4e36
+/Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+Loading configuration from: /Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+https://68eb-193-58-150-12.ngrok-free.app/api-sensibo/get_sensor_data
+================
+{
+  sensors: [
+    { room: 'Living Room', sensor: 'temperature', value: 19.4 },
+    { room: 'Living Room', sensor: 'humidity', value: 78.8 }
+  ],
+  success: true
+}
+================
+Extracted values - Temperature: 19.4, Humidity: 78.8
+Received sensor data: Temperature 19.4, Humidity 78.8 in Living Room
+Temperature Event to be sent: Temperature 19.4, Humidity 78.8 in Living Room
+Requesting sensor data for Room ID: 41413915-5245, Room Name: Living Room, Space ID: 41413915, Device ID: JArdX73w, Raspberry Pi: 192.168.0.121, User: 6648b1dd3da69ac2341e4e36
+/Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+Loading configuration from: /Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+https://68eb-193-58-150-12.ngrok-free.app/api-sensibo/get_sensor_data
+================
+{
+  sensors: [
+    { room: 'Living Room', sensor: 'temperature', value: 19.4 },
+    { room: 'Living Room', sensor: 'humidity', value: 78.8 }
+  ],
+  success: true
+}
+================
+Extracted values - Temperature: 19.4, Humidity: 78.8
+Received sensor data: Temperature 19.4, Humidity 78.8 in Living Room
+Temperature Event to be sent: Temperature 19.4, Humidity 78.8 in Living Room
+Requesting sensor data for Room ID: 41413915-5245, Room Name: Living Room, Space ID: 41413915, Device ID: JArdX73w, Raspberry Pi: 192.168.0.121, User: 6648b1dd3da69ac2341e4e36
+/Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+Loading configuration from: /Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+https://68eb-193-58-150-12.ngrok-free.app/api-sensibo/get_sensor_data
+================
+{
+  sensors: [
+    { room: 'Living Room', sensor: 'temperature', value: 19.4 },
+    { room: 'Living Room', sensor: 'humidity', value: 78.8 }
+  ],
+  success: true
+}
+================
+Extracted values - Temperature: 19.4, Humidity: 78.8
+Received sensor data: Temperature 19.4, Humidity 78.8 in Living Room
+Temperature Event to be sent: Temperature 19.4, Humidity 78.8 in Living Room
+Requesting sensor data for Room ID: 41413915-5245, Room Name: Living Room, Space ID: 41413915, Device ID: JArdX73w, Raspberry Pi: 192.168.0.121, User: 6648b1dd3da69ac2341e4e36
+/Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+Loading configuration from: /Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+https://68eb-193-58-150-12.ngrok-free.app/api-sensibo/get_sensor_data
+================
+{
+  sensors: [
+    { room: 'Living Room', sensor: 'temperature', value: 19.4 },
+    { room: 'Living Room', sensor: 'humidity', value: 78.8 }
+  ],
+  success: true
+}
+================
+Extracted values - Temperature: 19.4, Humidity: 78.8
+Received sensor data: Temperature 19.4, Humidity 78.8 in Living Room
+Temperature Event to be sent: Temperature 19.4, Humidity 78.8 in Living Room
+Requesting sensor data for Room ID: 41413915-5245, Room Name: Living Room, Space ID: 41413915, Device ID: JArdX73w, Raspberry Pi: 192.168.0.121, User: 6648b1dd3da69ac2341e4e36
+/Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+Loading configuration from: /Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+https://68eb-193-58-150-12.ngrok-free.app/api-sensibo/get_sensor_data
+================
+{
+  sensors: [
+    { room: 'Living Room', sensor: 'temperature', value: 19.4 },
+    { room: 'Living Room', sensor: 'humidity', value: 78.8 }
+  ],
+  success: true
+}
+================
+Extracted values - Temperature: 19.4, Humidity: 78.8
+Received sensor data: Temperature 19.4, Humidity 78.8 in Living Room
+Temperature Event to be sent: Temperature 19.4, Humidity 78.8 in Living Room
+Polling for sensor data...
+Fetching sensor data from Raspberry Pi at 192.168.0.121
+/Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+Loading configuration from: /Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+https://68eb-193-58-150-12.ngrok-free.app/api-sensibo/get_sensor_data
+================
+{
+  sensors: [
+    { room: 'Living Room', sensor: 'temperature', value: 19.4 },
+    { room: 'Living Room', sensor: 'humidity', value: 78.8 }
+  ],
+  success: true
+}
+================
+Extracted values - Temperature: 19.4, Humidity: 78.8
+Received sensor data: { temperature: 19.4, humidity: 78.8 }
+Updating temperature for Living Room Temperature to 19.4celsius
+Event Living Room Temperature notifying 3 observers with value: 19.4
+Rule rule_1742503476744_955 evaluation: > 20 with event value 19.4
+Rule rule_1742503476744_955 condition met: false
+Rule rule_1742503476900_23 is not active, skipping evaluation
+Rule rule_1742503552743_292 evaluation: > 15 with event value 19.4
+Rule rule_1742503552743_292 condition met: true
+Rule rule_1742503552743_292 notifying 1 observing actions
+[ACTION AC] Rule triggered: rule_1742503552743_292 - if Living Room Temperature > 15 then living room ac on 25 cool
+[ACTION AC] Parsed AC action: state=true, temp=25, mode=cool
+[ACTION AC] Executing AC action for Living Room AC
+Successfully updated event: Living Room Temperature = 19.4
+Updating humidity for Living Room Humidity to 78.8%
+Event Living Room Humidity notifying 0 observers with value: 78.8
+Successfully updated event: Living Room Humidity = 78.8
+[ACTION AC] Error getting Raspberry Pi IP: Raspberry Pi IP not found for room: Living Room
+[ACTION AC] Using fallback Raspberry Pi IP: 192.168.0.121
+[ACTION AC] No state change needed for Living Room AC. Current state already matches target state.
+Action Living Room AC executed successfully: AC in Living Room already in desired state (on, temp: 25, mode: cool)
+Requesting sensor data for Room ID: 41413915-5245, Room Name: Living Room, Space ID: 41413915, Device ID: JArdX73w, Raspberry Pi: 192.168.0.121, User: 6648b1dd3da69ac2341e4e36
+/Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+Loading configuration from: /Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+https://68eb-193-58-150-12.ngrok-free.app/api-sensibo/get_sensor_data
+================
+{
+  sensors: [
+    { room: 'Living Room', sensor: 'temperature', value: 19.4 },
+    { room: 'Living Room', sensor: 'humidity', value: 78.8 }
+  ],
+  success: true
+}
+================
+Extracted values - Temperature: 19.4, Humidity: 78.8
+Received sensor data: Temperature 19.4, Humidity 78.8 in Living Room
+Temperature Event to be sent: Temperature 19.4, Humidity 78.8 in Living Room
+Requesting sensor data for Room ID: 41413915-5245, Room Name: Living Room, Space ID: 41413915, Device ID: JArdX73w, Raspberry Pi: 192.168.0.121, User: 6648b1dd3da69ac2341e4e36
+/Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+Loading configuration from: /Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+https://68eb-193-58-150-12.ngrok-free.app/api-sensibo/get_sensor_data
+================
+{
+  sensors: [
+    { room: 'Living Room', sensor: 'temperature', value: 19.4 },
+    { room: 'Living Room', sensor: 'humidity', value: 78.8 }
+  ],
+  success: true
+}
+================
+Extracted values - Temperature: 19.4, Humidity: 78.8
+Received sensor data: Temperature 19.4, Humidity 78.8 in Living Room
+Temperature Event to be sent: Temperature 19.4, Humidity 78.8 in Living Room
+Requesting sensor data for Room ID: 41413915-5245, Room Name: Living Room, Space ID: 41413915, Device ID: JArdX73w, Raspberry Pi: 192.168.0.121, User: 6648b1dd3da69ac2341e4e36
+/Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+Loading configuration from: /Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/api/endpoint/rasp_pi.json
+https://68eb-193-58-150-12.ngrok-free.app/api-sensibo/get_sensor_data
+================
+{
+  sensors: [
+    { room: 'Living Room', sensor: 'temperature', value: 19.4 },
+    { room: 'Living Room', sensor: 'humidity', value: 78.8 }
+  ],
+  success: true
+}
+================
+Extracted values - Temperature: 19.4, Humidity: 78.8
+Received sensor data: Temperature 19.4, Humidity 78.8 in Living Room
+Temperature Event to be sent: Temperature 19.4, Humidity 78.8 in Living Room

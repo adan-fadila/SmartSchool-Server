@@ -115,6 +115,7 @@ const {calendarRouter} = require('./routers/calendarRouter');
 const {endpointRouter} = require('./routers/endpointRouter');
 const { recommendationRouter } = require('./routers/recommendationRouter.js');
 const { anomalyRouter } = require('./routers/anomalyRouter');
+const interpreterRouter = require('./routers/interpreter.router'); // Import the new interpreter router
 
 
 const testRaspiRouter = require('./routers/testRaspiRouter.js')
@@ -148,7 +149,10 @@ server.use(recommendationRouter);
 server.use(anomalyRouter);
 server.use('/api-testRaspiRouter',testRaspiRouter)
 
-
+// Add explicit logging for the interpreter router
+console.log('Registering interpreter router...');
+server.use('/api-interpreter', interpreterRouter); // Add the interpreter router
+console.log('Interpreter router registered');
 
 server.use((req, res) => {
     res.status(400).send('Something is broken!');
