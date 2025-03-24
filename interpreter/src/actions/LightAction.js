@@ -58,6 +58,44 @@ class LightAction extends Action {
     }
 
     /**
+     * Pre-parse the action string and return the parsed parameters
+     * This is used during rule initialization to avoid parsing at runtime
+     * @param {string} actionString - The action string to parse
+     * @returns {Object} Object containing parsed parameters
+     */
+    preParseActionString(actionString) {
+        // Default parameters
+        const result = {
+            state: false,
+            params: {}
+        };
+        
+        // Parse the action string using the same logic as parseActionString
+        const parts = actionString.toLowerCase().trim().split(' ');
+        const lightIndex = parts.findIndex(part => part === 'light');
+        
+        if (lightIndex === -1) {
+            this.logAction(`Pre-parsing: Invalid Light action format: ${actionString}`);
+            return result;
+        }
+        
+        // Extract commands (everything after "light")
+        const commands = parts.slice(lightIndex + 1);
+        
+        if (commands.length === 0) {
+            this.logAction(`Pre-parsing: Missing state in Light action: ${actionString}`);
+            return result;
+        }
+        
+        // Extract state (on/off)
+        result.state = commands[0] === 'on';
+        
+        this.logAction(`Pre-parsed Light action: state=${result.state}`);
+        
+        return result;
+    }
+
+    /**
      * Check if this action can handle the given action string
      * @param {string} actionString - The action string to check
      * @returns {boolean} True if this action can handle the string

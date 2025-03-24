@@ -346,17 +346,63 @@ class ActionRegistry {
         }
         
         try {
-            // Parse the action string
-            matchingAction.parseActionString(actionString);
+            // Pre-parse the action string for better performance
+            const parsedParams = matchingAction.preParseActionString(actionString);
+            
+            // Apply the parsed parameters to the action
+            matchingAction.state = parsedParams.state;
+            matchingAction.params = parsedParams.params;
+            
+            console.log(`[ACTION REGISTRY] Pre-parsed action parameters: ${JSON.stringify(parsedParams)}`);
             
             // Execute the action
             return await matchingAction.execute();
         } catch (error) {
-            console.error(`[ACTION REGISTRY] Error executing test action: ${error.message}`);
+            console.error(`[ACTION REGISTRY] Error executing action: ${error.message}`);
+            return { success: false, message: error.message };
+        }
+    }
+
+    /**
+     * Execute an action string by finding matching actions
+     * @param {string} actionString - The action string to execute
+     * @returns {Promise<Object>} Result of the action execution
+     */
+    async executeAction(actionString) {
+        console.log(`[ACTION REGISTRY] Executing action: ${actionString}`);
+        
+        // Find the first action that can handle this string
+        let matchingAction = null;
+        
+        for (const action of this.actions.values()) {
+            if (action.canHandleAction(actionString)) {
+                matchingAction = action;
+                break;
+            }
+        }
+        
+        if (!matchingAction) {
             return { 
                 success: false, 
-                message: `Error executing action: ${error.message}` 
+                message: `No action found that can handle: ${actionString}` 
             };
+        }
+        
+        try {
+            // Pre-parse the action string for better performance
+            const parsedParams = matchingAction.preParseActionString(actionString);
+            
+            // Apply the parsed parameters to the action
+            matchingAction.state = parsedParams.state;
+            matchingAction.params = parsedParams.params;
+            
+            console.log(`[ACTION REGISTRY] Pre-parsed action parameters: ${JSON.stringify(parsedParams)}`);
+            
+            // Execute the action
+            return await matchingAction.execute();
+        } catch (error) {
+            console.error(`[ACTION REGISTRY] Error executing action: ${error.message}`);
+            return { success: false, message: error.message };
         }
     }
 }

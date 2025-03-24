@@ -80,6 +80,65 @@ class ACAction extends Action {
     }
 
     /**
+     * Pre-parse the action string and return the parsed parameters
+     * This is used during rule initialization to avoid parsing at runtime
+     * @param {string} actionString - The action string to parse
+     * @returns {Object} Object containing parsed parameters
+     */
+    preParseActionString(actionString) {
+        // Default parameters
+        const result = {
+            state: false,
+            params: {
+                temperature: null,
+                mode: 'cool'  // Default mode
+            }
+        };
+        
+        // Parse the action string using the same logic as parseActionString
+        const parts = actionString.toLowerCase().trim().split(' ');
+        const acIndex = parts.findIndex(part => part === 'ac');
+        
+        if (acIndex === -1) {
+            this.logAction(`Pre-parsing: Invalid AC action format: ${actionString}`);
+            return result;
+        }
+        
+        // Extract commands (everything after "ac")
+        const commands = parts.slice(acIndex + 1);
+        
+        if (commands.length === 0) {
+            this.logAction(`Pre-parsing: Missing state in AC action: ${actionString}`);
+            return result;
+        }
+        
+        // Extract state (on/off)
+        result.state = commands[0] === 'on';
+        
+        // Extract optional temperature and mode
+        if (commands.length > 1) {
+            // Check if the next part is a number (temperature)
+            const tempCandidate = commands[1];
+            if (!isNaN(Number(tempCandidate))) {
+                result.params.temperature = Number(tempCandidate);
+                
+                // If there's another part after temperature, it's the mode
+                if (commands.length > 2) {
+                    result.params.mode = commands[2];
+                }
+            } else {
+                // If not a number, it might be the mode
+                result.params.mode = tempCandidate;
+            }
+        }
+        
+        this.logAction(`Pre-parsed AC action: state=${result.state}, ` +
+                     `temp=${result.params.temperature}, mode=${result.params.mode}`);
+        
+        return result;
+    }
+
+    /**
      * Check if this action can handle the given action string
      * @param {string} actionString - The action string to check
      * @returns {boolean} True if this action can handle the string

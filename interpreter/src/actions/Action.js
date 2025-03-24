@@ -26,6 +26,10 @@ class Action {
             // Register this action with the rule
             rule.addObservingAction(this);
             this.logAction(`Started observing rule: ${rule.id} - ${rule.ruleString}`);
+            
+            // Pre-parse the action string and store the parsed parameters
+            const params = this.preParseActionString(rule.actionString);
+            rule.setParsedActionParams(params);
         }
     }
 
@@ -51,11 +55,37 @@ class Action {
     async onRuleTriggered(rule, context = {}) {
         this.logAction(`Rule triggered: ${rule.id} - ${rule.ruleString}`);
         
-        // Parse the action string from the rule
-        this.parseActionString(rule.actionString);
+        // Get pre-parsed parameters if available
+        const parsedParams = rule.getParsedActionParams();
+        if (parsedParams) {
+            // Use pre-parsed parameters
+            this.state = parsedParams.state;
+            this.params = parsedParams.params;
+            this.logAction(`Using pre-parsed action parameters for rule ${rule.id}`);
+        } else {
+            // Fall back to parsing at runtime if necessary
+            this.logAction(`No pre-parsed parameters available for rule ${rule.id}, parsing at runtime`);
+            this.parseActionString(rule.actionString);
+        }
         
         // Execute the action
         return await this.execute(context);
+    }
+
+    /**
+     * Pre-parse an action string and return the parsed parameters
+     * This is used during rule initialization to avoid parsing at runtime
+     * Subclasses should override this to provide specific implementation
+     * @param {string} actionString - The action string to parse
+     * @returns {Object} Object containing parsed parameters
+     */
+    preParseActionString(actionString) {
+        // Base implementation returns empty parameters
+        // Subclasses should override this with specific parsing logic
+        return {
+            state: '',
+            params: {}
+        };
     }
 
     /**

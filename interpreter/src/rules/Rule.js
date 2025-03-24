@@ -27,6 +27,7 @@ class Rule {
         this.eventName = parsedRule.eventName;
         this.condition = parsedRule.condition;
         this.actionString = parsedRule.actionString;
+        this.parsedActionParams = null; // Will store pre-parsed action parameters
         
         // Register this rule with the appropriate event
         const event = EventRegistry.getEvent(this.eventName);
@@ -252,6 +253,23 @@ class Rule {
     deactivate() {
         this.active = false;
         console.log(`Rule ${this.id} deactivated`);
+    }
+
+    /**
+     * Store pre-parsed action parameters
+     * @param {Object} params - The parsed action parameters
+     */
+    setParsedActionParams(params) {
+        this.parsedActionParams = params;
+        console.log(`Pre-parsed action parameters stored for rule ${this.id}`);
+    }
+
+    /**
+     * Get pre-parsed action parameters
+     * @returns {Object|null} The parsed action parameters or null if not yet parsed
+     */
+    getParsedActionParams() {
+        return this.parsedActionParams;
     }
 }
 
