@@ -212,7 +212,8 @@ class ActionRegistry {
                 // Create action instances based on type
                 const ActionClass = this.actionTypes.get(type.toLowerCase());
                 if (ActionClass) {
-                    const action = new ActionClass(name, actionLocation);
+                    // Pass the type from the API to the constructor
+                    const action = new ActionClass(name, actionLocation, type.toLowerCase());
                     this.registerAction(action);
                     createdActions.push(action);
                 } else {

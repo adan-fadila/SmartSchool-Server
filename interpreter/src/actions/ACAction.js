@@ -16,9 +16,10 @@ class ACAction extends Action {
      * Constructor for the ACAction class
      * @param {string} name - The name of the action (e.g., "Living Room AC")
      * @param {string} location - The location of this action (room name)
+     * @param {string} [type='ac'] - The type of this action from API
      */
-    constructor(name, location) {
-        super(name, 'ac', location);
+    constructor(name, location, type = 'ac') {
+        super(name, type, location);
     }
 
     /**

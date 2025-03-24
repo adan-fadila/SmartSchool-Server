@@ -9,6 +9,13 @@ class EventRegistry {
     constructor() {
         this.events = new Map(); // Map of event name to event instance
         this.raspiEndpoints = new Map(); // Map of Raspberry Pi IPs to their endpoints
+        
+        // Map of event types to their corresponding classes
+        this.eventTypes = new Map([
+            ['temperature', TemperatureEvent],
+            ['humidity', HumidityEvent]
+            // Add more event types here as they are implemented
+        ]);
     }
 
     /**
@@ -72,13 +79,13 @@ class EventRegistry {
             }
 
             const { location, type } = parts;
+            const lowerType = type.toLowerCase();
             
-            // Create appropriate event instance based on type
-            if (type.toLowerCase() === 'temperature') {
-                const event = new TemperatureEvent(eventName, location);
-                this.registerEvent(event);
-            } else if (type.toLowerCase() === 'humidity') {
-                const event = new HumidityEvent(eventName, location);
+            // Create appropriate event instance based on type using the map
+            const EventClass = this.eventTypes.get(lowerType);
+            
+            if (EventClass) {
+                const event = new EventClass(eventName, location);
                 this.registerEvent(event);
             } else {
                 console.warn(`Unknown event type: ${type} for event ${eventName}`);

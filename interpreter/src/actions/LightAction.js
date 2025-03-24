@@ -15,9 +15,10 @@ class LightAction extends Action {
      * Constructor for the LightAction class
      * @param {string} name - The name of the action (e.g., "Living Room Light")
      * @param {string} location - The location of this action (room name)
+     * @param {string} [type='light'] - The type of this action from API
      */
-    constructor(name, location) {
-        super(name, 'light', location);
+    constructor(name, location, type = 'light') {
+        super(name, type, location);
     }
 
     /**
