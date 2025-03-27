@@ -5,6 +5,7 @@ const fs = require('fs').promises;
 const path = require('path');
 const Rule = require('../../models/Rule'); // Import the MongoDB Rule model
 const ActionRegistry = require('./actions/ActionRegistry');
+const sensorLoggingService = require('../../services/sensor-logging.service');
 
 let interpreterInitialized = false;
 let sensorPollingInterval = null;
@@ -30,6 +31,9 @@ async function initializeInterpreter() {
         // Then load existing rules from MongoDB
         await loadRulesFromDatabase();
         
+        // Initialize sensor logging service
+        await initializeSensorLogging();
+        
         interpreterInitialized = true;
         console.log('Interpreter initialized successfully');
         
@@ -40,6 +44,36 @@ async function initializeInterpreter() {
     } catch (error) {
         console.error('Failed to initialize interpreter:', error);
         return false;
+    }
+}
+
+/**
+ * Initialize the sensor logging service
+ * @returns {Promise<Object>} Result of the initialization
+ */
+async function initializeSensorLogging() {
+    try {
+        console.log('Initializing sensor logging service...');
+        
+        // Get all event names from the registry
+        const events = EventRegistry.getAllEvents();
+        const eventNames = events.map(event => event.name);
+        
+        console.log(`Initializing logging for ${eventNames.length} events:`, eventNames);
+        
+        // Initialize the logging service with these event names
+        const result = await sensorLoggingService.initialize(eventNames);
+        
+        if (result.success) {
+            console.log('Sensor logging service initialized successfully');
+        } else {
+            console.error('Failed to initialize sensor logging service:', result.error);
+        }
+        
+        return result;
+    } catch (error) {
+        console.error('Error initializing sensor logging service:', error);
+        return { success: false, error: error.message };
     }
 }
 

@@ -95,7 +95,7 @@ class ActionRegistry {
         try {
             console.log('[ACTION REGISTRY] Initializing actions...');
             
-            // Load Raspberry Pi configuration
+            // Load Raspberry Pi configuration - temp config till we have a proper config
             const configPath = path.join(__dirname, '../../../api/endpoint/rasp_pi.json');
             const configData = await fs.readFile(configPath, 'utf8');
             const config = JSON.parse(configData);

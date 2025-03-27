@@ -37,6 +37,9 @@ const configurations = [
 ];
 
 exports.handleControllers = {
+  // Export the configurations so other modules can access it
+  configurations,
+
   async get_MotionState(req, res) {
     res.status(200).json({
       motionDetected: motionState,

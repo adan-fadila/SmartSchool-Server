@@ -1,0 +1,213 @@
+2025-03-27T17:10:43.832Z: Initializing sensor logging service
+2025-03-27T17:10:43.833Z: Log file path: /Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/logs/sensor_data_2025-03-27_with_space_id.csv
+2025-03-27T17:10:43.833Z: Using existing log file
+2025-03-27T17:10:43.834Z: Log stream created and logging enabled
+2025-03-27T17:10:43.834Z: No polling was active to stop
+2025-03-27T17:10:43.834Z: Starting sensor polling with interval: 30000ms for IP 192.168.0.121
+2025-03-27T17:10:43.834Z: Polling interval set with ID: 511
+2025-03-27T17:10:43.835Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-03-27T17:10:43.835Z: Received sensor data: {"temperature":22,"humidity":75.6}
+2025-03-27T17:10:43.835Z: Formatted events: [{"name":"Living Room Temperature","value":22,"roomName":"Living Room","spaceId":"41413915"},{"name":"Living Room Humidity","value":75.6,"roomName":"Living Room","spaceId":"41413915"}]
+2025-03-27T17:10:44.417Z: logSensorData called with 2 sensors
+2025-03-27T17:10:44.417Z: Column map has 2 columns: [["Living Room Temperature",1],["Living Room Humidity",2]]
+2025-03-27T17:10:44.417Z: Setting spaceId column 3 to 41413915
+2025-03-27T17:10:44.417Z: Setting column 1 (Living Room Temperature) to 22
+2025-03-27T17:10:44.417Z: Setting column 2 (Living Room Humidity) to 75.6
+2025-03-27T17:10:44.417Z: Writing row to log file: 2025-03-27T17:10:44.417Z,22,75.6,41413915
+2025-03-27T17:10:44.417Z: Successfully wrote to log file using appendFileSync
+2025-03-27T17:10:43.835Z: Successfully logged sensor data
+2025-03-27T17:10:43.835Z: Successfully updated event: Living Room Temperature = 22
+2025-03-27T17:10:43.835Z: Successfully updated event: Living Room Humidity = 75.6
+2025-03-27T17:10:44.420Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"Living Room Temperature","value":22,"roomName":"Living Room","spaceId":"41413915"},{"name":"Living Room Humidity","value":75.6,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-03-27T17:11:13.836Z: Polling for sensor data... (poll #1)
+2025-03-27T17:11:13.837Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-03-27T17:11:13.837Z: Received sensor data: {"temperature":21.8,"humidity":73.8}
+2025-03-27T17:11:13.837Z: Formatted events: [{"name":"Living Room Temperature","value":21.8,"roomName":"Living Room","spaceId":"41413915"},{"name":"Living Room Humidity","value":73.8,"roomName":"Living Room","spaceId":"41413915"}]
+2025-03-27T17:11:14.442Z: logSensorData called with 2 sensors
+2025-03-27T17:11:14.442Z: Column map has 2 columns: [["Living Room Temperature",1],["Living Room Humidity",2]]
+2025-03-27T17:11:14.442Z: Setting spaceId column 3 to 41413915
+2025-03-27T17:11:14.442Z: Setting column 1 (Living Room Temperature) to 21.8
+2025-03-27T17:11:14.442Z: Setting column 2 (Living Room Humidity) to 73.8
+2025-03-27T17:11:14.442Z: Writing row to log file: 2025-03-27T17:11:14.442Z,21.8,73.8,41413915
+2025-03-27T17:11:14.442Z: Successfully wrote to log file using appendFileSync
+2025-03-27T17:11:13.837Z: Successfully logged sensor data
+2025-03-27T17:11:13.837Z: Successfully updated event: Living Room Temperature = 21.8
+2025-03-27T17:11:13.837Z: Successfully updated event: Living Room Humidity = 73.8
+2025-03-27T17:11:14.447Z: Polling result: {"success":true,"updatedEvents":[{"name":"Living Room Temperature","value":21.8,"roomName":"Living Room","spaceId":"41413915"},{"name":"Living Room Humidity","value":73.8,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-03-27T17:11:14.447Z: Polling interval active: true
+2025-03-27T17:11:43.837Z: Polling for sensor data... (poll #2)
+2025-03-27T17:11:43.838Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-03-27T17:11:43.838Z: Received sensor data: {"temperature":21.8,"humidity":73.8}
+2025-03-27T17:11:43.838Z: Formatted events: [{"name":"Living Room Temperature","value":21.8,"roomName":"Living Room","spaceId":"41413915"},{"name":"Living Room Humidity","value":73.8,"roomName":"Living Room","spaceId":"41413915"}]
+2025-03-27T17:11:44.511Z: logSensorData called with 2 sensors
+2025-03-27T17:11:44.511Z: Column map has 2 columns: [["Living Room Temperature",1],["Living Room Humidity",2]]
+2025-03-27T17:11:44.511Z: Setting spaceId column 3 to 41413915
+2025-03-27T17:11:44.511Z: Setting column 1 (Living Room Temperature) to 21.8
+2025-03-27T17:11:44.511Z: Setting column 2 (Living Room Humidity) to 73.8
+2025-03-27T17:11:44.511Z: Writing row to log file: 2025-03-27T17:11:44.511Z,21.8,73.8,41413915
+2025-03-27T17:11:44.511Z: Successfully wrote to log file using appendFileSync
+2025-03-27T17:11:43.838Z: Successfully logged sensor data
+2025-03-27T17:11:43.838Z: Successfully updated event: Living Room Temperature = 21.8
+2025-03-27T17:11:43.838Z: Successfully updated event: Living Room Humidity = 73.8
+2025-03-27T17:11:44.515Z: Polling result: {"success":true,"updatedEvents":[{"name":"Living Room Temperature","value":21.8,"roomName":"Living Room","spaceId":"41413915"},{"name":"Living Room Humidity","value":73.8,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-03-27T17:11:44.516Z: Polling interval active: true
+2025-03-27T17:12:13.838Z: Polling for sensor data... (poll #3)
+2025-03-27T17:12:13.839Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-03-27T17:12:13.839Z: Received sensor data: {"temperature":21.8,"humidity":73.8}
+2025-03-27T17:12:13.839Z: Formatted events: [{"name":"Living Room Temperature","value":21.8,"roomName":"Living Room","spaceId":"41413915"},{"name":"Living Room Humidity","value":73.8,"roomName":"Living Room","spaceId":"41413915"}]
+2025-03-27T17:12:15.170Z: logSensorData called with 2 sensors
+2025-03-27T17:12:15.170Z: Column map has 2 columns: [["Living Room Temperature",1],["Living Room Humidity",2]]
+2025-03-27T17:12:15.170Z: Setting spaceId column 3 to 41413915
+2025-03-27T17:12:15.170Z: Setting column 1 (Living Room Temperature) to 21.8
+2025-03-27T17:12:15.170Z: Setting column 2 (Living Room Humidity) to 73.8
+2025-03-27T17:12:15.170Z: Writing row to log file: 2025-03-27T17:12:15.170Z,21.8,73.8,41413915
+2025-03-27T17:12:15.170Z: Successfully wrote to log file using appendFileSync
+2025-03-27T17:12:13.839Z: Successfully logged sensor data
+2025-03-27T17:12:13.839Z: Successfully updated event: Living Room Temperature = 21.8
+2025-03-27T17:12:13.839Z: Successfully updated event: Living Room Humidity = 73.8
+2025-03-27T17:12:15.174Z: Polling result: {"success":true,"updatedEvents":[{"name":"Living Room Temperature","value":21.8,"roomName":"Living Room","spaceId":"41413915"},{"name":"Living Room Humidity","value":73.8,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-03-27T17:12:15.175Z: Polling interval active: true
+2025-03-27T17:12:43.838Z: Polling for sensor data... (poll #4)
+2025-03-27T17:12:43.840Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-03-27T17:12:43.840Z: Received sensor data: {"temperature":21.6,"humidity":74.7}
+2025-03-27T17:12:43.840Z: Formatted events: [{"name":"Living Room Temperature","value":21.6,"roomName":"Living Room","spaceId":"41413915"},{"name":"Living Room Humidity","value":74.7,"roomName":"Living Room","spaceId":"41413915"}]
+2025-03-27T17:12:44.504Z: logSensorData called with 2 sensors
+2025-03-27T17:12:44.504Z: Column map has 2 columns: [["Living Room Temperature",1],["Living Room Humidity",2]]
+2025-03-27T17:12:44.504Z: Setting spaceId column 3 to 41413915
+2025-03-27T17:12:44.504Z: Setting column 1 (Living Room Temperature) to 21.6
+2025-03-27T17:12:44.504Z: Setting column 2 (Living Room Humidity) to 74.7
+2025-03-27T17:12:44.504Z: Writing row to log file: 2025-03-27T17:12:44.505Z,21.6,74.7,41413915
+2025-03-27T17:12:44.504Z: Successfully wrote to log file using appendFileSync
+2025-03-27T17:12:43.840Z: Successfully logged sensor data
+2025-03-27T17:12:43.840Z: Successfully updated event: Living Room Temperature = 21.6
+2025-03-27T17:12:43.840Z: Successfully updated event: Living Room Humidity = 74.7
+2025-03-27T17:12:44.509Z: Polling result: {"success":true,"updatedEvents":[{"name":"Living Room Temperature","value":21.6,"roomName":"Living Room","spaceId":"41413915"},{"name":"Living Room Humidity","value":74.7,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-03-27T17:12:44.509Z: Polling interval active: true
+2025-03-27T17:13:13.839Z: Polling for sensor data... (poll #5)
+2025-03-27T17:13:13.840Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-03-27T17:13:13.840Z: Received sensor data: {"temperature":21.6,"humidity":74.7}
+2025-03-27T17:13:13.840Z: Formatted events: [{"name":"Living Room Temperature","value":21.6,"roomName":"Living Room","spaceId":"41413915"},{"name":"Living Room Humidity","value":74.7,"roomName":"Living Room","spaceId":"41413915"}]
+2025-03-27T17:13:14.825Z: logSensorData called with 2 sensors
+2025-03-27T17:13:14.825Z: Column map has 2 columns: [["Living Room Temperature",1],["Living Room Humidity",2]]
+2025-03-27T17:13:14.825Z: Setting spaceId column 3 to 41413915
+2025-03-27T17:13:14.825Z: Setting column 1 (Living Room Temperature) to 21.6
+2025-03-27T17:13:14.825Z: Setting column 2 (Living Room Humidity) to 74.7
+2025-03-27T17:13:14.825Z: Writing row to log file: 2025-03-27T17:13:14.826Z,21.6,74.7,41413915
+2025-03-27T17:13:14.825Z: Successfully wrote to log file using appendFileSync
+2025-03-27T17:13:13.840Z: Successfully logged sensor data
+2025-03-27T17:13:13.840Z: Successfully updated event: Living Room Temperature = 21.6
+2025-03-27T17:13:13.840Z: Successfully updated event: Living Room Humidity = 74.7
+2025-03-27T17:13:14.829Z: Polling result: {"success":true,"updatedEvents":[{"name":"Living Room Temperature","value":21.6,"roomName":"Living Room","spaceId":"41413915"},{"name":"Living Room Humidity","value":74.7,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-03-27T17:13:14.830Z: Polling interval active: true
+2025-03-27T17:13:43.840Z: Polling for sensor data... (poll #6)
+2025-03-27T17:13:43.842Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-03-27T17:13:43.842Z: Received sensor data: {"temperature":21.6,"humidity":74.7}
+2025-03-27T17:13:43.842Z: Formatted events: [{"name":"Living Room Temperature","value":21.6,"roomName":"Living Room","spaceId":"41413915"},{"name":"Living Room Humidity","value":74.7,"roomName":"Living Room","spaceId":"41413915"}]
+2025-03-27T17:13:44.489Z: logSensorData called with 2 sensors
+2025-03-27T17:13:44.489Z: Column map has 2 columns: [["Living Room Temperature",1],["Living Room Humidity",2]]
+2025-03-27T17:13:44.489Z: Setting spaceId column 3 to 41413915
+2025-03-27T17:13:44.489Z: Setting column 1 (Living Room Temperature) to 21.6
+2025-03-27T17:13:44.489Z: Setting column 2 (Living Room Humidity) to 74.7
+2025-03-27T17:13:44.489Z: Writing row to log file: 2025-03-27T17:13:44.490Z,21.6,74.7,41413915
+2025-03-27T17:13:44.489Z: Successfully wrote to log file using appendFileSync
+2025-03-27T17:13:43.842Z: Successfully logged sensor data
+2025-03-27T17:13:43.842Z: Successfully updated event: Living Room Temperature = 21.6
+2025-03-27T17:13:43.842Z: Successfully updated event: Living Room Humidity = 74.7
+2025-03-27T17:13:44.493Z: Polling result: {"success":true,"updatedEvents":[{"name":"Living Room Temperature","value":21.6,"roomName":"Living Room","spaceId":"41413915"},{"name":"Living Room Humidity","value":74.7,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-03-27T17:13:44.494Z: Polling interval active: true
+2025-03-27T17:14:13.841Z: Polling for sensor data... (poll #7)
+2025-03-27T17:14:13.842Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-03-27T17:14:13.842Z: Received sensor data: {"temperature":21.4,"humidity":75.6}
+2025-03-27T17:14:13.842Z: Formatted events: [{"name":"Living Room Temperature","value":21.4,"roomName":"Living Room","spaceId":"41413915"},{"name":"Living Room Humidity","value":75.6,"roomName":"Living Room","spaceId":"41413915"}]
+2025-03-27T17:14:14.426Z: logSensorData called with 2 sensors
+2025-03-27T17:14:14.426Z: Column map has 2 columns: [["Living Room Temperature",1],["Living Room Humidity",2]]
+2025-03-27T17:14:14.426Z: Setting spaceId column 3 to 41413915
+2025-03-27T17:14:14.426Z: Setting column 1 (Living Room Temperature) to 21.4
+2025-03-27T17:14:14.426Z: Setting column 2 (Living Room Humidity) to 75.6
+2025-03-27T17:14:14.426Z: Writing row to log file: 2025-03-27T17:14:14.427Z,21.4,75.6,41413915
+2025-03-27T17:14:14.426Z: Successfully wrote to log file using appendFileSync
+2025-03-27T17:14:13.842Z: Successfully logged sensor data
+2025-03-27T17:14:13.842Z: Successfully updated event: Living Room Temperature = 21.4
+2025-03-27T17:14:13.842Z: Successfully updated event: Living Room Humidity = 75.6
+2025-03-27T17:14:14.429Z: Polling result: {"success":true,"updatedEvents":[{"name":"Living Room Temperature","value":21.4,"roomName":"Living Room","spaceId":"41413915"},{"name":"Living Room Humidity","value":75.6,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-03-27T17:14:14.429Z: Polling interval active: true
+2025-03-27T17:14:43.843Z: Polling for sensor data... (poll #8)
+2025-03-27T17:14:43.844Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-03-27T17:14:43.844Z: Received sensor data: {"temperature":21.4,"humidity":75.6}
+2025-03-27T17:14:43.844Z: Formatted events: [{"name":"Living Room Temperature","value":21.4,"roomName":"Living Room","spaceId":"41413915"},{"name":"Living Room Humidity","value":75.6,"roomName":"Living Room","spaceId":"41413915"}]
+2025-03-27T17:14:44.562Z: logSensorData called with 2 sensors
+2025-03-27T17:14:44.562Z: Column map has 2 columns: [["Living Room Temperature",1],["Living Room Humidity",2]]
+2025-03-27T17:14:44.562Z: Setting spaceId column 3 to 41413915
+2025-03-27T17:14:44.562Z: Setting column 1 (Living Room Temperature) to 21.4
+2025-03-27T17:14:44.562Z: Setting column 2 (Living Room Humidity) to 75.6
+2025-03-27T17:14:44.562Z: Writing row to log file: 2025-03-27T17:14:44.562Z,21.4,75.6,41413915
+2025-03-27T17:14:44.562Z: Successfully wrote to log file using appendFileSync
+2025-03-27T17:14:43.844Z: Successfully logged sensor data
+2025-03-27T17:14:43.844Z: Successfully updated event: Living Room Temperature = 21.4
+2025-03-27T17:14:43.844Z: Successfully updated event: Living Room Humidity = 75.6
+2025-03-27T17:14:44.566Z: Polling result: {"success":true,"updatedEvents":[{"name":"Living Room Temperature","value":21.4,"roomName":"Living Room","spaceId":"41413915"},{"name":"Living Room Humidity","value":75.6,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-03-27T17:14:44.567Z: Polling interval active: true
+2025-03-27T17:15:13.844Z: Polling for sensor data... (poll #9)
+2025-03-27T17:15:13.845Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-03-27T17:15:13.845Z: Received sensor data: {"temperature":21.4,"humidity":75.6}
+2025-03-27T17:15:13.845Z: Formatted events: [{"name":"Living Room Temperature","value":21.4,"roomName":"Living Room","spaceId":"41413915"},{"name":"Living Room Humidity","value":75.6,"roomName":"Living Room","spaceId":"41413915"}]
+2025-03-27T17:15:14.520Z: logSensorData called with 2 sensors
+2025-03-27T17:15:14.520Z: Column map has 2 columns: [["Living Room Temperature",1],["Living Room Humidity",2]]
+2025-03-27T17:15:14.520Z: Setting spaceId column 3 to 41413915
+2025-03-27T17:15:14.520Z: Setting column 1 (Living Room Temperature) to 21.4
+2025-03-27T17:15:14.520Z: Setting column 2 (Living Room Humidity) to 75.6
+2025-03-27T17:15:14.520Z: Writing row to log file: 2025-03-27T17:15:14.520Z,21.4,75.6,41413915
+2025-03-27T17:15:14.520Z: Successfully wrote to log file using appendFileSync
+2025-03-27T17:15:13.845Z: Successfully logged sensor data
+2025-03-27T17:15:13.845Z: Successfully updated event: Living Room Temperature = 21.4
+2025-03-27T17:15:13.845Z: Successfully updated event: Living Room Humidity = 75.6
+2025-03-27T17:15:14.525Z: Polling result: {"success":true,"updatedEvents":[{"name":"Living Room Temperature","value":21.4,"roomName":"Living Room","spaceId":"41413915"},{"name":"Living Room Humidity","value":75.6,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-03-27T17:15:14.526Z: Polling interval active: true
+2025-03-27T17:15:43.844Z: Polling for sensor data... (poll #10)
+2025-03-27T17:15:43.845Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-03-27T17:15:43.845Z: Received sensor data: {"temperature":21.3,"humidity":76.6}
+2025-03-27T17:15:43.845Z: Formatted events: [{"name":"Living Room Temperature","value":21.3,"roomName":"Living Room","spaceId":"41413915"},{"name":"Living Room Humidity","value":76.6,"roomName":"Living Room","spaceId":"41413915"}]
+2025-03-27T17:15:44.903Z: logSensorData called with 2 sensors
+2025-03-27T17:15:44.903Z: Column map has 2 columns: [["Living Room Temperature",1],["Living Room Humidity",2]]
+2025-03-27T17:15:44.903Z: Setting spaceId column 3 to 41413915
+2025-03-27T17:15:44.903Z: Setting column 1 (Living Room Temperature) to 21.3
+2025-03-27T17:15:44.903Z: Setting column 2 (Living Room Humidity) to 76.6
+2025-03-27T17:15:44.903Z: Writing row to log file: 2025-03-27T17:15:44.903Z,21.3,76.6,41413915
+2025-03-27T17:15:44.903Z: Successfully wrote to log file using appendFileSync
+2025-03-27T17:15:43.845Z: Successfully logged sensor data
+2025-03-27T17:15:43.845Z: Successfully updated event: Living Room Temperature = 21.3
+2025-03-27T17:15:43.845Z: Successfully updated event: Living Room Humidity = 76.6
+2025-03-27T17:15:44.907Z: Polling result: {"success":true,"updatedEvents":[{"name":"Living Room Temperature","value":21.3,"roomName":"Living Room","spaceId":"41413915"},{"name":"Living Room Humidity","value":76.6,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-03-27T17:15:44.908Z: Polling interval active: true
+2025-03-27T17:16:13.844Z: Polling for sensor data... (poll #11)
+2025-03-27T17:16:13.845Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-03-27T17:16:13.845Z: Received sensor data: {"temperature":21.3,"humidity":76.6}
+2025-03-27T17:16:13.845Z: Formatted events: [{"name":"Living Room Temperature","value":21.3,"roomName":"Living Room","spaceId":"41413915"},{"name":"Living Room Humidity","value":76.6,"roomName":"Living Room","spaceId":"41413915"}]
+2025-03-27T17:16:14.489Z: logSensorData called with 2 sensors
+2025-03-27T17:16:14.489Z: Column map has 2 columns: [["Living Room Temperature",1],["Living Room Humidity",2]]
+2025-03-27T17:16:14.489Z: Setting spaceId column 3 to 41413915
+2025-03-27T17:16:14.489Z: Setting column 1 (Living Room Temperature) to 21.3
+2025-03-27T17:16:14.489Z: Setting column 2 (Living Room Humidity) to 76.6
+2025-03-27T17:16:14.489Z: Writing row to log file: 2025-03-27T17:16:14.490Z,21.3,76.6,41413915
+2025-03-27T17:16:14.489Z: Successfully wrote to log file using appendFileSync
+2025-03-27T17:16:13.845Z: Successfully logged sensor data
+2025-03-27T17:16:13.845Z: Successfully updated event: Living Room Temperature = 21.3
+2025-03-27T17:16:13.845Z: Successfully updated event: Living Room Humidity = 76.6
+2025-03-27T17:16:14.492Z: Polling result: {"success":true,"updatedEvents":[{"name":"Living Room Temperature","value":21.3,"roomName":"Living Room","spaceId":"41413915"},{"name":"Living Room Humidity","value":76.6,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-03-27T17:16:14.492Z: Polling interval active: true
+2025-03-27T17:16:43.845Z: Polling for sensor data... (poll #12)
+2025-03-27T17:16:43.847Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-03-27T17:16:43.847Z: Received sensor data: {"temperature":21.3,"humidity":76.6}
+2025-03-27T17:16:43.847Z: Formatted events: [{"name":"Living Room Temperature","value":21.3,"roomName":"Living Room","spaceId":"41413915"},{"name":"Living Room Humidity","value":76.6,"roomName":"Living Room","spaceId":"41413915"}]
+2025-03-27T17:16:44.537Z: logSensorData called with 2 sensors
+2025-03-27T17:16:44.537Z: Column map has 2 columns: [["Living Room Temperature",1],["Living Room Humidity",2]]
+2025-03-27T17:16:44.537Z: Setting spaceId column 3 to 41413915
+2025-03-27T17:16:44.537Z: Setting column 1 (Living Room Temperature) to 21.3
+2025-03-27T17:16:44.537Z: Setting column 2 (Living Room Humidity) to 76.6
+2025-03-27T17:16:44.537Z: Writing row to log file: 2025-03-27T17:16:44.538Z,21.3,76.6,41413915
+2025-03-27T17:16:44.537Z: Successfully wrote to log file using appendFileSync
+2025-03-27T17:16:43.847Z: Successfully logged sensor data
+2025-03-27T17:16:43.847Z: Successfully updated event: Living Room Temperature = 21.3
+2025-03-27T17:16:43.847Z: Successfully updated event: Living Room Humidity = 76.6
+2025-03-27T17:16:44.541Z: Polling result: {"success":true,"updatedEvents":[{"name":"Living Room Temperature","value":21.3,"roomName":"Living Room","spaceId":"41413915"},{"name":"Living Room Humidity","value":76.6,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-03-27T17:16:44.542Z: Polling interval active: true
