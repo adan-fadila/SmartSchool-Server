@@ -9,6 +9,7 @@ const sensorLoggingService = require('../../services/sensor-logging.service');
 
 let interpreterInitialized = false;
 let sensorPollingInterval = null;
+let anomalyPollingInterval = null;
 
 /**
  * Initialize the interpreter when the server starts
@@ -39,6 +40,9 @@ async function initializeInterpreter() {
         
         // Try to start sensor polling automatically
         await startSensorPolling();
+        
+        // Start anomaly polling
+        await startAnomalyPolling();
         
         return true;
     } catch (error) {
@@ -444,6 +448,56 @@ function stopInterpreter() {
     return true;
 }
 
+/**
+ * Start polling for anomaly updates
+ * @param {number} interval - Polling interval in milliseconds (default: 60000 - 1 minute)
+ * @returns {boolean} True if polling started successfully, false otherwise
+ */
+async function startAnomalyPolling(interval = 60000) {
+    try {
+        if (!interpreterInitialized) {
+            console.warn('Cannot start anomaly polling: Interpreter not initialized');
+            return false;
+        }
+        
+        // Stop any existing polling
+        stopAnomalyPolling();
+        
+        console.log(`Starting anomaly polling with interval ${interval}ms`);
+        
+        // Start polling
+        anomalyPollingInterval = setInterval(async () => {
+            try {
+                await EventRegistry.updateAnomalyStates();
+            } catch (error) {
+                console.error('Error in anomaly polling:', error);
+            }
+        }, interval);
+        
+        // Run immediately for first update
+        await EventRegistry.updateAnomalyStates();
+        
+        return true;
+    } catch (error) {
+        console.error('Error starting anomaly polling:', error);
+        return false;
+    }
+}
+
+/**
+ * Stop anomaly polling
+ * @returns {boolean} True if polling was stopped, false otherwise
+ */
+function stopAnomalyPolling() {
+    if (anomalyPollingInterval) {
+        clearInterval(anomalyPollingInterval);
+        anomalyPollingInterval = null;
+        console.log('Anomaly polling stopped');
+        return true;
+    }
+    return false;
+}
+
 module.exports = {
     initializeInterpreter,
     isInterpreterInitialized,
@@ -458,5 +512,7 @@ module.exports = {
     setRuleActive,
     testExecuteAction: testAction,
     updateEventValue,
-    getDeviceStates
+    getDeviceStates,
+    startAnomalyPolling,
+    stopAnomalyPolling
 }; 

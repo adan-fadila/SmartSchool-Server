@@ -1,6 +1,7 @@
 const axios = require('axios');
 const TemperatureEvent = require('./TemperatureEvent');
 const HumidityEvent = require('./HumidityEvent');
+const AnomalyEvent = require('./AnomalyEvent');
 
 /**
  * Registry for managing all events in the system
@@ -9,11 +10,13 @@ class EventRegistry {
     constructor() {
         this.events = new Map(); // Map of event name to event instance
         this.raspiEndpoints = new Map(); // Map of Raspberry Pi IPs to their endpoints
+        this.anomalyApiEndpoint = 'http://127.0.0.1:5000/api/v1/anomaly_detection/anomalies'; // Anomaly API endpoint
         
         // Map of event types to their corresponding classes
         this.eventTypes = new Map([
             ['temperature', TemperatureEvent],
-            ['humidity', HumidityEvent]
+            ['humidity', HumidityEvent],
+            ['anomaly', AnomalyEvent]
             // Add more event types here as they are implemented
         ]);
     }
@@ -30,7 +33,7 @@ class EventRegistry {
     }
 
     /**
-     * Initialize events by fetching them from all connected Raspberry Pis
+     * Initialize events by fetching them from all connected Raspberry Pis and anomaly API
      */
     async initializeEvents() {
         try {
@@ -38,6 +41,11 @@ class EventRegistry {
                 console.log(`Fetching events from Raspberry Pi at ${ip} (${endpoint})`);
                 await this.fetchEventsFromRaspberryPi(endpoint);
             }
+            
+            // Fetch anomaly events
+            console.log('Fetching anomaly events from API');
+            await this.fetchAnomalyEvents();
+            
             console.log('All events initialized successfully');
         } catch (error) {
             console.error('Error initializing events:', error);
@@ -94,11 +102,74 @@ class EventRegistry {
     }
 
     /**
+     * Fetch anomaly events from the anomaly detection API
+     */
+    async fetchAnomalyEvents() {
+        try {
+            console.log(`Fetching anomalies from ${this.anomalyApiEndpoint}`);
+            const response = await axios.get(this.anomalyApiEndpoint, {
+                headers: { 'Content-Type': 'application/json' }
+            });
+
+            if (response.data && response.data.success && response.data.data) {
+                const anomalyData = response.data.data;
+                this.createAnomalyEventInstances(anomalyData);
+            } else {
+                console.error('Failed to get anomalies, response:', response.data);
+            }
+        } catch (error) {
+            console.error(`Error fetching anomalies from API:`, error);
+        }
+    }
+
+    /**
+     * Create anomaly event instances from API data
+     * @param {Object} anomalyData - Data from anomaly API
+     */
+    createAnomalyEventInstances(anomalyData) {
+        try {
+            // Loop through each metric (e.g., living_room_temperature)
+            Object.entries(anomalyData).forEach(([metricKey, anomalyTypes]) => {
+                // Parse location and metric type from the key
+                const metricParts = metricKey.split('_');
+                const metricType = metricParts.pop(); // Last part is the metric type (temperature, humidity)
+                const location = metricParts.join(' '); // Rest is the location (living room)
+                
+                // Loop through each anomaly type (pointwise, seasonality, trend)
+                Object.entries(anomalyTypes).forEach(([anomalyType, anomalyInfo]) => {
+                    const eventName = anomalyInfo.name;
+                    
+                    // Create anomaly event
+                    const event = new AnomalyEvent(eventName, location, anomalyType, metricType);
+                    
+                    // Set initial state (not detected)
+                    event.updateAnomalyState(false);
+                    
+                    // Register event
+                    this.registerEvent(event);
+                    
+                    console.log(`Created anomaly event: ${eventName}`);
+                });
+            });
+            
+            console.log(`Created anomaly events successfully.`);
+        } catch (error) {
+            console.error('Error creating anomaly events:', error);
+        }
+    }
+
+    /**
      * Parse event name to extract location and type
      * @param {string} eventName - Raw event name from Raspberry Pi (e.g. "Living Room Temperature")
      * @returns {Object|null} Object with location and type, or null if parsing failed
      */
     parseEventName(eventName) {
+        // Check if this is an anomaly event
+        if (eventName.toLowerCase().includes('anomaly')) {
+            // For anomaly events, we handle them separately
+            return null;
+        }
+        
         // Simple parsing that assumes format like "Living Room Temperature" or "Kitchen Humidity"
         const lastSpace = eventName.lastIndexOf(' ');
         if (lastSpace === -1) return null;
@@ -151,6 +222,55 @@ class EventRegistry {
      */
     getAllEvents() {
         return Array.from(this.events.values());
+    }
+
+    /**
+     * Update anomaly states from the anomaly detection API
+     * This should be called periodically to get the latest anomaly states
+     */
+    async updateAnomalyStates() {
+        try {
+            console.log('Updating anomaly states from API...');
+            const response = await axios.get(this.anomalyApiEndpoint, {
+                headers: { 'Content-Type': 'application/json' }
+            });
+
+            if (response.data && response.data.success && response.data.data) {
+                // Use the same data structure as during initialization
+                const anomalyData = response.data.data;
+                
+                // For each anomaly in the response
+                Object.entries(anomalyData).forEach(([metricKey, anomalyTypes]) => {
+                    // Parse location and metric type from the key
+                    const metricParts = metricKey.split('_');
+                    const metricType = metricParts.pop(); // Last part is the metric type
+                    const location = metricParts.join(' '); // Rest is the location
+                    
+                    // Loop through each anomaly type
+                    Object.entries(anomalyTypes).forEach(([anomalyType, anomalyInfo]) => {
+                        const eventName = anomalyInfo.name;
+                        const event = this.getEvent(eventName);
+                        
+                        if (event && event.type === 'anomaly') {
+                            // Get the detection status if available, default to false
+                            const detected = anomalyInfo.detected === true;
+                            
+                            // Update the event state
+                            event.updateAnomalyState(detected, anomalyInfo);
+                            console.log(`Updated state for anomaly event ${eventName}: detected=${detected}`);
+                        } else {
+                            console.warn(`Anomaly event not found for state update: ${eventName}`);
+                        }
+                    });
+                });
+                
+                console.log('Anomaly states updated successfully');
+            } else {
+                console.error('Failed to get anomaly states, response:', response.data);
+            }
+        } catch (error) {
+            console.error('Error updating anomaly states:', error);
+        }
     }
 }
 

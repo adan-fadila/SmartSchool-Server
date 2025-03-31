@@ -28,8 +28,10 @@ const {endpointRouter} = require('./routers/endpointRouter');
 const { recommendationRouter } = require('./routers/recommendationRouter.js');
 const { anomalyRouter } = require('./routers/anomalyRouter');
 const interpreterRouter = require('./routers/interpreter.router'); // Import the new interpreter router
+const interpreterApiRouter = require('./routes/interpreter-api.routes'); // Import the interpreter API router
 const actionRouter = require('./routers/action.router');
 const eventRouter = require('./routers/event.router');
+const anomalyEventsRouter = require('./routers/anomaly.router'); // Import the new anomaly events router
 
 
 const testRaspiRouter = require('./routers/testRaspiRouter.js')
@@ -68,6 +70,11 @@ console.log('Registering interpreter router...');
 server.use('/api-interpreter', interpreterRouter); // Add the interpreter router
 console.log('Interpreter router registered');
 
+// Add the interpreter API router
+console.log('Registering interpreter API router...');
+server.use('/api-interpreter-api', interpreterApiRouter); // Add the interpreter API router
+console.log('Interpreter API router registered');
+
 // Add the action router
 console.log('Registering action router...');
 server.use('/api-actions', actionRouter);
@@ -77,6 +84,11 @@ console.log('Action router registered');
 console.log('Registering event router...');
 server.use('/api-events', eventRouter);
 console.log('Event router registered');
+
+// Add the anomaly events router
+console.log('Registering anomaly events router...');
+server.use('/api-anomalies', anomalyEventsRouter);
+console.log('Anomaly events router registered');
 
 server.use((req, res) => {
     res.status(400).send('Something is broken!');
