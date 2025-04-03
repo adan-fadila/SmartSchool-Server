@@ -1,5 +1,6 @@
 const EventRegistry = require('../events/EventRegistry');
 const ActionRegistry = require('../actions/ActionRegistry');
+const { notifyRuleTriggered } = require('../../../utils/notificationService');
 
 /**
  * Class representing a rule in the system
@@ -29,6 +30,9 @@ class Rule {
         this.actionString = parsedRule.actionString;
         this.parsedActionParams = null; // Will store pre-parsed action parameters
         
+        // Check if this is an anomaly event rule
+        this.isAnomalyRule = this.checkIfAnomalyRule();
+        
         // Register this rule with the appropriate event
         const event = EventRegistry.getEvent(this.eventName);
         if (!event) {
@@ -39,6 +43,23 @@ class Rule {
         // Add this rule as an observer to the event
         event.addObserver(this);
         console.log(`Rule added as observer to event ${this.eventName}`);
+    }
+
+    /**
+     * Check if this rule is related to an anomaly event
+     * @returns {boolean} True if this is an anomaly rule
+     */
+    checkIfAnomalyRule() {
+        // Check the event name or condition
+        const event = EventRegistry.getEvent(this.eventName);
+        if (event && event.type === 'anomaly') {
+            return true;
+        }
+        
+        // Check if the rule string mentions anomaly
+        const anomalyKeywords = ['anomaly', 'anomalies', 'pointwise', 'seasonality', 'trend'];
+        const ruleStringLower = this.ruleString.toLowerCase();
+        return anomalyKeywords.some(keyword => ruleStringLower.includes(keyword));
     }
 
     /**
@@ -59,9 +80,37 @@ class Rule {
         const conditionPart = ifThenMatch[1].trim();
         const actionString = ifThenMatch[2].trim();
 
-        // Extract event name and condition operator/value
-        // For now, assume the format is "event operator value" (e.g., "living room temperature > 25")
-        // This is a simplified approach. For a more robust solution, consider using a dedicated parser
+        // Check if this is an anomaly rule with "detected" pattern
+        const anomalyDetectedPattern = /(.+?)\s+anomaly\s+detected$/i;
+        const anomalyDetectedMatch = conditionPart.match(anomalyDetectedPattern);
+        
+        // Check if this is an anomaly rule with "not detected" pattern
+        const anomalyNotDetectedPattern = /(.+?)\s+anomaly\s+not\s+detected$/i;
+        const anomalyNotDetectedMatch = conditionPart.match(anomalyNotDetectedPattern);
+        
+        if (anomalyDetectedMatch) {
+            // This is an anomaly rule with "detected"
+            const eventName = anomalyDetectedMatch[1].trim();
+            console.log(`Parsed anomaly rule for event: "${eventName}" with condition "detected"`);
+            
+            return {
+                eventName,
+                condition: { operator: 'anomaly_detected', value: 'true' },
+                actionString
+            };
+        } else if (anomalyNotDetectedMatch) {
+            // This is an anomaly rule with "not detected"
+            const eventName = anomalyNotDetectedMatch[1].trim();
+            console.log(`Parsed anomaly rule for event: "${eventName}" with condition "not detected"`);
+            
+            return {
+                eventName,
+                condition: { operator: 'anomaly_detected', value: 'false' },
+                actionString
+            };
+        }
+        
+        // Not an anomaly rule, use standard operator-based parsing
         const conditionPattern = /(.+?)\s+([<>=!]+)\s+(.+)/;
         const conditionMatch = conditionPart.match(conditionPattern);
         
@@ -156,6 +205,11 @@ class Rule {
     notifyObservingActions(context) {
         console.log(`Rule ${this.id} notifying ${this.observingActions.length} observing actions`);
         
+        // If this is an anomaly rule, send a notification
+        if (this.isAnomalyRule) {
+            this.sendAnomalyRuleNotification(context);
+        }
+        
         this.observingActions.forEach(action => {
             try {
                 action.onRuleTriggered(this, context)
@@ -174,15 +228,65 @@ class Rule {
             }
         });
     }
+    
+    /**
+     * Send a notification when an anomaly rule is triggered
+     * @param {Object} context - Context data from the event
+     */
+    async sendAnomalyRuleNotification(context) {
+        try {
+            // Get more information about the event
+            const event = EventRegistry.getEvent(this.eventName);
+            if (!event) return;
+            
+            // Only send for anomaly events
+            if (event.type !== 'anomaly') return;
+            
+            // Get action information
+            const actions = this.observingActions.map(action => `${action.name}`).join(', ');
+            
+            // Prepare notification data
+            const ruleData = {
+                id: this.id,
+                ruleString: this.ruleString,
+                eventName: this.eventName,
+                actions: actions
+            };
+            
+            const eventData = {
+                name: event.name,
+                location: event.location,
+                metricType: event.metricType,
+                anomalyType: event.anomalyType
+            };
+            
+            // Send notification using the notification service
+            console.log(`Sending notification for rule: ${this.id}`);
+            await notifyRuleTriggered(ruleData, eventData);
+        } catch (error) {
+            console.error('Failed to send rule notification:', error);
+        }
+    }
 
     /**
      * Evaluate a condition
      * @param {any} eventValue - Current value of the event
-     * @param {string} operator - Condition operator (>, <, >=, <=, ==, !=)
+     * @param {string} operator - Condition operator (>, <, >=, <=, ==, !=, anomaly_detected)
      * @param {string} conditionValue - Value to compare against
      * @returns {boolean} True if condition is met, false otherwise
      */
     evaluateCondition(eventValue, operator, conditionValue) {
+        // Special handling for anomaly events
+        if (operator === 'anomaly_detected') {
+            // For anomaly events, check if the anomaly is detected or not detected
+            if (typeof eventValue === 'object' && eventValue !== null) {
+                // If conditionValue is "false", we want "not detected"
+                const expectedDetectionState = conditionValue.toLowerCase() !== 'false';
+                return eventValue.detected === expectedDetectionState;
+            }
+            return false;
+        }
+        
         // Convert values to appropriate types
         let parsedEventValue = eventValue;
         let parsedConditionValue = conditionValue;

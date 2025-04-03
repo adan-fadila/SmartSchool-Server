@@ -13,6 +13,60 @@ const {
   TurnON_OFF_LIGHT,
 } = require("./../api/sensibo.js");
 const _ = require("lodash");
+const axios = require("axios");
+const { handleControllers } = require('../controllers/handlersController');
+const fs = require('fs').promises;
+const path = require('path');
+
+// Access configurations directly from handleControllers export
+const configurations = handleControllers.configurations || [];
+
+// Helper function to load Ngrok config within this controller
+const loadNgrokConfig = async () => {
+  try {
+    // Correct path relative to *this* file (controllers/sensorController.js)
+    const filePath = path.resolve(__dirname, '../api/endpoint/rasp_pi.json'); 
+    console.log(`[SensorController] Loading Ngrok configuration from: ${filePath}`);
+    const data = await fs.readFile(filePath, 'utf8');
+    return JSON.parse(data);
+  } catch (err) {
+    console.error("[SensorController] Error loading Ngrok configuration:", err);
+    // Depending on desired behavior, might throw, or return null/empty object
+    return null; 
+  }
+};
+
+// Define getLocationsViaNgrok within this controller
+const getLocationsViaNgrok = async (raspPiIP) => {
+  const endpointPath = '/api-sensors/get_sensors_by_location';
+  try {
+    // Load the Ngrok config using the helper above
+    const ngrokConfig = await loadNgrokConfig();
+    if (!ngrokConfig) {
+      throw new Error('Failed to load Ngrok configuration for getLocationsViaNgrok');
+    }
+    const ngrokUrl = ngrokConfig[raspPiIP];
+
+    if (!ngrokUrl) {
+      console.error(`[getLocationsViaNgrok] IP address ${raspPiIP} not found in the Ngrok configuration file`);
+      return { success: false, error: `IP address ${raspPiIP} not found in the Ngrok configuration file` };
+    }
+
+    const targetUrl = `${ngrokUrl}${endpointPath}`;
+    console.log(`[getLocationsViaNgrok] Requesting location data from: ${targetUrl}`);
+    
+    const response = await axios.get(targetUrl, { 
+      timeout: 10000 
+    });
+
+    console.log("[getLocationsViaNgrok] Location response data received:", JSON.stringify(response.data));
+    return response.data;
+
+  } catch (err) {
+    console.error(`[getLocationsViaNgrok] Error fetching location data from ${raspPiIP} via Ngrok:`, err.message);
+    return { success: false, error: err.message };
+  }
+};
 
 // let motionState = false; // This should reflect the real motion state, possibly stored in a database
 // let RoomID = ""; 
@@ -202,4 +256,78 @@ exports.sensorControllers={
 
       },
 
+    /**
+     * MODIFIED: Fetch sensor data from all configured Raspberry Pis via Ngrok,
+     * including roomId and spaceId in the response.
+     */
+    async getSensorsByLocation(req, res) {
+      console.log('[SensorController] getSensorsByLocation called (using Ngrok)');
+      // No need to load ngrokConfig here anymore, getLocationsViaNgrok does it.
+      try {
+        // REMOVED ngrokConfig loading from here
+
+        if (!configurations || configurations.length === 0) {
+          return res.status(500).json({ 
+            success: false, 
+            error: 'No room configurations found in handlersController' 
+          });
+        }
+        
+        console.log('Processing configurations:', configurations.map(c => c.roomName).join(', '));
+        console.log('Fetching sensors for all configured rooms via Ngrok');
+        
+        const results = {};
+        let atLeastOneSuccess = false;
+        
+        for (const config of configurations) {
+          const roomName = config.roomName;
+          const localIp = config.raspberryPiIP;
+          const roomId = config.roomId;
+          const spaceId = config.spaceId;
+
+          console.log(`Querying Ngrok for ${roomName} (RoomID: ${roomId}, SpaceID: ${spaceId}, IP: ${localIp})`);
+          
+          // Use the locally defined getLocationsViaNgrok function
+          const responseData = await getLocationsViaNgrok(localIp);
+          
+          if (responseData && responseData.success === true && responseData.locations) {
+            // Success: Store IDs and the Pi's response
+            results[roomName] = {
+              roomId: roomId,
+              spaceId: spaceId,
+              pi_response: responseData.locations // Store the nested locations object from Pi
+            };
+            atLeastOneSuccess = true;
+          } else {
+            // Failure: Store IDs and the error message
+            const errorMessage = responseData ? responseData.error : 'Unknown error or invalid format from Ngrok endpoint';
+            console.error(`Error fetching sensors for ${roomName} via Ngrok:`, errorMessage);
+            results[roomName] = { 
+              roomId: roomId,
+              spaceId: spaceId,
+              error: errorMessage 
+            };
+          }
+        }
+        
+        // Add example data only if absolutely nothing was processed (e.g., empty config)
+        // Or perhaps remove example data now that errors include IDs?
+        // Let's keep it simple for now and only return actual results/errors.
+        // if (Object.keys(results).length === 0) { ... }
+        
+        console.log('Final results object:', JSON.stringify(results));
+        
+        return res.status(200).json({ 
+          success: true, 
+          room_sensor_data: results 
+        });
+
+      } catch (error) {
+        console.error('Error in getSensorsByLocation controller:', error);
+        return res.status(500).json({ 
+          success: false, 
+          error: 'Internal server error: ' + error.message 
+        });
+      }
+    },
 }

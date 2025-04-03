@@ -135,20 +135,40 @@ class EventRegistry {
                 const metricType = metricParts.pop(); // Last part is the metric type (temperature, humidity)
                 const location = metricParts.join(' '); // Rest is the location (living room)
                 
+                console.log(`Creating anomaly events for: ${location} ${metricType}`);
+                
                 // Loop through each anomaly type (pointwise, seasonality, trend)
                 Object.entries(anomalyTypes).forEach(([anomalyType, anomalyInfo]) => {
+                    if (!anomalyInfo || !anomalyInfo.name) {
+                        console.error(`Missing required data for anomaly event: ${metricKey}, type: ${anomalyType}`);
+                        return;
+                    }
+                    
                     const eventName = anomalyInfo.name;
                     
-                    // Create anomaly event
-                    const event = new AnomalyEvent(eventName, location, anomalyType, metricType);
+                    // Check if this event already exists
+                    const existingEvent = this.getEvent(eventName);
+                    if (existingEvent) {
+                        console.log(`Anomaly event already exists: ${eventName}`);
+                        return;
+                    }
                     
-                    // Set initial state (not detected)
-                    event.updateAnomalyState(false);
+                    // Create anomaly event
+                    const event = new AnomalyEvent(
+                        eventName,
+                        location,
+                        anomalyType,
+                        metricType
+                    );
+                    
+                    // Set initial state (not detected by default)
+                    const detected = anomalyInfo.detected === true;
+                    event.updateAnomalyState(detected, anomalyInfo);
                     
                     // Register event
                     this.registerEvent(event);
                     
-                    console.log(`Created anomaly event: ${eventName}`);
+                    console.log(`Created anomaly event: ${eventName} (initial state: ${detected ? 'detected' : 'not detected'})`);
                 });
             });
             
@@ -199,6 +219,18 @@ class EventRegistry {
      * @returns {Event|undefined} The event instance or undefined if not found
      */
     getEvent(eventName) {
+        // If the name might be an anomaly event in simplified form, try to find the full name
+        if (eventName.toLowerCase().includes('pointwise') || 
+            eventName.toLowerCase().includes('trend') || 
+            eventName.toLowerCase().includes('seasonality')) {
+            
+            const fullEventName = this.findAnomalyEventByPartialName(eventName);
+            if (fullEventName) {
+                console.log(`Converted partial anomaly event name "${eventName}" to "${fullEventName}"`);
+                eventName = fullEventName;
+            }
+        }
+        
         // Try exact match first
         if (this.events.has(eventName)) {
             return this.events.get(eventName);
@@ -213,7 +245,73 @@ class EventRegistry {
             }
         }
         
+        // If still not found, log available events to help debugging
+        console.log(`Event "${eventName}" not found. Available events:`);
+        this.events.forEach((event, key) => {
+            console.log(`- ${key} (${event.type})`);
+        });
+        
         return undefined;
+    }
+    
+    /**
+     * Find an anomaly event by partial name
+     * @param {string} partialName - Partial name of the anomaly event
+     * @returns {string|null} Full event name if found, null otherwise
+     */
+    findAnomalyEventByPartialName(partialName) {
+        const partialNameLower = partialName.toLowerCase();
+        
+        // Extract location, metric type, and anomaly type from partial name
+        let location = '';
+        let metricType = '';
+        let anomalyType = '';
+        
+        // Check for metric type
+        if (partialNameLower.includes('temperature')) {
+            metricType = 'temperature';
+        } else if (partialNameLower.includes('humidity')) {
+            metricType = 'humidity';
+        }
+        
+        // Check for anomaly type
+        if (partialNameLower.includes('pointwise')) {
+            anomalyType = 'pointwise';
+        } else if (partialNameLower.includes('trend')) {
+            anomalyType = 'trend';
+        } else if (partialNameLower.includes('seasonality')) {
+            anomalyType = 'seasonality';
+        }
+        
+        // Extract location by removing identified parts
+        const parts = partialNameLower.split(' ');
+        const locationParts = parts.filter(part => 
+            part !== metricType && 
+            part !== anomalyType && 
+            part !== 'anomaly'
+        );
+        location = locationParts.join(' ');
+        
+        console.log(`Extracted from "${partialName}": location="${location}", metricType="${metricType}", anomalyType="${anomalyType}"`);
+        
+        // Look for a matching event
+        for (const [key, event] of this.events.entries()) {
+            if (event.type === 'anomaly') {
+                const keyLower = key.toLowerCase();
+                
+                // Check if this event matches our extracted parts
+                const matchesLocation = location === '' || keyLower.includes(location);
+                const matchesMetricType = metricType === '' || keyLower.includes(metricType);
+                const matchesAnomalyType = anomalyType === '' || keyLower.includes(anomalyType);
+                
+                if (matchesLocation && matchesMetricType && matchesAnomalyType) {
+                    console.log(`Found matching anomaly event: "${key}" for partial name "${partialName}"`);
+                    return key;
+                }
+            }
+        }
+        
+        return null;
     }
 
     /**
@@ -238,6 +336,8 @@ class EventRegistry {
             if (response.data && response.data.success && response.data.data) {
                 // Use the same data structure as during initialization
                 const anomalyData = response.data.data;
+                let updatedCount = 0;
+                let detectedCount = 0;
                 
                 // For each anomaly in the response
                 Object.entries(anomalyData).forEach(([metricKey, anomalyTypes]) => {
@@ -248,6 +348,11 @@ class EventRegistry {
                     
                     // Loop through each anomaly type
                     Object.entries(anomalyTypes).forEach(([anomalyType, anomalyInfo]) => {
+                        if (!anomalyInfo || !anomalyInfo.name) {
+                            console.error(`Missing required data for anomaly state update: ${metricKey}, type: ${anomalyType}`);
+                            return;
+                        }
+                        
                         const eventName = anomalyInfo.name;
                         const event = this.getEvent(eventName);
                         
@@ -255,16 +360,50 @@ class EventRegistry {
                             // Get the detection status if available, default to false
                             const detected = anomalyInfo.detected === true;
                             
+                            // Check if state changed
+                            const previousState = event.isDetected ? event.isDetected() : false;
+                            const stateChanged = previousState !== detected;
+                            
                             // Update the event state
                             event.updateAnomalyState(detected, anomalyInfo);
-                            console.log(`Updated state for anomaly event ${eventName}: detected=${detected}`);
+                            updatedCount++;
+                            
+                            if (detected) {
+                                detectedCount++;
+                            }
+                            
+                            if (stateChanged) {
+                                console.log(`Anomaly state CHANGED for ${eventName}: ${previousState} -> ${detected}`);
+                            }
                         } else {
-                            console.warn(`Anomaly event not found for state update: ${eventName}`);
+                            // Event not found - create it
+                            console.log(`Anomaly event not found, creating new one: ${eventName}`);
+                            
+                            // Create and register the new anomaly event
+                            const newEvent = new AnomalyEvent(
+                                eventName,
+                                location,
+                                anomalyType,
+                                metricType
+                            );
+                            
+                            // Set initial state
+                            const detected = anomalyInfo.detected === true;
+                            newEvent.updateAnomalyState(detected, anomalyInfo);
+                            
+                            // Register event
+                            this.registerEvent(newEvent);
+                            
+                            if (detected) {
+                                detectedCount++;
+                            }
+                            
+                            updatedCount++;
                         }
                     });
                 });
                 
-                console.log('Anomaly states updated successfully');
+                console.log(`Anomaly states updated: ${updatedCount} events, ${detectedCount} currently detected`);
             } else {
                 console.error('Failed to get anomaly states, response:', response.data);
             }

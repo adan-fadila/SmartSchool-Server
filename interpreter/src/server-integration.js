@@ -498,6 +498,128 @@ function stopAnomalyPolling() {
     return false;
 }
 
+/**
+ * Manually trigger an anomaly event (for testing)
+ * @param {string} eventName - The name of the anomaly event to trigger
+ * @param {boolean} detected - Whether the anomaly is detected or not
+ * @param {Object} additionalData - Additional data to include in the anomaly state
+ * @returns {Object} Object with success status
+ */
+function triggerAnomalyEvent(eventName, detected = true, additionalData = {}) {
+    if (!interpreterInitialized) {
+        return { success: false, error: 'Interpreter not initialized' };
+    }
+
+    const event = EventRegistry.getEvent(eventName);
+    if (!event) {
+        return { 
+            success: false, 
+            error: `Event ${eventName} not found`,
+            availableEvents: EventRegistry.getAllEvents()
+                .filter(e => e.type === 'anomaly')
+                .map(e => e.name)
+        };
+    }
+
+    if (event.type !== 'anomaly') {
+        return { 
+            success: false, 
+            error: `Event ${eventName} is not an anomaly event (type: ${event.type})` 
+        };
+    }
+
+    // Update the anomaly state
+    event.updateAnomalyState(detected, {
+        ...additionalData,
+        manuallyTriggered: true,
+        timestamp: Date.now()
+    });
+
+    return { 
+        success: true, 
+        message: `Anomaly event ${eventName} ${detected ? 'detected' : 'cleared'}`,
+        eventName,
+        detected
+    };
+}
+
+/**
+ * Get all available anomaly events
+ * @returns {Object} Object with success status and list of anomaly events
+ */
+function getAnomalyEvents() {
+    if (!interpreterInitialized) {
+        return { success: false, error: 'Interpreter not initialized' };
+    }
+
+    const events = EventRegistry.getAllEvents().filter(event => event.type === 'anomaly');
+    const eventInfoList = events.map(event => ({
+        name: event.name,
+        type: event.type,
+        anomalyType: event.anomalyType,
+        metricType: event.metricType,
+        location: event.location,
+        isDetected: event.isDetected ? event.isDetected() : false,
+        currentValue: event.currentValue
+    }));
+
+    return { 
+        success: true, 
+        events: eventInfoList,
+        count: eventInfoList.length,
+        ruleExamples: eventInfoList.map(e => 
+            `if ${e.name} detected then Living Room AC on` + 
+            `\nif ${e.name} not detected then Living Room Light off`
+        )
+    };
+}
+
+/**
+ * Helper to create an anomaly rule with proper formatting
+ * @param {string} location - Location (e.g., "Living Room")
+ * @param {string} metricType - Metric type (e.g., "temperature", "humidity")
+ * @param {string} anomalyType - Anomaly type (e.g., "pointwise", "trend", "seasonality")
+ * @param {boolean} detected - Whether to check for detected (true) or not detected (false)
+ * @param {string} actionString - The action to take when the rule triggers
+ * @returns {Object} Object with success status and rule ID
+ */
+function createAnomalyRule(location, metricType, anomalyType, detected, actionString) {
+    if (!interpreterInitialized) {
+        return { success: false, error: 'Interpreter not initialized' };
+    }
+
+    try {
+        // Find all matching anomaly events
+        const events = EventRegistry.getAllEvents().filter(event => 
+            event.type === 'anomaly' &&
+            event.location.toLowerCase() === location.toLowerCase() &&
+            event.metricType.toLowerCase() === metricType.toLowerCase() &&
+            event.anomalyType.toLowerCase() === anomalyType.toLowerCase()
+        );
+
+        if (events.length === 0) {
+            return { 
+                success: false, 
+                error: `No matching anomaly event found for location=${location}, metricType=${metricType}, anomalyType=${anomalyType}`,
+                availableEvents: getAnomalyEvents()
+            };
+        }
+
+        // Use the first matching event
+        const event = events[0];
+        const detectedStr = detected ? 'detected' : 'not detected';
+        const ruleString = `if ${event.name} ${detectedStr} then ${actionString}`;
+        
+        console.log(`Creating anomaly rule: ${ruleString}`);
+        const ruleId = RuleManager.createRule(ruleString);
+        
+        return { success: true, ruleId, ruleString };
+    } catch (error) {
+        console.error('Error creating anomaly rule:', error);
+        return { success: false, error: error.message };
+    }
+}
+
 module.exports = {
     initializeInterpreter,
     isInterpreterInitialized,
@@ -507,12 +629,15 @@ module.exports = {
     getEvents: getAvailableEvents,
     getActions: getAvailableActions,
     getRules: getAllRules,
+    getAnomalyEvents,
     createRule,
+    createAnomalyRule,
     deleteRule,
     setRuleActive,
     testExecuteAction: testAction,
     updateEventValue,
     getDeviceStates,
     startAnomalyPolling,
-    stopAnomalyPolling
+    stopAnomalyPolling,
+    triggerAnomalyEvent
 }; 
