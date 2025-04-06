@@ -293,4 +293,31 @@ router.post('/rebuild-rules', async (req, res) => {
   }
 });
 
+// Add a route to reinitialize sensor logging
+router.post('/reinitialize-logging', async (req, res) => {
+  try {
+    console.log('Request to reinitialize sensor logging received');
+    const result = await interpreterService.initializeSensorLogging();
+    
+    if (result.success) {
+      res.status(200).json({
+        success: true,
+        message: 'Sensor logging service reinitialized successfully',
+        columns: result.columns
+      });
+    } else {
+      res.status(500).json({
+        success: false,
+        error: result.error || 'Failed to reinitialize sensor logging'
+      });
+    }
+  } catch (error) {
+    console.error('Error reinitializing sensor logging:', error);
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  }
+});
+
 module.exports = router; 

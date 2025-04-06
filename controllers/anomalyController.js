@@ -4,6 +4,8 @@ const path = require('path');
 const { broadcastAnomalyData, clients } = require('../ws');
 const EventRegistry = require('../interpreter/src/events/EventRegistry');
 const interpreterService = require('../interpreter/src/server-integration');
+// Import the configurations from handlersController
+const { configurations } = require('./handlersController');
 
 // Initialize the interpreter if not already initialized
 (async function() {
@@ -25,8 +27,21 @@ let anomalyState = {
   anomalies: null,
   plot_image: null,
   collective_plot: null,
-  timestamp: null
+  timestamp: null,
+  // Add fields to hold determined config details
+  roomId: null,
+  spaceId: null,
+  roomName: null
 };
+
+// Helper function to find config based on location name
+function findConfigByLocation(locationName) {
+    if (!locationName || !configurations) return null;
+    const lowerLocationName = locationName.toLowerCase().trim();
+    return configurations.find(config => 
+        config.roomName && config.roomName.toLowerCase().trim() === lowerLocationName
+    );
+}
 
 /**
  * Helper function to update an anomaly event in the interpreter
@@ -79,7 +94,6 @@ function updateInterpreterAnomalyEvent(eventName, detected, data = {}) {
 
 const handleAnomalyResponse = (req, res) => {
   try {
-    // Log the entire request body structure
     console.log("Full anomaly request body structure:");
     console.log(JSON.stringify(req.body, null, 2));
     
@@ -89,11 +103,50 @@ const handleAnomalyResponse = (req, res) => {
       return res.status(400).json({ message: 'Anomalies or image data missing' });
     }
 
-    // Log the name field if it exists
+    let determinedRoomId = null;
+    let determinedSpaceId = null;
+    let determinedLocationName = null; 
+
+    // --- Determine Room/Space ID based on Anomaly Name or Metric Name ---
+    let potentialLocationName = null;
+    if (name) {
+        const nameParts = name.split('_');
+        if (nameParts.length >= 3) {
+            potentialLocationName = nameParts.slice(0, -2).join(' ');
+            console.log(`Parsed location from name '${name}': ${potentialLocationName}`);
+        }
+    } else if (req.body.metric_name) {
+        const metricParts = req.body.metric_name.split(' ');
+        if (metricParts.length > 1) {
+            const lastPart = metricParts[metricParts.length - 1].toLowerCase();
+            if (['temperature', 'humidity'].includes(lastPart)) {
+                potentialLocationName = metricParts.slice(0, -1).join(' ');
+                console.log(`Parsed location from metric_name '${req.body.metric_name}': ${potentialLocationName}`);
+            }
+        }
+    }
+
+    if (potentialLocationName) {
+        const matchedConfig = findConfigByLocation(potentialLocationName);
+        if (matchedConfig) {
+            determinedRoomId = matchedConfig.roomId;
+            determinedSpaceId = matchedConfig.spaceId;
+            determinedLocationName = matchedConfig.roomName; // Use the canonical name from config
+            console.log(`Matched config: RoomID=${determinedRoomId}, SpaceID=${determinedSpaceId}, RoomName=${determinedLocationName}`);
+        } else {
+            console.log(`Could not find configuration matching location: ${potentialLocationName}`);
+        }
+    }
+
+    // Fallback if still not determined (maybe from req.body if sent directly?)
+    if (!determinedRoomId && req.body.roomId) determinedRoomId = req.body.roomId;
+    if (!determinedSpaceId && req.body.spaceId) determinedSpaceId = req.body.spaceId;
+    if (!determinedLocationName && req.body.location) determinedLocationName = req.body.location;
+    // --- End Room/Space ID Determination ---
+
+    // Log the name field if it exists and update interpreter
     if (name) {
       console.log("Anomaly name:", name);
-      
-      // Check if this anomaly event exists in the interpreter and update its state
       updateInterpreterAnomalyEvent(name, true, req.body);
     } else {
       console.log("No name field found in the anomaly data");
@@ -103,7 +156,7 @@ const handleAnomalyResponse = (req, res) => {
       
       // Check for metric_name + anomaly_type
       if (req.body.metric_name && req.body.anomaly_type) {
-        const constructedName = `${req.body.metric_name} ${req.body.anomaly_type} Anomaly`;
+        const constructedName = `${potentialLocationName || 'unknown'} ${req.body.metric_name.split(' ').pop()} ${req.body.anomaly_type} Anomaly`;
         possibleNames.push(constructedName);
         console.log("Constructed name:", constructedName);
       }
@@ -147,10 +200,19 @@ const handleAnomalyResponse = (req, res) => {
       console.log("Anomaly type:", req.body.anomaly_type);
     }
 
-    // Update state
-    anomalyState.anomalies = anomalies;
-    anomalyState.plot_image = plot_image;
-    anomalyState.timestamp = new Date().toISOString();
+    // Update the temporary state object with all data, including determined IDs
+    const currentStateForBroadcast = {
+        anomalies: anomalies,
+        plot_image: plot_image,
+        collective_plot: anomalyState.collective_plot, // Include if it arrived earlier
+        timestamp: new Date().toISOString(),
+        name: name, 
+        metric_name: req.body.metric_name, 
+        anomaly_type: req.body.anomaly_type, 
+        roomId: determinedRoomId, // Use determined ID
+        spaceId: determinedSpaceId, // Use determined ID
+        location: determinedLocationName // Use determined Name
+    };
 
     // Save the image
     const imageBuffer = Buffer.from(plot_image, 'base64');
@@ -159,26 +221,22 @@ const handleAnomalyResponse = (req, res) => {
     fs.writeFile(imagePath, imageBuffer, (err) => {
       if (err) {
         console.error('Error saving the image:', err);
-        return res.status(500).json({ message: 'Error saving the image' });
+      } else {
+        console.log("anomaly_plot.png saved");
       }
-      console.log("anomaly_plot.png saved");
       console.log("anomalies received");
       console.log("================================================");
-      console.log(anomalies);
-      // Check if we have all necessary data to broadcast
-      if (anomalyState.collective_plot) {
-        broadcastAnomalyData(anomalyState);
-        // Reset state after broadcasting
-        anomalyState = {
-          anomalies: null,
-          plot_image: null,
-          collective_plot: null,
-          timestamp: null
-        };
-      }
+      
+      // Broadcast immediately using the prepared state object
+      console.log('Broadcasting individual anomaly data to WebSocket clients...');
+      broadcastAnomalyData(currentStateForBroadcast);
+      
+      // Update the shared state *only* with collective_plot if it was present
+      // The individual data has been broadcast
+      anomalyState.collective_plot = currentStateForBroadcast.collective_plot;
 
       res.status(200).json({
-        message: 'Data received and image saved successfully'
+        message: 'Data received, image saved (if successful), and broadcast attempted.'
       });
     });
   } catch (error) {
@@ -195,32 +253,27 @@ const handleCollectiveAnomalyResponse = (req, res) => {
       return res.status(400).json({ message: 'image data missing' });
     }
 
-    // Update state
+    // Save collective plot to the shared state
     anomalyState.collective_plot = collective_plot;
 
+    // Save the collective plot image
     const collective_plot_img = Buffer.from(collective_plot, 'base64');
     const collective_plot_path = path.join(__dirname, 'collective_plot.png');
     
     fs.writeFile(collective_plot_path, collective_plot_img, (err) => {
       if (err) {
         console.error('Error saving the collective image:', err);
-        return res.status(500).json({ message: 'Error saving the collective image' });
+      } else {
+          console.log("collective_plot.png saved");
       }
 
-      // Check if we have all necessary data to broadcast
-      if (anomalyState.anomalies && anomalyState.plot_image) {
-        broadcastAnomalyData(anomalyState);
-        // Reset state after broadcasting
-        anomalyState = {
-          anomalies: null,
-          plot_image: null,
-          collective_plot: null,
-          timestamp: null
-        };
-      }
+      // Do NOT broadcast from here anymore, as individual data is sent immediately
+      // The frontend can decide how to handle the arrival of collective_plot later if needed
+      // (e.g., via a separate message type or polling)
+      console.log('Collective plot received and saved. No immediate broadcast from here.');
 
       res.status(200).json({
-        message: 'collective Data received and image saved successfully'
+        message: 'Collective plot data received and image saved (if successful).'
       });
     });
   } catch (error) {

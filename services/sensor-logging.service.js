@@ -29,10 +29,8 @@ const sensorLoggingService = {
         mkdirSync(logsDir, { recursive: true });
       }
       
-      // Generate log file name with current date and include "with_space_id" in the name
-      const date = new Date();
-      const dateStr = date.toISOString().split('T')[0]; // YYYY-MM-DD
-      this.logFilePath = path.join(logsDir, `sensor_data_${dateStr}_with_space_id.csv`);
+      // Use a fixed filename instead of date-based files
+      this.logFilePath = path.join(logsDir, 'sensor_data.csv');
       
       fsSync.appendFileSync('./logs/sensor_debug.log', `${new Date().toISOString()}: Log file path: ${this.logFilePath}\n`);
       console.log(`Initializing sensor logging to file: ${this.logFilePath}`);
@@ -164,7 +162,9 @@ const sensorLoggingService = {
       }
       
       // Get current timestamp for the log entry
-      const entryTimestamp = new Date().toISOString();
+      const date = new Date();
+      // Format timestamp as YYYY-MM-DD HH:MM:SS
+      const formattedTimestamp = date.toISOString().replace('T', ' ').replace(/\.\d+Z$/, '');
       
       // Debug the column map
       fsSync.appendFileSync('./logs/sensor_debug.log', `${timestamp}: Column map has ${this.columnMap.size} columns: ${JSON.stringify(Array.from(this.columnMap.entries()))}\n`);
@@ -173,7 +173,7 @@ const sensorLoggingService = {
       // Add 2 to total columns: one for timestamp, one for spaceId
       const totalColumns = this.columnMap.size + 2;
       const rowData = new Array(totalColumns).fill('');
-      rowData[0] = entryTimestamp; // Set timestamp
+      rowData[0] = formattedTimestamp; // Set timestamp
       
       // Check if all sensors have the same spaceId
       let spaceId = null;
@@ -263,11 +263,12 @@ const sensorLoggingService = {
       // Add a final message to the log file to indicate clean shutdown
       try {
         if (this.logFilePath) {
-          fsSync.appendFileSync(this.logFilePath, `# Logging stopped at ${timestamp}\n`);
-          fsSync.appendFileSync('./logs/sensor_debug.log', `${timestamp}: Added shutdown marker to log file\n`);
+          // Remove the line that adds the shutdown marker to CSV
+          // Just log to debug log that we're stopping
+          fsSync.appendFileSync('./logs/sensor_debug.log', `${timestamp}: Logging stopped at ${timestamp}\n`);
         }
       } catch (markerError) {
-        fsSync.appendFileSync('./logs/sensor_debug.log', `${timestamp}: Unable to add shutdown marker: ${markerError.message}\n`);
+        fsSync.appendFileSync('./logs/sensor_debug.log', `${timestamp}: Error during shutdown: ${markerError.message}\n`);
       }
       
       return {

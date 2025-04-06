@@ -32,6 +32,7 @@ const interpreterApiRouter = require('./routes/interpreter-api.routes'); // Impo
 const actionRouter = require('./routers/action.router');
 const eventRouter = require('./routers/event.router');
 const anomalyEventsRouter = require('./routers/anomaly.router'); // Import the new anomaly events router
+const anomalyDescriptionsRouter = require('./routes/anomaly-descriptions.routes'); // Import the new anomaly descriptions router
 
 
 const testRaspiRouter = require('./routers/testRaspiRouter.js')
@@ -89,6 +90,11 @@ console.log('Event router registered');
 console.log('Registering anomaly events router...');
 server.use('/api-anomalies', anomalyEventsRouter);
 console.log('Anomaly events router registered');
+
+// Add the anomaly descriptions router
+console.log('Registering anomaly descriptions router...');
+server.use('/api-anomaly-descriptions', anomalyDescriptionsRouter);
+console.log('Anomaly descriptions router registered');
 
 server.use((req, res) => {
     res.status(400).send('Something is broken!');

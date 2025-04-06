@@ -57,24 +57,50 @@ async function initializeInterpreter() {
  */
 async function initializeSensorLogging() {
     try {
-        console.log('Initializing sensor logging service...');
+        console.log('Initializing sensor logging service with sensor data...');
         
-        // Get all event names from the registry
-        const events = EventRegistry.getAllEvents();
-        const eventNames = events.map(event => event.name);
+        // Import the configurations from handlersController
+        const { configurations } = require('../../controllers/handlersController').handleControllers;
         
-        console.log(`Initializing logging for ${eventNames.length} events:`, eventNames);
+        if (!configurations || configurations.length === 0) {
+            console.error('No room configurations found in handlersController');
+            return { success: false, error: 'No room configurations found' };
+        }
         
-        // Initialize the logging service with these event names
-        const result = await sensorLoggingService.initialize(eventNames);
+        // Define the sensor types we want to log
+        const sensorTypes = ['temperature', 'humidity'];
+        
+        // Create column names based on room names and sensor types
+        const sensorColumns = [];
+        
+        // Create simple column names for each room and sensor type
+        configurations.forEach(config => {
+            const roomName = config.roomName.toLowerCase();
+            
+            sensorTypes.forEach(sensorType => {
+                sensorColumns.push(`${roomName} ${sensorType}`);
+            });
+        });
+        
+        console.log(`Initializing logging for ${sensorColumns.length} sensor columns:`, sensorColumns);
+        
+        // Initialize the logging service with these column names
+        const result = await sensorLoggingService.initialize(sensorColumns);
         
         if (result.success) {
             console.log('Sensor logging service initialized successfully');
+            return {
+                success: true,
+                message: result.message,
+                columns: sensorColumns
+            };
         } else {
             console.error('Failed to initialize sensor logging service:', result.error);
+            return {
+                success: false,
+                error: result.error
+            };
         }
-        
-        return result;
     } catch (error) {
         console.error('Error initializing sensor logging service:', error);
         return { success: false, error: error.message };

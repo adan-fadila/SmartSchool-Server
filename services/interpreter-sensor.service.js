@@ -135,7 +135,7 @@ const interpreterSensorService = {
       const spaceId = this.getSpaceIdFromRoomName(roomName);
       
       events.push({
-        name: `${roomName} Temperature`,
+        name: `${roomName.toLowerCase()} temperature`,
         value: sensorData.temperature,
         roomName,
         spaceId
@@ -148,7 +148,7 @@ const interpreterSensorService = {
       const spaceId = this.getSpaceIdFromRoomName(roomName);
       
       events.push({
-        name: `${roomName} Humidity`,
+        name: `${roomName.toLowerCase()} humidity`,
         value: sensorData.humidity,
         roomName,
         spaceId
@@ -164,7 +164,7 @@ const interpreterSensorService = {
           const spaceId = this.getSpaceIdFromRoomName(roomName);
           
           events.push({
-            name: `${roomName} ${sensor.sensor.charAt(0).toUpperCase() + sensor.sensor.slice(1)}`,
+            name: `${roomName.toLowerCase()} ${sensor.sensor.toLowerCase()}`,
             value: sensor.value,
             roomName,
             spaceId

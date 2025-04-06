@@ -1,6 +1,32 @@
 const WebSocket = require("ws");
+// Fix the import to correctly match how configurations are exported
+const { handleControllers } = require('./controllers/handlersController');
+const configurations = handleControllers.configurations;
+
+// Log what we're importing to debug
+console.log('WEBSOCKET: Imported configurations:', 
+  configurations ? 
+  `Found ${configurations.length} configurations` : 
+  'No configurations found');
+
+if (configurations && configurations.length > 0) {
+  console.log('WEBSOCKET: First config:', {
+    roomId: configurations[0].roomId,
+    spaceId: configurations[0].spaceId,
+    roomName: configurations[0].roomName
+  });
+}
 
 const clients = [];
+
+// Get roomId and spaceId from the first configuration
+// We're using the first entry as default (typically "Living Room")
+const defaultConfig = configurations && configurations.length > 0 ? configurations[0] : { roomId: '38197016', spaceId: '61097711' };
+const configRoomId = defaultConfig.roomId;
+const configSpaceId = defaultConfig.spaceId;
+const configRoomName = defaultConfig.roomName || 'Living Room';
+
+console.log(`WebSocket using configuration: Room=${configRoomName}, RoomID=${configRoomId}, SpaceID=${configSpaceId}`);
 
 const connectToWs = () => {
   const wss = new WebSocket.Server({ port: 8002 });
@@ -46,37 +72,56 @@ function broadcast(wss, message) {
 
 // New function to broadcast anomaly data
 function broadcastAnomalyData(anomalyState) {
+  console.log('WEBSOCKET: Attempting to broadcast anomaly data');
+  console.log('WEBSOCKET: Connected clients:', clients.length);
+  console.log('WEBSOCKET: Anomaly state received:', anomalyState ? Object.keys(anomalyState) : 'null');
+
+  // Always use hardcoded sensorType
+  const sensorType = 'temperature';
+
   const anomalyData = {
     type: 'anomaly_update',
     data: {
-      anomalies: anomalyState.anomalies.map(anomaly => ({
+      anomalies: (anomalyState && Array.isArray(anomalyState.anomalies)) ? anomalyState.anomalies.map(anomaly => ({
         timestamp: anomaly.timestamp,
         value: anomaly.value,
         voting_algorithms: anomaly.voting_algorithms,
         anomaly_val: anomaly.anomaly_val
-      })),
-      plot_image: anomalyState.plot_image,
-      collective_plot: anomalyState.collective_plot,
-      timestamp: anomalyState.timestamp,
-      spaceId: '61097711',
-      roomId: '38197016',
-      deviceType: 'AC'
+      })) : [],
+      plot_image: anomalyState?.plot_image || null,
+      collective_plot: anomalyState?.collective_plot || null,
+      timestamp: anomalyState?.timestamp || new Date().toISOString(),
+      // Always use the roomId and spaceId from configuration
+      spaceId: configSpaceId,
+      roomId: configRoomId,
+      location: configRoomName,
+      sensorType: sensorType
     }
   };
 
-  console.log('Broadcasting anomaly data:', {
+  console.log('WEBSOCKET: Broadcasting anomaly data:', {
     timestamp: anomalyData.data.timestamp,
     hasPlotImage: !!anomalyData.data.plot_image,
     hasCollectivePlot: !!anomalyData.data.collective_plot,
-    anomaliesCount: anomalyData.data.anomalies?.length
+    anomaliesCount: anomalyData.data.anomalies?.length,
+    sensorType: anomalyData.data.sensorType,
+    location: anomalyData.data.location,
+    roomId: anomalyData.data.roomId,
+    spaceId: anomalyData.data.spaceId
   });
 
+  let sentCount = 0;
   clients.forEach((client) => {
     if (client.readyState === WebSocket.OPEN) {
-      client.send(JSON.stringify(anomalyData));
-      console.log('Sent anomaly data to client');
+      try {
+        client.send(JSON.stringify(anomalyData));
+        sentCount++;
+      } catch (error) {
+        console.error('WEBSOCKET: Error sending data to client:', error);
+      }
     }
   });
+  console.log(`WEBSOCKET: Sent anomaly data to ${sentCount} client(s)`);
 }
 
 // New function to broadcast recommendation data

@@ -1,5 +1,6 @@
 const Event = require('./Event');
 const { notifyAnomalyDetection } = require('../../../utils/notificationService');
+const AnomalyDescription = require('../../../models/AnomalyDescription');
 
 /**
  * Anomaly Event class that extends the base Event
@@ -19,6 +20,35 @@ class AnomalyEvent extends Event {
         
         // Track previous state to detect changes
         this.previouslyDetected = false;
+        
+        // Check if we have any descriptions for this anomaly event
+        this.checkForDescriptions();
+    }
+
+    /**
+     * Check if there are any user-provided descriptions for this anomaly
+     */
+    async checkForDescriptions() {
+        try {
+            const descriptions = await AnomalyDescription.find({ 
+                rawEventName: this.name,
+                isActive: true
+            });
+            
+            if (descriptions && descriptions.length > 0) {
+                console.log(`Found ${descriptions.length} descriptions for anomaly ${this.name}`);
+                this.hasDescriptions = true;
+                this.descriptions = descriptions;
+            } else {
+                console.log(`No descriptions found for anomaly ${this.name}`);
+                this.hasDescriptions = false;
+                this.descriptions = [];
+            }
+        } catch (error) {
+            console.error(`Error checking for descriptions for ${this.name}:`, error);
+            this.hasDescriptions = false;
+            this.descriptions = [];
+        }
     }
 
     /**
@@ -26,7 +56,7 @@ class AnomalyEvent extends Event {
      * @param {boolean} detected - Whether the anomaly is detected or not
      * @param {Object} data - Additional anomaly data
      */
-    updateAnomalyState(detected, data = {}) {
+    async updateAnomalyState(detected, data = {}) {
         console.log(`Updating anomaly state for ${this.name} to detected=${detected}`);
         const stateValue = {
             detected: detected,
@@ -48,8 +78,19 @@ class AnomalyEvent extends Event {
                 console.log(`Confidence: ${data.confidence}`);
             }
             
-            // If the state changed to detected, send a notification
+            // If the state changed to detected, check if we have descriptions
             if (stateChanged) {
+                // Refresh the descriptions
+                await this.checkForDescriptions();
+                
+                // Check if we need to trigger rules based on description
+                if (this.hasDescriptions) {
+                    console.log(`Triggering rules for ${this.descriptions.length} descriptions`);
+                    // In a real implementation, we would trigger the rules based on descriptions here
+                    // This would require modifying the rule evaluation logic
+                }
+                
+                // Send notification about the anomaly
                 this.sendAnomalyNotification(stateValue);
             }
         }
@@ -74,6 +115,15 @@ class AnomalyEvent extends Event {
     }
     
     /**
+     * Get all descriptions for this anomaly
+     * @returns {Array} Array of description objects
+     */
+    async getDescriptions() {
+        await this.checkForDescriptions();
+        return this.descriptions;
+    }
+    
+    /**
      * Send a notification about the detected anomaly
      * @param {Object} anomalyData - The anomaly data to include in the notification
      */
@@ -86,7 +136,9 @@ class AnomalyEvent extends Event {
                 metricType: this.metricType,
                 anomalyType: this.anomalyType,
                 confidence: anomalyData.confidence,
-                timestamp: anomalyData.timestamp
+                timestamp: anomalyData.timestamp,
+                hasDescriptions: this.hasDescriptions,
+                descriptionsCount: this.descriptions ? this.descriptions.length : 0
             };
             
             // Send notification using the notification service
