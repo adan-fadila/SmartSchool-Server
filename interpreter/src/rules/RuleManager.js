@@ -22,7 +22,35 @@ class RuleManager {
             this.rules.set(id, rule);
             console.log(`Rule created and registered with ID: ${id}`);
             
-            // Connect the rule to matching actions
+            // Check if this rule has async initialization (custom anomaly description)
+            if (rule.initPromise) {
+                console.log(`Rule ${id} has async initialization, waiting for completion`);
+                
+                // Start async initialization but don't block
+                rule.initPromise
+                    .then(() => {
+                        console.log(`Rule ${id} async initialization completed successfully`);
+                        
+                        // Connect the rule to matching actions after initialization
+                        const matchingActions = ActionRegistry.connectRuleToActions(rule);
+                        console.log(`Rule ${id} connected to ${matchingActions.length} actions`);
+                    })
+                    .catch(error => {
+                        console.error(`Rule ${id} async initialization failed:`, error);
+                        
+                        // Rule initialization failed, remove it from the manager
+                        this.rules.delete(id);
+                        
+                        // We can't throw an error here since we're in a promise callback
+                        // The error will be handled by the caller through event emitter or callback pattern
+                    });
+                
+                // Return the ID immediately without waiting for initialization
+                // The rule will be fully functional once initialization completes
+                return id;
+            }
+            
+            // For synchronous rules, connect to actions immediately
             const matchingActions = ActionRegistry.connectRuleToActions(rule);
             console.log(`Rule ${id} connected to ${matchingActions.length} actions`);
             

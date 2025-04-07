@@ -158,20 +158,30 @@ class ACAction extends Action {
      */
     async getRoomRaspberryPi() {
         try {
+            this.logAction(`Looking up Raspberry Pi IP for room: ${this.location}`);
+            
             // Get room ID from name
             const roomId = await roomService.getRoomIdByRoomName(this.location);
             
             if (!roomId) {
+                this.logAction(`Room not found in database: ${this.location}`);
                 throw new Error(`Room not found: ${this.location}`);
             }
             
             // Get room details to find Raspberry Pi IP
             const room = await roomService.getRoomById(roomId);
             
-            if (!room || !room.rasp_ip) {
+            if (!room) {
+                this.logAction(`Room found but no details available: ${this.location} (ID: ${roomId})`);
+                throw new Error(`Room details not found: ${this.location}`);
+            }
+            
+            if (!room.rasp_ip) {
+                this.logAction(`Room found but no Raspberry Pi IP set: ${this.location} (ID: ${roomId})`);
                 throw new Error(`Raspberry Pi IP not found for room: ${this.location}`);
             }
             
+            this.logAction(`Found Raspberry Pi IP for ${this.location}: ${room.rasp_ip}`);
             return room.rasp_ip;
         } catch (error) {
             this.logAction(`Error getting Raspberry Pi IP: ${error.message}`);
@@ -179,12 +189,27 @@ class ACAction extends Action {
             // Fallback to configuration file
             try {
                 const configPath = path.join(__dirname, '../../../api/endpoint/rasp_pi.json');
+                this.logAction(`Looking for fallback IP in config: ${configPath}`);
+                
                 const configData = await fs.readFile(configPath, 'utf8');
                 const config = JSON.parse(configData);
                 
                 // Get the first IP from the config as a fallback
-                const firstIp = Object.keys(config)[0];
-                this.logAction(`Using fallback Raspberry Pi IP: ${firstIp}`);
+                const allIps = Object.keys(config);
+                
+                if (allIps.length === 0) {
+                    this.logAction(`No IPs found in config file. Cannot proceed.`);
+                    throw new Error('No Raspberry Pi IPs available in fallback config');
+                }
+                
+                const firstIp = allIps[0];
+                this.logAction(`Using fallback Raspberry Pi IP: ${firstIp} (from config with ${allIps.length} IPs)`);
+                
+                // Log all available IPs for debugging
+                allIps.forEach((ip, index) => {
+                    this.logAction(`Config IP #${index+1}: ${ip} -> ${config[ip]}`);
+                });
+                
                 return firstIp;
             } catch (fallbackError) {
                 this.logAction(`Fallback failed: ${fallbackError.message}`);
@@ -232,14 +257,38 @@ class ACAction extends Action {
             // Get action registry
             const ActionRegistry = require('./ActionRegistry');
             
+            // Force update option - force a command even if states match
+            // Add a context.force parameter that can be set to true to force an update
+            const forceUpdate = context.force === true;
+            
             // Check if state change is needed
-            if (!ActionRegistry.isStateChangeNeeded(deviceId, targetState, 'ac')) {
-                this.logAction(`No state change needed for ${this.name}. Current state already matches target state.`);
-                return { 
-                    success: true, 
-                    message: `AC in ${this.location} already in desired state (${this.state ? 'on' : 'off'}, temp: ${this.params.temperature}, mode: ${this.params.mode})`,
-                    noChange: true
-                };
+            if (!forceUpdate && !ActionRegistry.isStateChangeNeeded(deviceId, targetState, 'ac')) {
+                this.logAction(`No state change needed for ${this.name}. Current state already matches target state. Use force=true to override.`);
+                
+                // Verify actual device state (optional verification step)
+                try {
+                    const { getAcState } = require('../../../api/sensibo');
+                    const actualState = await getAcState(raspPiIP, deviceId);
+                    
+                    if (actualState) {
+                        const actualOnState = actualState.on === true;
+                        
+                        // If actual state doesn't match our tracked state, force an update
+                        if (actualOnState !== targetState.state) {
+                            this.logAction(`Detected state mismatch! Tracked: ${targetState.state ? 'on' : 'off'}, Actual: ${actualOnState ? 'on' : 'off'}. Forcing update.`);
+                            // Continue with the action execution
+                        } else {
+                            return { 
+                                success: true, 
+                                message: `AC in ${this.location} already in desired state (${this.state ? 'on' : 'off'}, temp: ${this.params.temperature}, mode: ${this.params.mode})`,
+                                noChange: true
+                            };
+                        }
+                    }
+                } catch (verifyError) {
+                    this.logAction(`Error verifying actual device state: ${verifyError.message}. Proceeding with command anyway.`);
+                    // Continue with action execution to be safe
+                }
             }
             
             // Execute the AC state change via Sensibo API
@@ -251,18 +300,28 @@ class ACAction extends Action {
             );
             
             if (result.statusCode === 200) {
-                this.logAction(`Successfully changed AC state for ${this.location}`);
-                
-                // Update device state in registry
+                // Update the action registry with the new state
                 ActionRegistry.updateDeviceState(deviceId, targetState, 'ac');
                 
-                return { success: true, message: `AC in ${this.location} turned ${this.state ? 'on' : 'off'}` };
+                this.logAction(`Successfully set ${this.name} to ${this.state ? 'on' : 'off'} with temp: ${this.params.temperature}, mode: ${this.params.mode}`);
+                return {
+                    success: true,
+                    message: `AC in ${this.location} set to ${this.state ? 'on' : 'off'} with temp: ${this.params.temperature}, mode: ${this.params.mode}`
+                };
             } else {
-                throw new Error(`Failed to change AC state: ${JSON.stringify(result.data)}`);
+                const errorMessage = result.data?.message || 'Unknown error';
+                this.logAction(`Failed to set ${this.name} state: ${errorMessage}`);
+                return {
+                    success: false,
+                    message: `Failed to set AC in ${this.location}: ${errorMessage}`
+                };
             }
         } catch (error) {
             this.logAction(`Error executing AC action: ${error.message}`);
-            return { success: false, message: error.message };
+            return {
+                success: false,
+                message: `Error setting AC in ${this.location}: ${error.message}`
+            };
         }
     }
 }

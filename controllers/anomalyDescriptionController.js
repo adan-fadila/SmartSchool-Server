@@ -29,13 +29,46 @@ const anomalyDescriptionController = {
             }
             
             // Get the anomaly event from the registry to get additional metadata
-            const anomalyEvent = EventRegistry.getEvent(rawEventName);
+            let anomalyEvent = EventRegistry.getEvent(rawEventName);
             
             if (!anomalyEvent || anomalyEvent.type !== 'anomaly') {
-                return res.status(404).json({
-                    success: false,
-                    error: `Anomaly event '${rawEventName}' not found`
-                });
+                console.log(`Anomaly event '${rawEventName}' not found in registry. Creating a mock event.`);
+                
+                // Extract parts from the raw event name
+                const parts = rawEventName.toLowerCase().split(' ');
+                
+                // Determine anomaly type
+                let anomalyType = 'pointwise'; // Default
+                if (parts.includes('seasonality')) {
+                    anomalyType = 'seasonality';
+                } else if (parts.includes('trend')) {
+                    anomalyType = 'trend';
+                }
+                
+                // Determine metric type
+                let metricType = 'temperature'; // Default
+                if (parts.includes('humidity')) {
+                    metricType = 'humidity';
+                }
+                
+                // Determine location (everything before metric type and anomaly type)
+                const metricIndex = parts.indexOf(metricType);
+                const anomalyIndex = parts.indexOf(anomalyType);
+                let location = '';
+                
+                if (metricIndex > 0) {
+                    location = parts.slice(0, metricIndex).join(' ');
+                }
+                
+                console.log(`Parsed from name - Location: "${location}", Metric: "${metricType}", Type: "${anomalyType}"`);
+                
+                // Create a mock anomaly event object
+                anomalyEvent = {
+                    type: 'anomaly',
+                    metricType: metricType,
+                    anomalyType: anomalyType,
+                    location: location || 'living room' // Default to living room if not found
+                };
             }
             
             // Create the new anomaly description

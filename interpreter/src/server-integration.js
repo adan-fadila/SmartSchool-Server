@@ -112,11 +112,11 @@ async function initializeSensorLogging() {
  */
 async function loadRulesFromDatabase() {
     try {
-        console.log('Loading rules from database...');
+        console.log('Loading all rules from database...');
         
-        // Fetch all active rules from the database
-        const dbRules = await Rule.find({ isActive: true });
-        console.log(`Found ${dbRules.length} active rules in database`);
+        // Fetch all rules from the database (both active and inactive)
+        const dbRules = await Rule.find({});
+        console.log(`Found ${dbRules.length} total rules in database`);
         
         // Rules that were successfully loaded
         const loadedRules = [];
@@ -135,12 +135,18 @@ async function loadRulesFromDatabase() {
                     continue;
                 }
                 
-                console.log(`Processing rule: ${ruleString}`);
+                console.log(`Processing rule: ${ruleString}, isActive: ${dbRule.isActive}`);
                 
                 // Try to parse the rule to check if it matches our format
                 if (isValidRuleFormat(ruleString)) {
-                    // Create rule in our interpreter
+                    // Create rule in our interpreter (rules are active by default when created)
                     const ruleId = RuleManager.createRule(ruleString);
+                    
+                    // If the rule should be inactive, deactivate it
+                    if (!dbRule.isActive) {
+                        console.log(`Deactivating rule ${ruleId} as it is inactive in the database`);
+                        RuleManager.deactivateRule(ruleId);
+                    }
                     
                     // Update the database record with the interpreter rule ID
                     await Rule.updateOne(
@@ -153,8 +159,8 @@ async function loadRulesFromDatabase() {
                         }
                     );
                     
-                    console.log(`Loaded rule from database: ${ruleString} (ID: ${ruleId})`);
-                    loadedRules.push({ id: dbRule.id, ruleId, ruleString });
+                    console.log(`Loaded rule from database: ${ruleString} (ID: ${ruleId}, active: ${dbRule.isActive})`);
+                    loadedRules.push({ id: dbRule.id, ruleId, ruleString, isActive: dbRule.isActive });
                 } else {
                     console.log(`Rule rejected - does not match required format: ${ruleString}`);
                     failedRules.push({ id: dbRule.id, reason: 'Invalid format', ruleString });
@@ -197,8 +203,21 @@ function isValidRuleFormat(ruleString) {
     
     if (!ifThenMatch) return false;
     
-    // Check that condition part has an operator
+    // Get the condition part
     const conditionPart = ifThenMatch[1].trim();
+    
+    // Check if this is an anomaly rule with standard "detected" pattern
+    if (conditionPart.includes('anomaly detected') || 
+        conditionPart.includes('anomaly not detected')) {
+        return true;
+    }
+    
+    // Check if this is a rule with custom description using "detected" pattern
+    if (conditionPart.endsWith('detected')) {
+        return true;
+    }
+    
+    // Check that condition part has an operator for standard rules
     const operatorPattern = /(.+?)\s+([<>=!]+)\s+(.+)/;
     const operatorMatch = conditionPart.match(operatorPattern);
     
@@ -210,7 +229,7 @@ function isValidRuleFormat(ruleString) {
  * @param {number} interval - Polling interval in milliseconds (default: 30000)
  * @returns {boolean} True if polling started successfully, false otherwise
  */
-async function startSensorPolling(interval = 30000) {
+async function startSensorPolling(interval = 100000) {
     try {
         if (!interpreterInitialized) {
             console.warn('Cannot start sensor polling: Interpreter not initialized');
@@ -646,6 +665,29 @@ function createAnomalyRule(location, metricType, anomalyType, detected, actionSt
     }
 }
 
+/**
+ * Check if a rule exists by ID
+ * @param {string} ruleId - The ID of the rule to check
+ * @returns {Object} Object with success status and rule if found
+ */
+function getRuleById(ruleId) {
+    try {
+        if (!interpreterInitialized) {
+            return { success: false, error: 'Interpreter not initialized' };
+        }
+
+        const rule = RuleManager.getRule(ruleId);
+        if (rule) {
+            return { success: true, rule };
+        } else {
+            return { success: false, error: `Rule ${ruleId} not found` };
+        }
+    } catch (error) {
+        console.error('Error checking rule:', error);
+        return { success: false, error: error.message };
+    }
+}
+
 module.exports = {
     initializeInterpreter,
     isInterpreterInitialized,
@@ -665,5 +707,6 @@ module.exports = {
     getDeviceStates,
     startAnomalyPolling,
     stopAnomalyPolling,
-    triggerAnomalyEvent
+    triggerAnomalyEvent,
+    getRuleById
 }; 

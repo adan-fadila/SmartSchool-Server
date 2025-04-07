@@ -215,6 +215,21 @@ const sensorLoggingService = {
       fsSync.appendFileSync('./logs/sensor_debug.log', `${timestamp}: Writing row to log file: ${rowStr.trim()}\n`);
       
       try {
+        // Check if the file ends with a newline character
+        let needsNewline = false;
+        if (fsSync.existsSync(this.logFilePath)) {
+          const fileContents = fsSync.readFileSync(this.logFilePath, 'utf8');
+          if (fileContents.length > 0 && !fileContents.endsWith('\n')) {
+            needsNewline = true;
+            fsSync.appendFileSync('./logs/sensor_debug.log', `${timestamp}: File does not end with newline, adding one\n`);
+          }
+        }
+        
+        // Add a newline first if needed to fix corrupted files
+        if (needsNewline) {
+          fsSync.appendFileSync(this.logFilePath, '\n');
+        }
+        
         // Instead of using this.logStream.write() which buffers data, use appendFileSync
         // directly to ensure data is written to disk immediately
         fsSync.appendFileSync(this.logFilePath, rowStr);

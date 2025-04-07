@@ -174,15 +174,86 @@ router.patch('/rules/:ruleId/active', async (req, res) => {
       return res.status(400).json({ success: false, error: 'Active status is required' });
     }
     
-    // Update the rule in the interpreter
-    const result = interpreterService.setRuleActive(ruleId, active);
+    const Rule = require('../models/Rule');
     
-    if (result.success) {
-      // If successful, also update the database
-      try {
-        const Rule = require('../models/Rule');
-        const dbRule = await Rule.findOne({ interpreterId: ruleId });
+    // First check if this is a MongoDB ID (not an interpreter ID)
+    let dbRule = null;
+    
+    try {
+      // Try to find the rule by the MongoDB _id first
+      dbRule = await Rule.findById(ruleId);
+    } catch (error) {
+      // Not a valid MongoDB ID, continue with normal flow
+      console.log(`${ruleId} is not a valid MongoDB ID, treating as interpreter ID`);
+    }
+    
+    if (dbRule) {
+      console.log(`Found rule by MongoDB ID: ${dbRule._id}`);
+      
+      // If we found by MongoDB ID but the rule has no interpreter ID or the interpreter
+      // doesn't recognize it, we need to re-create it in the interpreter
+      let interpreterRuleId = dbRule.interpreterId;
+      
+      if (!interpreterRuleId || !interpreterService.getRuleById(interpreterRuleId)) {
+        console.log(`Rule ${dbRule._id} needs to be recreated in interpreter`);
         
+        // Get rule string
+        const ruleString = dbRule.ruleString || dbRule.description;
+        
+        if (ruleString) {
+          // Create in interpreter
+          const createResult = await interpreterService.createRule(ruleString);
+          
+          if (createResult.success) {
+            // Update database with new interpreter ID
+            interpreterRuleId = createResult.ruleId;
+            dbRule.interpreterId = interpreterRuleId;
+            await dbRule.save();
+            console.log(`Rule recreated in interpreter with ID: ${interpreterRuleId}`);
+          } else {
+            return res.status(500).json({ 
+              success: false, 
+              error: `Failed to recreate rule: ${createResult.error}`
+            });
+          }
+        } else {
+          return res.status(400).json({ 
+            success: false, 
+            error: 'Rule has no valid rule string for recreation'
+          });
+        }
+      }
+      
+      // Now activate/deactivate using the interpreter ID
+      const result = interpreterService.setRuleActive(interpreterRuleId, active);
+      
+      if (result.success) {
+        // Update database
+        dbRule.isActive = active;
+        await dbRule.save();
+        console.log(`Updated rule active status in database: ${dbRule._id}, isActive=${active}`);
+        
+        return res.json({
+          success: true,
+          ruleId: interpreterRuleId,
+          databaseId: dbRule._id,
+          isActive: active
+        });
+      } else {
+        return res.status(500).json({ 
+          success: false, 
+          error: 'Failed to update rule status in interpreter'
+        });
+      }
+    } else {
+      // Try to find by interpreter ID
+      dbRule = await Rule.findOne({ interpreterId: ruleId });
+      
+      // Update the rule in the interpreter
+      const result = interpreterService.setRuleActive(ruleId, active);
+      
+      if (result.success) {
+        // If we found a matching database rule, update it
         if (dbRule) {
           // Update the isActive status in the database
           dbRule.isActive = active;
@@ -191,28 +262,26 @@ router.patch('/rules/:ruleId/active', async (req, res) => {
           
           // Return success with additional info about the database update
           return res.json({
-            ...result,
-            databaseUpdated: true,
-            databaseId: dbRule._id
+            success: true,
+            ruleId: ruleId,
+            databaseId: dbRule._id,
+            isActive: active
           });
         } else {
           console.log(`No database rule found with interpreter ID ${ruleId}`);
           return res.json({
-            ...result,
-            databaseUpdated: false
+            success: true,
+            ruleId: ruleId,
+            databaseUpdated: false,
+            isActive: active
           });
         }
-      } catch (dbError) {
-        console.error(`Error updating rule in database: ${dbError.message}`);
-        return res.json({
-          ...result,
-          databaseUpdated: false,
-          databaseError: dbError.message
+      } else {
+        return res.status(404).json({ 
+          success: false, 
+          error: `Rule ${ruleId} not found in interpreter`
         });
       }
-    } else {
-      // If the interpreter update failed, return the error
-      return res.json(result);
     }
   } catch (error) {
     console.error('Error updating rule active status:', error);

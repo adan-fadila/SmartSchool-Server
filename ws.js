@@ -76,9 +76,16 @@ function broadcastAnomalyData(anomalyState) {
   console.log('WEBSOCKET: Connected clients:', clients.length);
   console.log('WEBSOCKET: Anomaly state received:', anomalyState ? Object.keys(anomalyState) : 'null');
 
-  // Always use hardcoded sensorType
-  const sensorType = 'temperature';
-
+  // Always use hardcoded sensorType if not provided
+  const sensorType = anomalyState?.metric_name?.split(' ').pop() || 'temperature';
+  
+  // Extract the anomaly type or use a default
+  const anomalyType = anomalyState?.anomaly_type || 'pointwise';
+  
+  // Construct the complete anomaly event name for the frontend to use
+  const location = anomalyState?.location || configRoomName;
+  const completeAnomalyName = `${location} ${sensorType} ${anomalyType} anomaly`.toLowerCase();
+  
   const anomalyData = {
     type: 'anomaly_update',
     data: {
@@ -91,11 +98,15 @@ function broadcastAnomalyData(anomalyState) {
       plot_image: anomalyState?.plot_image || null,
       collective_plot: anomalyState?.collective_plot || null,
       timestamp: anomalyState?.timestamp || new Date().toISOString(),
-      // Always use the roomId and spaceId from configuration
-      spaceId: configSpaceId,
-      roomId: configRoomId,
-      location: configRoomName,
-      sensorType: sensorType
+      // Include IDs from anomalyState if available, otherwise use defaults
+      spaceId: anomalyState?.spaceId || configSpaceId,
+      roomId: anomalyState?.roomId || configRoomId,
+      location: location,
+      sensorType: sensorType,
+      // Include these critical fields for the frontend
+      anomalyType: anomalyType,
+      completeAnomalyName: completeAnomalyName,
+      rawEventName: completeAnomalyName  // This is what the frontend should use when saving descriptions
     }
   };
 
@@ -107,7 +118,9 @@ function broadcastAnomalyData(anomalyState) {
     sensorType: anomalyData.data.sensorType,
     location: anomalyData.data.location,
     roomId: anomalyData.data.roomId,
-    spaceId: anomalyData.data.spaceId
+    spaceId: anomalyData.data.spaceId,
+    anomalyType: anomalyData.data.anomalyType,
+    completeAnomalyName: anomalyData.data.completeAnomalyName
   });
 
   let sentCount = 0;

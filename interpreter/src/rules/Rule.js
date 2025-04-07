@@ -25,6 +25,51 @@ class Rule {
             throw new Error(`Invalid rule format: ${ruleString}`);
         }
         
+        // Handle async event name resolution for custom anomaly descriptions
+        if (parsedRule.eventNamePromise) {
+            console.log(`Rule contains a custom anomaly description, resolving event name asynchronously`);
+            
+            // Define an async initialization function
+            const initAsync = async () => {
+                try {
+                    // Wait for the event name promise to resolve
+                    this.eventName = await parsedRule.eventNamePromise;
+                    console.log(`Resolved event name from custom description: ${this.eventName}`);
+                    
+                    this.condition = parsedRule.condition;
+                    this.actionString = parsedRule.actionString;
+                    this.parsedActionParams = null;
+                    
+                    // Check if this is an anomaly event rule
+                    this.isAnomalyRule = this.checkIfAnomalyRule();
+                    
+                    // Register this rule with the appropriate event
+                    const event = EventRegistry.getEvent(this.eventName);
+                    if (!event) {
+                        console.error(`Event "${this.eventName}" not found in EventRegistry`);
+                        throw new Error(`Event not found: ${this.eventName}`);
+                    }
+                    
+                    // Add this rule as an observer to the event
+                    event.addObserver(this);
+                    console.log(`Rule added as observer to event ${this.eventName}`);
+                    
+                    return true;
+                } catch (error) {
+                    console.error(`Failed to initialize rule with custom anomaly description: ${error.message}`);
+                    throw error;
+                }
+            };
+            
+            // Start the async initialization and store the promise
+            this.initPromise = initAsync();
+            
+            // We can't proceed with normal initialization here
+            // The rule will be fully initialized once the initPromise resolves
+            return;
+        }
+        
+        // Standard synchronous initialization for regular rules
         this.eventName = parsedRule.eventName;
         this.condition = parsedRule.condition;
         this.actionString = parsedRule.actionString;
@@ -88,6 +133,10 @@ class Rule {
         const anomalyNotDetectedPattern = /(.+?)\s+anomaly\s+not\s+detected$/i;
         const anomalyNotDetectedMatch = conditionPart.match(anomalyNotDetectedPattern);
         
+        // Check if this is a rule with custom description using "detected" pattern
+        const customDescriptionDetectedPattern = /(.+?)\s+detected$/i;
+        const customDescriptionDetectedMatch = conditionPart.match(customDescriptionDetectedPattern);
+        
         if (anomalyDetectedMatch) {
             // This is an anomaly rule with "detected"
             const eventName = anomalyDetectedMatch[1].trim();
@@ -106,6 +155,53 @@ class Rule {
             return {
                 eventName,
                 condition: { operator: 'anomaly_detected', value: 'false' },
+                actionString
+            };
+        } else if (customDescriptionDetectedMatch) {
+            // This is a rule with custom description using "detected"
+            const description = customDescriptionDetectedMatch[1].trim();
+            console.log(`Found possible custom anomaly description: "${description}"`);
+            
+            // Try to find a matching anomaly description in the database
+            const AnomalyDescription = require('../../../models/AnomalyDescription');
+            
+            // Use an immediately invoked async function to handle the async database query
+            const eventNamePromise = (async () => {
+                try {
+                    // Look for a matching description in the database
+                    const anomalyDesc = await AnomalyDescription.findOne({
+                        description: { $regex: new RegExp(description, 'i') },
+                        isActive: true
+                    });
+                    
+                    if (anomalyDesc) {
+                        console.log(`Found matching anomaly description in database. Raw event name: ${anomalyDesc.rawEventName}`);
+                        return anomalyDesc.rawEventName;
+                    }
+                    
+                    // If no exact match found, try to extract potential anomaly event name using EventRegistry
+                    const EventRegistry = require('../events/EventRegistry');
+                    const potentialEventName = EventRegistry.findAnomalyEventByPartialName(description);
+                    
+                    if (potentialEventName) {
+                        console.log(`Found potential matching anomaly event: ${potentialEventName}`);
+                        return potentialEventName;
+                    }
+                    
+                    console.error(`No matching anomaly description or event found for: ${description}`);
+                    throw new Error(`No matching anomaly event found for description: ${description}`);
+                } catch (error) {
+                    console.error(`Error finding matching anomaly event for description: ${description}`, error);
+                    throw error;
+                }
+            })();
+            
+            // We need to wait for the Promise to resolve
+            // This is a bit of a hack since parseRule is synchronous but we need async behavior
+            // The constructor calling this will need to handle the Promise rejection
+            return {
+                eventNamePromise,
+                condition: { operator: 'anomaly_detected', value: 'true' },
                 actionString
             };
         }
@@ -156,8 +252,9 @@ class Rule {
     /**
      * Evaluate the rule based on the current event value
      * Called when the observed event changes
+     * @param {boolean} [forceExecute=false] - Whether to force execution of actions if condition is met
      */
-    evaluate() {
+    evaluate(forceExecute = false) {
         if (!this.active) {
             console.log(`Rule ${this.id} is not active, skipping evaluation`);
             return;
@@ -193,26 +290,30 @@ class Rule {
                 timestamp: Date.now()
             };
             
-            // Notify all observing actions
-            this.notifyObservingActions(context);
+            // Notify all observing actions, passing the force execute flag
+            this.notifyObservingActions(context, forceExecute);
         }
     }
 
     /**
      * Notify all actions that are observing this rule
      * @param {Object} context - Context data to pass to the actions
+     * @param {boolean} [force=false] - Whether to force execution (bypass state check)
      */
-    notifyObservingActions(context) {
-        console.log(`Rule ${this.id} notifying ${this.observingActions.length} observing actions`);
+    notifyObservingActions(context, force = false) {
+        console.log(`Rule ${this.id} notifying ${this.observingActions.length} observing actions${force ? ' (forced execution)' : ''}`);
         
         // If this is an anomaly rule, send a notification
         if (this.isAnomalyRule) {
             this.sendAnomalyRuleNotification(context);
         }
         
+        // Add force flag to context if specified
+        const actionContext = force ? { ...context, force: true } : context;
+        
         this.observingActions.forEach(action => {
             try {
-                action.onRuleTriggered(this, context)
+                action.onRuleTriggered(this, actionContext)
                     .then(result => {
                         if (result.success) {
                             console.log(`Action ${action.name} executed successfully: ${result.message}`);
@@ -348,7 +449,22 @@ class Rule {
      */
     activate() {
         this.active = true;
-        console.log(`Rule ${this.id} activated`);
+        
+        // Re-register this rule as an observer to its event
+        const event = EventRegistry.getEvent(this.eventName);
+        if (event) {
+            // First remove as observer to avoid duplicates
+            event.removeObserver(this);
+            // Then add back as observer
+            event.addObserver(this);
+            console.log(`Rule ${this.id} activated and re-registered as observer for event ${this.eventName}`);
+            
+            // Force an immediate evaluation of the rule with forceExecute=true
+            console.log(`Performing immediate evaluation of rule ${this.id} after activation (forced execution)`);
+            this.evaluate(true);  // Pass true to force execution
+        } else {
+            console.warn(`Rule ${this.id} activated but couldn't find event ${this.eventName}`);
+        }
     }
 
     /**

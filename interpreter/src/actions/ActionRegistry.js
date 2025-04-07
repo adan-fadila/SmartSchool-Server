@@ -321,42 +321,42 @@ class ActionRegistry {
     }
 
     /**
-     * Test execute an action string
-     * @param {string} actionString - The action string to execute
+     * Test an action string without creating a rule
+     * @param {string} actionString - The action string to test
+     * @param {Object} [context={}] - Optional context for execution
      * @returns {Promise<Object>} Result of the action execution
      */
-    async testExecuteAction(actionString) {
-        console.log(`[ACTION REGISTRY] Testing action: ${actionString}`);
-        
-        // Find the first action that can handle this string
-        let matchingAction = null;
-        
-        for (const action of this.actions.values()) {
-            if (action.canHandleAction(actionString)) {
-                matchingAction = action;
-                break;
-            }
-        }
-        
-        if (!matchingAction) {
-            return { 
-                success: false, 
-                message: `No action found that can handle: ${actionString}` 
-            };
-        }
-        
+    async testExecuteAction(actionString, context = {}) {
         try {
-            // Pre-parse the action string for better performance
-            const parsedParams = matchingAction.preParseActionString(actionString);
+            console.log(`[ACTION REGISTRY] Testing action: ${actionString}`);
             
-            // Apply the parsed parameters to the action
-            matchingAction.state = parsedParams.state;
-            matchingAction.params = parsedParams.params;
+            // Find a matching action
+            let matchingAction = null;
             
-            console.log(`[ACTION REGISTRY] Pre-parsed action parameters: ${JSON.stringify(parsedParams)}`);
+            // Try to find an exact match for the action string
+            for (const action of this.actions.values()) {
+                if (action.canHandleAction(actionString)) {
+                    matchingAction = action;
+                    console.log(`[ACTION REGISTRY] Found matching action: ${action.name} (${action.type})`);
+                    break;
+                }
+            }
             
-            // Execute the action
-            return await matchingAction.execute();
+            if (!matchingAction) {
+                // If no match found, try more fuzzy matching
+                // TODO: Implement more sophisticated fuzzy matching if needed
+                console.log(`[ACTION REGISTRY] No matching action found for: ${actionString}`);
+                return { success: false, message: 'No matching action found' };
+            }
+            
+            // Parse the action string
+            matchingAction.parseActionString(actionString);
+            
+            // Execute the action with the provided context
+            const result = await matchingAction.execute(context);
+            
+            console.log(`[ACTION REGISTRY] Action executed with result:`, result);
+            return { success: result.success, message: result.message };
         } catch (error) {
             console.error(`[ACTION REGISTRY] Error executing action: ${error.message}`);
             return { success: false, message: error.message };

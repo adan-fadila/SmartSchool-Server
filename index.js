@@ -71,9 +71,9 @@ console.log('Registering interpreter router...');
 server.use('/api-interpreter', interpreterRouter); // Add the interpreter router
 console.log('Interpreter router registered');
 
-// Add the interpreter API router
+// Add the interpreter API router - Fix the path to match the client endpoint
 console.log('Registering interpreter API router...');
-server.use('/api-interpreter-api', interpreterApiRouter); // Add the interpreter API router
+server.use('/api/interpreter', interpreterApiRouter); // Changed from '/api-interpreter-api' to '/api/interpreter'
 console.log('Interpreter API router registered');
 
 // Add the action router
@@ -93,7 +93,7 @@ console.log('Anomaly events router registered');
 
 // Add the anomaly descriptions router
 console.log('Registering anomaly descriptions router...');
-server.use('/api-anomaly-descriptions', anomalyDescriptionsRouter);
+server.use('/api/anomaly-descriptions', anomalyDescriptionsRouter);
 console.log('Anomaly descriptions router registered');
 
 server.use((req, res) => {
