@@ -31,6 +31,18 @@ const ruleSchema = new mongoose.Schema({
   ruleString: {
     type: String,
     default: null
+  },
+  notificationPhoneNumber: {
+    type: String,
+    default: null
+  },
+  notificationMessage: {
+    type: String,
+    default: null
+  },
+  isNotificationRule: {
+    type: Boolean,
+    default: false
   }
 });
 

@@ -1,5 +1,6 @@
 const ACAction = require('./ACAction');
 const LightAction = require('./LightAction');
+const SMSAction = require('./SMSAction');
 const axios = require('axios');
 const fs = require('fs').promises;
 const path = require('path');
@@ -12,7 +13,8 @@ class ActionRegistry {
         // Map of action types by name
         this.actionTypes = new Map([
             ['ac', ACAction],
-            ['light', LightAction]
+            ['light', LightAction],
+            ['sms', SMSAction]
             // Add more action types here as they are implemented
         ]);
         

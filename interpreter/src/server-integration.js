@@ -29,6 +29,10 @@ async function initializeInterpreter() {
         console.log('Initializing actions registry...');
         await ActionRegistry.initializeActions();
         
+        // Create default SMS actions
+        console.log('Creating default SMS actions...');
+        await createDefaultSmsActions();
+        
         // Then load existing rules from MongoDB
         await loadRulesFromDatabase();
         
@@ -103,6 +107,47 @@ async function initializeSensorLogging() {
         }
     } catch (error) {
         console.error('Error initializing sensor logging service:', error);
+        return { success: false, error: error.message };
+    }
+}
+
+/**
+ * Create a single default SMS action for the entire system
+ * This allows rules to use SMS notifications without having a physical device
+ */
+function createDefaultSmsActions() {
+    try {
+        console.log('Creating default SMS action...');
+        
+        // Get SMS action constructor
+        const SMSAction = require('./actions/SMSAction');
+        
+        // Check if generic notification action already exists
+        const actionName = 'Notification Service';
+        if (ActionRegistry.getAction(actionName)) {
+            console.log(`SMS action '${actionName}' already exists, skipping`);
+            return { 
+                success: true, 
+                created: 0,
+                skipped: 1,
+                message: 'SMS action already exists'
+            };
+        }
+        
+        // Create a single SMS action for the entire system
+        const smsAction = new SMSAction(actionName, 'System');
+        
+        // Register the action with the ActionRegistry
+        ActionRegistry.registerAction(smsAction);
+        
+        console.log(`Created single SMS action: ${actionName}`);
+        return { 
+            success: true, 
+            created: 1,
+            message: 'SMS action created successfully'
+        };
+    } catch (error) {
+        console.error('Error creating default SMS action:', error);
         return { success: false, error: error.message };
     }
 }
@@ -688,6 +733,128 @@ function getRuleById(ruleId) {
     }
 }
 
+/**
+ * Create a notification rule with explicit phone number
+ * @param {string} ruleString - The rule string in natural language format
+ * @param {string} phoneNumber - The phone number to send the notification to (optional if already in ruleString)
+ * @param {string} message - The message to send in the notification (optional, will use rule condition if not provided)
+ * @param {string} spaceId - The space ID for the rule
+ * @returns {Object} Object with rule ID and success status
+ */
+async function createNotificationRule(ruleString, phoneNumber = null, message = null, spaceId) {
+    try {
+        if (!interpreterInitialized) {
+            return { success: false, error: 'Interpreter not initialized' };
+        }
+        
+        let finalRuleString = ruleString;
+        let finalPhoneNumber = phoneNumber;
+        
+        // If phone number is not provided but is in the rule string, extract it
+        if (!finalPhoneNumber) {
+            // Check if rule already has a phone number
+            const phoneMatch = ruleString.match(/send\s+sms\s+to\s+(\+\d+)/i);
+            if (phoneMatch) {
+                finalPhoneNumber = phoneMatch[1];
+                console.log(`Extracted phone number from rule string: ${finalPhoneNumber}`);
+            }
+        }
+        
+        // Format the phone number if provided
+        if (finalPhoneNumber && !finalPhoneNumber.startsWith('+')) {
+            console.warn(`Phone number ${finalPhoneNumber} does not start with '+', adding it`);
+            finalPhoneNumber = '+' + finalPhoneNumber;
+        }
+        
+        // Check if the rule already has the "then" part
+        if (!finalRuleString.toLowerCase().includes(' then ')) {
+            return { 
+                success: false, 
+                error: 'Invalid rule format - missing "then" part' 
+            };
+        }
+        
+        // Check if the rule already has "send sms to" format
+        const hasSendSmsFormat = /then\s+send\s+sms\s+to\s+\+\d+/.test(finalRuleString);
+        
+        // If not, and we have a phone number, append it with the send sms to format
+        if (!hasSendSmsFormat && finalPhoneNumber) {
+            // Split the rule at "then"
+            const thenIndex = finalRuleString.toLowerCase().indexOf(' then ');
+            const rulePart = finalRuleString.substring(0, thenIndex + 6); // Include " then "
+            
+            // Append the "send sms to" + phone number to create the final rule string
+            finalRuleString = `${rulePart}send sms to ${finalPhoneNumber}`;
+            console.log(`Updated rule string: ${finalRuleString}`);
+        }
+        
+        // Create the rule in the interpreter
+        const { success, ruleId } = createRule(finalRuleString);
+        
+        if (!success || !ruleId) {
+            return { success: false, error: `Failed to create rule: ${finalRuleString}` };
+        }
+        
+        // Extract the condition part to use as default message
+        let finalMessage = message;
+        if (!finalMessage) {
+            const conditionMatch = finalRuleString.match(/if\s+(.+?)\s+then/i);
+            if (conditionMatch) {
+                finalMessage = conditionMatch[1].trim();
+                console.log(`Generated message from rule condition: ${finalMessage}`);
+            }
+        }
+        
+        // Create or update the rule in the database with notification fields
+        try {
+            // Check if the rule already exists in the database
+            const Rule = require('../../models/Rule');
+            
+            await Rule.updateOne(
+                { id: ruleId },
+                {
+                    $set: {
+                        id: ruleId,
+                        space_id: spaceId,
+                        description: finalRuleString,
+                        ruleString: finalRuleString,
+                        interpreterId: ruleId,
+                        notificationPhoneNumber: finalPhoneNumber,
+                        notificationMessage: finalMessage,
+                        isNotificationRule: true
+                    }
+                },
+                { upsert: true }
+            );
+            
+            console.log(`Created notification rule in database: ${finalRuleString} (ID: ${ruleId})`);
+            console.log(`Notification details: SMS to ${finalPhoneNumber || 'default numbers'} with message: "${finalMessage || 'derived from condition'}"`);
+            
+            return { 
+                success: true, 
+                ruleId,
+                phoneNumber: finalPhoneNumber,
+                message: finalMessage,
+                ruleString: finalRuleString
+            };
+        } catch (dbError) {
+            console.error('Error saving notification rule to database:', dbError);
+            
+            // We still created the rule in the interpreter, 
+            // so we consider it a partial success
+            return { 
+                success: true, 
+                ruleId,
+                databaseError: dbError.message,
+                warning: 'Rule created in interpreter but database update failed'
+            };
+        }
+    } catch (error) {
+        console.error('Error creating notification rule:', error);
+        return { success: false, error: error.message };
+    }
+}
+
 module.exports = {
     initializeInterpreter,
     isInterpreterInitialized,
@@ -700,6 +867,7 @@ module.exports = {
     getAnomalyEvents,
     createRule,
     createAnomalyRule,
+    createNotificationRule,
     deleteRule,
     setRuleActive,
     testExecuteAction: testAction,

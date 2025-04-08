@@ -1,6 +1,5 @@
 const EventRegistry = require('../events/EventRegistry');
 const ActionRegistry = require('../actions/ActionRegistry');
-const { notifyRuleTriggered } = require('../../../utils/notificationService');
 
 /**
  * Class representing a rule in the system
@@ -303,11 +302,6 @@ class Rule {
     notifyObservingActions(context, force = false) {
         console.log(`Rule ${this.id} notifying ${this.observingActions.length} observing actions${force ? ' (forced execution)' : ''}`);
         
-        // If this is an anomaly rule, send a notification
-        if (this.isAnomalyRule) {
-            this.sendAnomalyRuleNotification(context);
-        }
-        
         // Add force flag to context if specified
         const actionContext = force ? { ...context, force: true } : context;
         
@@ -328,45 +322,6 @@ class Rule {
                 console.error(`Error notifying action ${action.name}: ${error.message}`);
             }
         });
-    }
-    
-    /**
-     * Send a notification when an anomaly rule is triggered
-     * @param {Object} context - Context data from the event
-     */
-    async sendAnomalyRuleNotification(context) {
-        try {
-            // Get more information about the event
-            const event = EventRegistry.getEvent(this.eventName);
-            if (!event) return;
-            
-            // Only send for anomaly events
-            if (event.type !== 'anomaly') return;
-            
-            // Get action information
-            const actions = this.observingActions.map(action => `${action.name}`).join(', ');
-            
-            // Prepare notification data
-            const ruleData = {
-                id: this.id,
-                ruleString: this.ruleString,
-                eventName: this.eventName,
-                actions: actions
-            };
-            
-            const eventData = {
-                name: event.name,
-                location: event.location,
-                metricType: event.metricType,
-                anomalyType: event.anomalyType
-            };
-            
-            // Send notification using the notification service
-            console.log(`Sending notification for rule: ${this.id}`);
-            await notifyRuleTriggered(ruleData, eventData);
-        } catch (error) {
-            console.error('Failed to send rule notification:', error);
-        }
     }
 
     /**

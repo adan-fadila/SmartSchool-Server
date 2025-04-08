@@ -41,7 +41,31 @@ Type: {{metricType}} {{anomalyType}}
 Time: {{time}}
 Actions: {{actions}}
 
-The system has taken appropriate actions based on this rule.`
+The system has taken appropriate actions based on this rule.`,
+
+    // Template for custom SMS messages from the SMS action
+    customMessage:
+`📱 NOTIFICATION FROM SMARTSPACE 📱
+Location: {{location}}
+Time: {{time}}
+
+MESSAGE: {{customMessage}}
+
+This notification was triggered by a rule in the system.`
+  },
+  
+  // Rule examples for notifications
+  ruleExamples: {
+    sms: [
+      // Examples with specific phone numbers
+      'if living room temperature > 30 then send notification to +1234567890 about High temperature alert',
+      'if classroom humidity anomaly detected then notify +1234567890 about Possible water leak detected',
+      'if office motion detected then send sms to +1234567890: Motion detected in the office',
+      
+      // Examples without phone numbers (will use default configured numbers)
+      'if living room temperature anomaly detected then send notification about Temperature anomaly in living room',
+      'if classroom humidity > 80 then notify about High humidity in classroom'
+    ]
   }
 };
 

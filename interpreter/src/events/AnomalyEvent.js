@@ -1,5 +1,6 @@
 const Event = require('./Event');
-const { notifyAnomalyDetection } = require('../../../utils/notificationService');
+// We're removing this import since we're no longer sending automatic notifications
+// const { notifyAnomalyDetection } = require('../../../utils/notificationService');
 const AnomalyDescription = require('../../../models/AnomalyDescription');
 
 /**
@@ -90,8 +91,8 @@ class AnomalyEvent extends Event {
                     // This would require modifying the rule evaluation logic
                 }
                 
-                // Send notification about the anomaly
-                this.sendAnomalyNotification(stateValue);
+                // REMOVED: No longer send notifications automatically
+                // Instead, notifications will be sent through the SMS action if rules trigger
             }
         }
         
@@ -123,31 +124,7 @@ class AnomalyEvent extends Event {
         return this.descriptions;
     }
     
-    /**
-     * Send a notification about the detected anomaly
-     * @param {Object} anomalyData - The anomaly data to include in the notification
-     */
-    async sendAnomalyNotification(anomalyData) {
-        try {
-            // Prepare notification data
-            const notificationData = {
-                name: this.name,
-                location: this.location,
-                metricType: this.metricType,
-                anomalyType: this.anomalyType,
-                confidence: anomalyData.confidence,
-                timestamp: anomalyData.timestamp,
-                hasDescriptions: this.hasDescriptions,
-                descriptionsCount: this.descriptions ? this.descriptions.length : 0
-            };
-            
-            // Send notification using the notification service
-            console.log(`Sending notification for anomaly: ${this.name}`);
-            await notifyAnomalyDetection(notificationData);
-        } catch (error) {
-            console.error('Failed to send anomaly notification:', error);
-        }
-    }
+    // REMOVED: sendAnomalyNotification method - notifications now handled by SMSAction
 }
 
 module.exports = AnomalyEvent; 

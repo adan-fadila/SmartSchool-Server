@@ -63,6 +63,56 @@ async function notifyAnomalyDetection(anomalyData) {
       return false;
     }
     
+    // Check if this is a custom message from an action
+    if (anomalyData.fromAction && anomalyData.customMessage) {
+      console.log(`Processing custom notification message: ${anomalyData.customMessage}`);
+      
+      // Prepare template variables for custom message
+      const variables = {
+        location: anomalyData.location || 'Unknown',
+        time: new Date().toLocaleString(),
+        customMessage: anomalyData.customMessage
+      };
+      
+      // Render the custom message
+      const message = renderTemplate(notificationConfig.templates.customMessage, variables);
+      
+      // Determine which phone numbers to use - default array or specific number
+      let phoneNumbers = notificationConfig.whatsapp.phoneNumbers;
+      
+      // If a specific phone number is provided and is non-empty, use only that one
+      if (anomalyData.targetPhoneNumber && anomalyData.targetPhoneNumber.trim().length > 0) {
+        // Format check - phone numbers should start with '+'
+        let phoneNumber = anomalyData.targetPhoneNumber.trim();
+        if (!phoneNumber.startsWith('+')) {
+          phoneNumber = '+' + phoneNumber;
+        }
+        
+        phoneNumbers = [phoneNumber];
+        console.log(`Using specified phone number: ${phoneNumber}`);
+      } else {
+        console.log(`No specific phone number provided, using ${phoneNumbers.length} default numbers`);
+      }
+      
+      let sentCount = 0;
+      
+      // Send to configured phone numbers (or the specific target phone)
+      for (const phoneNumber of phoneNumbers) {
+        try {
+          console.log(`Sending custom notification to ${phoneNumber}`);
+          await sendWhatsAppNotification(phoneNumber, message);
+          sentCount++;
+        } catch (error) {
+          console.error(`Failed to send notification to ${phoneNumber}:`, error);
+          // Continue with other phone numbers even if one fails
+        }
+      }
+      
+      console.log(`Custom notification sent to ${sentCount} recipients: ${anomalyData.customMessage}`);
+      return sentCount > 0;
+    }
+    
+    // Regular anomaly notification processing
     // Enforce throttling - check when the last notification was sent for this anomaly
     const now = Date.now();
     const lastNotificationTime = lastNotifications.anomalyDetections.get(anomalyData.name) || 0;
