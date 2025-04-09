@@ -179,7 +179,7 @@ exports.handleControllers = {
           config.raspberryPiIP,
           config.user_oid
         );
-      },5000); // 300000 ms = 5 minutes
+      },100000); // 300000 ms = 5 minutes
     });
   },
 };

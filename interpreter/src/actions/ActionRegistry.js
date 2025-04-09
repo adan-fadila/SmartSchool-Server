@@ -73,14 +73,39 @@ class ActionRegistry {
         
         // If no current state, change is needed
         if (!currentState) {
+            console.log(`[ACTION REGISTRY] No current state for ${deviceType} ${deviceId}, change needed`);
             return true;
         }
         
         // For AC: compare power state, temperature and mode
         if (deviceType === 'ac') {
             const powerChanged = currentState.state !== targetState.state;
-            const tempChanged = currentState.temperature !== targetState.temperature;
-            const modeChanged = currentState.mode !== targetState.mode;
+            
+            // Check temperature only if a target temperature is specified
+            const tempChanged = targetState.temperature !== null && 
+                               currentState.temperature !== targetState.temperature;
+            
+            // Check mode only if a target mode is specified
+            const modeChanged = targetState.mode !== null && 
+                               currentState.mode !== targetState.mode;
+            
+            console.log(`[ACTION REGISTRY] State comparison for ${deviceType} ${deviceId}:`, {
+                current: {
+                    power: currentState.state,
+                    temp: currentState.temperature,
+                    mode: currentState.mode
+                },
+                target: {
+                    power: targetState.state,
+                    temp: targetState.temperature,
+                    mode: targetState.mode
+                },
+                changes: {
+                    power: powerChanged,
+                    temp: tempChanged,
+                    mode: modeChanged
+                }
+            });
             
             return powerChanged || tempChanged || modeChanged;
         }
@@ -152,13 +177,16 @@ class ActionRegistry {
                     const acState = await getAcState(ip, process.env.SENSIBO_DEVICE_ID);
                     
                     if (acState) {
-                        // Create and save AC state
+                        console.log('[ACTION REGISTRY] Retrieved AC state:', acState);
+                        
+                        // Create and save AC state - map API fields to our expected structure
                         const state = {
                             state: acState.on === true,
-                            temperature: acState.targetTemperature,
+                            temperature: acState.targetTemperature, // Use targetTemperature from API
                             mode: acState.mode
                         };
                         
+                        console.log('[ACTION REGISTRY] Storing mapped AC state:', state);
                         this.updateDeviceState(process.env.SENSIBO_DEVICE_ID, state, 'ac');
                     }
                 } catch (error) {

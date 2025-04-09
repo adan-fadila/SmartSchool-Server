@@ -70,71 +70,81 @@ function broadcast(wss, message) {
   });
 }
 
-// New function to broadcast anomaly data
+// Function to broadcast anomaly data
 function broadcastAnomalyData(anomalyState) {
-  console.log('WEBSOCKET: Attempting to broadcast anomaly data');
-  console.log('WEBSOCKET: Connected clients:', clients.length);
-  console.log('WEBSOCKET: Anomaly state received:', anomalyState ? Object.keys(anomalyState) : 'null');
+    console.log('WEBSOCKET: Attempting to broadcast anomaly data');
+    console.log('WEBSOCKET: Connected clients:', clients.length);
+    
+    // Log received keys but filter out image-related ones
+    const receivedKeys = Object.keys(anomalyState || {}).filter(key => !key.includes('plot') && !key.includes('image'));
+    console.log('WEBSOCKET: Anomaly state received (excluding image data):', receivedKeys);
 
-  // Always use hardcoded sensorType if not provided
-  const sensorType = anomalyState?.metric_name?.split(' ').pop() || 'temperature';
-  
-  // Extract the anomaly type or use a default
-  const anomalyType = anomalyState?.anomaly_type || 'pointwise';
-  
-  // Construct the complete anomaly event name for the frontend to use
-  const location = anomalyState?.location || configRoomName;
-  const completeAnomalyName = `${location} ${sensorType} ${anomalyType} anomaly`.toLowerCase();
-  
-  const anomalyData = {
-    type: 'anomaly_update',
-    data: {
-      anomalies: (anomalyState && Array.isArray(anomalyState.anomalies)) ? anomalyState.anomalies.map(anomaly => ({
-        timestamp: anomaly.timestamp,
-        value: anomaly.value,
-        voting_algorithms: anomaly.voting_algorithms,
-        anomaly_val: anomaly.anomaly_val
-      })) : [],
-      plot_image: anomalyState?.plot_image || null,
-      collective_plot: anomalyState?.collective_plot || null,
-      timestamp: anomalyState?.timestamp || new Date().toISOString(),
-      // Include IDs from anomalyState if available, otherwise use defaults
-      spaceId: anomalyState?.spaceId || configSpaceId,
-      roomId: anomalyState?.roomId || configRoomId,
-      location: location,
-      sensorType: sensorType,
-      // Include these critical fields for the frontend
-      anomalyType: anomalyType,
-      completeAnomalyName: completeAnomalyName,
-      rawEventName: completeAnomalyName  // This is what the frontend should use when saving descriptions
+    // Always use hardcoded sensorType if not provided
+    const sensorType = anomalyState?.metric_name?.split(' ').pop() || 'temperature';
+    
+    // Extract the anomaly type from the name or use the provided type
+    let anomalyType = anomalyState?.anomaly_type;
+    if (!anomalyType && anomalyState?.name) {
+        const nameLower = anomalyState.name.toLowerCase();
+        if (nameLower.includes('trend')) {
+            anomalyType = 'trend';
+        } else if (nameLower.includes('seasonality')) {
+            anomalyType = 'seasonality';
+        } else if (nameLower.includes('pointwise')) {
+            anomalyType = 'pointwise';
+        }
     }
-  };
+    
+    // Construct the complete anomaly event name for the frontend to use
+    const location = anomalyState?.location || configRoomName;
+    const completeAnomalyName = `${location} ${sensorType} ${anomalyType} anomaly`.toLowerCase();
+    
+    const anomalyData = {
+        type: 'anomaly_update',
+        data: {
+            anomalies: (anomalyState && Array.isArray(anomalyState.anomalies)) ? anomalyState.anomalies.map(anomaly => ({
+                timestamp: anomaly.timestamp,
+                value: anomaly.value,
+                voting_algorithms: anomaly.voting_algorithms,
+                anomaly_val: anomaly.anomaly_val
+            })) : [],
+            plot_image: anomalyState?.plot_image || null,
+            collective_plot: anomalyState?.collective_plot || null,
+            timestamp: anomalyState?.timestamp || new Date().toISOString(),
+            spaceId: anomalyState?.spaceId || configSpaceId,
+            roomId: anomalyState?.roomId || configRoomId,
+            location: location,
+            sensorType: sensorType,
+            anomalyType: anomalyType,
+            completeAnomalyName: completeAnomalyName,
+            rawEventName: completeAnomalyName
+        }
+    };
 
-  console.log('WEBSOCKET: Broadcasting anomaly data:', {
-    timestamp: anomalyData.data.timestamp,
-    hasPlotImage: !!anomalyData.data.plot_image,
-    hasCollectivePlot: !!anomalyData.data.collective_plot,
-    anomaliesCount: anomalyData.data.anomalies?.length,
-    sensorType: anomalyData.data.sensorType,
-    location: anomalyData.data.location,
-    roomId: anomalyData.data.roomId,
-    spaceId: anomalyData.data.spaceId,
-    anomalyType: anomalyData.data.anomalyType,
-    completeAnomalyName: anomalyData.data.completeAnomalyName
-  });
+    // Log broadcast info without image data
+    console.log('WEBSOCKET: Broadcasting anomaly data:', {
+        timestamp: anomalyData.data.timestamp,
+        anomaliesCount: anomalyData.data.anomalies?.length,
+        sensorType: anomalyData.data.sensorType,
+        location: anomalyData.data.location,
+        roomId: anomalyData.data.roomId,
+        spaceId: anomalyData.data.spaceId,
+        anomalyType: anomalyData.data.anomalyType,
+        completeAnomalyName: anomalyData.data.completeAnomalyName
+    });
 
-  let sentCount = 0;
-  clients.forEach((client) => {
-    if (client.readyState === WebSocket.OPEN) {
-      try {
-        client.send(JSON.stringify(anomalyData));
-        sentCount++;
-      } catch (error) {
-        console.error('WEBSOCKET: Error sending data to client:', error);
-      }
-    }
-  });
-  console.log(`WEBSOCKET: Sent anomaly data to ${sentCount} client(s)`);
+    let sentCount = 0;
+    clients.forEach((client) => {
+        if (client.readyState === WebSocket.OPEN) {
+            try {
+                client.send(JSON.stringify(anomalyData));
+                sentCount++;
+            } catch (error) {
+                console.error('WEBSOCKET: Error sending data to client:', error);
+            }
+        }
+    });
+    console.log(`WEBSOCKET: Sent anomaly data to ${sentCount} client(s)`);
 }
 
 // New function to broadcast recommendation data

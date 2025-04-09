@@ -20,7 +20,7 @@ const interpreterService = require('../interpreter/src/server-integration');
 const AnomalyDescription = require('../models/AnomalyDescription');
 
 /**
- * Check if a rule condition string matches our required format: [event][condition] then [action]
+ * Check if a rule condition string matches our required format
  * @param {string} ruleString - The rule string to check
  * @returns {boolean} True if the rule matches our format, false otherwise
  */
@@ -36,8 +36,15 @@ function isValidRuleFormat(ruleString) {
     
     if (!ifThenMatch) return false;
     
-    // Check that condition part has an operator
+    // Extract the condition part
     const conditionPart = ifThenMatch[1].trim();
+    
+    // Check if this is an anomaly rule (contains "detected")
+    if (conditionPart.includes('anomaly') && conditionPart.includes('detected')) {
+        return true;
+    }
+    
+    // Check if this is a sensor value rule (has comparison operator)
     const operatorPattern = /(.+?)\s+([<>=!]+)\s+(.+)/;
     const operatorMatch = conditionPart.match(operatorPattern);
     
@@ -45,23 +52,20 @@ function isValidRuleFormat(ruleString) {
 }
 
 /**
- * Check if a rule condition is related to an anomaly
+ * Check if the rule is anomaly-related
  * @param {string} ruleString - The rule string to check
- * @returns {boolean} True if the rule is related to an anomaly, false otherwise
+ * @returns {boolean} True if this is an anomaly-related rule
  */
 function isAnomalyRule(ruleString) {
     if (!ruleString) return false;
     
-    // Convert to lowercase for case-insensitive matching
-    const lowerCaseRule = ruleString.toLowerCase();
-    
     // Check if the rule contains keywords related to anomalies
-    return (
-        lowerCaseRule.includes('anomaly') || 
-        lowerCaseRule.includes('pointwise') || 
-        lowerCaseRule.includes('seasonality') || 
-        lowerCaseRule.includes('trend')
-    );
+    const normalizedRule = ruleString.toLowerCase();
+    return normalizedRule.includes('anomaly') || 
+           normalizedRule.includes('detected') ||
+           normalizedRule.includes('trend') ||
+           normalizedRule.includes('seasonality') ||
+           normalizedRule.includes('pointwise');
 }
 
 /**
@@ -81,10 +85,31 @@ function extractAnomalyDescription(ruleString) {
     
     if (!ifThenMatch) return null;
     
-    const conditionPart = ifThenMatch[1].trim();
+    let conditionPart = ifThenMatch[1].trim();
     
-    // For now, we'll consider the entire condition part as the potential anomaly description
-    return conditionPart;
+    // Remove 'detected' from the end if it exists
+    conditionPart = conditionPart.replace(/\s+detected$/, '');
+    
+    // Remove anomaly type keywords if they exist
+    const anomalyTypes = ['pointwise', 'trend', 'seasonality'];
+    anomalyTypes.forEach(type => {
+        conditionPart = conditionPart.replace(new RegExp(`\\s+${type}\\s+`, 'g'), ' ');
+        conditionPart = conditionPart.replace(new RegExp(`\\s+${type}$`, 'g'), '');
+    });
+    
+    // Remove the word 'anomaly' if it exists
+    conditionPart = conditionPart.replace(/\s+anomaly\s*/g, '');
+    
+    // Clean up any multiple spaces and trim
+    const description = conditionPart.replace(/\s+/g, ' ').trim();
+    
+    // Log the extracted description for debugging
+    console.log('Extracted description from rule:', {
+        original: lowerCaseRule,
+        extracted: description
+    });
+    
+    return description;
 }
   
 exports.ruleControllers={
@@ -111,7 +136,7 @@ exports.ruleControllers={
     },
     
     // Define the route for adding a new rule
-    async add_Rule(req, res){
+    async add_Rule(req, res) {
         const rule = req.body;
         console.log("Adding new rule:", rule);
         
@@ -123,49 +148,100 @@ exports.ruleControllers={
             if (isAnomalyRule(ruleText)) {
                 console.log("Rule appears to be related to anomalies, checking for anomaly descriptions");
                 
-                // Extract the potential anomaly description
+                // Extract the potential anomaly description from the rule text
                 const potentialDescription = extractAnomalyDescription(ruleText);
+                console.log("Potential description extracted:", potentialDescription);
                 
-                // Check if this description exists in our database
+                // Find the matching anomaly description in the database
                 const anomalyDescription = await AnomalyDescription.findOne({
-                    description: { $regex: new RegExp(potentialDescription, 'i') },
                     spaceId: rule.space_id,
-                    isActive: true
+                    isActive: true,
+                    $or: [
+                        // Exact match
+                        { description: potentialDescription },
+                        // Case-insensitive match
+                        { description: { $regex: new RegExp('^' + escapeRegExp(potentialDescription) + '$', 'i') } },
+                        // Description contains the potential description
+                        { description: { $regex: new RegExp(escapeRegExp(potentialDescription), 'i') } },
+                        // Potential description contains the description
+                        { $expr: { $regexMatch: { input: potentialDescription, regex: new RegExp(escapeRegExp('$description'), 'i') } } }
+                    ]
                 });
                 
                 if (!anomalyDescription) {
-                    console.log(`No matching anomaly description found for: ${potentialDescription}`);
+                    console.log(`No matching anomaly description found for: "${potentialDescription}"`);
                     return res.status(400).json({
                         status: 400,
                         message: "Cannot create anomaly rule without a corresponding anomaly description. Please create a description for this anomaly first."
                     });
                 }
                 
-                console.log(`Found matching anomaly description: ${anomalyDescription.description}`);
+                console.log(`Found matching anomaly description:`, {
+                    description: anomalyDescription.description,
+                    rawEventName: anomalyDescription.rawEventName,
+                    anomalyType: anomalyDescription.anomalyType
+                });
                 
                 // Store the anomaly description ID with the rule for reference
                 rule.anomalyDescriptionId = anomalyDescription._id;
-                rule.rawEventName = anomalyDescription.rawEventName;
-            }
-            
-            if (ruleText && isValidRuleFormat(ruleText)) {
-                console.log("Rule text matches interpreter format:", ruleText);
                 
-                // Create the rule in the interpreter system
-                const interpreterResult = interpreterService.createRule(ruleText);
+                // Extract the action part from the original rule
+                const actionMatch = ruleText.match(/then\s+(.+)$/i);
+                if (!actionMatch) {
+                    return res.status(400).json({
+                        status: 400,
+                        message: "Invalid rule format: Could not extract action part"
+                    });
+                }
+                const action = actionMatch[1].trim();
+
+                // Construct the rule using the rawEventName from the anomaly description
+                const interpreterRuleText = `if ${anomalyDescription.rawEventName} detected then ${action}`;
+                console.log("Constructed interpreter rule for interpreter:", interpreterRuleText);
+                
+                // Set the event using the rawEventName from the description
+                rule.event = `${anomalyDescription.rawEventName} detected`;
+                rule.ruleString = interpreterRuleText;
+
+                // IMPORTANT: Use the constructed interpreter rule text when creating the rule
+                const interpreterResult = interpreterService.createRule(interpreterRuleText);
                 
                 if (interpreterResult.success) {
                     console.log("Rule created in interpreter:", interpreterResult.ruleId);
-                    
-                    // Add the interpreter rule ID to the rule object
                     rule.interpreterId = interpreterResult.ruleId;
-                    rule.ruleString = ruleText;
+                    rule.isActive = true;  // Ensure rule is active
                 } else {
                     console.log("Failed to create rule in interpreter:", interpreterResult.error);
+                    // Even if interpreter creation fails, continue to save the rule in the database
                 }
             } else {
-                console.log("Rule does not match interpreter format:", ruleText);
+                // For non-anomaly rules, use the original rule text
+                console.log("Rule is not anomaly-related, using original format");
+                
+                if (isValidRuleFormat(ruleText)) {
+                    console.log("Rule text matches interpreter format:", ruleText);
+                    
+                    const interpreterResult = interpreterService.createRule(ruleText);
+                    
+                    if (interpreterResult.success) {
+                        console.log("Rule created in interpreter:", interpreterResult.ruleId);
+                        rule.interpreterId = interpreterResult.ruleId;
+                        rule.ruleString = ruleText;
+                        rule.isActive = true;  // Ensure rule is active
+                    } else {
+                        console.log("Failed to create rule in interpreter:", interpreterResult.error);
+                    }
+                } else {
+                    console.log("Rule does not match interpreter format:", ruleText);
+                }
             }
+            
+            console.log("Rule ready to save in the database:", {
+                event: rule.event,
+                ruleString: rule.ruleString,
+                interpreterId: rule.interpreterId,
+                isActive: rule.isActive
+            });
             
             // Continue with adding the rule to the database
             const response = await add_new_Rule(rule);
@@ -314,4 +390,9 @@ exports.ruleControllers={
             res.status(500).json({ message: `Server error: ${error.message}` });
         }
     },
+}
+
+// Helper function to escape regex special characters
+function escapeRegExp(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }

@@ -271,11 +271,24 @@ class ACAction extends Action {
                     const actualState = await getAcState(raspPiIP, deviceId);
                     
                     if (actualState) {
+                        // Check both power state AND temperature
                         const actualOnState = actualState.on === true;
+                        const actualTemperature = actualState.targetTemperature;
+                        const actualMode = actualState.mode;
                         
-                        // If actual state doesn't match our tracked state, force an update
-                        if (actualOnState !== targetState.state) {
-                            this.logAction(`Detected state mismatch! Tracked: ${targetState.state ? 'on' : 'off'}, Actual: ${actualOnState ? 'on' : 'off'}. Forcing update.`);
+                        this.logAction(`Actual state: on=${actualOnState}, temp=${actualTemperature}, mode=${actualMode}`);
+                        this.logAction(`Target state: on=${targetState.state}, temp=${targetState.temperature}, mode=${targetState.mode}`);
+                        
+                        // Check if any of the important parameters don't match
+                        const powerMismatch = actualOnState !== targetState.state;
+                        const tempMismatch = targetState.temperature !== null && 
+                                             actualTemperature !== targetState.temperature;
+                        const modeMismatch = targetState.mode !== null && 
+                                            actualMode !== targetState.mode;
+                        
+                        // If any parameter doesn't match, force an update
+                        if (powerMismatch || tempMismatch || modeMismatch) {
+                            this.logAction(`Detected state mismatch! Power: ${powerMismatch}, Temp: ${tempMismatch}, Mode: ${modeMismatch}. Forcing update.`);
                             // Continue with the action execution
                         } else {
                             return { 
