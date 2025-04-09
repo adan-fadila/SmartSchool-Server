@@ -185,6 +185,12 @@ exports.ruleControllers={
                 // Store the anomaly description ID with the rule for reference
                 rule.anomalyDescriptionId = anomalyDescription._id;
                 
+                // If this is an SMS notification rule, use the description from the anomalyDescriptions table
+                if (rule.isNotificationRule && rule.action && rule.action.toLowerCase().includes('send sms')) {
+                    console.log("This is an SMS notification rule, using the anomaly description for the message");
+                    rule.notificationMessage = anomalyDescription.description;
+                }
+                
                 // Extract the action part from the original rule
                 const actionMatch = ruleText.match(/then\s+(.+)$/i);
                 if (!actionMatch) {
@@ -240,7 +246,8 @@ exports.ruleControllers={
                 event: rule.event,
                 ruleString: rule.ruleString,
                 interpreterId: rule.interpreterId,
-                isActive: rule.isActive
+                isActive: rule.isActive,
+                notificationMessage: rule.notificationMessage
             });
             
             // Continue with adding the rule to the database
