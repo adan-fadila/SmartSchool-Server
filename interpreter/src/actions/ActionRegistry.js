@@ -297,6 +297,7 @@ class ActionRegistry {
         const matchingActions = [];
         
         this.actions.forEach(action => {
+            console.log("actionString::   ",rule.actionString);
             if (action.canHandleAction(rule.actionString)) {
                 matchingActions.push(action);
             }

@@ -1,0 +1,50 @@
+{"level":"info","message":"Fetching events from Raspberry Pi at endpoint: https://ff2e-193-58-150-20.ngrok-free.app","timestamp":"2025-04-28 00:25:57"}
+{"level":"info","message":"Fetching events from Raspberry Pi at endpoint: https://ff2e-193-58-150-20.ngrok-free.app","timestamp":"2025-04-28 00:25:57"}
+{"level":"info","message":"Successfully fetched 3 events from https://ff2e-193-58-150-20.ngrok-free.app","timestamp":"2025-04-28 00:25:57"}
+{"level":"info","message":"Successfully fetched 3 events from https://ff2e-193-58-150-20.ngrok-free.app","timestamp":"2025-04-28 00:25:57"}
+{"level":"info","message":"LightAction constructor initialized for Living Room LIGHT in Living Room","timestamp":"2025-04-28 00:25:58"}
+{"level":"info","message":"LightAction constructor initialized for Living Room LIGHT in Living Room","timestamp":"2025-04-28 00:25:58"}
+{"level":"info","message":"Fetching events from Raspberry Pi at endpoint: https://ff2e-193-58-150-20.ngrok-free.app","timestamp":"2025-04-28 00:26:15"}
+{"level":"info","message":"Fetching events from Raspberry Pi at endpoint: https://ff2e-193-58-150-20.ngrok-free.app","timestamp":"2025-04-28 00:26:15"}
+{"level":"info","message":"Successfully fetched 3 events from https://ff2e-193-58-150-20.ngrok-free.app","timestamp":"2025-04-28 00:26:15"}
+{"level":"info","message":"Successfully fetched 3 events from https://ff2e-193-58-150-20.ngrok-free.app","timestamp":"2025-04-28 00:26:15"}
+{"level":"info","message":"LightAction constructor initialized for Living Room LIGHT in Living Room","timestamp":"2025-04-28 00:26:16"}
+{"level":"info","message":"LightAction constructor initialized for Living Room LIGHT in Living Room","timestamp":"2025-04-28 00:26:16"}
+{"level":"info","message":"Pre-parsed Light action: state=true, brightness=0, color=white","timestamp":"2025-04-28 00:26:17"}
+{"level":"info","message":"Pre-parsed Light action: state=true, brightness=0, color=white","timestamp":"2025-04-28 00:26:17"}
+{"level":"info","message":"Pre-parsed Light action: state=true, brightness=0, color=white","timestamp":"2025-04-28 00:26:17"}
+{"level":"info","message":"Pre-parsed Light action: state=true, brightness=0, color=white","timestamp":"2025-04-28 00:26:17"}
+{"level":"info","message":"Pre-parsed Light action: state=true, brightness=0, color=white","timestamp":"2025-04-28 00:26:17"}
+{"level":"info","message":"Pre-parsed Light action: state=true, brightness=0, color=white","timestamp":"2025-04-28 00:26:17"}
+{"level":"info","message":"Executing Light action: Living Room LIGHT (Living Room)","timestamp":"2025-04-28 00:26:18"}
+{"level":"info","message":"Getting Raspberry Pi IP for Living Room","timestamp":"2025-04-28 00:26:18"}
+{"level":"info","message":"Executing Light action: Living Room LIGHT (Living Room)","timestamp":"2025-04-28 00:26:18"}
+{"level":"info","message":"Getting Raspberry Pi IP for Living Room","timestamp":"2025-04-28 00:26:18"}
+{"level":"info","message":"Executing Light action: Living Room LIGHT (Living Room)","timestamp":"2025-04-28 00:26:18"}
+{"level":"info","message":"Getting Raspberry Pi IP for Living Room","timestamp":"2025-04-28 00:26:18"}
+{"level":"info","message":"Executing Light action: Living Room LIGHT (Living Room)","timestamp":"2025-04-28 00:26:18"}
+{"level":"info","message":"Getting Raspberry Pi IP for Living Room","timestamp":"2025-04-28 00:26:18"}
+{"level":"info","message":"Executing Light action: Living Room LIGHT (Living Room)","timestamp":"2025-04-28 00:26:18"}
+{"level":"info","message":"Getting Raspberry Pi IP for Living Room","timestamp":"2025-04-28 00:26:18"}
+{"level":"info","message":"Executing Light action: Living Room LIGHT (Living Room)","timestamp":"2025-04-28 00:26:18"}
+{"level":"info","message":"Getting Raspberry Pi IP for Living Room","timestamp":"2025-04-28 00:26:18"}
+{"level":"info","message":"Fetching events from Raspberry Pi at endpoint: https://ff2e-193-58-150-20.ngrok-free.app","timestamp":"2025-04-28 00:26:47"}
+{"level":"info","message":"Fetching events from Raspberry Pi at endpoint: https://ff2e-193-58-150-20.ngrok-free.app","timestamp":"2025-04-28 00:26:47"}
+{"level":"info","message":"Successfully fetched 3 events from https://ff2e-193-58-150-20.ngrok-free.app","timestamp":"2025-04-28 00:26:47"}
+{"level":"info","message":"Successfully fetched 3 events from https://ff2e-193-58-150-20.ngrok-free.app","timestamp":"2025-04-28 00:26:48"}
+{"level":"info","message":"LightAction constructor initialized for Living Room LIGHT in Living Room","timestamp":"2025-04-28 00:26:48"}
+{"level":"info","message":"LightAction constructor initialized for Living Room LIGHT in Living Room","timestamp":"2025-04-28 00:26:48"}
+{"level":"info","message":"Pre-parsed Light action: state=true, brightness=0, color=white","timestamp":"2025-04-28 00:26:49"}
+{"level":"info","message":"Pre-parsed Light action: state=true, brightness=0, color=white","timestamp":"2025-04-28 00:26:49"}
+{"level":"info","message":"Pre-parsed Light action: state=true, brightness=0, color=white","timestamp":"2025-04-28 00:26:49"}
+{"level":"info","message":"Pre-parsed Light action: state=true, brightness=0, color=white","timestamp":"2025-04-28 00:26:49"}
+{"level":"info","message":"Pre-parsed Light action: state=true, brightness=0, color=white","timestamp":"2025-04-28 00:26:49"}
+{"level":"info","message":"Pre-parsed Light action: state=true, brightness=0, color=white","timestamp":"2025-04-28 00:26:49"}
+{"level":"info","message":"Executing Light action: Living Room LIGHT (Living Room)","timestamp":"2025-04-28 00:26:50"}
+{"level":"info","message":"Getting Raspberry Pi IP for Living Room","timestamp":"2025-04-28 00:26:50"}
+{"level":"info","message":"Executing Light action: Living Room LIGHT (Living Room)","timestamp":"2025-04-28 00:26:50"}
+{"level":"info","message":"Getting Raspberry Pi IP for Living Room","timestamp":"2025-04-28 00:26:50"}
+{"level":"info","message":"Executing Light action: Living Room LIGHT (Living Room)","timestamp":"2025-04-28 00:26:50"}
+{"level":"info","message":"Getting Raspberry Pi IP for Living Room","timestamp":"2025-04-28 00:26:50"}
+{"level":"info","message":"Executing Light action: Living Room LIGHT (Living Room)","timestamp":"2025-04-28 00:26:50"}
+{"level":"info","message":"Getting Raspberry Pi IP for Living Room","timestamp":"2025-04-28 00:26:50"}

@@ -35795,3 +35795,1916 @@
 2025-04-09T16:18:42.828Z: Successfully updated event: living room humidity = 94.5
 2025-04-09T16:18:43.487Z: Polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":16.2,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":94.5,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
 2025-04-09T16:18:43.487Z: Polling interval active: true
+2025-04-27T18:33:39.746Z: Initializing sensor logging service
+2025-04-27T18:33:39.747Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T18:33:39.747Z: Using existing log file
+2025-04-27T18:33:39.748Z: Log stream created and logging enabled
+2025-04-27T18:33:39.749Z: No polling was active to stop
+2025-04-27T18:33:39.750Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T18:33:39.750Z: Polling interval set with ID: 620
+2025-04-27T18:33:39.751Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T18:33:39.822Z: Initializing sensor logging service
+2025-04-27T18:33:39.822Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T18:33:39.823Z: Using existing log file
+2025-04-27T18:33:39.824Z: Closing existing log stream before creating new one
+2025-04-27T18:33:39.825Z: Log stream created and logging enabled
+2025-04-27T18:33:39.825Z: Stopping sensor polling interval: 620
+2025-04-27T18:33:39.825Z: Closing logging service
+2025-04-27T18:33:39.826Z: Closing sensor logging service
+2025-04-27T18:33:39.826Z: Closing log stream
+2025-04-27T18:33:39.826Z: Logging stopped at 2025-04-27T18:33:39.826Z
+2025-04-27T18:33:39.827Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T18:33:39.827Z: Polling interval set with ID: 695
+2025-04-27T18:33:39.827Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T18:33:39.751Z: ERROR - No sensor data received from Sensibo
+2025-04-27T18:33:39.995Z: Initial polling result: {"success":false,"error":"No sensor data received from Sensibo"}
+2025-04-27T18:33:39.827Z: ERROR - No sensor data received from Sensibo
+2025-04-27T18:33:40.055Z: Initial polling result: {"success":false,"error":"No sensor data received from Sensibo"}
+2025-04-27T18:37:44.038Z: Initializing sensor logging service
+2025-04-27T18:37:44.039Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T18:37:44.039Z: Using existing log file
+2025-04-27T18:37:44.041Z: Log stream created and logging enabled
+2025-04-27T18:37:44.042Z: No polling was active to stop
+2025-04-27T18:37:44.043Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T18:37:44.043Z: Polling interval set with ID: 541
+2025-04-27T18:37:44.044Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T18:37:44.103Z: Initializing sensor logging service
+2025-04-27T18:37:44.104Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T18:37:44.104Z: Using existing log file
+2025-04-27T18:37:44.105Z: Closing existing log stream before creating new one
+2025-04-27T18:37:44.105Z: Log stream created and logging enabled
+2025-04-27T18:37:44.106Z: Stopping sensor polling interval: 541
+2025-04-27T18:37:44.106Z: Closing logging service
+2025-04-27T18:37:44.106Z: Closing sensor logging service
+2025-04-27T18:37:44.106Z: Closing log stream
+2025-04-27T18:37:44.106Z: Logging stopped at 2025-04-27T18:37:44.106Z
+2025-04-27T18:37:44.107Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T18:37:44.107Z: Polling interval set with ID: 598
+2025-04-27T18:37:44.108Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T18:37:44.044Z: ERROR - No sensor data received from Sensibo
+2025-04-27T18:37:44.279Z: Initial polling result: {"success":false,"error":"No sensor data received from Sensibo"}
+2025-04-27T18:37:44.108Z: ERROR - No sensor data received from Sensibo
+2025-04-27T18:37:44.337Z: Initial polling result: {"success":false,"error":"No sensor data received from Sensibo"}
+2025-04-27T18:38:27.784Z: Initializing sensor logging service
+2025-04-27T18:38:27.785Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T18:38:27.785Z: Using existing log file
+2025-04-27T18:38:27.793Z: Initializing sensor logging service
+2025-04-27T18:38:27.793Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T18:38:27.794Z: Using existing log file
+2025-04-27T18:38:27.795Z: Log stream created and logging enabled
+2025-04-27T18:38:27.796Z: No polling was active to stop
+2025-04-27T18:38:27.796Z: Closing existing log stream before creating new one
+2025-04-27T18:38:27.796Z: Log stream created and logging enabled
+2025-04-27T18:38:27.797Z: No polling was active to stop
+2025-04-27T18:38:27.798Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T18:38:27.798Z: Polling interval set with ID: 572
+2025-04-27T18:38:27.798Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T18:38:27.805Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T18:38:27.805Z: Clearing existing polling interval
+2025-04-27T18:38:27.805Z: Polling interval set with ID: 592
+2025-04-27T18:38:27.806Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T18:38:27.806Z: ERROR - No sensor data received from Sensibo
+2025-04-27T18:38:28.080Z: Initial polling result: {"success":false,"error":"No sensor data received from Sensibo"}
+2025-04-27T18:38:27.798Z: ERROR - No sensor data received from Sensibo
+2025-04-27T18:38:28.082Z: Initial polling result: {"success":false,"error":"No sensor data received from Sensibo"}
+2025-04-27T18:40:07.809Z: Polling for sensor data... (poll #1)
+2025-04-27T18:40:07.811Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T18:40:07.811Z: ERROR - No sensor data received from Sensibo
+2025-04-27T18:40:08.034Z: Polling result: {"success":false,"error":"No sensor data received from Sensibo"}
+2025-04-27T18:40:08.034Z: Polling interval active: true
+2025-04-27T18:41:47.810Z: Polling for sensor data... (poll #2)
+2025-04-27T18:41:47.811Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T18:41:47.811Z: ERROR - No sensor data received from Sensibo
+2025-04-27T18:41:48.065Z: Polling result: {"success":false,"error":"No sensor data received from Sensibo"}
+2025-04-27T18:41:48.065Z: Polling interval active: true
+2025-04-27T18:43:28.743Z: Initializing sensor logging service
+2025-04-27T18:43:28.744Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T18:43:28.745Z: Using existing log file
+2025-04-27T18:43:28.746Z: Log stream created and logging enabled
+2025-04-27T18:43:28.747Z: No polling was active to stop
+2025-04-27T18:43:28.748Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T18:43:28.748Z: Polling interval set with ID: 545
+2025-04-27T18:43:28.749Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T18:43:28.761Z: Initializing sensor logging service
+2025-04-27T18:43:28.762Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T18:43:28.762Z: Using existing log file
+2025-04-27T18:43:28.763Z: Closing existing log stream before creating new one
+2025-04-27T18:43:28.763Z: Log stream created and logging enabled
+2025-04-27T18:43:28.764Z: Stopping sensor polling interval: 545
+2025-04-27T18:43:28.764Z: Closing logging service
+2025-04-27T18:43:28.764Z: Closing sensor logging service
+2025-04-27T18:43:28.764Z: Closing log stream
+2025-04-27T18:43:28.764Z: Logging stopped at 2025-04-27T18:43:28.764Z
+2025-04-27T18:43:28.765Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T18:43:28.765Z: Polling interval set with ID: 606
+2025-04-27T18:43:28.766Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T18:43:28.749Z: ERROR - No sensor data received from Sensibo
+2025-04-27T18:43:28.987Z: Initial polling result: {"success":false,"error":"No sensor data received from Sensibo"}
+2025-04-27T18:43:28.766Z: ERROR - No sensor data received from Sensibo
+2025-04-27T18:43:28.993Z: Initial polling result: {"success":false,"error":"No sensor data received from Sensibo"}
+2025-04-27T18:44:06.501Z: Initializing sensor logging service
+2025-04-27T18:44:06.502Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T18:44:06.503Z: Using existing log file
+2025-04-27T18:44:06.504Z: Log stream created and logging enabled
+2025-04-27T18:44:06.504Z: No polling was active to stop
+2025-04-27T18:44:06.505Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T18:44:06.505Z: Polling interval set with ID: 546
+2025-04-27T18:44:06.506Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T18:44:06.537Z: Initializing sensor logging service
+2025-04-27T18:44:06.537Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T18:44:06.537Z: Using existing log file
+2025-04-27T18:44:06.538Z: Closing existing log stream before creating new one
+2025-04-27T18:44:06.538Z: Log stream created and logging enabled
+2025-04-27T18:44:06.538Z: Stopping sensor polling interval: 546
+2025-04-27T18:44:06.538Z: Closing logging service
+2025-04-27T18:44:06.539Z: Closing sensor logging service
+2025-04-27T18:44:06.539Z: Closing log stream
+2025-04-27T18:44:06.539Z: Logging stopped at 2025-04-27T18:44:06.539Z
+2025-04-27T18:44:06.541Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T18:44:06.541Z: Polling interval set with ID: 614
+2025-04-27T18:44:06.541Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T18:44:06.506Z: ERROR - No sensor data received from Sensibo
+2025-04-27T18:44:06.794Z: Initial polling result: {"success":false,"error":"No sensor data received from Sensibo"}
+2025-04-27T18:44:06.541Z: ERROR - No sensor data received from Sensibo
+2025-04-27T18:44:06.799Z: Initial polling result: {"success":false,"error":"No sensor data received from Sensibo"}
+2025-04-27T18:45:46.542Z: Polling for sensor data... (poll #1)
+2025-04-27T18:45:46.542Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T18:45:46.542Z: ERROR - No sensor data received from Sensibo
+2025-04-27T18:45:46.769Z: Polling result: {"success":false,"error":"No sensor data received from Sensibo"}
+2025-04-27T18:45:46.769Z: Polling interval active: true
+2025-04-27T18:47:26.545Z: Polling for sensor data... (poll #2)
+2025-04-27T18:47:26.546Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T18:47:26.546Z: ERROR - No sensor data received from Sensibo
+2025-04-27T18:47:26.779Z: Polling result: {"success":false,"error":"No sensor data received from Sensibo"}
+2025-04-27T18:47:26.779Z: Polling interval active: true
+2025-04-27T18:56:39.631Z: Initializing sensor logging service
+2025-04-27T18:56:39.632Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T18:56:39.633Z: Using existing log file
+2025-04-27T18:56:39.634Z: Log stream created and logging enabled
+2025-04-27T18:56:39.635Z: No polling was active to stop
+2025-04-27T18:56:39.636Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T18:56:39.636Z: Polling interval set with ID: 540
+2025-04-27T18:56:39.637Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T18:56:39.677Z: Initializing sensor logging service
+2025-04-27T18:56:39.678Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T18:56:39.678Z: Using existing log file
+2025-04-27T18:56:39.679Z: Closing existing log stream before creating new one
+2025-04-27T18:56:39.679Z: Log stream created and logging enabled
+2025-04-27T18:56:39.680Z: Stopping sensor polling interval: 540
+2025-04-27T18:56:39.680Z: Closing logging service
+2025-04-27T18:56:39.680Z: Closing sensor logging service
+2025-04-27T18:56:39.680Z: Closing log stream
+2025-04-27T18:56:39.680Z: Logging stopped at 2025-04-27T18:56:39.680Z
+2025-04-27T18:56:39.681Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T18:56:39.681Z: Polling interval set with ID: 600
+2025-04-27T18:56:39.682Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T18:56:39.637Z: ERROR - No sensor data received from Sensibo
+2025-04-27T18:56:39.873Z: Initial polling result: {"success":false,"error":"No sensor data received from Sensibo"}
+2025-04-27T18:56:39.682Z: ERROR - No sensor data received from Sensibo
+2025-04-27T18:56:39.926Z: Initial polling result: {"success":false,"error":"No sensor data received from Sensibo"}
+2025-04-27T18:57:33.300Z: Initializing sensor logging service
+2025-04-27T18:57:33.301Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T18:57:33.301Z: Using existing log file
+2025-04-27T18:57:33.302Z: Log stream created and logging enabled
+2025-04-27T18:57:33.303Z: No polling was active to stop
+2025-04-27T18:57:33.304Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T18:57:33.304Z: Polling interval set with ID: 512
+2025-04-27T18:57:33.304Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T18:57:33.343Z: Initializing sensor logging service
+2025-04-27T18:57:33.344Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T18:57:33.344Z: Using existing log file
+2025-04-27T18:57:33.345Z: Closing existing log stream before creating new one
+2025-04-27T18:57:33.345Z: Log stream created and logging enabled
+2025-04-27T18:57:33.346Z: Stopping sensor polling interval: 512
+2025-04-27T18:57:33.346Z: Closing logging service
+2025-04-27T18:57:33.346Z: Closing sensor logging service
+2025-04-27T18:57:33.346Z: Closing log stream
+2025-04-27T18:57:33.346Z: Logging stopped at 2025-04-27T18:57:33.346Z
+2025-04-27T18:57:33.348Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T18:57:33.348Z: Polling interval set with ID: 571
+2025-04-27T18:57:33.348Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T18:57:33.304Z: Received sensor data: {"temperature":21,"humidity":70.1}
+2025-04-27T18:57:33.304Z: Formatted events: [{"name":"living room temperature","value":21,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":70.1,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T18:57:33.937Z: logSensorData called with 2 sensors
+2025-04-27T18:57:33.937Z: WARNING - Logging is disabled but logSensorData was called
+2025-04-27T18:57:33.937Z: Attempting to re-initialize logging with existing events
+2025-04-27T18:57:33.938Z: Initializing sensor logging service
+2025-04-27T18:57:33.938Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T18:57:33.939Z: Using existing log file
+2025-04-27T18:57:33.937Z: ERROR - Logging service not initialized (logStream is null)
+2025-04-27T18:57:33.304Z: ERROR - Failed to log sensor data: Logging service not initialized
+2025-04-27T18:57:33.304Z: Failed to update event living room temperature: Event living room temperature not found
+2025-04-27T18:57:33.304Z: Failed to update event living room humidity: Event living room humidity not found
+2025-04-27T18:57:33.941Z: Initial polling result: {"success":true,"updatedEvents":[],"totalEvents":2,"successfulUpdates":0}
+2025-04-27T18:57:33.942Z: Log stream created and logging enabled
+2025-04-27T18:57:33.937Z: Re-initialization result: {"success":true,"message":"Sensor logging initialized to C:\\Users\\amin\\Desktop\\smart-space\\SmartSchool-Server\\logs\\sensor_data.csv","columns":[["living room temperature",1],["living room humidity",2]]}
+2025-04-27T18:57:33.348Z: Received sensor data: {"temperature":21,"humidity":70.1}
+2025-04-27T18:57:33.348Z: Formatted events: [{"name":"living room temperature","value":21,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":70.1,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T18:57:34.043Z: logSensorData called with 2 sensors
+2025-04-27T18:57:34.043Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T18:57:34.043Z: Setting spaceId column 3 to 41413915
+2025-04-27T18:57:34.043Z: Setting column 1 (living room temperature) to 21
+2025-04-27T18:57:34.043Z: Setting column 2 (living room humidity) to 70.1
+2025-04-27T18:57:34.043Z: Writing row to log file: 2025-04-27 18:57:34,21,70.1,41413915
+2025-04-27T18:57:34.043Z: Successfully wrote to log file using appendFileSync
+2025-04-27T18:57:33.348Z: Successfully logged sensor data
+2025-04-27T18:57:33.348Z: Failed to update event living room temperature: Event living room temperature not found
+2025-04-27T18:57:33.348Z: Failed to update event living room humidity: Event living room humidity not found
+2025-04-27T18:57:34.046Z: Initial polling result: {"success":true,"updatedEvents":[],"totalEvents":2,"successfulUpdates":0}
+2025-04-27T18:59:13.358Z: Polling for sensor data... (poll #1)
+2025-04-27T18:59:13.359Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T18:59:13.359Z: Received sensor data: {"temperature":21,"humidity":70.1}
+2025-04-27T18:59:13.359Z: Formatted events: [{"name":"living room temperature","value":21,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":70.1,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T18:59:13.882Z: logSensorData called with 2 sensors
+2025-04-27T18:59:13.882Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T18:59:13.882Z: Setting spaceId column 3 to 41413915
+2025-04-27T18:59:13.882Z: Setting column 1 (living room temperature) to 21
+2025-04-27T18:59:13.882Z: Setting column 2 (living room humidity) to 70.1
+2025-04-27T18:59:13.882Z: Writing row to log file: 2025-04-27 18:59:13,21,70.1,41413915
+2025-04-27T18:59:13.882Z: Successfully wrote to log file using appendFileSync
+2025-04-27T18:59:13.359Z: Successfully logged sensor data
+2025-04-27T18:59:13.359Z: Failed to update event living room temperature: Event living room temperature not found
+2025-04-27T18:59:13.359Z: Failed to update event living room humidity: Event living room humidity not found
+2025-04-27T18:59:13.885Z: Polling result: {"success":true,"updatedEvents":[],"totalEvents":2,"successfulUpdates":0}
+2025-04-27T18:59:13.885Z: Polling interval active: true
+2025-04-27T19:01:35.102Z: Initializing sensor logging service
+2025-04-27T19:01:35.103Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T19:01:35.104Z: Using existing log file
+2025-04-27T19:01:35.105Z: Initializing sensor logging service
+2025-04-27T19:01:35.105Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T19:01:35.106Z: Using existing log file
+2025-04-27T19:01:35.106Z: Log stream created and logging enabled
+2025-04-27T19:01:35.107Z: No polling was active to stop
+2025-04-27T19:01:35.107Z: Closing existing log stream before creating new one
+2025-04-27T19:01:35.108Z: Log stream created and logging enabled
+2025-04-27T19:01:35.108Z: No polling was active to stop
+2025-04-27T19:01:35.109Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T19:01:35.109Z: Polling interval set with ID: 758
+2025-04-27T19:01:35.110Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T19:01:35.112Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T19:01:35.112Z: Clearing existing polling interval
+2025-04-27T19:01:35.112Z: Polling interval set with ID: 769
+2025-04-27T19:01:35.113Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T19:01:35.113Z: Received sensor data: {"temperature":21,"humidity":70.2}
+2025-04-27T19:01:35.113Z: Formatted events: [{"name":"living room temperature","value":21,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":70.2,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T19:01:35.721Z: logSensorData called with 2 sensors
+2025-04-27T19:01:35.721Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T19:01:35.721Z: Setting spaceId column 3 to 41413915
+2025-04-27T19:01:35.721Z: Setting column 1 (living room temperature) to 21
+2025-04-27T19:01:35.721Z: Setting column 2 (living room humidity) to 70.2
+2025-04-27T19:01:35.721Z: Writing row to log file: 2025-04-27 19:01:35,21,70.2,41413915
+2025-04-27T19:01:35.721Z: Successfully wrote to log file using appendFileSync
+2025-04-27T19:01:35.113Z: Successfully logged sensor data
+2025-04-27T19:01:35.113Z: Successfully updated event: living room temperature = 21
+2025-04-27T19:01:35.113Z: Successfully updated event: living room humidity = 70.2
+2025-04-27T19:01:35.727Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":70.2,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T19:01:35.110Z: Received sensor data: {"temperature":21,"humidity":70.2}
+2025-04-27T19:01:35.110Z: Formatted events: [{"name":"living room temperature","value":21,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":70.2,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T19:01:35.730Z: logSensorData called with 2 sensors
+2025-04-27T19:01:35.730Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T19:01:35.730Z: Setting spaceId column 3 to 41413915
+2025-04-27T19:01:35.730Z: Setting column 1 (living room temperature) to 21
+2025-04-27T19:01:35.730Z: Setting column 2 (living room humidity) to 70.2
+2025-04-27T19:01:35.730Z: Writing row to log file: 2025-04-27 19:01:35,21,70.2,41413915
+2025-04-27T19:01:35.730Z: Successfully wrote to log file using appendFileSync
+2025-04-27T19:01:35.110Z: Successfully logged sensor data
+2025-04-27T19:01:35.110Z: Successfully updated event: living room temperature = 21
+2025-04-27T19:01:35.110Z: Successfully updated event: living room humidity = 70.2
+2025-04-27T19:01:35.733Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":70.2,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T19:10:52.982Z: Initializing sensor logging service
+2025-04-27T19:10:52.982Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T19:10:52.983Z: Using existing log file
+2025-04-27T19:10:52.984Z: Log stream created and logging enabled
+2025-04-27T19:10:52.985Z: No polling was active to stop
+2025-04-27T19:10:52.986Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T19:10:52.986Z: Polling interval set with ID: 722
+2025-04-27T19:10:52.987Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T19:10:52.987Z: Received sensor data: {"temperature":21,"humidity":70.1}
+2025-04-27T19:10:52.987Z: Formatted events: [{"name":"living room temperature","value":21,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":70.1,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T19:10:53.517Z: logSensorData called with 2 sensors
+2025-04-27T19:10:53.517Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T19:10:53.517Z: Setting spaceId column 3 to 41413915
+2025-04-27T19:10:53.517Z: Setting column 1 (living room temperature) to 21
+2025-04-27T19:10:53.517Z: Setting column 2 (living room humidity) to 70.1
+2025-04-27T19:10:53.517Z: Writing row to log file: 2025-04-27 19:10:53,21,70.1,41413915
+2025-04-27T19:10:53.517Z: Successfully wrote to log file using appendFileSync
+2025-04-27T19:10:52.987Z: Successfully logged sensor data
+2025-04-27T19:10:52.987Z: Successfully updated event: living room temperature = 21
+2025-04-27T19:10:52.987Z: Successfully updated event: living room humidity = 70.1
+2025-04-27T19:10:53.523Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":70.1,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T19:10:53.762Z: Initializing sensor logging service
+2025-04-27T19:10:53.762Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T19:10:53.763Z: Using existing log file
+2025-04-27T19:10:53.764Z: Closing existing log stream before creating new one
+2025-04-27T19:10:53.765Z: Log stream created and logging enabled
+2025-04-27T19:10:53.765Z: Stopping sensor polling interval: 722
+2025-04-27T19:10:53.765Z: Closing logging service
+2025-04-27T19:10:53.766Z: Closing sensor logging service
+2025-04-27T19:10:53.766Z: Closing log stream
+2025-04-27T19:10:53.766Z: Logging stopped at 2025-04-27T19:10:53.766Z
+2025-04-27T19:10:53.767Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T19:10:53.767Z: Polling interval set with ID: 889
+2025-04-27T19:10:53.767Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T19:10:53.767Z: Received sensor data: {"temperature":21,"humidity":70.1}
+2025-04-27T19:10:53.767Z: Formatted events: [{"name":"living room temperature","value":21,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":70.1,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T19:10:54.309Z: logSensorData called with 2 sensors
+2025-04-27T19:10:54.309Z: WARNING - Logging is disabled but logSensorData was called
+2025-04-27T19:10:54.309Z: Attempting to re-initialize logging with existing events
+2025-04-27T19:10:54.310Z: Initializing sensor logging service
+2025-04-27T19:10:54.310Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T19:10:54.311Z: Using existing log file
+2025-04-27T19:10:54.309Z: ERROR - Logging service not initialized (logStream is null)
+2025-04-27T19:10:53.767Z: ERROR - Failed to log sensor data: Logging service not initialized
+2025-04-27T19:10:53.767Z: Successfully updated event: living room temperature = 21
+2025-04-27T19:10:53.767Z: Successfully updated event: living room humidity = 70.1
+2025-04-27T19:10:54.316Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":70.1,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T19:10:54.317Z: Log stream created and logging enabled
+2025-04-27T19:10:54.309Z: Re-initialization result: {"success":true,"message":"Sensor logging initialized to C:\\Users\\amin\\Desktop\\smart-space\\SmartSchool-Server\\logs\\sensor_data.csv","columns":[["living room temperature",1],["living room humidity",2]]}
+2025-04-27T19:17:44.455Z: Initializing sensor logging service
+2025-04-27T19:17:44.455Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T19:17:44.456Z: Using existing log file
+2025-04-27T19:17:44.456Z: Log stream created and logging enabled
+2025-04-27T19:17:44.457Z: No polling was active to stop
+2025-04-27T19:17:44.458Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T19:17:44.458Z: Polling interval set with ID: 735
+2025-04-27T19:17:44.458Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T19:17:44.467Z: Initializing sensor logging service
+2025-04-27T19:17:44.467Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T19:17:44.468Z: Using existing log file
+2025-04-27T19:17:44.469Z: Closing existing log stream before creating new one
+2025-04-27T19:17:44.470Z: Log stream created and logging enabled
+2025-04-27T19:17:44.470Z: Stopping sensor polling interval: 735
+2025-04-27T19:17:44.470Z: Closing logging service
+2025-04-27T19:17:44.471Z: Closing sensor logging service
+2025-04-27T19:17:44.471Z: Closing log stream
+2025-04-27T19:17:44.471Z: Logging stopped at 2025-04-27T19:17:44.471Z
+2025-04-27T19:17:44.472Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T19:17:44.472Z: Polling interval set with ID: 789
+2025-04-27T19:17:44.472Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T19:17:44.458Z: Received sensor data: {"temperature":21.1,"humidity":69.8}
+2025-04-27T19:17:44.458Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.8,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T19:17:44.976Z: logSensorData called with 2 sensors
+2025-04-27T19:17:44.976Z: WARNING - Logging is disabled but logSensorData was called
+2025-04-27T19:17:44.976Z: Attempting to re-initialize logging with existing events
+2025-04-27T19:17:44.977Z: Initializing sensor logging service
+2025-04-27T19:17:44.978Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T19:17:44.978Z: Using existing log file
+2025-04-27T19:17:44.976Z: ERROR - Logging service not initialized (logStream is null)
+2025-04-27T19:17:44.458Z: ERROR - Failed to log sensor data: Logging service not initialized
+2025-04-27T19:17:44.458Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T19:17:44.458Z: Successfully updated event: living room humidity = 69.8
+2025-04-27T19:17:44.982Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.8,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T19:17:44.983Z: Log stream created and logging enabled
+2025-04-27T19:17:44.976Z: Re-initialization result: {"success":true,"message":"Sensor logging initialized to C:\\Users\\amin\\Desktop\\smart-space\\SmartSchool-Server\\logs\\sensor_data.csv","columns":[["living room temperature",1],["living room humidity",2]]}
+2025-04-27T19:17:44.472Z: Received sensor data: {"temperature":21.1,"humidity":69.8}
+2025-04-27T19:17:44.472Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.8,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T19:17:45.114Z: logSensorData called with 2 sensors
+2025-04-27T19:17:45.114Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T19:17:45.114Z: Setting spaceId column 3 to 41413915
+2025-04-27T19:17:45.114Z: Setting column 1 (living room temperature) to 21.1
+2025-04-27T19:17:45.114Z: Setting column 2 (living room humidity) to 69.8
+2025-04-27T19:17:45.114Z: Writing row to log file: 2025-04-27 19:17:45,21.1,69.8,41413915
+2025-04-27T19:17:45.114Z: Successfully wrote to log file using appendFileSync
+2025-04-27T19:17:44.472Z: Successfully logged sensor data
+2025-04-27T19:17:44.472Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T19:17:44.472Z: Successfully updated event: living room humidity = 69.8
+2025-04-27T19:17:45.121Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.8,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T19:19:27.472Z: Initializing sensor logging service
+2025-04-27T19:19:27.472Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T19:19:27.473Z: Using existing log file
+2025-04-27T19:19:27.474Z: Log stream created and logging enabled
+2025-04-27T19:19:27.475Z: No polling was active to stop
+2025-04-27T19:19:27.476Z: Initializing sensor logging service
+2025-04-27T19:19:27.476Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T19:19:27.476Z: Using existing log file
+2025-04-27T19:19:27.477Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T19:19:27.477Z: Polling interval set with ID: 722
+2025-04-27T19:19:27.478Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T19:19:27.480Z: Closing existing log stream before creating new one
+2025-04-27T19:19:27.480Z: Log stream created and logging enabled
+2025-04-27T19:19:27.481Z: Stopping sensor polling interval: 722
+2025-04-27T19:19:27.481Z: Closing logging service
+2025-04-27T19:19:27.481Z: Closing sensor logging service
+2025-04-27T19:19:27.481Z: Closing log stream
+2025-04-27T19:19:27.481Z: Logging stopped at 2025-04-27T19:19:27.481Z
+2025-04-27T19:19:27.488Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T19:19:27.488Z: Polling interval set with ID: 761
+2025-04-27T19:19:27.489Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T19:19:27.489Z: Received sensor data: {"temperature":21.1,"humidity":69.8}
+2025-04-27T19:19:27.489Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.8,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T19:19:28.038Z: logSensorData called with 2 sensors
+2025-04-27T19:19:28.038Z: WARNING - Logging is disabled but logSensorData was called
+2025-04-27T19:19:28.038Z: Attempting to re-initialize logging with existing events
+2025-04-27T19:19:28.038Z: Initializing sensor logging service
+2025-04-27T19:19:28.038Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T19:19:28.039Z: Using existing log file
+2025-04-27T19:19:28.038Z: ERROR - Logging service not initialized (logStream is null)
+2025-04-27T19:19:27.489Z: ERROR - Failed to log sensor data: Logging service not initialized
+2025-04-27T19:19:27.489Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T19:19:27.489Z: Successfully updated event: living room humidity = 69.8
+2025-04-27T19:19:28.043Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.8,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T19:19:28.044Z: Log stream created and logging enabled
+2025-04-27T19:19:28.038Z: Re-initialization result: {"success":true,"message":"Sensor logging initialized to C:\\Users\\amin\\Desktop\\smart-space\\SmartSchool-Server\\logs\\sensor_data.csv","columns":[["living room temperature",1],["living room humidity",2]]}
+2025-04-27T19:19:27.478Z: Received sensor data: {"temperature":21.1,"humidity":69.8}
+2025-04-27T19:19:27.478Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.8,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T19:19:28.112Z: logSensorData called with 2 sensors
+2025-04-27T19:19:28.112Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T19:19:28.112Z: Setting spaceId column 3 to 41413915
+2025-04-27T19:19:28.112Z: Setting column 1 (living room temperature) to 21.1
+2025-04-27T19:19:28.112Z: Setting column 2 (living room humidity) to 69.8
+2025-04-27T19:19:28.112Z: Writing row to log file: 2025-04-27 19:19:28,21.1,69.8,41413915
+2025-04-27T19:19:28.112Z: Successfully wrote to log file using appendFileSync
+2025-04-27T19:19:27.478Z: Successfully logged sensor data
+2025-04-27T19:19:27.478Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T19:19:27.478Z: Successfully updated event: living room humidity = 69.8
+2025-04-27T19:19:28.117Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.8,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T19:20:52.813Z: Initializing sensor logging service
+2025-04-27T19:20:52.814Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T19:20:52.814Z: Using existing log file
+2025-04-27T19:20:52.815Z: Log stream created and logging enabled
+2025-04-27T19:20:52.816Z: No polling was active to stop
+2025-04-27T19:20:52.817Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T19:20:52.817Z: Polling interval set with ID: 719
+2025-04-27T19:20:52.818Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T19:20:55.610Z: Initializing sensor logging service
+2025-04-27T19:20:55.611Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T19:20:55.612Z: Using existing log file
+2025-04-27T19:20:55.613Z: Initializing sensor logging service
+2025-04-27T19:20:55.613Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T19:20:55.614Z: Using existing log file
+2025-04-27T19:20:55.615Z: Log stream created and logging enabled
+2025-04-27T19:20:55.616Z: No polling was active to stop
+2025-04-27T19:20:55.616Z: Closing existing log stream before creating new one
+2025-04-27T19:20:55.617Z: Log stream created and logging enabled
+2025-04-27T19:20:55.618Z: No polling was active to stop
+2025-04-27T19:20:55.621Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T19:20:55.621Z: Polling interval set with ID: 759
+2025-04-27T19:20:55.622Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T19:20:55.625Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T19:20:55.625Z: Clearing existing polling interval
+2025-04-27T19:20:55.625Z: Polling interval set with ID: 770
+2025-04-27T19:20:55.626Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T19:20:55.622Z: Received sensor data: {"temperature":21.1,"humidity":69.8}
+2025-04-27T19:20:55.622Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.8,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T19:20:56.182Z: logSensorData called with 2 sensors
+2025-04-27T19:20:56.182Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T19:20:56.182Z: Setting spaceId column 3 to 41413915
+2025-04-27T19:20:56.182Z: Setting column 1 (living room temperature) to 21.1
+2025-04-27T19:20:56.182Z: Setting column 2 (living room humidity) to 69.8
+2025-04-27T19:20:56.182Z: Writing row to log file: 2025-04-27 19:20:56,21.1,69.8,41413915
+2025-04-27T19:20:56.182Z: Successfully wrote to log file using appendFileSync
+2025-04-27T19:20:55.622Z: Successfully logged sensor data
+2025-04-27T19:20:55.622Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T19:20:55.622Z: Successfully updated event: living room humidity = 69.8
+2025-04-27T19:20:56.188Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.8,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T19:20:55.626Z: Received sensor data: {"temperature":21.1,"humidity":69.8}
+2025-04-27T19:20:55.626Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.8,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T19:20:56.195Z: logSensorData called with 2 sensors
+2025-04-27T19:20:56.195Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T19:20:56.195Z: Setting spaceId column 3 to 41413915
+2025-04-27T19:20:56.195Z: Setting column 1 (living room temperature) to 21.1
+2025-04-27T19:20:56.195Z: Setting column 2 (living room humidity) to 69.8
+2025-04-27T19:20:56.195Z: Writing row to log file: 2025-04-27 19:20:56,21.1,69.8,41413915
+2025-04-27T19:20:56.195Z: Successfully wrote to log file using appendFileSync
+2025-04-27T19:20:55.626Z: Successfully logged sensor data
+2025-04-27T19:20:55.626Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T19:20:55.626Z: Successfully updated event: living room humidity = 69.8
+2025-04-27T19:20:56.199Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.8,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T19:20:59.128Z: Initializing sensor logging service
+2025-04-27T19:20:59.129Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T19:20:59.129Z: Using existing log file
+2025-04-27T19:20:59.130Z: Log stream created and logging enabled
+2025-04-27T19:20:59.131Z: No polling was active to stop
+2025-04-27T19:20:59.131Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T19:20:59.131Z: Polling interval set with ID: 604
+2025-04-27T19:20:59.132Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T19:20:59.198Z: Initializing sensor logging service
+2025-04-27T19:20:59.198Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T19:20:59.198Z: Using existing log file
+2025-04-27T19:20:59.199Z: Closing existing log stream before creating new one
+2025-04-27T19:20:59.200Z: Log stream created and logging enabled
+2025-04-27T19:20:59.200Z: Stopping sensor polling interval: 604
+2025-04-27T19:20:59.200Z: Closing logging service
+2025-04-27T19:20:59.200Z: Closing sensor logging service
+2025-04-27T19:20:59.200Z: Closing log stream
+2025-04-27T19:20:59.200Z: Logging stopped at 2025-04-27T19:20:59.200Z
+2025-04-27T19:20:59.202Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T19:20:59.202Z: Polling interval set with ID: 665
+2025-04-27T19:20:59.203Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T19:21:01.556Z: Initializing sensor logging service
+2025-04-27T19:21:01.557Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T19:21:01.557Z: Using existing log file
+2025-04-27T19:21:01.558Z: Log stream created and logging enabled
+2025-04-27T19:21:01.559Z: No polling was active to stop
+2025-04-27T19:21:01.560Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T19:21:01.560Z: Polling interval set with ID: 610
+2025-04-27T19:21:01.561Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T19:21:01.593Z: Initializing sensor logging service
+2025-04-27T19:21:01.593Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T19:21:01.593Z: Using existing log file
+2025-04-27T19:21:01.594Z: Closing existing log stream before creating new one
+2025-04-27T19:21:01.595Z: Log stream created and logging enabled
+2025-04-27T19:21:01.595Z: Stopping sensor polling interval: 610
+2025-04-27T19:21:01.595Z: Closing logging service
+2025-04-27T19:21:01.596Z: Closing sensor logging service
+2025-04-27T19:21:01.596Z: Closing log stream
+2025-04-27T19:21:01.596Z: Logging stopped at 2025-04-27T19:21:01.596Z
+2025-04-27T19:21:01.597Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T19:21:01.597Z: Polling interval set with ID: 665
+2025-04-27T19:21:01.597Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T19:21:01.561Z: ERROR - No sensor data received from Sensibo
+2025-04-27T19:21:02.053Z: Initial polling result: {"success":false,"error":"No sensor data received from Sensibo"}
+2025-04-27T19:21:01.597Z: Received sensor data: {"temperature":21.1,"humidity":69.8}
+2025-04-27T19:21:01.597Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.8,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T19:21:02.169Z: logSensorData called with 2 sensors
+2025-04-27T19:21:02.169Z: WARNING - Logging is disabled but logSensorData was called
+2025-04-27T19:21:02.169Z: Attempting to re-initialize logging with existing events
+2025-04-27T19:21:02.170Z: Initializing sensor logging service
+2025-04-27T19:21:02.170Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T19:21:02.171Z: Using existing log file
+2025-04-27T19:21:02.169Z: ERROR - Logging service not initialized (logStream is null)
+2025-04-27T19:21:01.597Z: ERROR - Failed to log sensor data: Logging service not initialized
+2025-04-27T19:21:01.597Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T19:21:01.597Z: Successfully updated event: living room humidity = 69.8
+2025-04-27T19:21:02.174Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.8,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T19:21:02.175Z: Log stream created and logging enabled
+2025-04-27T19:21:02.169Z: Re-initialization result: {"success":true,"message":"Sensor logging initialized to C:\\Users\\amin\\Desktop\\smart-space\\SmartSchool-Server\\logs\\sensor_data.csv","columns":[["living room temperature",1],["living room humidity",2]]}
+2025-04-27T19:21:07.882Z: Initializing sensor logging service
+2025-04-27T19:21:07.883Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T19:21:07.883Z: Using existing log file
+2025-04-27T19:21:07.884Z: Log stream created and logging enabled
+2025-04-27T19:21:07.885Z: No polling was active to stop
+2025-04-27T19:21:07.885Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T19:21:07.885Z: Polling interval set with ID: 736
+2025-04-27T19:21:07.886Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T19:21:08.269Z: Initializing sensor logging service
+2025-04-27T19:21:08.270Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T19:21:08.270Z: Using existing log file
+2025-04-27T19:21:08.271Z: Closing existing log stream before creating new one
+2025-04-27T19:21:08.271Z: Log stream created and logging enabled
+2025-04-27T19:21:08.272Z: Stopping sensor polling interval: 736
+2025-04-27T19:21:08.272Z: Closing logging service
+2025-04-27T19:21:08.272Z: Closing sensor logging service
+2025-04-27T19:21:08.272Z: Closing log stream
+2025-04-27T19:21:08.272Z: Logging stopped at 2025-04-27T19:21:08.272Z
+2025-04-27T19:21:08.274Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T19:21:08.274Z: Polling interval set with ID: 880
+2025-04-27T19:21:08.274Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T19:21:07.886Z: Received sensor data: {"temperature":21.1,"humidity":69.9}
+2025-04-27T19:21:07.886Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.9,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T19:21:08.385Z: logSensorData called with 2 sensors
+2025-04-27T19:21:08.385Z: WARNING - Logging is disabled but logSensorData was called
+2025-04-27T19:21:08.385Z: Attempting to re-initialize logging with existing events
+2025-04-27T19:21:08.385Z: Initializing sensor logging service
+2025-04-27T19:21:08.386Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T19:21:08.386Z: Using existing log file
+2025-04-27T19:21:08.385Z: ERROR - Logging service not initialized (logStream is null)
+2025-04-27T19:21:07.886Z: ERROR - Failed to log sensor data: Logging service not initialized
+2025-04-27T19:21:07.886Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T19:21:07.886Z: Successfully updated event: living room humidity = 69.9
+2025-04-27T19:21:08.391Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.9,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T19:21:08.392Z: Log stream created and logging enabled
+2025-04-27T19:21:08.385Z: Re-initialization result: {"success":true,"message":"Sensor logging initialized to C:\\Users\\amin\\Desktop\\smart-space\\SmartSchool-Server\\logs\\sensor_data.csv","columns":[["living room temperature",1],["living room humidity",2]]}
+2025-04-27T19:21:13.678Z: Initializing sensor logging service
+2025-04-27T19:21:13.678Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T19:21:13.679Z: Using existing log file
+2025-04-27T19:21:13.680Z: Log stream created and logging enabled
+2025-04-27T19:21:13.681Z: No polling was active to stop
+2025-04-27T19:21:13.682Z: Initializing sensor logging service
+2025-04-27T19:21:13.683Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T19:21:13.683Z: Using existing log file
+2025-04-27T19:21:13.684Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T19:21:13.684Z: Polling interval set with ID: 745
+2025-04-27T19:21:13.684Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T19:21:13.686Z: Closing existing log stream before creating new one
+2025-04-27T19:21:13.687Z: Log stream created and logging enabled
+2025-04-27T19:21:13.687Z: Stopping sensor polling interval: 745
+2025-04-27T19:21:13.687Z: Closing logging service
+2025-04-27T19:21:13.688Z: Closing sensor logging service
+2025-04-27T19:21:13.688Z: Closing log stream
+2025-04-27T19:21:13.688Z: Logging stopped at 2025-04-27T19:21:13.688Z
+2025-04-27T19:21:13.695Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T19:21:13.695Z: Polling interval set with ID: 787
+2025-04-27T19:21:13.695Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T19:21:13.695Z: Received sensor data: {"temperature":21.1,"humidity":69.9}
+2025-04-27T19:21:13.695Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.9,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T19:21:14.198Z: logSensorData called with 2 sensors
+2025-04-27T19:21:14.198Z: WARNING - Logging is disabled but logSensorData was called
+2025-04-27T19:21:14.198Z: Attempting to re-initialize logging with existing events
+2025-04-27T19:21:14.199Z: Initializing sensor logging service
+2025-04-27T19:21:14.200Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T19:21:14.200Z: Using existing log file
+2025-04-27T19:21:14.198Z: ERROR - Logging service not initialized (logStream is null)
+2025-04-27T19:21:13.695Z: ERROR - Failed to log sensor data: Logging service not initialized
+2025-04-27T19:21:13.695Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T19:21:13.695Z: Successfully updated event: living room humidity = 69.9
+2025-04-27T19:21:14.204Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.9,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T19:21:14.205Z: Log stream created and logging enabled
+2025-04-27T19:21:14.198Z: Re-initialization result: {"success":true,"message":"Sensor logging initialized to C:\\Users\\amin\\Desktop\\smart-space\\SmartSchool-Server\\logs\\sensor_data.csv","columns":[["living room temperature",1],["living room humidity",2]]}
+2025-04-27T19:21:13.684Z: Received sensor data: {"temperature":21.1,"humidity":69.9}
+2025-04-27T19:21:13.684Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.9,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T19:21:14.267Z: logSensorData called with 2 sensors
+2025-04-27T19:21:14.267Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T19:21:14.267Z: Setting spaceId column 3 to 41413915
+2025-04-27T19:21:14.267Z: Setting column 1 (living room temperature) to 21.1
+2025-04-27T19:21:14.267Z: Setting column 2 (living room humidity) to 69.9
+2025-04-27T19:21:14.267Z: Writing row to log file: 2025-04-27 19:21:14,21.1,69.9,41413915
+2025-04-27T19:21:14.267Z: Successfully wrote to log file using appendFileSync
+2025-04-27T19:21:13.684Z: Successfully logged sensor data
+2025-04-27T19:21:13.684Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T19:21:13.684Z: Successfully updated event: living room humidity = 69.9
+2025-04-27T19:21:14.272Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.9,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T19:21:19.437Z: Initializing sensor logging service
+2025-04-27T19:21:19.438Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T19:21:19.438Z: Using existing log file
+2025-04-27T19:21:19.439Z: Log stream created and logging enabled
+2025-04-27T19:21:19.440Z: No polling was active to stop
+2025-04-27T19:21:19.440Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T19:21:19.440Z: Polling interval set with ID: 722
+2025-04-27T19:21:19.441Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T19:21:23.921Z: Initializing sensor logging service
+2025-04-27T19:21:23.922Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T19:21:23.923Z: Using existing log file
+2025-04-27T19:21:23.924Z: Log stream created and logging enabled
+2025-04-27T19:21:23.925Z: No polling was active to stop
+2025-04-27T19:21:23.925Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T19:21:23.925Z: Polling interval set with ID: 722
+2025-04-27T19:21:23.926Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T19:21:24.330Z: Initializing sensor logging service
+2025-04-27T19:21:24.330Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T19:21:24.331Z: Using existing log file
+2025-04-27T19:21:24.331Z: Closing existing log stream before creating new one
+2025-04-27T19:21:24.332Z: Log stream created and logging enabled
+2025-04-27T19:21:24.332Z: Stopping sensor polling interval: 722
+2025-04-27T19:21:24.332Z: Closing logging service
+2025-04-27T19:21:24.333Z: Closing sensor logging service
+2025-04-27T19:21:24.333Z: Closing log stream
+2025-04-27T19:21:24.333Z: Logging stopped at 2025-04-27T19:21:24.333Z
+2025-04-27T19:21:24.334Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T19:21:24.334Z: Polling interval set with ID: 829
+2025-04-27T19:21:24.335Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T19:21:23.926Z: ERROR - No sensor data received from Sensibo
+2025-04-27T19:21:24.439Z: Initial polling result: {"success":false,"error":"No sensor data received from Sensibo"}
+2025-04-27T19:21:24.335Z: Received sensor data: {"temperature":21.1,"humidity":69.9}
+2025-04-27T19:21:24.335Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.9,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T19:21:24.895Z: logSensorData called with 2 sensors
+2025-04-27T19:21:24.895Z: WARNING - Logging is disabled but logSensorData was called
+2025-04-27T19:21:24.895Z: Attempting to re-initialize logging with existing events
+2025-04-27T19:21:24.896Z: Initializing sensor logging service
+2025-04-27T19:21:24.896Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T19:21:24.897Z: Using existing log file
+2025-04-27T19:21:24.895Z: ERROR - Logging service not initialized (logStream is null)
+2025-04-27T19:21:24.335Z: ERROR - Failed to log sensor data: Logging service not initialized
+2025-04-27T19:21:24.335Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T19:21:24.335Z: Successfully updated event: living room humidity = 69.9
+2025-04-27T19:21:24.904Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.9,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T19:21:24.906Z: Log stream created and logging enabled
+2025-04-27T19:21:24.895Z: Re-initialization result: {"success":true,"message":"Sensor logging initialized to C:\\Users\\amin\\Desktop\\smart-space\\SmartSchool-Server\\logs\\sensor_data.csv","columns":[["living room temperature",1],["living room humidity",2]]}
+2025-04-27T19:21:28.268Z: Initializing sensor logging service
+2025-04-27T19:21:28.268Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T19:21:28.269Z: Using existing log file
+2025-04-27T19:21:28.270Z: Log stream created and logging enabled
+2025-04-27T19:21:28.271Z: No polling was active to stop
+2025-04-27T19:21:28.272Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T19:21:28.272Z: Polling interval set with ID: 715
+2025-04-27T19:21:28.272Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T19:21:28.272Z: Received sensor data: {"temperature":21.1,"humidity":69.9}
+2025-04-27T19:21:28.272Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.9,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T19:21:28.770Z: logSensorData called with 2 sensors
+2025-04-27T19:21:28.770Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T19:21:28.770Z: Setting spaceId column 3 to 41413915
+2025-04-27T19:21:28.770Z: Setting column 1 (living room temperature) to 21.1
+2025-04-27T19:21:28.770Z: Setting column 2 (living room humidity) to 69.9
+2025-04-27T19:21:28.770Z: Writing row to log file: 2025-04-27 19:21:28,21.1,69.9,41413915
+2025-04-27T19:21:28.770Z: Successfully wrote to log file using appendFileSync
+2025-04-27T19:21:28.272Z: Successfully logged sensor data
+2025-04-27T19:21:28.272Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T19:21:28.272Z: Successfully updated event: living room humidity = 69.9
+2025-04-27T19:21:28.776Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.9,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T19:22:24.136Z: Initializing sensor logging service
+2025-04-27T19:22:24.137Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T19:22:24.137Z: Using existing log file
+2025-04-27T19:22:24.139Z: Log stream created and logging enabled
+2025-04-27T19:22:24.140Z: No polling was active to stop
+2025-04-27T19:22:24.140Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T19:22:24.140Z: Polling interval set with ID: 750
+2025-04-27T19:22:24.141Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T19:22:24.579Z: Initializing sensor logging service
+2025-04-27T19:22:24.580Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T19:22:24.580Z: Using existing log file
+2025-04-27T19:22:24.581Z: Closing existing log stream before creating new one
+2025-04-27T19:22:24.582Z: Log stream created and logging enabled
+2025-04-27T19:22:24.582Z: Stopping sensor polling interval: 750
+2025-04-27T19:22:24.582Z: Closing logging service
+2025-04-27T19:22:24.583Z: Closing sensor logging service
+2025-04-27T19:22:24.583Z: Closing log stream
+2025-04-27T19:22:24.583Z: Logging stopped at 2025-04-27T19:22:24.583Z
+2025-04-27T19:22:24.584Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T19:22:24.584Z: Polling interval set with ID: 856
+2025-04-27T19:22:24.585Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T19:22:24.141Z: Received sensor data: {"temperature":21.1,"humidity":69.9}
+2025-04-27T19:22:24.141Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.9,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T19:22:24.731Z: logSensorData called with 2 sensors
+2025-04-27T19:22:24.731Z: WARNING - Logging is disabled but logSensorData was called
+2025-04-27T19:22:24.731Z: Attempting to re-initialize logging with existing events
+2025-04-27T19:22:24.732Z: Initializing sensor logging service
+2025-04-27T19:22:24.733Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T19:22:24.733Z: Using existing log file
+2025-04-27T19:22:24.731Z: ERROR - Logging service not initialized (logStream is null)
+2025-04-27T19:22:24.141Z: ERROR - Failed to log sensor data: Logging service not initialized
+2025-04-27T19:22:24.141Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T19:22:24.141Z: Successfully updated event: living room humidity = 69.9
+2025-04-27T19:22:24.736Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.9,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T19:22:24.736Z: Log stream created and logging enabled
+2025-04-27T19:22:24.731Z: Re-initialization result: {"success":true,"message":"Sensor logging initialized to C:\\Users\\amin\\Desktop\\smart-space\\SmartSchool-Server\\logs\\sensor_data.csv","columns":[["living room temperature",1],["living room humidity",2]]}
+2025-04-27T19:22:24.585Z: Received sensor data: {"temperature":21.1,"humidity":69.9}
+2025-04-27T19:22:24.585Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.9,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T19:22:25.099Z: logSensorData called with 2 sensors
+2025-04-27T19:22:25.099Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T19:22:25.099Z: Setting spaceId column 3 to 41413915
+2025-04-27T19:22:25.099Z: Setting column 1 (living room temperature) to 21.1
+2025-04-27T19:22:25.099Z: Setting column 2 (living room humidity) to 69.9
+2025-04-27T19:22:25.099Z: Writing row to log file: 2025-04-27 19:22:25,21.1,69.9,41413915
+2025-04-27T19:22:25.099Z: Successfully wrote to log file using appendFileSync
+2025-04-27T19:22:24.585Z: Successfully logged sensor data
+2025-04-27T19:22:24.585Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T19:22:24.585Z: Successfully updated event: living room humidity = 69.9
+2025-04-27T19:22:25.104Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.9,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T19:23:28.093Z: Initializing sensor logging service
+2025-04-27T19:23:28.094Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T19:23:28.095Z: Using existing log file
+2025-04-27T19:23:28.096Z: Log stream created and logging enabled
+2025-04-27T19:23:28.097Z: No polling was active to stop
+2025-04-27T19:23:28.097Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T19:23:28.097Z: Polling interval set with ID: 756
+2025-04-27T19:23:28.098Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T19:23:28.138Z: Initializing sensor logging service
+2025-04-27T19:23:28.139Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T19:23:28.139Z: Using existing log file
+2025-04-27T19:23:28.140Z: Closing existing log stream before creating new one
+2025-04-27T19:23:28.141Z: Log stream created and logging enabled
+2025-04-27T19:23:28.141Z: Stopping sensor polling interval: 756
+2025-04-27T19:23:28.141Z: Closing logging service
+2025-04-27T19:23:28.142Z: Closing sensor logging service
+2025-04-27T19:23:28.142Z: Closing log stream
+2025-04-27T19:23:28.142Z: Logging stopped at 2025-04-27T19:23:28.142Z
+2025-04-27T19:23:28.143Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T19:23:28.143Z: Polling interval set with ID: 810
+2025-04-27T19:23:28.143Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T19:23:28.098Z: Received sensor data: {"temperature":21.1,"humidity":69.8}
+2025-04-27T19:23:28.098Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.8,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T19:23:28.698Z: logSensorData called with 2 sensors
+2025-04-27T19:23:28.698Z: WARNING - Logging is disabled but logSensorData was called
+2025-04-27T19:23:28.698Z: Attempting to re-initialize logging with existing events
+2025-04-27T19:23:28.699Z: Initializing sensor logging service
+2025-04-27T19:23:28.699Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T19:23:28.700Z: Using existing log file
+2025-04-27T19:23:28.698Z: ERROR - Logging service not initialized (logStream is null)
+2025-04-27T19:23:28.098Z: ERROR - Failed to log sensor data: Logging service not initialized
+2025-04-27T19:23:28.098Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T19:23:28.098Z: Successfully updated event: living room humidity = 69.8
+2025-04-27T19:23:28.704Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.8,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T19:23:28.705Z: Log stream created and logging enabled
+2025-04-27T19:23:28.698Z: Re-initialization result: {"success":true,"message":"Sensor logging initialized to C:\\Users\\amin\\Desktop\\smart-space\\SmartSchool-Server\\logs\\sensor_data.csv","columns":[["living room temperature",1],["living room humidity",2]]}
+2025-04-27T19:23:28.143Z: Received sensor data: {"temperature":21.1,"humidity":69.8}
+2025-04-27T19:23:28.143Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.8,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T19:23:28.842Z: logSensorData called with 2 sensors
+2025-04-27T19:23:28.842Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T19:23:28.842Z: Setting spaceId column 3 to 41413915
+2025-04-27T19:23:28.842Z: Setting column 1 (living room temperature) to 21.1
+2025-04-27T19:23:28.842Z: Setting column 2 (living room humidity) to 69.8
+2025-04-27T19:23:28.842Z: Writing row to log file: 2025-04-27 19:23:28,21.1,69.8,41413915
+2025-04-27T19:23:28.842Z: Successfully wrote to log file using appendFileSync
+2025-04-27T19:23:28.143Z: Successfully logged sensor data
+2025-04-27T19:23:28.143Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T19:23:28.143Z: Successfully updated event: living room humidity = 69.8
+2025-04-27T19:23:28.847Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.8,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T19:29:52.760Z: Initializing sensor logging service
+2025-04-27T19:29:52.760Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T19:29:52.761Z: Using existing log file
+2025-04-27T19:29:52.762Z: Log stream created and logging enabled
+2025-04-27T19:29:52.763Z: No polling was active to stop
+2025-04-27T19:29:52.764Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T19:29:52.764Z: Polling interval set with ID: 758
+2025-04-27T19:29:52.764Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T19:29:53.166Z: Initializing sensor logging service
+2025-04-27T19:29:53.167Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T19:29:53.167Z: Using existing log file
+2025-04-27T19:29:53.169Z: Closing existing log stream before creating new one
+2025-04-27T19:29:53.169Z: Log stream created and logging enabled
+2025-04-27T19:29:53.170Z: Stopping sensor polling interval: 758
+2025-04-27T19:29:53.170Z: Closing logging service
+2025-04-27T19:29:53.170Z: Closing sensor logging service
+2025-04-27T19:29:53.170Z: Closing log stream
+2025-04-27T19:29:53.170Z: Logging stopped at 2025-04-27T19:29:53.170Z
+2025-04-27T19:29:53.172Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T19:29:53.172Z: Polling interval set with ID: 896
+2025-04-27T19:29:53.172Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T19:29:52.764Z: Received sensor data: {"temperature":21.1,"humidity":69.8}
+2025-04-27T19:29:52.764Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.8,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T19:29:53.267Z: logSensorData called with 2 sensors
+2025-04-27T19:29:53.267Z: WARNING - Logging is disabled but logSensorData was called
+2025-04-27T19:29:53.267Z: Attempting to re-initialize logging with existing events
+2025-04-27T19:29:53.268Z: Initializing sensor logging service
+2025-04-27T19:29:53.268Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T19:29:53.269Z: Using existing log file
+2025-04-27T19:29:53.267Z: ERROR - Logging service not initialized (logStream is null)
+2025-04-27T19:29:52.764Z: ERROR - Failed to log sensor data: Logging service not initialized
+2025-04-27T19:29:52.764Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T19:29:52.764Z: Successfully updated event: living room humidity = 69.8
+2025-04-27T19:29:53.274Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.8,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T19:29:53.275Z: Log stream created and logging enabled
+2025-04-27T19:29:53.267Z: Re-initialization result: {"success":true,"message":"Sensor logging initialized to C:\\Users\\amin\\Desktop\\smart-space\\SmartSchool-Server\\logs\\sensor_data.csv","columns":[["living room temperature",1],["living room humidity",2]]}
+2025-04-27T19:29:53.172Z: Received sensor data: {"temperature":21.1,"humidity":69.8}
+2025-04-27T19:29:53.172Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.8,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T19:29:53.725Z: logSensorData called with 2 sensors
+2025-04-27T19:29:53.725Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T19:29:53.725Z: Setting spaceId column 3 to 41413915
+2025-04-27T19:29:53.725Z: Setting column 1 (living room temperature) to 21.1
+2025-04-27T19:29:53.725Z: Setting column 2 (living room humidity) to 69.8
+2025-04-27T19:29:53.725Z: Writing row to log file: 2025-04-27 19:29:53,21.1,69.8,41413915
+2025-04-27T19:29:53.725Z: Successfully wrote to log file using appendFileSync
+2025-04-27T19:29:53.172Z: Successfully logged sensor data
+2025-04-27T19:29:53.172Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T19:29:53.172Z: Successfully updated event: living room humidity = 69.8
+2025-04-27T19:29:53.731Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.8,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T19:31:24.270Z: Initializing sensor logging service
+2025-04-27T19:31:24.271Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T19:31:24.271Z: Using existing log file
+2025-04-27T19:31:24.272Z: Log stream created and logging enabled
+2025-04-27T19:31:24.273Z: No polling was active to stop
+2025-04-27T19:31:24.274Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T19:31:24.274Z: Polling interval set with ID: 768
+2025-04-27T19:31:24.275Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T19:31:24.756Z: Initializing sensor logging service
+2025-04-27T19:31:24.757Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T19:31:24.757Z: Using existing log file
+2025-04-27T19:31:24.758Z: Closing existing log stream before creating new one
+2025-04-27T19:31:24.759Z: Log stream created and logging enabled
+2025-04-27T19:31:24.759Z: Stopping sensor polling interval: 768
+2025-04-27T19:31:24.759Z: Closing logging service
+2025-04-27T19:31:24.760Z: Closing sensor logging service
+2025-04-27T19:31:24.760Z: Closing log stream
+2025-04-27T19:31:24.760Z: Logging stopped at 2025-04-27T19:31:24.760Z
+2025-04-27T19:31:24.761Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T19:31:24.761Z: Polling interval set with ID: 882
+2025-04-27T19:31:24.762Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T19:31:24.275Z: Received sensor data: {"temperature":21.1,"humidity":70}
+2025-04-27T19:31:24.275Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":70,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T19:31:24.821Z: logSensorData called with 2 sensors
+2025-04-27T19:31:24.821Z: WARNING - Logging is disabled but logSensorData was called
+2025-04-27T19:31:24.821Z: Attempting to re-initialize logging with existing events
+2025-04-27T19:31:24.822Z: Initializing sensor logging service
+2025-04-27T19:31:24.822Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T19:31:24.823Z: Using existing log file
+2025-04-27T19:31:24.821Z: ERROR - Logging service not initialized (logStream is null)
+2025-04-27T19:31:24.275Z: ERROR - Failed to log sensor data: Logging service not initialized
+2025-04-27T19:31:24.275Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T19:31:24.275Z: Successfully updated event: living room humidity = 70
+2025-04-27T19:31:24.825Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":70,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T19:31:24.826Z: Log stream created and logging enabled
+2025-04-27T19:31:24.821Z: Re-initialization result: {"success":true,"message":"Sensor logging initialized to C:\\Users\\amin\\Desktop\\smart-space\\SmartSchool-Server\\logs\\sensor_data.csv","columns":[["living room temperature",1],["living room humidity",2]]}
+2025-04-27T19:31:24.762Z: Received sensor data: {"temperature":21.1,"humidity":70}
+2025-04-27T19:31:24.762Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":70,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T19:31:25.346Z: logSensorData called with 2 sensors
+2025-04-27T19:31:25.346Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T19:31:25.346Z: Setting spaceId column 3 to 41413915
+2025-04-27T19:31:25.346Z: Setting column 1 (living room temperature) to 21.1
+2025-04-27T19:31:25.346Z: Setting column 2 (living room humidity) to 70
+2025-04-27T19:31:25.346Z: Writing row to log file: 2025-04-27 19:31:25,21.1,70,41413915
+2025-04-27T19:31:25.346Z: Successfully wrote to log file using appendFileSync
+2025-04-27T19:31:24.762Z: Successfully logged sensor data
+2025-04-27T19:31:24.762Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T19:31:24.762Z: Successfully updated event: living room humidity = 70
+2025-04-27T19:31:25.354Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":70,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T19:41:29.541Z: Initializing sensor logging service
+2025-04-27T19:41:29.542Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T19:41:29.542Z: Using existing log file
+2025-04-27T19:41:29.543Z: Log stream created and logging enabled
+2025-04-27T19:41:29.543Z: No polling was active to stop
+2025-04-27T19:41:29.544Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T19:41:29.544Z: Polling interval set with ID: 806
+2025-04-27T19:41:29.545Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T19:41:29.551Z: Initializing sensor logging service
+2025-04-27T19:41:29.551Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T19:41:29.551Z: Using existing log file
+2025-04-27T19:41:29.553Z: Closing existing log stream before creating new one
+2025-04-27T19:41:29.553Z: Log stream created and logging enabled
+2025-04-27T19:41:29.554Z: Stopping sensor polling interval: 806
+2025-04-27T19:41:29.554Z: Closing logging service
+2025-04-27T19:41:29.554Z: Closing sensor logging service
+2025-04-27T19:41:29.554Z: Closing log stream
+2025-04-27T19:41:29.554Z: Logging stopped at 2025-04-27T19:41:29.554Z
+2025-04-27T19:41:29.555Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T19:41:29.555Z: Polling interval set with ID: 854
+2025-04-27T19:41:29.556Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T19:41:29.545Z: Received sensor data: {"temperature":21.1,"humidity":70.2}
+2025-04-27T19:41:29.545Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":70.2,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T19:41:30.091Z: logSensorData called with 2 sensors
+2025-04-27T19:41:30.091Z: WARNING - Logging is disabled but logSensorData was called
+2025-04-27T19:41:30.091Z: Attempting to re-initialize logging with existing events
+2025-04-27T19:41:30.091Z: Initializing sensor logging service
+2025-04-27T19:41:30.091Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T19:41:30.092Z: Using existing log file
+2025-04-27T19:41:30.091Z: ERROR - Logging service not initialized (logStream is null)
+2025-04-27T19:41:29.545Z: ERROR - Failed to log sensor data: Logging service not initialized
+2025-04-27T19:41:29.545Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T19:41:29.545Z: Successfully updated event: living room humidity = 70.2
+2025-04-27T19:41:30.099Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":70.2,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T19:41:30.101Z: Log stream created and logging enabled
+2025-04-27T19:41:30.091Z: Re-initialization result: {"success":true,"message":"Sensor logging initialized to C:\\Users\\amin\\Desktop\\smart-space\\SmartSchool-Server\\logs\\sensor_data.csv","columns":[["living room temperature",1],["living room humidity",2]]}
+2025-04-27T19:41:29.556Z: Received sensor data: {"temperature":21.1,"humidity":70.2}
+2025-04-27T19:41:29.556Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":70.2,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T19:41:30.153Z: logSensorData called with 2 sensors
+2025-04-27T19:41:30.153Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T19:41:30.153Z: Setting spaceId column 3 to 41413915
+2025-04-27T19:41:30.153Z: Setting column 1 (living room temperature) to 21.1
+2025-04-27T19:41:30.153Z: Setting column 2 (living room humidity) to 70.2
+2025-04-27T19:41:30.153Z: Writing row to log file: 2025-04-27 19:41:30,21.1,70.2,41413915
+2025-04-27T19:41:30.153Z: Successfully wrote to log file using appendFileSync
+2025-04-27T19:41:29.556Z: Successfully logged sensor data
+2025-04-27T19:41:29.556Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T19:41:29.556Z: Successfully updated event: living room humidity = 70.2
+2025-04-27T19:41:30.159Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":70.2,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T19:43:09.567Z: Polling for sensor data... (poll #1)
+2025-04-27T19:43:09.568Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T19:43:09.568Z: Received sensor data: {"temperature":21.1,"humidity":70}
+2025-04-27T19:43:09.568Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":70,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T19:43:10.138Z: logSensorData called with 2 sensors
+2025-04-27T19:43:10.138Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T19:43:10.138Z: Setting spaceId column 3 to 41413915
+2025-04-27T19:43:10.138Z: Setting column 1 (living room temperature) to 21.1
+2025-04-27T19:43:10.138Z: Setting column 2 (living room humidity) to 70
+2025-04-27T19:43:10.138Z: Writing row to log file: 2025-04-27 19:43:10,21.1,70,41413915
+2025-04-27T19:43:10.138Z: Successfully wrote to log file using appendFileSync
+2025-04-27T19:43:09.568Z: Successfully logged sensor data
+2025-04-27T19:43:09.568Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T19:43:09.568Z: Successfully updated event: living room humidity = 70
+2025-04-27T19:43:10.145Z: Polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":70,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T19:43:10.145Z: Polling interval active: true
+2025-04-27T19:44:49.575Z: Polling for sensor data... (poll #2)
+2025-04-27T19:44:49.576Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T19:44:49.576Z: Received sensor data: {"temperature":21.1,"humidity":69.9}
+2025-04-27T19:44:49.576Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.9,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T19:44:50.145Z: logSensorData called with 2 sensors
+2025-04-27T19:44:50.145Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T19:44:50.145Z: Setting spaceId column 3 to 41413915
+2025-04-27T19:44:50.145Z: Setting column 1 (living room temperature) to 21.1
+2025-04-27T19:44:50.145Z: Setting column 2 (living room humidity) to 69.9
+2025-04-27T19:44:50.145Z: Writing row to log file: 2025-04-27 19:44:50,21.1,69.9,41413915
+2025-04-27T19:44:50.145Z: Successfully wrote to log file using appendFileSync
+2025-04-27T19:44:49.576Z: Successfully logged sensor data
+2025-04-27T19:44:49.576Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T19:44:49.576Z: Successfully updated event: living room humidity = 69.9
+2025-04-27T19:44:50.152Z: Polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.9,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T19:44:50.152Z: Polling interval active: true
+2025-04-27T19:46:29.582Z: Polling for sensor data... (poll #3)
+2025-04-27T19:46:29.583Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T19:46:29.583Z: Received sensor data: {"temperature":21.1,"humidity":69.9}
+2025-04-27T19:46:29.583Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.9,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T19:46:30.128Z: logSensorData called with 2 sensors
+2025-04-27T19:46:30.128Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T19:46:30.128Z: Setting spaceId column 3 to 41413915
+2025-04-27T19:46:30.128Z: Setting column 1 (living room temperature) to 21.1
+2025-04-27T19:46:30.128Z: Setting column 2 (living room humidity) to 69.9
+2025-04-27T19:46:30.128Z: Writing row to log file: 2025-04-27 19:46:30,21.1,69.9,41413915
+2025-04-27T19:46:30.128Z: Successfully wrote to log file using appendFileSync
+2025-04-27T19:46:29.583Z: Successfully logged sensor data
+2025-04-27T19:46:29.583Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T19:46:29.583Z: Successfully updated event: living room humidity = 69.9
+2025-04-27T19:46:30.134Z: Polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.9,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T19:46:30.134Z: Polling interval active: true
+2025-04-27T19:48:09.597Z: Polling for sensor data... (poll #4)
+2025-04-27T19:48:09.598Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T19:48:09.598Z: Received sensor data: {"temperature":21.1,"humidity":69.9}
+2025-04-27T19:48:09.598Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.9,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T19:48:10.140Z: logSensorData called with 2 sensors
+2025-04-27T19:48:10.140Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T19:48:10.140Z: Setting spaceId column 3 to 41413915
+2025-04-27T19:48:10.140Z: Setting column 1 (living room temperature) to 21.1
+2025-04-27T19:48:10.140Z: Setting column 2 (living room humidity) to 69.9
+2025-04-27T19:48:10.140Z: Writing row to log file: 2025-04-27 19:48:10,21.1,69.9,41413915
+2025-04-27T19:48:10.140Z: Successfully wrote to log file using appendFileSync
+2025-04-27T19:48:09.598Z: Successfully logged sensor data
+2025-04-27T19:48:09.598Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T19:48:09.598Z: Successfully updated event: living room humidity = 69.9
+2025-04-27T19:48:10.146Z: Polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.9,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T19:48:10.146Z: Polling interval active: true
+2025-04-27T19:49:49.610Z: Polling for sensor data... (poll #5)
+2025-04-27T19:49:49.611Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T19:49:49.611Z: Received sensor data: {"temperature":21.1,"humidity":69.9}
+2025-04-27T19:49:49.611Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.9,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T19:49:50.177Z: logSensorData called with 2 sensors
+2025-04-27T19:49:50.177Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T19:49:50.177Z: Setting spaceId column 3 to 41413915
+2025-04-27T19:49:50.177Z: Setting column 1 (living room temperature) to 21.1
+2025-04-27T19:49:50.177Z: Setting column 2 (living room humidity) to 69.9
+2025-04-27T19:49:50.177Z: Writing row to log file: 2025-04-27 19:49:50,21.1,69.9,41413915
+2025-04-27T19:49:50.177Z: Successfully wrote to log file using appendFileSync
+2025-04-27T19:49:49.611Z: Successfully logged sensor data
+2025-04-27T19:49:49.611Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T19:49:49.611Z: Successfully updated event: living room humidity = 69.9
+2025-04-27T19:49:50.182Z: Polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.9,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T19:49:50.182Z: Polling interval active: true
+2025-04-27T19:51:29.611Z: Polling for sensor data... (poll #6)
+2025-04-27T19:51:29.612Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T19:51:29.612Z: Received sensor data: {"temperature":21.1,"humidity":69.9}
+2025-04-27T19:51:29.612Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.9,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T19:51:30.126Z: logSensorData called with 2 sensors
+2025-04-27T19:51:30.126Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T19:51:30.126Z: Setting spaceId column 3 to 41413915
+2025-04-27T19:51:30.126Z: Setting column 1 (living room temperature) to 21.1
+2025-04-27T19:51:30.126Z: Setting column 2 (living room humidity) to 69.9
+2025-04-27T19:51:30.126Z: Writing row to log file: 2025-04-27 19:51:30,21.1,69.9,41413915
+2025-04-27T19:51:30.126Z: Successfully wrote to log file using appendFileSync
+2025-04-27T19:51:29.612Z: Successfully logged sensor data
+2025-04-27T19:51:29.612Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T19:51:29.612Z: Successfully updated event: living room humidity = 69.9
+2025-04-27T19:51:30.131Z: Polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.9,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T19:51:30.132Z: Polling interval active: true
+2025-04-27T19:53:09.615Z: Polling for sensor data... (poll #7)
+2025-04-27T19:53:09.616Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T19:53:09.616Z: Received sensor data: {"temperature":21.1,"humidity":69.9}
+2025-04-27T19:53:09.616Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.9,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T19:53:10.092Z: logSensorData called with 2 sensors
+2025-04-27T19:53:10.092Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T19:53:10.092Z: Setting spaceId column 3 to 41413915
+2025-04-27T19:53:10.092Z: Setting column 1 (living room temperature) to 21.1
+2025-04-27T19:53:10.092Z: Setting column 2 (living room humidity) to 69.9
+2025-04-27T19:53:10.092Z: Writing row to log file: 2025-04-27 19:53:10,21.1,69.9,41413915
+2025-04-27T19:53:10.092Z: Successfully wrote to log file using appendFileSync
+2025-04-27T19:53:09.616Z: Successfully logged sensor data
+2025-04-27T19:53:09.616Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T19:53:09.616Z: Successfully updated event: living room humidity = 69.9
+2025-04-27T19:53:10.098Z: Polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.9,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T19:53:10.098Z: Polling interval active: true
+2025-04-27T19:54:49.619Z: Polling for sensor data... (poll #8)
+2025-04-27T19:54:49.620Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T19:54:49.620Z: Received sensor data: {"temperature":21.1,"humidity":69.8}
+2025-04-27T19:54:49.620Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.8,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T19:54:50.130Z: logSensorData called with 2 sensors
+2025-04-27T19:54:50.130Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T19:54:50.130Z: Setting spaceId column 3 to 41413915
+2025-04-27T19:54:50.130Z: Setting column 1 (living room temperature) to 21.1
+2025-04-27T19:54:50.130Z: Setting column 2 (living room humidity) to 69.8
+2025-04-27T19:54:50.130Z: Writing row to log file: 2025-04-27 19:54:50,21.1,69.8,41413915
+2025-04-27T19:54:50.130Z: Successfully wrote to log file using appendFileSync
+2025-04-27T19:54:49.620Z: Successfully logged sensor data
+2025-04-27T19:54:49.620Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T19:54:49.620Z: Successfully updated event: living room humidity = 69.8
+2025-04-27T19:54:50.136Z: Polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.8,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T19:54:50.136Z: Polling interval active: true
+2025-04-27T19:56:29.623Z: Polling for sensor data... (poll #9)
+2025-04-27T19:56:29.624Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T19:56:29.624Z: Received sensor data: {"temperature":21.1,"humidity":69.9}
+2025-04-27T19:56:29.624Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.9,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T19:56:30.176Z: logSensorData called with 2 sensors
+2025-04-27T19:56:30.176Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T19:56:30.176Z: Setting spaceId column 3 to 41413915
+2025-04-27T19:56:30.176Z: Setting column 1 (living room temperature) to 21.1
+2025-04-27T19:56:30.176Z: Setting column 2 (living room humidity) to 69.9
+2025-04-27T19:56:30.176Z: Writing row to log file: 2025-04-27 19:56:30,21.1,69.9,41413915
+2025-04-27T19:56:30.176Z: Successfully wrote to log file using appendFileSync
+2025-04-27T19:56:29.624Z: Successfully logged sensor data
+2025-04-27T19:56:29.624Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T19:56:29.624Z: Successfully updated event: living room humidity = 69.9
+2025-04-27T19:56:30.183Z: Polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.9,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T19:56:30.183Z: Polling interval active: true
+2025-04-27T19:58:09.633Z: Polling for sensor data... (poll #10)
+2025-04-27T19:58:09.634Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T19:58:09.634Z: Received sensor data: {"temperature":21.1,"humidity":69.8}
+2025-04-27T19:58:09.634Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.8,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T19:58:10.209Z: logSensorData called with 2 sensors
+2025-04-27T19:58:10.209Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T19:58:10.209Z: Setting spaceId column 3 to 41413915
+2025-04-27T19:58:10.209Z: Setting column 1 (living room temperature) to 21.1
+2025-04-27T19:58:10.209Z: Setting column 2 (living room humidity) to 69.8
+2025-04-27T19:58:10.209Z: Writing row to log file: 2025-04-27 19:58:10,21.1,69.8,41413915
+2025-04-27T19:58:10.209Z: Successfully wrote to log file using appendFileSync
+2025-04-27T19:58:09.634Z: Successfully logged sensor data
+2025-04-27T19:58:09.634Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T19:58:09.634Z: Successfully updated event: living room humidity = 69.8
+2025-04-27T19:58:10.216Z: Polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.8,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T19:58:10.216Z: Polling interval active: true
+2025-04-27T19:59:49.640Z: Polling for sensor data... (poll #11)
+2025-04-27T19:59:49.641Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T19:59:49.641Z: Received sensor data: {"temperature":21.1,"humidity":69.8}
+2025-04-27T19:59:49.641Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.8,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T19:59:50.211Z: logSensorData called with 2 sensors
+2025-04-27T19:59:50.211Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T19:59:50.211Z: Setting spaceId column 3 to 41413915
+2025-04-27T19:59:50.211Z: Setting column 1 (living room temperature) to 21.1
+2025-04-27T19:59:50.211Z: Setting column 2 (living room humidity) to 69.8
+2025-04-27T19:59:50.211Z: Writing row to log file: 2025-04-27 19:59:50,21.1,69.8,41413915
+2025-04-27T19:59:50.211Z: Successfully wrote to log file using appendFileSync
+2025-04-27T19:59:49.641Z: Successfully logged sensor data
+2025-04-27T19:59:49.641Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T19:59:49.641Z: Successfully updated event: living room humidity = 69.8
+2025-04-27T19:59:50.217Z: Polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.8,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T19:59:50.217Z: Polling interval active: true
+2025-04-27T20:01:01.552Z: Initializing sensor logging service
+2025-04-27T20:01:01.552Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T20:01:01.553Z: Using existing log file
+2025-04-27T20:01:01.554Z: Log stream created and logging enabled
+2025-04-27T20:01:01.555Z: No polling was active to stop
+2025-04-27T20:01:01.556Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T20:01:01.556Z: Polling interval set with ID: 802
+2025-04-27T20:01:01.557Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T20:01:01.968Z: Initializing sensor logging service
+2025-04-27T20:01:01.968Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T20:01:01.969Z: Using existing log file
+2025-04-27T20:01:01.970Z: Closing existing log stream before creating new one
+2025-04-27T20:01:01.971Z: Log stream created and logging enabled
+2025-04-27T20:01:01.971Z: Stopping sensor polling interval: 802
+2025-04-27T20:01:01.971Z: Closing logging service
+2025-04-27T20:01:01.972Z: Closing sensor logging service
+2025-04-27T20:01:01.972Z: Closing log stream
+2025-04-27T20:01:01.972Z: Logging stopped at 2025-04-27T20:01:01.972Z
+2025-04-27T20:01:01.973Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T20:01:01.973Z: Polling interval set with ID: 911
+2025-04-27T20:01:01.974Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T20:01:01.557Z: Received sensor data: {"temperature":21.1,"humidity":69.8}
+2025-04-27T20:01:01.557Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.8,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T20:01:02.137Z: logSensorData called with 2 sensors
+2025-04-27T20:01:02.137Z: WARNING - Logging is disabled but logSensorData was called
+2025-04-27T20:01:02.137Z: Attempting to re-initialize logging with existing events
+2025-04-27T20:01:02.138Z: Initializing sensor logging service
+2025-04-27T20:01:02.138Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T20:01:02.139Z: Using existing log file
+2025-04-27T20:01:02.137Z: ERROR - Logging service not initialized (logStream is null)
+2025-04-27T20:01:01.557Z: ERROR - Failed to log sensor data: Logging service not initialized
+2025-04-27T20:01:01.557Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T20:01:01.557Z: Successfully updated event: living room humidity = 69.8
+2025-04-27T20:01:02.143Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.8,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T20:01:02.148Z: Log stream created and logging enabled
+2025-04-27T20:01:02.137Z: Re-initialization result: {"success":true,"message":"Sensor logging initialized to C:\\Users\\amin\\Desktop\\smart-space\\SmartSchool-Server\\logs\\sensor_data.csv","columns":[["living room temperature",1],["living room humidity",2]]}
+2025-04-27T20:01:01.974Z: Received sensor data: {"temperature":21.1,"humidity":69.8}
+2025-04-27T20:01:01.974Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.8,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T20:01:02.487Z: logSensorData called with 2 sensors
+2025-04-27T20:01:02.487Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T20:01:02.487Z: Setting spaceId column 3 to 41413915
+2025-04-27T20:01:02.487Z: Setting column 1 (living room temperature) to 21.1
+2025-04-27T20:01:02.487Z: Setting column 2 (living room humidity) to 69.8
+2025-04-27T20:01:02.487Z: Writing row to log file: 2025-04-27 20:01:02,21.1,69.8,41413915
+2025-04-27T20:01:02.487Z: Successfully wrote to log file using appendFileSync
+2025-04-27T20:01:01.974Z: Successfully logged sensor data
+2025-04-27T20:01:01.974Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T20:01:01.974Z: Successfully updated event: living room humidity = 69.8
+2025-04-27T20:01:02.494Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.8,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T20:02:41.977Z: Polling for sensor data... (poll #1)
+2025-04-27T20:02:41.978Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T20:02:41.978Z: Received sensor data: {"temperature":21.1,"humidity":69.8}
+2025-04-27T20:02:41.978Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.8,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T20:02:42.546Z: logSensorData called with 2 sensors
+2025-04-27T20:02:42.546Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T20:02:42.546Z: Setting spaceId column 3 to 41413915
+2025-04-27T20:02:42.546Z: Setting column 1 (living room temperature) to 21.1
+2025-04-27T20:02:42.546Z: Setting column 2 (living room humidity) to 69.8
+2025-04-27T20:02:42.546Z: Writing row to log file: 2025-04-27 20:02:42,21.1,69.8,41413915
+2025-04-27T20:02:42.546Z: Successfully wrote to log file using appendFileSync
+2025-04-27T20:02:41.978Z: Successfully logged sensor data
+2025-04-27T20:02:41.978Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T20:02:41.978Z: Successfully updated event: living room humidity = 69.8
+2025-04-27T20:02:42.553Z: Polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.8,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T20:02:42.553Z: Polling interval active: true
+2025-04-27T20:04:21.987Z: Polling for sensor data... (poll #2)
+2025-04-27T20:04:21.988Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T20:04:21.988Z: Received sensor data: {"temperature":21,"humidity":69.8}
+2025-04-27T20:04:21.988Z: Formatted events: [{"name":"living room temperature","value":21,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.8,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T20:04:22.527Z: logSensorData called with 2 sensors
+2025-04-27T20:04:22.527Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T20:04:22.527Z: Setting spaceId column 3 to 41413915
+2025-04-27T20:04:22.527Z: Setting column 1 (living room temperature) to 21
+2025-04-27T20:04:22.527Z: Setting column 2 (living room humidity) to 69.8
+2025-04-27T20:04:22.527Z: Writing row to log file: 2025-04-27 20:04:22,21,69.8,41413915
+2025-04-27T20:04:22.527Z: Successfully wrote to log file using appendFileSync
+2025-04-27T20:04:21.988Z: Successfully logged sensor data
+2025-04-27T20:04:21.988Z: Successfully updated event: living room temperature = 21
+2025-04-27T20:04:21.988Z: Successfully updated event: living room humidity = 69.8
+2025-04-27T20:04:22.534Z: Polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.8,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T20:04:22.534Z: Polling interval active: true
+2025-04-27T20:06:01.989Z: Polling for sensor data... (poll #3)
+2025-04-27T20:06:01.990Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T20:07:44.923Z: Initializing sensor logging service
+2025-04-27T20:07:44.924Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T20:07:44.924Z: Using existing log file
+2025-04-27T20:07:44.926Z: Log stream created and logging enabled
+2025-04-27T20:07:44.927Z: No polling was active to stop
+2025-04-27T20:07:44.927Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T20:07:44.927Z: Polling interval set with ID: 794
+2025-04-27T20:07:44.928Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T20:07:45.362Z: Initializing sensor logging service
+2025-04-27T20:07:45.362Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T20:07:45.363Z: Using existing log file
+2025-04-27T20:07:45.364Z: Closing existing log stream before creating new one
+2025-04-27T20:07:45.364Z: Log stream created and logging enabled
+2025-04-27T20:07:45.365Z: Stopping sensor polling interval: 794
+2025-04-27T20:07:45.365Z: Closing logging service
+2025-04-27T20:07:45.366Z: Closing sensor logging service
+2025-04-27T20:07:45.366Z: Closing log stream
+2025-04-27T20:07:45.366Z: Logging stopped at 2025-04-27T20:07:45.366Z
+2025-04-27T20:07:45.367Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T20:07:45.367Z: Polling interval set with ID: 902
+2025-04-27T20:07:45.367Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T20:07:44.928Z: Received sensor data: {"temperature":21,"humidity":70.2}
+2025-04-27T20:07:44.928Z: Formatted events: [{"name":"living room temperature","value":21,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":70.2,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T20:07:45.493Z: logSensorData called with 2 sensors
+2025-04-27T20:07:45.493Z: WARNING - Logging is disabled but logSensorData was called
+2025-04-27T20:07:45.493Z: Attempting to re-initialize logging with existing events
+2025-04-27T20:07:45.493Z: Initializing sensor logging service
+2025-04-27T20:07:45.494Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T20:07:45.494Z: Using existing log file
+2025-04-27T20:07:45.493Z: ERROR - Logging service not initialized (logStream is null)
+2025-04-27T20:07:44.928Z: ERROR - Failed to log sensor data: Logging service not initialized
+2025-04-27T20:07:44.928Z: Successfully updated event: living room temperature = 21
+2025-04-27T20:07:44.928Z: Successfully updated event: living room humidity = 70.2
+2025-04-27T20:07:45.498Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":70.2,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T20:07:45.499Z: Log stream created and logging enabled
+2025-04-27T20:07:45.493Z: Re-initialization result: {"success":true,"message":"Sensor logging initialized to C:\\Users\\amin\\Desktop\\smart-space\\SmartSchool-Server\\logs\\sensor_data.csv","columns":[["living room temperature",1],["living room humidity",2]]}
+2025-04-27T20:07:45.367Z: Received sensor data: {"temperature":21,"humidity":70.2}
+2025-04-27T20:07:45.367Z: Formatted events: [{"name":"living room temperature","value":21,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":70.2,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T20:07:45.891Z: logSensorData called with 2 sensors
+2025-04-27T20:07:45.891Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T20:07:45.891Z: Setting spaceId column 3 to 41413915
+2025-04-27T20:07:45.891Z: Setting column 1 (living room temperature) to 21
+2025-04-27T20:07:45.891Z: Setting column 2 (living room humidity) to 70.2
+2025-04-27T20:07:45.891Z: Writing row to log file: 2025-04-27 20:07:45,21,70.2,41413915
+2025-04-27T20:07:45.891Z: Successfully wrote to log file using appendFileSync
+2025-04-27T20:07:45.367Z: Successfully logged sensor data
+2025-04-27T20:07:45.367Z: Successfully updated event: living room temperature = 21
+2025-04-27T20:07:45.367Z: Successfully updated event: living room humidity = 70.2
+2025-04-27T20:07:45.898Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":70.2,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T20:08:46.380Z: Initializing sensor logging service
+2025-04-27T20:08:46.380Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T20:08:46.381Z: Using existing log file
+2025-04-27T20:08:46.382Z: Log stream created and logging enabled
+2025-04-27T20:08:46.383Z: No polling was active to stop
+2025-04-27T20:08:46.384Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T20:08:46.384Z: Polling interval set with ID: 814
+2025-04-27T20:08:46.385Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T20:08:46.388Z: Initializing sensor logging service
+2025-04-27T20:08:46.388Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T20:08:46.388Z: Using existing log file
+2025-04-27T20:08:46.395Z: Closing existing log stream before creating new one
+2025-04-27T20:08:46.395Z: Log stream created and logging enabled
+2025-04-27T20:08:46.396Z: Stopping sensor polling interval: 814
+2025-04-27T20:08:46.396Z: Closing logging service
+2025-04-27T20:08:46.396Z: Closing sensor logging service
+2025-04-27T20:08:46.396Z: Closing log stream
+2025-04-27T20:08:46.396Z: Logging stopped at 2025-04-27T20:08:46.396Z
+2025-04-27T20:08:46.398Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T20:08:46.398Z: Polling interval set with ID: 868
+2025-04-27T20:08:46.399Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T20:08:46.385Z: Received sensor data: {"temperature":21,"humidity":70.2}
+2025-04-27T20:08:46.385Z: Formatted events: [{"name":"living room temperature","value":21,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":70.2,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T20:08:46.955Z: logSensorData called with 2 sensors
+2025-04-27T20:08:46.955Z: WARNING - Logging is disabled but logSensorData was called
+2025-04-27T20:08:46.955Z: Attempting to re-initialize logging with existing events
+2025-04-27T20:08:46.955Z: Initializing sensor logging service
+2025-04-27T20:08:46.956Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T20:08:46.956Z: Using existing log file
+2025-04-27T20:08:46.955Z: ERROR - Logging service not initialized (logStream is null)
+2025-04-27T20:08:46.385Z: ERROR - Failed to log sensor data: Logging service not initialized
+2025-04-27T20:08:46.385Z: Successfully updated event: living room temperature = 21
+2025-04-27T20:08:46.385Z: Successfully updated event: living room humidity = 70.2
+2025-04-27T20:08:46.962Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":70.2,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T20:08:46.399Z: Received sensor data: {"temperature":21,"humidity":70.2}
+2025-04-27T20:08:46.399Z: Formatted events: [{"name":"living room temperature","value":21,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":70.2,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T20:08:46.965Z: logSensorData called with 2 sensors
+2025-04-27T20:08:46.965Z: WARNING - Logging is disabled but logSensorData was called
+2025-04-27T20:08:46.965Z: Attempting to re-initialize logging with existing events
+2025-04-27T20:08:46.966Z: Initializing sensor logging service
+2025-04-27T20:08:46.966Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T20:08:46.966Z: Using existing log file
+2025-04-27T20:08:46.965Z: ERROR - Logging service not initialized (logStream is null)
+2025-04-27T20:08:46.399Z: ERROR - Failed to log sensor data: Logging service not initialized
+2025-04-27T20:08:46.399Z: Successfully updated event: living room temperature = 21
+2025-04-27T20:08:46.399Z: Successfully updated event: living room humidity = 70.2
+2025-04-27T20:08:46.971Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":70.2,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T20:08:46.973Z: Log stream created and logging enabled
+2025-04-27T20:08:46.955Z: Re-initialization result: {"success":true,"message":"Sensor logging initialized to C:\\Users\\amin\\Desktop\\smart-space\\SmartSchool-Server\\logs\\sensor_data.csv","columns":[["living room temperature",1],["living room humidity",2]]}
+2025-04-27T20:08:46.974Z: Closing existing log stream before creating new one
+2025-04-27T20:08:46.974Z: Log stream created and logging enabled
+2025-04-27T20:08:46.965Z: Re-initialization result: {"success":true,"message":"Sensor logging initialized to C:\\Users\\amin\\Desktop\\smart-space\\SmartSchool-Server\\logs\\sensor_data.csv","columns":[["living room temperature",1],["living room humidity",2]]}
+2025-04-27T20:10:26.410Z: Polling for sensor data... (poll #1)
+2025-04-27T20:10:26.411Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T20:10:26.411Z: Received sensor data: {"temperature":21.1,"humidity":69.9}
+2025-04-27T20:10:26.411Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.9,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T20:10:26.954Z: logSensorData called with 2 sensors
+2025-04-27T20:10:26.954Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T20:10:26.954Z: Setting spaceId column 3 to 41413915
+2025-04-27T20:10:26.954Z: Setting column 1 (living room temperature) to 21.1
+2025-04-27T20:10:26.954Z: Setting column 2 (living room humidity) to 69.9
+2025-04-27T20:10:26.954Z: Writing row to log file: 2025-04-27 20:10:26,21.1,69.9,41413915
+2025-04-27T20:10:26.954Z: Successfully wrote to log file using appendFileSync
+2025-04-27T20:10:26.411Z: Successfully logged sensor data
+2025-04-27T20:10:26.411Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T20:10:26.411Z: Successfully updated event: living room humidity = 69.9
+2025-04-27T20:10:26.962Z: Polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.9,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T20:10:26.962Z: Polling interval active: true
+2025-04-27T20:12:06.413Z: Polling for sensor data... (poll #2)
+2025-04-27T20:12:06.414Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T20:12:06.414Z: Received sensor data: {"temperature":21.1,"humidity":69.9}
+2025-04-27T20:12:06.414Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.9,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T20:12:06.990Z: logSensorData called with 2 sensors
+2025-04-27T20:12:06.990Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T20:12:06.990Z: Setting spaceId column 3 to 41413915
+2025-04-27T20:12:06.990Z: Setting column 1 (living room temperature) to 21.1
+2025-04-27T20:12:06.990Z: Setting column 2 (living room humidity) to 69.9
+2025-04-27T20:12:06.990Z: Writing row to log file: 2025-04-27 20:12:06,21.1,69.9,41413915
+2025-04-27T20:12:06.990Z: Successfully wrote to log file using appendFileSync
+2025-04-27T20:12:06.414Z: Successfully logged sensor data
+2025-04-27T20:12:06.414Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T20:12:06.414Z: Successfully updated event: living room humidity = 69.9
+2025-04-27T20:12:06.998Z: Polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.9,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T20:12:06.998Z: Polling interval active: true
+2025-04-27T20:13:46.422Z: Polling for sensor data... (poll #3)
+2025-04-27T20:13:46.423Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T20:13:46.423Z: Received sensor data: {"temperature":21.1,"humidity":69.8}
+2025-04-27T20:13:46.423Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.8,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T20:13:47.379Z: logSensorData called with 2 sensors
+2025-04-27T20:13:47.379Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T20:13:47.379Z: Setting spaceId column 3 to 41413915
+2025-04-27T20:13:47.379Z: Setting column 1 (living room temperature) to 21.1
+2025-04-27T20:13:47.379Z: Setting column 2 (living room humidity) to 69.8
+2025-04-27T20:13:47.379Z: Writing row to log file: 2025-04-27 20:13:47,21.1,69.8,41413915
+2025-04-27T20:13:47.379Z: Successfully wrote to log file using appendFileSync
+2025-04-27T20:13:46.423Z: Successfully logged sensor data
+2025-04-27T20:13:46.423Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T20:13:46.423Z: Successfully updated event: living room humidity = 69.8
+2025-04-27T20:13:47.387Z: Polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.8,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T20:13:47.387Z: Polling interval active: true
+2025-04-27T20:15:26.434Z: Polling for sensor data... (poll #4)
+2025-04-27T20:15:26.435Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T20:15:26.435Z: Received sensor data: {"temperature":21.1,"humidity":69.8}
+2025-04-27T20:15:26.435Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.8,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T20:15:27.010Z: logSensorData called with 2 sensors
+2025-04-27T20:15:27.010Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T20:15:27.010Z: Setting spaceId column 3 to 41413915
+2025-04-27T20:15:27.010Z: Setting column 1 (living room temperature) to 21.1
+2025-04-27T20:15:27.010Z: Setting column 2 (living room humidity) to 69.8
+2025-04-27T20:15:27.010Z: Writing row to log file: 2025-04-27 20:15:27,21.1,69.8,41413915
+2025-04-27T20:15:27.010Z: Successfully wrote to log file using appendFileSync
+2025-04-27T20:15:26.435Z: Successfully logged sensor data
+2025-04-27T20:15:26.435Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T20:15:26.435Z: Successfully updated event: living room humidity = 69.8
+2025-04-27T20:15:27.017Z: Polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.8,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T20:15:27.017Z: Polling interval active: true
+2025-04-27T20:17:06.446Z: Polling for sensor data... (poll #5)
+2025-04-27T20:17:06.447Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T20:17:06.447Z: Received sensor data: {"temperature":21.2,"humidity":69.6}
+2025-04-27T20:17:06.447Z: Formatted events: [{"name":"living room temperature","value":21.2,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.6,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T20:17:06.957Z: logSensorData called with 2 sensors
+2025-04-27T20:17:06.957Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T20:17:06.957Z: Setting spaceId column 3 to 41413915
+2025-04-27T20:17:06.957Z: Setting column 1 (living room temperature) to 21.2
+2025-04-27T20:17:06.957Z: Setting column 2 (living room humidity) to 69.6
+2025-04-27T20:17:06.957Z: Writing row to log file: 2025-04-27 20:17:06,21.2,69.6,41413915
+2025-04-27T20:17:06.957Z: Successfully wrote to log file using appendFileSync
+2025-04-27T20:17:06.447Z: Successfully logged sensor data
+2025-04-27T20:17:06.447Z: Successfully updated event: living room temperature = 21.2
+2025-04-27T20:17:06.447Z: Successfully updated event: living room humidity = 69.6
+2025-04-27T20:17:06.963Z: Polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.2,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.6,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T20:17:06.964Z: Polling interval active: true
+2025-04-27T20:18:46.458Z: Polling for sensor data... (poll #6)
+2025-04-27T20:18:46.459Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T20:18:46.459Z: Received sensor data: {"temperature":21.1,"humidity":69.5}
+2025-04-27T20:18:46.459Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.5,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T20:18:46.947Z: logSensorData called with 2 sensors
+2025-04-27T20:18:46.947Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T20:18:46.947Z: Setting spaceId column 3 to 41413915
+2025-04-27T20:18:46.947Z: Setting column 1 (living room temperature) to 21.1
+2025-04-27T20:18:46.947Z: Setting column 2 (living room humidity) to 69.5
+2025-04-27T20:18:46.947Z: Writing row to log file: 2025-04-27 20:18:46,21.1,69.5,41413915
+2025-04-27T20:18:46.947Z: Successfully wrote to log file using appendFileSync
+2025-04-27T20:18:46.459Z: Successfully logged sensor data
+2025-04-27T20:18:46.459Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T20:18:46.459Z: Successfully updated event: living room humidity = 69.5
+2025-04-27T20:18:46.952Z: Polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.5,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T20:18:46.952Z: Polling interval active: true
+2025-04-27T20:20:26.469Z: Polling for sensor data... (poll #7)
+2025-04-27T20:20:26.470Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T20:20:26.470Z: Received sensor data: {"temperature":21.2,"humidity":69.6}
+2025-04-27T20:20:26.470Z: Formatted events: [{"name":"living room temperature","value":21.2,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.6,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T20:20:27.037Z: logSensorData called with 2 sensors
+2025-04-27T20:20:27.037Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T20:20:27.037Z: Setting spaceId column 3 to 41413915
+2025-04-27T20:20:27.037Z: Setting column 1 (living room temperature) to 21.2
+2025-04-27T20:20:27.037Z: Setting column 2 (living room humidity) to 69.6
+2025-04-27T20:20:27.037Z: Writing row to log file: 2025-04-27 20:20:27,21.2,69.6,41413915
+2025-04-27T20:20:27.037Z: Successfully wrote to log file using appendFileSync
+2025-04-27T20:20:26.470Z: Successfully logged sensor data
+2025-04-27T20:20:26.470Z: Successfully updated event: living room temperature = 21.2
+2025-04-27T20:20:26.470Z: Successfully updated event: living room humidity = 69.6
+2025-04-27T20:20:27.043Z: Polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.2,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.6,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T20:20:27.043Z: Polling interval active: true
+2025-04-27T20:22:06.474Z: Polling for sensor data... (poll #8)
+2025-04-27T20:22:06.475Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T20:22:06.475Z: ERROR - No sensor data received from Sensibo
+2025-04-27T20:22:06.850Z: Polling result: {"success":false,"error":"No sensor data received from Sensibo"}
+2025-04-27T20:22:06.850Z: Polling interval active: true
+2025-04-27T20:23:46.488Z: Polling for sensor data... (poll #9)
+2025-04-27T20:23:46.488Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T20:23:46.488Z: ERROR - No sensor data received from Sensibo
+2025-04-27T20:23:46.933Z: Polling result: {"success":false,"error":"No sensor data received from Sensibo"}
+2025-04-27T20:23:46.933Z: Polling interval active: true
+2025-04-27T20:25:26.491Z: Polling for sensor data... (poll #10)
+2025-04-27T20:25:26.492Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T20:25:26.492Z: ERROR - No sensor data received from Sensibo
+2025-04-27T20:25:27.055Z: Polling result: {"success":false,"error":"No sensor data received from Sensibo"}
+2025-04-27T20:25:27.056Z: Polling interval active: true
+2025-04-27T20:27:06.502Z: Polling for sensor data... (poll #11)
+2025-04-27T20:27:06.503Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T20:27:06.503Z: ERROR - No sensor data received from Sensibo
+2025-04-27T20:27:07.021Z: Polling result: {"success":false,"error":"No sensor data received from Sensibo"}
+2025-04-27T20:27:07.022Z: Polling interval active: true
+2025-04-27T20:28:46.505Z: Polling for sensor data... (poll #12)
+2025-04-27T20:28:46.506Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T20:28:46.506Z: ERROR - No sensor data received from Sensibo
+2025-04-27T20:28:46.956Z: Polling result: {"success":false,"error":"No sensor data received from Sensibo"}
+2025-04-27T20:28:46.957Z: Polling interval active: true
+2025-04-27T20:30:26.507Z: Polling for sensor data... (poll #13)
+2025-04-27T20:30:26.508Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T20:30:26.508Z: ERROR - No sensor data received from Sensibo
+2025-04-27T20:30:26.959Z: Polling result: {"success":false,"error":"No sensor data received from Sensibo"}
+2025-04-27T20:30:26.959Z: Polling interval active: true
+2025-04-27T20:32:06.522Z: Polling for sensor data... (poll #14)
+2025-04-27T20:32:06.523Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T20:32:06.523Z: ERROR - No sensor data received from Sensibo
+2025-04-27T20:32:06.968Z: Polling result: {"success":false,"error":"No sensor data received from Sensibo"}
+2025-04-27T20:32:06.968Z: Polling interval active: true
+2025-04-27T20:33:38.361Z: Initializing sensor logging service
+2025-04-27T20:33:38.361Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T20:33:38.362Z: Using existing log file
+2025-04-27T20:33:38.363Z: Log stream created and logging enabled
+2025-04-27T20:33:38.364Z: No polling was active to stop
+2025-04-27T20:33:38.365Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T20:33:38.365Z: Polling interval set with ID: 780
+2025-04-27T20:33:38.365Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T20:33:38.765Z: Initializing sensor logging service
+2025-04-27T20:33:38.765Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T20:33:38.766Z: Using existing log file
+2025-04-27T20:33:38.766Z: Closing existing log stream before creating new one
+2025-04-27T20:33:38.767Z: Log stream created and logging enabled
+2025-04-27T20:33:38.768Z: Stopping sensor polling interval: 780
+2025-04-27T20:33:38.768Z: Closing logging service
+2025-04-27T20:33:38.768Z: Closing sensor logging service
+2025-04-27T20:33:38.768Z: Closing log stream
+2025-04-27T20:33:38.768Z: Logging stopped at 2025-04-27T20:33:38.768Z
+2025-04-27T20:33:38.770Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T20:33:38.770Z: Polling interval set with ID: 888
+2025-04-27T20:33:38.770Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T20:33:38.365Z: Received sensor data: {"temperature":21.2,"humidity":69.5}
+2025-04-27T20:33:38.365Z: Formatted events: [{"name":"living room temperature","value":21.2,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.5,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T20:33:38.872Z: logSensorData called with 2 sensors
+2025-04-27T20:33:38.872Z: WARNING - Logging is disabled but logSensorData was called
+2025-04-27T20:33:38.872Z: Attempting to re-initialize logging with existing events
+2025-04-27T20:33:38.873Z: Initializing sensor logging service
+2025-04-27T20:33:38.873Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T20:33:38.873Z: Using existing log file
+2025-04-27T20:33:38.872Z: ERROR - Logging service not initialized (logStream is null)
+2025-04-27T20:33:38.365Z: ERROR - Failed to log sensor data: Logging service not initialized
+2025-04-27T20:33:38.365Z: Successfully updated event: living room temperature = 21.2
+2025-04-27T20:33:38.365Z: Successfully updated event: living room humidity = 69.5
+2025-04-27T20:33:38.878Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.2,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.5,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T20:33:38.879Z: Log stream created and logging enabled
+2025-04-27T20:33:38.872Z: Re-initialization result: {"success":true,"message":"Sensor logging initialized to C:\\Users\\amin\\Desktop\\smart-space\\SmartSchool-Server\\logs\\sensor_data.csv","columns":[["living room temperature",1],["living room humidity",2]]}
+2025-04-27T20:33:38.770Z: Received sensor data: {"temperature":21.2,"humidity":69.5}
+2025-04-27T20:33:38.770Z: Formatted events: [{"name":"living room temperature","value":21.2,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.5,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T20:33:39.325Z: logSensorData called with 2 sensors
+2025-04-27T20:33:39.325Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T20:33:39.325Z: Setting spaceId column 3 to 41413915
+2025-04-27T20:33:39.325Z: Setting column 1 (living room temperature) to 21.2
+2025-04-27T20:33:39.325Z: Setting column 2 (living room humidity) to 69.5
+2025-04-27T20:33:39.325Z: Writing row to log file: 2025-04-27 20:33:39,21.2,69.5,41413915
+2025-04-27T20:33:39.325Z: Successfully wrote to log file using appendFileSync
+2025-04-27T20:33:38.770Z: Successfully logged sensor data
+2025-04-27T20:33:38.770Z: Successfully updated event: living room temperature = 21.2
+2025-04-27T20:33:38.770Z: Successfully updated event: living room humidity = 69.5
+2025-04-27T20:33:39.332Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.2,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.5,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T20:35:18.781Z: Polling for sensor data... (poll #1)
+2025-04-27T20:35:18.782Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T20:35:18.782Z: Received sensor data: {"temperature":21.2,"humidity":69.5}
+2025-04-27T20:35:18.782Z: Formatted events: [{"name":"living room temperature","value":21.2,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.5,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T20:35:19.263Z: logSensorData called with 2 sensors
+2025-04-27T20:35:19.263Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T20:35:19.263Z: Setting spaceId column 3 to 41413915
+2025-04-27T20:35:19.263Z: Setting column 1 (living room temperature) to 21.2
+2025-04-27T20:35:19.263Z: Setting column 2 (living room humidity) to 69.5
+2025-04-27T20:35:19.263Z: Writing row to log file: 2025-04-27 20:35:19,21.2,69.5,41413915
+2025-04-27T20:35:19.263Z: Successfully wrote to log file using appendFileSync
+2025-04-27T20:35:18.782Z: Successfully logged sensor data
+2025-04-27T20:35:18.782Z: Successfully updated event: living room temperature = 21.2
+2025-04-27T20:35:18.782Z: Successfully updated event: living room humidity = 69.5
+2025-04-27T20:35:19.270Z: Polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.2,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.5,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T20:35:19.270Z: Polling interval active: true
+2025-04-27T20:36:58.787Z: Polling for sensor data... (poll #2)
+2025-04-27T20:36:58.787Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T20:36:58.787Z: Received sensor data: {"temperature":21.2,"humidity":69.5}
+2025-04-27T20:36:58.787Z: Formatted events: [{"name":"living room temperature","value":21.2,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.5,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T20:36:59.361Z: logSensorData called with 2 sensors
+2025-04-27T20:36:59.361Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T20:36:59.361Z: Setting spaceId column 3 to 41413915
+2025-04-27T20:36:59.361Z: Setting column 1 (living room temperature) to 21.2
+2025-04-27T20:36:59.361Z: Setting column 2 (living room humidity) to 69.5
+2025-04-27T20:36:59.361Z: Writing row to log file: 2025-04-27 20:36:59,21.2,69.5,41413915
+2025-04-27T20:36:59.361Z: Successfully wrote to log file using appendFileSync
+2025-04-27T20:36:58.787Z: Successfully logged sensor data
+2025-04-27T20:36:58.787Z: Successfully updated event: living room temperature = 21.2
+2025-04-27T20:36:58.787Z: Successfully updated event: living room humidity = 69.5
+2025-04-27T20:36:59.368Z: Polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.2,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.5,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T20:36:59.368Z: Polling interval active: true
+2025-04-27T20:38:38.797Z: Polling for sensor data... (poll #3)
+2025-04-27T20:38:38.798Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T20:38:38.798Z: Received sensor data: {"temperature":21.2,"humidity":69.5}
+2025-04-27T20:38:38.798Z: Formatted events: [{"name":"living room temperature","value":21.2,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.5,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T20:38:39.322Z: logSensorData called with 2 sensors
+2025-04-27T20:38:39.322Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T20:38:39.322Z: Setting spaceId column 3 to 41413915
+2025-04-27T20:38:39.322Z: Setting column 1 (living room temperature) to 21.2
+2025-04-27T20:38:39.322Z: Setting column 2 (living room humidity) to 69.5
+2025-04-27T20:38:39.322Z: Writing row to log file: 2025-04-27 20:38:39,21.2,69.5,41413915
+2025-04-27T20:38:39.322Z: Successfully wrote to log file using appendFileSync
+2025-04-27T20:38:38.798Z: Successfully logged sensor data
+2025-04-27T20:38:38.798Z: Successfully updated event: living room temperature = 21.2
+2025-04-27T20:38:38.798Z: Successfully updated event: living room humidity = 69.5
+2025-04-27T20:38:39.328Z: Polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.2,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.5,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T20:38:39.329Z: Polling interval active: true
+2025-04-27T20:40:18.804Z: Polling for sensor data... (poll #4)
+2025-04-27T20:40:18.805Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T20:40:18.805Z: Received sensor data: {"temperature":21.2,"humidity":69.5}
+2025-04-27T20:40:18.805Z: Formatted events: [{"name":"living room temperature","value":21.2,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.5,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T20:40:19.324Z: logSensorData called with 2 sensors
+2025-04-27T20:40:19.324Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T20:40:19.324Z: Setting spaceId column 3 to 41413915
+2025-04-27T20:40:19.324Z: Setting column 1 (living room temperature) to 21.2
+2025-04-27T20:40:19.324Z: Setting column 2 (living room humidity) to 69.5
+2025-04-27T20:40:19.324Z: Writing row to log file: 2025-04-27 20:40:19,21.2,69.5,41413915
+2025-04-27T20:40:19.324Z: Successfully wrote to log file using appendFileSync
+2025-04-27T20:40:18.805Z: Successfully logged sensor data
+2025-04-27T20:40:18.805Z: Successfully updated event: living room temperature = 21.2
+2025-04-27T20:40:18.805Z: Successfully updated event: living room humidity = 69.5
+2025-04-27T20:40:19.331Z: Polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.2,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.5,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T20:40:19.331Z: Polling interval active: true
+2025-04-27T20:41:58.809Z: Polling for sensor data... (poll #5)
+2025-04-27T20:41:58.809Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T20:41:58.809Z: Received sensor data: {"temperature":21.2,"humidity":69.5}
+2025-04-27T20:41:58.809Z: Formatted events: [{"name":"living room temperature","value":21.2,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.5,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T20:41:59.384Z: logSensorData called with 2 sensors
+2025-04-27T20:41:59.384Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T20:41:59.384Z: Setting spaceId column 3 to 41413915
+2025-04-27T20:41:59.384Z: Setting column 1 (living room temperature) to 21.2
+2025-04-27T20:41:59.384Z: Setting column 2 (living room humidity) to 69.5
+2025-04-27T20:41:59.384Z: Writing row to log file: 2025-04-27 20:41:59,21.2,69.5,41413915
+2025-04-27T20:41:59.384Z: Successfully wrote to log file using appendFileSync
+2025-04-27T20:41:58.809Z: Successfully logged sensor data
+2025-04-27T20:41:58.809Z: Successfully updated event: living room temperature = 21.2
+2025-04-27T20:41:58.809Z: Successfully updated event: living room humidity = 69.5
+2025-04-27T20:41:59.391Z: Polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.2,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.5,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T20:41:59.392Z: Polling interval active: true
+2025-04-27T20:50:39.450Z: Initializing sensor logging service
+2025-04-27T20:50:39.450Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T20:50:39.451Z: Using existing log file
+2025-04-27T20:50:39.452Z: Log stream created and logging enabled
+2025-04-27T20:50:39.452Z: No polling was active to stop
+2025-04-27T20:50:39.453Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T20:50:39.453Z: Polling interval set with ID: 800
+2025-04-27T20:50:39.453Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T20:50:39.908Z: Initializing sensor logging service
+2025-04-27T20:50:39.909Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T20:50:39.910Z: Using existing log file
+2025-04-27T20:50:39.910Z: Closing existing log stream before creating new one
+2025-04-27T20:50:39.911Z: Log stream created and logging enabled
+2025-04-27T20:50:39.911Z: Stopping sensor polling interval: 800
+2025-04-27T20:50:39.911Z: Closing logging service
+2025-04-27T20:50:39.912Z: Closing sensor logging service
+2025-04-27T20:50:39.912Z: Closing log stream
+2025-04-27T20:50:39.912Z: Logging stopped at 2025-04-27T20:50:39.912Z
+2025-04-27T20:50:39.913Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T20:50:39.913Z: Polling interval set with ID: 909
+2025-04-27T20:50:39.914Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T20:50:39.453Z: Received sensor data: {"temperature":21.2,"humidity":69.1}
+2025-04-27T20:50:39.453Z: Formatted events: [{"name":"living room temperature","value":21.2,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.1,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T20:50:40.031Z: logSensorData called with 2 sensors
+2025-04-27T20:50:40.031Z: WARNING - Logging is disabled but logSensorData was called
+2025-04-27T20:50:40.031Z: Attempting to re-initialize logging with existing events
+2025-04-27T20:50:40.032Z: Initializing sensor logging service
+2025-04-27T20:50:40.032Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T20:50:40.033Z: Using existing log file
+2025-04-27T20:50:40.031Z: ERROR - Logging service not initialized (logStream is null)
+2025-04-27T20:50:39.453Z: ERROR - Failed to log sensor data: Logging service not initialized
+2025-04-27T20:50:39.453Z: Successfully updated event: living room temperature = 21.2
+2025-04-27T20:50:39.453Z: Successfully updated event: living room humidity = 69.1
+2025-04-27T20:50:40.037Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.2,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.1,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T20:50:40.038Z: Log stream created and logging enabled
+2025-04-27T20:50:40.031Z: Re-initialization result: {"success":true,"message":"Sensor logging initialized to C:\\Users\\amin\\Desktop\\smart-space\\SmartSchool-Server\\logs\\sensor_data.csv","columns":[["living room temperature",1],["living room humidity",2]]}
+2025-04-27T20:50:39.914Z: Received sensor data: {"temperature":21.2,"humidity":69.1}
+2025-04-27T20:50:39.914Z: Formatted events: [{"name":"living room temperature","value":21.2,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.1,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T20:50:40.523Z: logSensorData called with 2 sensors
+2025-04-27T20:50:40.523Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T20:50:40.523Z: Setting spaceId column 3 to 41413915
+2025-04-27T20:50:40.523Z: Setting column 1 (living room temperature) to 21.2
+2025-04-27T20:50:40.523Z: Setting column 2 (living room humidity) to 69.1
+2025-04-27T20:50:40.523Z: Writing row to log file: 2025-04-27 20:50:40,21.2,69.1,41413915
+2025-04-27T20:50:40.523Z: Successfully wrote to log file using appendFileSync
+2025-04-27T20:50:39.914Z: Successfully logged sensor data
+2025-04-27T20:50:39.914Z: Successfully updated event: living room temperature = 21.2
+2025-04-27T20:50:39.914Z: Successfully updated event: living room humidity = 69.1
+2025-04-27T20:50:40.530Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.2,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.1,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T21:18:42.471Z: Initializing sensor logging service
+2025-04-27T21:18:42.472Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T21:18:42.472Z: Using existing log file
+2025-04-27T21:18:42.473Z: Log stream created and logging enabled
+2025-04-27T21:18:42.474Z: No polling was active to stop
+2025-04-27T21:18:42.475Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T21:18:42.475Z: Polling interval set with ID: 807
+2025-04-27T21:18:42.475Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T21:18:42.521Z: Initializing sensor logging service
+2025-04-27T21:18:42.521Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T21:18:42.522Z: Using existing log file
+2025-04-27T21:18:42.522Z: Closing existing log stream before creating new one
+2025-04-27T21:18:42.523Z: Log stream created and logging enabled
+2025-04-27T21:18:42.523Z: Stopping sensor polling interval: 807
+2025-04-27T21:18:42.523Z: Closing logging service
+2025-04-27T21:18:42.524Z: Closing sensor logging service
+2025-04-27T21:18:42.524Z: Closing log stream
+2025-04-27T21:18:42.524Z: Logging stopped at 2025-04-27T21:18:42.524Z
+2025-04-27T21:18:42.525Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T21:18:42.525Z: Polling interval set with ID: 861
+2025-04-27T21:18:42.526Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T21:18:42.475Z: Received sensor data: {"temperature":21,"humidity":69.3}
+2025-04-27T21:18:42.475Z: Formatted events: [{"name":"living room temperature","value":21,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.3,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T21:18:43.010Z: logSensorData called with 2 sensors
+2025-04-27T21:18:43.010Z: WARNING - Logging is disabled but logSensorData was called
+2025-04-27T21:18:43.010Z: Attempting to re-initialize logging with existing events
+2025-04-27T21:18:43.012Z: Initializing sensor logging service
+2025-04-27T21:18:43.012Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T21:18:43.012Z: Using existing log file
+2025-04-27T21:18:43.010Z: ERROR - Logging service not initialized (logStream is null)
+2025-04-27T21:18:42.475Z: ERROR - Failed to log sensor data: Logging service not initialized
+2025-04-27T21:18:42.475Z: Successfully updated event: living room temperature = 21
+2025-04-27T21:18:42.475Z: Successfully updated event: living room humidity = 69.3
+2025-04-27T21:18:43.019Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.3,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T21:18:43.021Z: Log stream created and logging enabled
+2025-04-27T21:18:43.010Z: Re-initialization result: {"success":true,"message":"Sensor logging initialized to C:\\Users\\amin\\Desktop\\smart-space\\SmartSchool-Server\\logs\\sensor_data.csv","columns":[["living room temperature",1],["living room humidity",2]]}
+2025-04-27T21:18:42.526Z: Received sensor data: {"temperature":21,"humidity":69.3}
+2025-04-27T21:18:42.526Z: Formatted events: [{"name":"living room temperature","value":21,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.3,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T21:18:43.025Z: logSensorData called with 2 sensors
+2025-04-27T21:18:43.025Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T21:18:43.025Z: Setting spaceId column 3 to 41413915
+2025-04-27T21:18:43.025Z: Setting column 1 (living room temperature) to 21
+2025-04-27T21:18:43.025Z: Setting column 2 (living room humidity) to 69.3
+2025-04-27T21:18:43.025Z: Writing row to log file: 2025-04-27 21:18:43,21,69.3,41413915
+2025-04-27T21:18:43.025Z: Successfully wrote to log file using appendFileSync
+2025-04-27T21:18:42.526Z: Successfully logged sensor data
+2025-04-27T21:18:42.526Z: Successfully updated event: living room temperature = 21
+2025-04-27T21:18:42.526Z: Successfully updated event: living room humidity = 69.3
+2025-04-27T21:18:43.031Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.3,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T21:19:49.085Z: Initializing sensor logging service
+2025-04-27T21:19:49.085Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T21:19:49.085Z: Using existing log file
+2025-04-27T21:19:49.087Z: Log stream created and logging enabled
+2025-04-27T21:19:49.087Z: No polling was active to stop
+2025-04-27T21:19:49.089Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T21:19:49.089Z: Polling interval set with ID: 780
+2025-04-27T21:19:49.089Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T21:19:49.550Z: Initializing sensor logging service
+2025-04-27T21:19:49.550Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T21:19:49.551Z: Using existing log file
+2025-04-27T21:19:49.552Z: Closing existing log stream before creating new one
+2025-04-27T21:19:49.553Z: Log stream created and logging enabled
+2025-04-27T21:19:49.553Z: Stopping sensor polling interval: 780
+2025-04-27T21:19:49.553Z: Closing logging service
+2025-04-27T21:19:49.554Z: Closing sensor logging service
+2025-04-27T21:19:49.554Z: Closing log stream
+2025-04-27T21:19:49.554Z: Logging stopped at 2025-04-27T21:19:49.554Z
+2025-04-27T21:19:49.555Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T21:19:49.555Z: Polling interval set with ID: 963
+2025-04-27T21:19:49.556Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T21:19:49.089Z: Received sensor data: {"temperature":21,"humidity":69.2}
+2025-04-27T21:19:49.089Z: Formatted events: [{"name":"living room temperature","value":21,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.2,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T21:19:49.660Z: logSensorData called with 2 sensors
+2025-04-27T21:19:49.660Z: WARNING - Logging is disabled but logSensorData was called
+2025-04-27T21:19:49.660Z: Attempting to re-initialize logging with existing events
+2025-04-27T21:19:49.661Z: Initializing sensor logging service
+2025-04-27T21:19:49.661Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T21:19:49.662Z: Using existing log file
+2025-04-27T21:19:49.660Z: ERROR - Logging service not initialized (logStream is null)
+2025-04-27T21:19:49.089Z: ERROR - Failed to log sensor data: Logging service not initialized
+2025-04-27T21:19:49.089Z: Successfully updated event: living room temperature = 21
+2025-04-27T21:19:49.089Z: Successfully updated event: living room humidity = 69.2
+2025-04-27T21:19:49.670Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.2,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T21:19:49.672Z: Log stream created and logging enabled
+2025-04-27T21:19:49.660Z: Re-initialization result: {"success":true,"message":"Sensor logging initialized to C:\\Users\\amin\\Desktop\\smart-space\\SmartSchool-Server\\logs\\sensor_data.csv","columns":[["living room temperature",1],["living room humidity",2]]}
+2025-04-27T21:19:49.556Z: Received sensor data: {"temperature":21,"humidity":69.2}
+2025-04-27T21:19:49.556Z: Formatted events: [{"name":"living room temperature","value":21,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.2,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T21:19:50.116Z: logSensorData called with 2 sensors
+2025-04-27T21:19:50.116Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T21:19:50.116Z: Setting spaceId column 3 to 41413915
+2025-04-27T21:19:50.116Z: Setting column 1 (living room temperature) to 21
+2025-04-27T21:19:50.116Z: Setting column 2 (living room humidity) to 69.2
+2025-04-27T21:19:50.116Z: Writing row to log file: 2025-04-27 21:19:50,21,69.2,41413915
+2025-04-27T21:19:50.116Z: Successfully wrote to log file using appendFileSync
+2025-04-27T21:19:49.556Z: Successfully logged sensor data
+2025-04-27T21:19:49.556Z: Successfully updated event: living room temperature = 21
+2025-04-27T21:19:49.556Z: Successfully updated event: living room humidity = 69.2
+2025-04-27T21:19:50.124Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.2,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T21:22:42.055Z: Initializing sensor logging service
+2025-04-27T21:22:42.055Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T21:22:42.056Z: Using existing log file
+2025-04-27T21:22:42.056Z: Log stream created and logging enabled
+2025-04-27T21:22:42.057Z: No polling was active to stop
+2025-04-27T21:22:42.057Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T21:22:42.057Z: Polling interval set with ID: 811
+2025-04-27T21:22:42.058Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T21:22:42.090Z: Initializing sensor logging service
+2025-04-27T21:22:42.091Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T21:22:42.091Z: Using existing log file
+2025-04-27T21:22:42.092Z: Closing existing log stream before creating new one
+2025-04-27T21:22:42.092Z: Log stream created and logging enabled
+2025-04-27T21:22:42.093Z: Stopping sensor polling interval: 811
+2025-04-27T21:22:42.093Z: Closing logging service
+2025-04-27T21:22:42.093Z: Closing sensor logging service
+2025-04-27T21:22:42.093Z: Closing log stream
+2025-04-27T21:22:42.093Z: Logging stopped at 2025-04-27T21:22:42.093Z
+2025-04-27T21:22:42.094Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T21:22:42.094Z: Polling interval set with ID: 859
+2025-04-27T21:22:42.095Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T21:22:42.095Z: Received sensor data: {"temperature":21,"humidity":69.4}
+2025-04-27T21:22:42.095Z: Formatted events: [{"name":"living room temperature","value":21,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.4,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T21:22:42.576Z: logSensorData called with 2 sensors
+2025-04-27T21:22:42.576Z: WARNING - Logging is disabled but logSensorData was called
+2025-04-27T21:22:42.576Z: Attempting to re-initialize logging with existing events
+2025-04-27T21:22:42.577Z: Initializing sensor logging service
+2025-04-27T21:22:42.577Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T21:22:42.578Z: Using existing log file
+2025-04-27T21:22:42.576Z: ERROR - Logging service not initialized (logStream is null)
+2025-04-27T21:22:42.095Z: ERROR - Failed to log sensor data: Logging service not initialized
+2025-04-27T21:22:42.095Z: Successfully updated event: living room temperature = 21
+2025-04-27T21:22:42.095Z: Successfully updated event: living room humidity = 69.4
+2025-04-27T21:22:42.584Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.4,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T21:22:42.058Z: Received sensor data: {"temperature":21,"humidity":69.4}
+2025-04-27T21:22:42.058Z: Formatted events: [{"name":"living room temperature","value":21,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.4,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T21:22:42.587Z: logSensorData called with 2 sensors
+2025-04-27T21:22:42.587Z: WARNING - Logging is disabled but logSensorData was called
+2025-04-27T21:22:42.587Z: Attempting to re-initialize logging with existing events
+2025-04-27T21:22:42.587Z: Initializing sensor logging service
+2025-04-27T21:22:42.588Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T21:22:42.588Z: Using existing log file
+2025-04-27T21:22:42.587Z: ERROR - Logging service not initialized (logStream is null)
+2025-04-27T21:22:42.058Z: ERROR - Failed to log sensor data: Logging service not initialized
+2025-04-27T21:22:42.058Z: Successfully updated event: living room temperature = 21
+2025-04-27T21:22:42.058Z: Successfully updated event: living room humidity = 69.4
+2025-04-27T21:22:42.592Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.4,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T21:22:42.595Z: Log stream created and logging enabled
+2025-04-27T21:22:42.576Z: Re-initialization result: {"success":true,"message":"Sensor logging initialized to C:\\Users\\amin\\Desktop\\smart-space\\SmartSchool-Server\\logs\\sensor_data.csv","columns":[["living room temperature",1],["living room humidity",2]]}
+2025-04-27T21:22:42.595Z: Closing existing log stream before creating new one
+2025-04-27T21:22:42.596Z: Log stream created and logging enabled
+2025-04-27T21:22:42.587Z: Re-initialization result: {"success":true,"message":"Sensor logging initialized to C:\\Users\\amin\\Desktop\\smart-space\\SmartSchool-Server\\logs\\sensor_data.csv","columns":[["living room temperature",1],["living room humidity",2]]}
+2025-04-27T21:25:08.755Z: Initializing sensor logging service
+2025-04-27T21:25:08.755Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T21:25:08.756Z: Using existing log file
+2025-04-27T21:25:08.759Z: Log stream created and logging enabled
+2025-04-27T21:25:08.759Z: No polling was active to stop
+2025-04-27T21:25:08.760Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T21:25:08.760Z: Polling interval set with ID: 803
+2025-04-27T21:25:08.761Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T21:25:09.195Z: Initializing sensor logging service
+2025-04-27T21:25:09.195Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T21:25:09.196Z: Using existing log file
+2025-04-27T21:25:09.197Z: Closing existing log stream before creating new one
+2025-04-27T21:25:09.198Z: Log stream created and logging enabled
+2025-04-27T21:25:09.198Z: Stopping sensor polling interval: 803
+2025-04-27T21:25:09.198Z: Closing logging service
+2025-04-27T21:25:09.199Z: Closing sensor logging service
+2025-04-27T21:25:09.199Z: Closing log stream
+2025-04-27T21:25:09.199Z: Logging stopped at 2025-04-27T21:25:09.199Z
+2025-04-27T21:25:09.200Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T21:25:09.200Z: Polling interval set with ID: 909
+2025-04-27T21:25:09.201Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T21:25:08.761Z: Received sensor data: {"temperature":21.1,"humidity":69.3}
+2025-04-27T21:25:08.761Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.3,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T21:25:09.350Z: logSensorData called with 2 sensors
+2025-04-27T21:25:09.350Z: WARNING - Logging is disabled but logSensorData was called
+2025-04-27T21:25:09.350Z: Attempting to re-initialize logging with existing events
+2025-04-27T21:25:09.351Z: Initializing sensor logging service
+2025-04-27T21:25:09.351Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T21:25:09.352Z: Using existing log file
+2025-04-27T21:25:09.350Z: ERROR - Logging service not initialized (logStream is null)
+2025-04-27T21:25:08.761Z: ERROR - Failed to log sensor data: Logging service not initialized
+2025-04-27T21:25:08.761Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T21:25:08.761Z: Successfully updated event: living room humidity = 69.3
+2025-04-27T21:25:09.357Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.3,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T21:25:09.358Z: Log stream created and logging enabled
+2025-04-27T21:25:09.350Z: Re-initialization result: {"success":true,"message":"Sensor logging initialized to C:\\Users\\amin\\Desktop\\smart-space\\SmartSchool-Server\\logs\\sensor_data.csv","columns":[["living room temperature",1],["living room humidity",2]]}
+2025-04-27T21:25:09.201Z: Received sensor data: {"temperature":21.1,"humidity":69.3}
+2025-04-27T21:25:09.201Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.3,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T21:25:09.825Z: logSensorData called with 2 sensors
+2025-04-27T21:25:09.825Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T21:25:09.825Z: Setting spaceId column 3 to 41413915
+2025-04-27T21:25:09.825Z: Setting column 1 (living room temperature) to 21.1
+2025-04-27T21:25:09.825Z: Setting column 2 (living room humidity) to 69.3
+2025-04-27T21:25:09.825Z: Writing row to log file: 2025-04-27 21:25:09,21.1,69.3,41413915
+2025-04-27T21:25:09.825Z: Successfully wrote to log file using appendFileSync
+2025-04-27T21:25:09.201Z: Successfully logged sensor data
+2025-04-27T21:25:09.201Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T21:25:09.201Z: Successfully updated event: living room humidity = 69.3
+2025-04-27T21:25:09.832Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.3,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T21:26:17.509Z: Initializing sensor logging service
+2025-04-27T21:26:17.510Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T21:26:17.511Z: Using existing log file
+2025-04-27T21:26:17.512Z: Log stream created and logging enabled
+2025-04-27T21:26:17.513Z: No polling was active to stop
+2025-04-27T21:26:17.513Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T21:26:17.513Z: Polling interval set with ID: 802
+2025-04-27T21:26:17.514Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T21:26:17.916Z: Initializing sensor logging service
+2025-04-27T21:26:17.916Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T21:26:17.917Z: Using existing log file
+2025-04-27T21:26:17.918Z: Closing existing log stream before creating new one
+2025-04-27T21:26:17.919Z: Log stream created and logging enabled
+2025-04-27T21:26:17.919Z: Stopping sensor polling interval: 802
+2025-04-27T21:26:17.919Z: Closing logging service
+2025-04-27T21:26:17.920Z: Closing sensor logging service
+2025-04-27T21:26:17.920Z: Closing log stream
+2025-04-27T21:26:17.920Z: Logging stopped at 2025-04-27T21:26:17.920Z
+2025-04-27T21:26:17.921Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T21:26:17.921Z: Polling interval set with ID: 984
+2025-04-27T21:26:17.922Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T21:26:17.514Z: Received sensor data: {"temperature":21.1,"humidity":69.3}
+2025-04-27T21:26:17.514Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.3,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T21:26:18.065Z: logSensorData called with 2 sensors
+2025-04-27T21:26:18.065Z: WARNING - Logging is disabled but logSensorData was called
+2025-04-27T21:26:18.065Z: Attempting to re-initialize logging with existing events
+2025-04-27T21:26:18.066Z: Initializing sensor logging service
+2025-04-27T21:26:18.066Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T21:26:18.067Z: Using existing log file
+2025-04-27T21:26:18.065Z: ERROR - Logging service not initialized (logStream is null)
+2025-04-27T21:26:17.514Z: ERROR - Failed to log sensor data: Logging service not initialized
+2025-04-27T21:26:17.514Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T21:26:17.514Z: Successfully updated event: living room humidity = 69.3
+2025-04-27T21:26:18.074Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.3,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T21:26:18.076Z: Log stream created and logging enabled
+2025-04-27T21:26:18.065Z: Re-initialization result: {"success":true,"message":"Sensor logging initialized to C:\\Users\\amin\\Desktop\\smart-space\\SmartSchool-Server\\logs\\sensor_data.csv","columns":[["living room temperature",1],["living room humidity",2]]}
+2025-04-27T21:26:17.922Z: Received sensor data: {"temperature":21.1,"humidity":69.3}
+2025-04-27T21:26:17.922Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.3,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T21:26:18.440Z: logSensorData called with 2 sensors
+2025-04-27T21:26:18.440Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T21:26:18.440Z: Setting spaceId column 3 to 41413915
+2025-04-27T21:26:18.440Z: Setting column 1 (living room temperature) to 21.1
+2025-04-27T21:26:18.440Z: Setting column 2 (living room humidity) to 69.3
+2025-04-27T21:26:18.440Z: Writing row to log file: 2025-04-27 21:26:18,21.1,69.3,41413915
+2025-04-27T21:26:18.440Z: Successfully wrote to log file using appendFileSync
+2025-04-27T21:26:17.922Z: Successfully logged sensor data
+2025-04-27T21:26:17.922Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T21:26:17.922Z: Successfully updated event: living room humidity = 69.3
+2025-04-27T21:26:18.450Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.3,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T21:26:49.648Z: Initializing sensor logging service
+2025-04-27T21:26:49.648Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T21:26:49.649Z: Using existing log file
+2025-04-27T21:26:49.650Z: Log stream created and logging enabled
+2025-04-27T21:26:49.651Z: No polling was active to stop
+2025-04-27T21:26:49.652Z: Initializing sensor logging service
+2025-04-27T21:26:49.652Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T21:26:49.652Z: Using existing log file
+2025-04-27T21:26:49.654Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T21:26:49.654Z: Polling interval set with ID: 833
+2025-04-27T21:26:49.655Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T21:26:49.657Z: Closing existing log stream before creating new one
+2025-04-27T21:26:49.657Z: Log stream created and logging enabled
+2025-04-27T21:26:49.658Z: Stopping sensor polling interval: 833
+2025-04-27T21:26:49.658Z: Closing logging service
+2025-04-27T21:26:49.658Z: Closing sensor logging service
+2025-04-27T21:26:49.658Z: Closing log stream
+2025-04-27T21:26:49.658Z: Logging stopped at 2025-04-27T21:26:49.658Z
+2025-04-27T21:26:49.665Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-04-27T21:26:49.665Z: Polling interval set with ID: 872
+2025-04-27T21:26:49.666Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-04-27T21:26:49.666Z: Received sensor data: {"temperature":21.1,"humidity":69.3}
+2025-04-27T21:26:49.666Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.3,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T21:26:50.141Z: logSensorData called with 2 sensors
+2025-04-27T21:26:50.141Z: WARNING - Logging is disabled but logSensorData was called
+2025-04-27T21:26:50.141Z: Attempting to re-initialize logging with existing events
+2025-04-27T21:26:50.142Z: Initializing sensor logging service
+2025-04-27T21:26:50.142Z: Log file path: C:\Users\amin\Desktop\smart-space\SmartSchool-Server\logs\sensor_data.csv
+2025-04-27T21:26:50.142Z: Using existing log file
+2025-04-27T21:26:50.141Z: ERROR - Logging service not initialized (logStream is null)
+2025-04-27T21:26:49.666Z: ERROR - Failed to log sensor data: Logging service not initialized
+2025-04-27T21:26:49.666Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T21:26:49.666Z: Successfully updated event: living room humidity = 69.3
+2025-04-27T21:26:50.149Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.3,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-04-27T21:26:50.151Z: Log stream created and logging enabled
+2025-04-27T21:26:50.141Z: Re-initialization result: {"success":true,"message":"Sensor logging initialized to C:\\Users\\amin\\Desktop\\smart-space\\SmartSchool-Server\\logs\\sensor_data.csv","columns":[["living room temperature",1],["living room humidity",2]]}
+2025-04-27T21:26:49.655Z: Received sensor data: {"temperature":21.1,"humidity":69.3}
+2025-04-27T21:26:49.655Z: Formatted events: [{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.3,"roomName":"Living Room","spaceId":"41413915"}]
+2025-04-27T21:26:50.221Z: logSensorData called with 2 sensors
+2025-04-27T21:26:50.221Z: Column map has 2 columns: [["living room temperature",1],["living room humidity",2]]
+2025-04-27T21:26:50.221Z: Setting spaceId column 3 to 41413915
+2025-04-27T21:26:50.221Z: Setting column 1 (living room temperature) to 21.1
+2025-04-27T21:26:50.221Z: Setting column 2 (living room humidity) to 69.3
+2025-04-27T21:26:50.221Z: Writing row to log file: 2025-04-27 21:26:50,21.1,69.3,41413915
+2025-04-27T21:26:50.221Z: Successfully wrote to log file using appendFileSync
+2025-04-27T21:26:49.655Z: Successfully logged sensor data
+2025-04-27T21:26:49.655Z: Successfully updated event: living room temperature = 21.1
+2025-04-27T21:26:49.655Z: Successfully updated event: living room humidity = 69.3
+2025-04-27T21:26:50.229Z: Initial polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":21.1,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":69.3,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
