@@ -1,8 +1,9 @@
-const { getSensiboSensors } = require('../api/sensibo');
-const interpreterService = require('../interpreter/src/server-integration');
-const sensorLoggingService = require('./sensor-logging.service');
-const fsSync = require('fs');
-const { handleControllers } = require('../controllers/handlersController');
+const { getSensiboSensors } = require("../api/sensibo");
+const interpreterService = require("../interpreter/src/server-integration");
+const sensorLoggingService = require("./sensor-logging.service");
+const fsSync = require("fs");
+const { handleControllers } = require("../controllers/handlersController");
+const { getMotionSensorData } = require("../api/MotionSensor");
 
 /**
  * Service to handle integration between Sensibo sensors and the interpreter
@@ -17,20 +18,155 @@ const interpreterSensorService = {
     try {
       // Access configurations from handlersController - exported as handleControllers
       const configurationsArray = handleControllers.configurations || [];
-      
+
       // Find the configuration for the given room name
       const config = configurationsArray.find(
-        config => config.roomName && config.roomName.toLowerCase() === roomName.toLowerCase()
+        (config) =>
+          config.roomName &&
+          config.roomName.toLowerCase() === roomName.toLowerCase()
       );
-      
+
       // Return the space ID if found, otherwise return 'unknown'
-      return config && config.spaceId ? config.spaceId : 'unknown';
+      return config && config.spaceId ? config.spaceId : "unknown";
     } catch (error) {
-      console.error('Error getting space ID from room name:', error);
-      return 'unknown';
+      console.error("Error getting space ID from room name:", error);
+      return "unknown";
     }
   },
 
+  /**
+   * Update events from Motion sensor
+   * @param {string} raspPiIP - Raspberry Pi IP address to fetch sensor data from
+   * @returns {Promise<Object>} Result object with success status and updated events
+   */
+  async updateEventsFromMotionSensor(raspPiIP) {
+    try {
+      const timestamp = new Date().toISOString();
+      fsSync.appendFileSync(
+        "./logs/sensor_debug.log",
+        `${timestamp}: Fetching motion sensor data from Raspberry Pi at ${raspPiIP}\n`
+      );
+
+      console.log(
+        `Fetching motion sensor data from Raspberry Pi at ${raspPiIP}`
+      );
+
+      // Get motion sensor data from Raspberry Pi
+      const motionSensorData = await getMotionSensorData(raspPiIP); // Assume this function fetches motion data
+
+      if (!motionSensorData) {
+        const errorMsg = "No motion sensor data received";
+        fsSync.appendFileSync(
+          "./logs/sensor_debug.log",
+          `${timestamp}: ERROR - ${errorMsg}\n`
+        );
+        console.error(errorMsg);
+        return {
+          success: false,
+          error: errorMsg,
+        };
+      }
+
+      // Debug logging
+      fsSync.appendFileSync(
+        "./logs/sensor_debug.log",
+        `${timestamp}: Received motion sensor data: ${JSON.stringify(
+          motionSensorData
+        )}\n`
+      );
+      console.log("Received motion sensor data:", motionSensorData);
+
+      // Format the data into events
+      const motionEvents =
+        this.formatMotionSensorDataToEvents(motionSensorData); // Assume this formats the motion sensor data
+
+      if (!motionEvents || motionEvents.length === 0) {
+        const errorMsg = "Failed to format motion sensor data to events";
+        fsSync.appendFileSync(
+          "./logs/sensor_debug.log",
+          `${timestamp}: ERROR - ${errorMsg}\n`
+        );
+        console.error(errorMsg);
+        return {
+          success: false,
+          error: errorMsg,
+        };
+      }
+
+      // Debug logging
+      fsSync.appendFileSync(
+        "./logs/sensor_debug.log",
+        `${timestamp}: Formatted motion sensor events: ${JSON.stringify(
+          motionEvents
+        )}\n`
+      );
+
+      // Log the motion sensor data to our logging service
+      const loggingResult = sensorLoggingService.logSensorData(motionEvents);
+      if (!loggingResult.success) {
+        fsSync.appendFileSync(
+          "./logs/sensor_debug.log",
+          `${timestamp}: ERROR - Failed to log motion sensor data: ${loggingResult.error}\n`
+        );
+        console.warn(
+          `Failed to log motion sensor data: ${loggingResult.error}`
+        );
+      } else {
+        fsSync.appendFileSync(
+          "./logs/sensor_debug.log",
+          `${timestamp}: Successfully logged motion sensor data\n`
+        );
+        console.log("Successfully logged motion sensor data");
+      }
+
+      // Update each event in the interpreter
+      const updatedMotionEvents = [];
+
+      for (const event of motionEvents) {
+        const result = interpreterService.updateEventValue(
+          event.name,
+          event.value
+        );
+
+        if (result.success) {
+          fsSync.appendFileSync(
+            "./logs/sensor_debug.log",
+            `${timestamp}: Successfully updated motion event: ${event.name} = ${event.value}\n`
+          );
+          console.log(
+            `Successfully updated motion event: ${event.name} = ${event.value}`
+          );
+          updatedMotionEvents.push(event);
+        } else {
+          fsSync.appendFileSync(
+            "./logs/sensor_debug.log",
+            `${timestamp}: Failed to update motion event ${event.name}: ${result.error}\n`
+          );
+          console.warn(
+            `Failed to update motion event ${event.name}: ${result.error}`
+          );
+        }
+      }
+
+      return {
+        success: true,
+        updatedEvents: updatedMotionEvents,
+        totalEvents: motionEvents.length,
+        successfulUpdates: updatedMotionEvents.length,
+      };
+    } catch (error) {
+      const timestamp = new Date().toISOString();
+      fsSync.appendFileSync(
+        "./logs/sensor_debug.log",
+        `${timestamp}: EXCEPTION - Error updating events from motion sensor: ${error.message}\n`
+      );
+      console.error("Error updating events from motion sensor:", error);
+      return {
+        success: false,
+        error: error.message,
+      };
+    }
+  },
   /**
    * Update events from Sensibo sensors
    * @param {string} raspPiIP - Raspberry Pi IP address to fetch sensor data from
@@ -39,86 +175,147 @@ const interpreterSensorService = {
   async updateEventsFromSensibo(raspPiIP) {
     try {
       const timestamp = new Date().toISOString();
-      fsSync.appendFileSync('./logs/sensor_debug.log', `${timestamp}: Fetching sensor data from Raspberry Pi at ${raspPiIP}\n`);
-      
+      fsSync.appendFileSync(
+        "./logs/sensor_debug.log",
+        `${timestamp}: Fetching sensor data from Raspberry Pi at ${raspPiIP}\n`
+      );
+
       console.log(`Fetching sensor data from Raspberry Pi at ${raspPiIP}`);
-      
+
       // Get sensor data from Sensibo via Raspberry Pi
       const sensorData = await getSensiboSensors(raspPiIP);
-      
+
       if (!sensorData) {
-        const errorMsg = 'No sensor data received from Sensibo';
-        fsSync.appendFileSync('./logs/sensor_debug.log', `${timestamp}: ERROR - ${errorMsg}\n`);
+        const errorMsg = "No sensor data received from Sensibo";
+        fsSync.appendFileSync(
+          "./logs/sensor_debug.log",
+          `${timestamp}: ERROR - ${errorMsg}\n`
+        );
         console.error(errorMsg);
-        return { 
-          success: false, 
-          error: errorMsg 
+        return {
+          success: false,
+          error: errorMsg,
         };
       }
-      
+
       // Debug logging
-      fsSync.appendFileSync('./logs/sensor_debug.log', `${timestamp}: Received sensor data: ${JSON.stringify(sensorData)}\n`);
-      console.log('Received sensor data:', sensorData);
-      
+      fsSync.appendFileSync(
+        "./logs/sensor_debug.log",
+        `${timestamp}: Received sensor data: ${JSON.stringify(sensorData)}\n`
+      );
+      console.log("Received sensor data:", sensorData);
+
       // Format the data into events
       const events = this.formatSensorDataToEvents(sensorData);
-      
+
       if (!events || events.length === 0) {
-        const errorMsg = 'Failed to format sensor data to events';
-        fsSync.appendFileSync('./logs/sensor_debug.log', `${timestamp}: ERROR - ${errorMsg}\n`);
+        const errorMsg = "Failed to format sensor data to events";
+        fsSync.appendFileSync(
+          "./logs/sensor_debug.log",
+          `${timestamp}: ERROR - ${errorMsg}\n`
+        );
         console.error(errorMsg);
-        return { 
-          success: false, 
-          error: errorMsg 
+        return {
+          success: false,
+          error: errorMsg,
         };
       }
-      
+
       // Debug logging
-      fsSync.appendFileSync('./logs/sensor_debug.log', `${timestamp}: Formatted events: ${JSON.stringify(events)}\n`);
-      
+      fsSync.appendFileSync(
+        "./logs/sensor_debug.log",
+        `${timestamp}: Formatted events: ${JSON.stringify(events)}\n`
+      );
+
       // Log the sensor data to our logging service
       const loggingResult = sensorLoggingService.logSensorData(events);
       if (!loggingResult.success) {
-        fsSync.appendFileSync('./logs/sensor_debug.log', `${timestamp}: ERROR - Failed to log sensor data: ${loggingResult.error}\n`);
+        fsSync.appendFileSync(
+          "./logs/sensor_debug.log",
+          `${timestamp}: ERROR - Failed to log sensor data: ${loggingResult.error}\n`
+        );
         console.warn(`Failed to log sensor data: ${loggingResult.error}`);
       } else {
-        fsSync.appendFileSync('./logs/sensor_debug.log', `${timestamp}: Successfully logged sensor data\n`);
-        console.log('Successfully logged sensor data');
+        fsSync.appendFileSync(
+          "./logs/sensor_debug.log",
+          `${timestamp}: Successfully logged sensor data\n`
+        );
+        console.log("Successfully logged sensor data");
       }
-      
+
       // Update each event in the interpreter
       const updatedEvents = [];
-      
+
       for (const event of events) {
-        const result = interpreterService.updateEventValue(event.name, event.value);
-        
+        const result = interpreterService.updateEventValue(
+          event.name,
+          event.value
+        );
+
         if (result.success) {
-          fsSync.appendFileSync('./logs/sensor_debug.log', `${timestamp}: Successfully updated event: ${event.name} = ${event.value}\n`);
-          console.log(`Successfully updated event: ${event.name} = ${event.value}`);
+          fsSync.appendFileSync(
+            "./logs/sensor_debug.log",
+            `${timestamp}: Successfully updated event: ${event.name} = ${event.value}\n`
+          );
+          console.log(
+            `Successfully updated event: ${event.name} = ${event.value}`
+          );
           updatedEvents.push(event);
         } else {
-          fsSync.appendFileSync('./logs/sensor_debug.log', `${timestamp}: Failed to update event ${event.name}: ${result.error}\n`);
+          fsSync.appendFileSync(
+            "./logs/sensor_debug.log",
+            `${timestamp}: Failed to update event ${event.name}: ${result.error}\n`
+          );
           console.warn(`Failed to update event ${event.name}: ${result.error}`);
         }
       }
-      
+
       return {
         success: true,
         updatedEvents,
         totalEvents: events.length,
-        successfulUpdates: updatedEvents.length
+        successfulUpdates: updatedEvents.length,
       };
     } catch (error) {
       const timestamp = new Date().toISOString();
-      fsSync.appendFileSync('./logs/sensor_debug.log', `${timestamp}: EXCEPTION - Error updating events from Sensibo: ${error.message}\n`);
-      console.error('Error updating events from Sensibo:', error);
+      fsSync.appendFileSync(
+        "./logs/sensor_debug.log",
+        `${timestamp}: EXCEPTION - Error updating events from Sensibo: ${error.message}\n`
+      );
+      console.error("Error updating events from Sensibo:", error);
       return {
         success: false,
-        error: error.message
+        error: error.message,
       };
     }
   },
-  
+
+  /**
+   * Format motion sensor data into events
+   * @param {Object} motionSensorData - Raw motion sensor data
+   * @returns {Array<Object>} Formatted events with name and value
+   */
+  formatMotionSensorDataToEvents(motionSensorData) {
+    const events = [];
+
+    // Check if motion detection status is available
+    if (motionSensorData.motionDetected !== undefined) {
+      // For now, we assume a generic location as "Living Room"
+      // This can be updated based on real data if needed
+      const roomName = "Living Room";
+      const spaceId = this.getSpaceIdFromRoomName(roomName);
+
+      events.push({
+        name: `${roomName.toLowerCase()} motion detected`,
+        value: motionSensorData.motionDetected,
+        roomName,
+        spaceId,
+      });
+    }
+
+    return events;
+  },
+
   /**
    * Format sensor data into events
    * @param {Object} sensorData - Raw sensor data from Sensibo
@@ -126,56 +323,56 @@ const interpreterSensorService = {
    */
   formatSensorDataToEvents(sensorData) {
     const events = [];
-    
+
     // Check if temperature is present
     if (sensorData.temperature !== undefined) {
       // For now, we're assuming "Living Room" as the location
       // This should be fetched from the device/room relationship in a real implementation
-      const roomName = 'Living Room';
+      const roomName = "Living Room";
       const spaceId = this.getSpaceIdFromRoomName(roomName);
-      
+
       events.push({
         name: `${roomName.toLowerCase()} temperature`,
         value: sensorData.temperature,
         roomName,
-        spaceId
+        spaceId,
       });
     }
-    
+
     // Check if humidity is present
     if (sensorData.humidity !== undefined) {
-      const roomName = 'Living Room';
+      const roomName = "Living Room";
       const spaceId = this.getSpaceIdFromRoomName(roomName);
-      
+
       events.push({
         name: `${roomName.toLowerCase()} humidity`,
         value: sensorData.humidity,
         roomName,
-        spaceId
+        spaceId,
       });
     }
-    
+
     // Handle the case where sensorData is in the format from the Raspberry Pi API
     // This handles the format: { sensors: [{ room: 'Living Room', sensor: 'temperature', value: 18.3 }, ...] }
     if (sensorData.sensors && Array.isArray(sensorData.sensors)) {
-      sensorData.sensors.forEach(sensor => {
+      sensorData.sensors.forEach((sensor) => {
         if (sensor.room && sensor.sensor && sensor.value !== undefined) {
           const roomName = sensor.room;
           const spaceId = this.getSpaceIdFromRoomName(roomName);
-          
+
           events.push({
             name: `${roomName.toLowerCase()} ${sensor.sensor.toLowerCase()}`,
             value: sensor.value,
             roomName,
-            spaceId
+            spaceId,
           });
         }
       });
     }
-    
+
     return events;
   },
-  
+
   /**
    * Start periodic polling for sensor data
    * @param {string} raspPiIP - Raspberry Pi IP to poll
@@ -184,75 +381,129 @@ const interpreterSensorService = {
    */
   startSensorPolling(raspPiIP, interval = 30000) {
     const timestamp = new Date().toISOString();
-    fsSync.appendFileSync('./logs/sensor_debug.log', `${timestamp}: Starting sensor polling with interval: ${interval}ms for IP ${raspPiIP}\n`);
+    fsSync.appendFileSync(
+      "./logs/sensor_debug.log",
+      `${timestamp}: Starting sensor polling with interval: ${interval}ms for IP ${raspPiIP}\n`
+    );
     console.log(`Starting sensor polling with interval: ${interval}ms`);
-    
+
     // Clear any existing polling
     if (this.pollingInterval) {
-      fsSync.appendFileSync('./logs/sensor_debug.log', `${timestamp}: Clearing existing polling interval\n`);
+      fsSync.appendFileSync(
+        "./logs/sensor_debug.log",
+        `${timestamp}: Clearing existing polling interval\n`
+      );
       clearInterval(this.pollingInterval);
     }
-    
+
     // Track poll count for debugging
     let pollCount = 0;
-    
+
     // Start new polling
     this.pollingInterval = setInterval(async () => {
       const pollTimestamp = new Date().toISOString();
       pollCount++;
-      fsSync.appendFileSync('./logs/sensor_debug.log', `${pollTimestamp}: Polling for sensor data... (poll #${pollCount})\n`);
+      fsSync.appendFileSync(
+        "./logs/sensor_debug.log",
+        `${pollTimestamp}: Polling for sensor data... (poll #${pollCount})\n`
+      );
       console.log(`Polling for sensor data... (poll #${pollCount})`);
-      
-      const result = await this.updateEventsFromSensibo(raspPiIP);
-      fsSync.appendFileSync('./logs/sensor_debug.log', `${new Date().toISOString()}: Polling result: ${JSON.stringify(result)}\n`);
-      
+
+      // Fetch data from Sensibo
+      const sensiboResult = await this.updateEventsFromSensibo(raspPiIP);
+      fsSync.appendFileSync(
+        "./logs/sensor_debug.log",
+        `${new Date().toISOString()}: Sensibo polling result: ${JSON.stringify(
+          sensiboResult
+        )}\n`
+      );
+
+      // Fetch data from Motion Sensor
+      const motionSensorResult = await this.updateEventsFromMotionSensor(
+        raspPiIP
+      );
+      fsSync.appendFileSync(
+        "./logs/sensor_debug.log",
+        `${new Date().toISOString()}: Motion sensor polling result: ${JSON.stringify(
+          motionSensorResult
+        )}\n`
+      );
+
       // Check if interval is active - defensive check
       const isIntervalActive = this.pollingInterval !== null;
-      fsSync.appendFileSync('./logs/sensor_debug.log', `${new Date().toISOString()}: Polling interval active: ${isIntervalActive}\n`);
+      fsSync.appendFileSync(
+        "./logs/sensor_debug.log",
+        `${new Date().toISOString()}: Polling interval active: ${isIntervalActive}\n`
+      );
     }, interval);
-    
-    fsSync.appendFileSync('./logs/sensor_debug.log', `${timestamp}: Polling interval set with ID: ${this.pollingInterval}\n`);
-    
+
+    fsSync.appendFileSync(
+      "./logs/sensor_debug.log",
+      `${timestamp}: Polling interval set with ID: ${this.pollingInterval}\n`
+    );
+
     // Run immediately the first poll instead of waiting for interval
-    this.updateEventsFromSensibo(raspPiIP).then(result => {
-      fsSync.appendFileSync('./logs/sensor_debug.log', `${new Date().toISOString()}: Initial polling result: ${JSON.stringify(result)}\n`);
+    this.updateEventsFromSensibo(raspPiIP).then((result) => {
+      fsSync.appendFileSync(
+        "./logs/sensor_debug.log",
+        `${new Date().toISOString()}: Initial Sensibo polling result: ${JSON.stringify(
+          result
+        )}\n`
+      );
     });
-    
+    this.updateEventsFromMotionSensor(raspPiIP).then((result) => {
+      fsSync.appendFileSync(
+        "./logs/sensor_debug.log",
+        `${new Date().toISOString()}: Initial Motion sensor polling result: ${JSON.stringify(
+          result
+        )}\n`
+      );
+    });
+
     return {
       success: true,
       message: `Sensor polling started with interval: ${interval}ms`,
-      handle: this.pollingInterval
+      handle: this.pollingInterval,
     };
   },
-  
+
   /**
    * Stop sensor polling
    * @returns {Object} Result of stopping the polling
    */
   stopSensorPolling() {
     const timestamp = new Date().toISOString();
-    
+
     if (this.pollingInterval) {
-      fsSync.appendFileSync('./logs/sensor_debug.log', `${timestamp}: Stopping sensor polling interval: ${this.pollingInterval}\n`);
+      fsSync.appendFileSync(
+        "./logs/sensor_debug.log",
+        `${timestamp}: Stopping sensor polling interval: ${this.pollingInterval}\n`
+      );
       clearInterval(this.pollingInterval);
       this.pollingInterval = null;
-      
+
       // Close the logging service when stopping polling
-      fsSync.appendFileSync('./logs/sensor_debug.log', `${timestamp}: Closing logging service\n`);
+      fsSync.appendFileSync(
+        "./logs/sensor_debug.log",
+        `${timestamp}: Closing logging service\n`
+      );
       sensorLoggingService.close();
-      
+
       return {
         success: true,
-        message: 'Sensor polling stopped'
+        message: "Sensor polling stopped",
       };
     }
-    
-    fsSync.appendFileSync('./logs/sensor_debug.log', `${timestamp}: No polling was active to stop\n`);
+
+    fsSync.appendFileSync(
+      "./logs/sensor_debug.log",
+      `${timestamp}: No polling was active to stop\n`
+    );
     return {
       success: false,
-      message: 'No polling was active'
+      message: "No polling was active",
     };
-  }
+  },
 };
 
-module.exports = interpreterSensorService; 
+module.exports = interpreterSensorService;

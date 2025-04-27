@@ -34,6 +34,7 @@ const sensorLoggingService = {
       
       fsSync.appendFileSync('./logs/sensor_debug.log', `${new Date().toISOString()}: Log file path: ${this.logFilePath}\n`);
       console.log(`Initializing sensor logging to file: ${this.logFilePath}`);
+      console.log("eventNames is ::: ",eventNames);
       
       // Check if file already exists
       const fileExists = existsSync(this.logFilePath);

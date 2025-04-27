@@ -102,6 +102,7 @@ class EventRegistry {
    */
   createEventInstances(eventNames) {
     eventNames.forEach((eventName) => {
+        logger.info(eventName);
       // Parse event name to extract location and type
       const parts = this.parseEventName(eventName);
 
