@@ -1,4 +1,5 @@
 const Event = require('./Event');
+const logger = require('../../../logger')
 
 /**
  * Temperature Event class that extends the base Event
@@ -10,7 +11,8 @@ class TemperatureEvent extends Event {
         this.location = location; // e.g. "Living Room"
         this.type = 'temperature';
         this.unit = 'celsius';
-        console.log(`Created TemperatureEvent: ${name} for location: ${location}`);
+        logger.info(`Created TemperatureEvent: ${name} for location: ${location}`);
+
     }
 
     /**

@@ -123,7 +123,9 @@ const interpreterSensorService = {
       const updatedMotionEvents = [];
 
       for (const event of motionEvents) {
-        const result = interpreterService.updateEventValue(
+        console.log("UPDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAATING :: ",event.name,
+          event.value,event.type);
+               const result = interpreterService.updateEventValue(
           event.name,
           event.value
         );
@@ -140,7 +142,7 @@ const interpreterSensorService = {
         } else {
           fsSync.appendFileSync(
             "./logs/sensor_debug.log",
-            `${timestamp}: Failed to update motion event ${event.name}: ${result.error}\n`
+            `${timestamp}: Failed to update motion event ttttt ${event.name}: ${result.error}\n`
           );
           console.warn(
             `Failed to update motion event ${event.name}: ${result.error}`
@@ -306,7 +308,7 @@ const interpreterSensorService = {
       const spaceId = this.getSpaceIdFromRoomName(roomName);
 
       events.push({
-        name: `${roomName.toLowerCase()} motion detected`,
+        name: `${roomName.toLowerCase()} motion`,
         value: motionSensorData.motionDetected,
         roomName,
         spaceId,

@@ -18,7 +18,7 @@ class MotionEvent extends Event {
      * @param {boolean} motionDetected - True if motion detected, false otherwise
      */
     updateMotion(motionDetected) {
-        const stateText = motionDetected ? 'Detected' : 'Not Detected';
+        const stateText = motionDetected ? 'true' : 'false';
         logger.info(`Updating motion state for ${this.name}: ${stateText}`);
         this.update(motionDetected);
     }

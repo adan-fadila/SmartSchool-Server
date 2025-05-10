@@ -20,9 +20,9 @@ const interpreterService = require('../interpreter/src/server-integration');
 const AnomalyDescription = require('../models/AnomalyDescription');
 
 /**
- * Check if a rule condition string matches our required format
+ * Check if a rule condition string matches our required formats
  * @param {string} ruleString - The rule string to check
- * @returns {boolean} True if the rule matches our format, false otherwise
+ * @returns {boolean} True if the rule matches any of our accepted formats, false otherwise
  */
 function isValidRuleFormat(ruleString) {
     if (!ruleString) return false;
@@ -36,8 +36,9 @@ function isValidRuleFormat(ruleString) {
     
     if (!ifThenMatch) return false;
     
-    // Extract the condition part
+    // Extract the condition part and action part
     const conditionPart = ifThenMatch[1].trim();
+    const actionPart = ifThenMatch[2].trim();
     
     // Check if this is an anomaly rule (contains "detected")
     if (conditionPart.includes('anomaly') && conditionPart.includes('detected')) {
@@ -48,7 +49,25 @@ function isValidRuleFormat(ruleString) {
     const operatorPattern = /(.+?)\s+([<>=!]+)\s+(.+)/;
     const operatorMatch = conditionPart.match(operatorPattern);
     
-    return !!operatorMatch;
+    if (operatorMatch) {
+        return true;
+    }
+    
+    // NEW FORMAT: Check for "if [Device] [Sensor] [Value] then [Device] [Action] [Value]" pattern
+    // Example: "if Living Room motion true then Living Room LIGHT on"
+    const deviceSensorValuePattern = /^(.+?)\s+(.+?)\s+(true|false|on|off|\d+)$/i;
+    const conditionMatch = conditionPart.match(deviceSensorValuePattern);
+    
+    // Action part should also follow a pattern like "[Device] [Action] [Value]"
+    const deviceActionValuePattern = /^(.+?)\s+(.+?)\s+(true|false|on|off|\d+)$/i;
+    const actionMatch = actionPart.match(deviceActionValuePattern);
+    
+    // Both condition and action parts need to match the new pattern
+    if (conditionMatch && actionMatch) {
+        return true;
+    }
+    
+    return false;
 }
 
 /**

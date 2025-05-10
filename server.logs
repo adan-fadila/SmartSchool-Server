@@ -1,18 +1,729 @@
-{"level":"info","message":"Fetching events from Raspberry Pi at endpoint: https://fd20-193-58-150-20.ngrok-free.app","timestamp":"2025-04-28 02:48:41"}
-{"level":"info","message":"Fetching events from Raspberry Pi at endpoint: https://fd20-193-58-150-20.ngrok-free.app","timestamp":"2025-04-28 02:48:41"}
-{"level":"info","message":"Successfully fetched 3 events from https://fd20-193-58-150-20.ngrok-free.app","timestamp":"2025-04-28 02:48:41"}
-{"level":"info","message":"Living Room Temperature","timestamp":"2025-04-28 02:48:41"}
-{"level":"info","message":"Living Room Humidity","timestamp":"2025-04-28 02:48:41"}
-{"level":"info","message":"Living Room motion-sensor","timestamp":"2025-04-28 02:48:41"}
-{"level":"info","message":"Successfully fetched 3 events from https://fd20-193-58-150-20.ngrok-free.app","timestamp":"2025-04-28 02:48:41"}
-{"level":"info","message":"Living Room Temperature","timestamp":"2025-04-28 02:48:41"}
-{"level":"info","message":"Living Room Humidity","timestamp":"2025-04-28 02:48:41"}
-{"level":"info","message":"Living Room motion-sensor","timestamp":"2025-04-28 02:48:41"}
-{"level":"info","message":"LightAction constructor initialized for Living Room LIGHT in Living Room","timestamp":"2025-04-28 02:48:41"}
-{"level":"info","message":"LightAction constructor initialized for Living Room LIGHT in Living Room","timestamp":"2025-04-28 02:48:41"}
-{"level":"info","message":"Pre-parsed Light action: state=true, brightness=0, color=white","timestamp":"2025-04-28 02:48:42"}
-{"level":"info","message":"Pre-parsed Light action: state=true, brightness=0, color=white","timestamp":"2025-04-28 02:48:42"}
-{"level":"info","message":"Pre-parsed Light action: state=true, brightness=0, color=white","timestamp":"2025-04-28 02:48:43"}
-{"level":"info","message":"Pre-parsed Light action: state=true, brightness=0, color=white","timestamp":"2025-04-28 02:48:43"}
-{"level":"info","message":"Pre-parsed Light action: state=true, brightness=0, color=white","timestamp":"2025-04-28 02:48:43"}
-{"level":"info","message":"Pre-parsed Light action: state=true, brightness=0, color=white","timestamp":"2025-04-28 02:48:43"}
+{"level":"info","message":"Fetching events from Raspberry Pi at endpoint: https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 18:27:05"}
+{"level":"info","message":"Fetching events from Raspberry Pi at endpoint: https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 18:27:05"}
+{"level":"info","message":"Successfully fetched 3 events from https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 18:27:06"}
+{"level":"info","message":"Creating event instance for: Living Room Temperature","timestamp":"2025-05-08 18:27:06"}
+{"level":"info","message":"Parsed event name \"Living Room Temperature\" into location: \"Living Room\", type: \"Temperature\", lowerType: \"temperature\"","timestamp":"2025-05-08 18:27:06"}
+{"level":"info","message":"Found matching event type for temperature","timestamp":"2025-05-08 18:27:06"}
+{"level":"info","message":"Creating temperature event using class: TemperatureEvent","timestamp":"2025-05-08 18:27:06"}
+{"level":"info","message":"Created TemperatureEvent: Living Room Temperature for location: Living Room","timestamp":"2025-05-08 18:27:06"}
+{"level":"info","message":"Successfully created and registered temperature event: Living Room Temperature","timestamp":"2025-05-08 18:27:06"}
+{"level":"info","message":"Creating event instance for: Living Room Humidity","timestamp":"2025-05-08 18:27:06"}
+{"level":"info","message":"Parsed event name \"Living Room Humidity\" into location: \"Living Room\", type: \"Humidity\", lowerType: \"humidity\"","timestamp":"2025-05-08 18:27:06"}
+{"level":"info","message":"Found matching event type for humidity","timestamp":"2025-05-08 18:27:06"}
+{"level":"info","message":"Creating humidity event using class: HumidityEvent","timestamp":"2025-05-08 18:27:06"}
+{"level":"info","message":"Successfully created and registered humidity event: Living Room Humidity","timestamp":"2025-05-08 18:27:06"}
+{"level":"info","message":"Creating event instance for: Living Room motion","timestamp":"2025-05-08 18:27:06"}
+{"level":"info","message":"Parsed event name \"Living Room motion\" into location: \"Living Room\", type: \"motion\", lowerType: \"motion\"","timestamp":"2025-05-08 18:27:06"}
+{"level":"info","message":"Found matching event type for motion","timestamp":"2025-05-08 18:27:06"}
+{"level":"info","message":"Creating motion event using class: MotionEvent","timestamp":"2025-05-08 18:27:06"}
+{"level":"info","message":"Created MotionEvent: Living Room motion for location: Living Room","timestamp":"2025-05-08 18:27:06"}
+{"level":"info","message":"Successfully created and registered motion event: Living Room motion","timestamp":"2025-05-08 18:27:06"}
+{"level":"info","message":"all events from getAllEvents()","timestamp":"2025-05-08 18:27:06"}
+{"level":"info","message":"Successfully fetched 3 events from https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 18:27:06"}
+{"level":"info","message":"Creating event instance for: Living Room Temperature","timestamp":"2025-05-08 18:27:06"}
+{"level":"info","message":"Parsed event name \"Living Room Temperature\" into location: \"Living Room\", type: \"Temperature\", lowerType: \"temperature\"","timestamp":"2025-05-08 18:27:06"}
+{"level":"info","message":"Found matching event type for temperature","timestamp":"2025-05-08 18:27:06"}
+{"level":"info","message":"Creating temperature event using class: TemperatureEvent","timestamp":"2025-05-08 18:27:06"}
+{"level":"info","message":"Created TemperatureEvent: Living Room Temperature for location: Living Room","timestamp":"2025-05-08 18:27:06"}
+{"level":"info","message":"Successfully created and registered temperature event: Living Room Temperature","timestamp":"2025-05-08 18:27:06"}
+{"level":"info","message":"Creating event instance for: Living Room Humidity","timestamp":"2025-05-08 18:27:06"}
+{"level":"info","message":"Parsed event name \"Living Room Humidity\" into location: \"Living Room\", type: \"Humidity\", lowerType: \"humidity\"","timestamp":"2025-05-08 18:27:06"}
+{"level":"info","message":"Found matching event type for humidity","timestamp":"2025-05-08 18:27:06"}
+{"level":"info","message":"Creating humidity event using class: HumidityEvent","timestamp":"2025-05-08 18:27:06"}
+{"level":"info","message":"Successfully created and registered humidity event: Living Room Humidity","timestamp":"2025-05-08 18:27:06"}
+{"level":"info","message":"Creating event instance for: Living Room motion","timestamp":"2025-05-08 18:27:06"}
+{"level":"info","message":"Parsed event name \"Living Room motion\" into location: \"Living Room\", type: \"motion\", lowerType: \"motion\"","timestamp":"2025-05-08 18:27:06"}
+{"level":"info","message":"Found matching event type for motion","timestamp":"2025-05-08 18:27:06"}
+{"level":"info","message":"Creating motion event using class: MotionEvent","timestamp":"2025-05-08 18:27:06"}
+{"level":"info","message":"Created MotionEvent: Living Room motion for location: Living Room","timestamp":"2025-05-08 18:27:06"}
+{"level":"info","message":"Successfully created and registered motion event: Living Room motion","timestamp":"2025-05-08 18:27:06"}
+{"level":"info","message":"all events from getAllEvents()","timestamp":"2025-05-08 18:27:06"}
+{"level":"info","message":"Fetching events from Raspberry Pi at endpoint: https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 18:27:06"}
+{"level":"info","message":"Fetching events from Raspberry Pi at endpoint: https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 18:27:06"}
+{"level":"info","message":"Successfully fetched 3 events from https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 18:27:07"}
+{"level":"info","message":"Creating event instance for: Living Room Temperature","timestamp":"2025-05-08 18:27:07"}
+{"level":"info","message":"Parsed event name \"Living Room Temperature\" into location: \"Living Room\", type: \"Temperature\", lowerType: \"temperature\"","timestamp":"2025-05-08 18:27:07"}
+{"level":"info","message":"Found matching event type for temperature","timestamp":"2025-05-08 18:27:07"}
+{"level":"info","message":"Creating temperature event using class: TemperatureEvent","timestamp":"2025-05-08 18:27:07"}
+{"level":"info","message":"Created TemperatureEvent: Living Room Temperature for location: Living Room","timestamp":"2025-05-08 18:27:07"}
+{"level":"info","message":"Successfully created and registered temperature event: Living Room Temperature","timestamp":"2025-05-08 18:27:07"}
+{"level":"info","message":"Creating event instance for: Living Room Humidity","timestamp":"2025-05-08 18:27:07"}
+{"level":"info","message":"Parsed event name \"Living Room Humidity\" into location: \"Living Room\", type: \"Humidity\", lowerType: \"humidity\"","timestamp":"2025-05-08 18:27:07"}
+{"level":"info","message":"Found matching event type for humidity","timestamp":"2025-05-08 18:27:07"}
+{"level":"info","message":"Creating humidity event using class: HumidityEvent","timestamp":"2025-05-08 18:27:07"}
+{"level":"info","message":"Successfully created and registered humidity event: Living Room Humidity","timestamp":"2025-05-08 18:27:07"}
+{"level":"info","message":"Creating event instance for: Living Room motion","timestamp":"2025-05-08 18:27:07"}
+{"level":"info","message":"Parsed event name \"Living Room motion\" into location: \"Living Room\", type: \"motion\", lowerType: \"motion\"","timestamp":"2025-05-08 18:27:07"}
+{"level":"info","message":"Found matching event type for motion","timestamp":"2025-05-08 18:27:07"}
+{"level":"info","message":"Creating motion event using class: MotionEvent","timestamp":"2025-05-08 18:27:07"}
+{"level":"info","message":"Created MotionEvent: Living Room motion for location: Living Room","timestamp":"2025-05-08 18:27:07"}
+{"level":"info","message":"Successfully created and registered motion event: Living Room motion","timestamp":"2025-05-08 18:27:07"}
+{"level":"info","message":"all events from getAllEvents()","timestamp":"2025-05-08 18:27:07"}
+{"level":"info","message":"Successfully fetched 3 events from https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 18:27:07"}
+{"level":"info","message":"Creating event instance for: Living Room Temperature","timestamp":"2025-05-08 18:27:07"}
+{"level":"info","message":"Parsed event name \"Living Room Temperature\" into location: \"Living Room\", type: \"Temperature\", lowerType: \"temperature\"","timestamp":"2025-05-08 18:27:07"}
+{"level":"info","message":"Found matching event type for temperature","timestamp":"2025-05-08 18:27:07"}
+{"level":"info","message":"Creating temperature event using class: TemperatureEvent","timestamp":"2025-05-08 18:27:07"}
+{"level":"info","message":"Created TemperatureEvent: Living Room Temperature for location: Living Room","timestamp":"2025-05-08 18:27:07"}
+{"level":"info","message":"Successfully created and registered temperature event: Living Room Temperature","timestamp":"2025-05-08 18:27:07"}
+{"level":"info","message":"Creating event instance for: Living Room Humidity","timestamp":"2025-05-08 18:27:07"}
+{"level":"info","message":"Parsed event name \"Living Room Humidity\" into location: \"Living Room\", type: \"Humidity\", lowerType: \"humidity\"","timestamp":"2025-05-08 18:27:07"}
+{"level":"info","message":"Found matching event type for humidity","timestamp":"2025-05-08 18:27:07"}
+{"level":"info","message":"Creating humidity event using class: HumidityEvent","timestamp":"2025-05-08 18:27:07"}
+{"level":"info","message":"Successfully created and registered humidity event: Living Room Humidity","timestamp":"2025-05-08 18:27:07"}
+{"level":"info","message":"Creating event instance for: Living Room motion","timestamp":"2025-05-08 18:27:07"}
+{"level":"info","message":"Parsed event name \"Living Room motion\" into location: \"Living Room\", type: \"motion\", lowerType: \"motion\"","timestamp":"2025-05-08 18:27:07"}
+{"level":"info","message":"Found matching event type for motion","timestamp":"2025-05-08 18:27:07"}
+{"level":"info","message":"Creating motion event using class: MotionEvent","timestamp":"2025-05-08 18:27:07"}
+{"level":"info","message":"Created MotionEvent: Living Room motion for location: Living Room","timestamp":"2025-05-08 18:27:07"}
+{"level":"info","message":"Successfully created and registered motion event: Living Room motion","timestamp":"2025-05-08 18:27:07"}
+{"level":"info","message":"all events from getAllEvents()","timestamp":"2025-05-08 18:27:07"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-08 18:27:08"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-08 18:27:08"}
+{"level":"info","message":"Fetching events from Raspberry Pi at endpoint: https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 18:27:15"}
+{"level":"info","message":"Fetching events from Raspberry Pi at endpoint: https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 18:27:15"}
+{"level":"info","message":"Successfully fetched 3 events from https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 18:27:15"}
+{"level":"info","message":"Creating event instance for: Living Room Temperature","timestamp":"2025-05-08 18:27:15"}
+{"level":"info","message":"Parsed event name \"Living Room Temperature\" into location: \"Living Room\", type: \"Temperature\", lowerType: \"temperature\"","timestamp":"2025-05-08 18:27:15"}
+{"level":"info","message":"Found matching event type for temperature","timestamp":"2025-05-08 18:27:15"}
+{"level":"info","message":"Creating temperature event using class: TemperatureEvent","timestamp":"2025-05-08 18:27:15"}
+{"level":"info","message":"Created TemperatureEvent: Living Room Temperature for location: Living Room","timestamp":"2025-05-08 18:27:15"}
+{"level":"info","message":"Successfully created and registered temperature event: Living Room Temperature","timestamp":"2025-05-08 18:27:15"}
+{"level":"info","message":"Creating event instance for: Living Room Humidity","timestamp":"2025-05-08 18:27:15"}
+{"level":"info","message":"Parsed event name \"Living Room Humidity\" into location: \"Living Room\", type: \"Humidity\", lowerType: \"humidity\"","timestamp":"2025-05-08 18:27:15"}
+{"level":"info","message":"Found matching event type for humidity","timestamp":"2025-05-08 18:27:15"}
+{"level":"info","message":"Creating humidity event using class: HumidityEvent","timestamp":"2025-05-08 18:27:15"}
+{"level":"info","message":"Successfully created and registered humidity event: Living Room Humidity","timestamp":"2025-05-08 18:27:15"}
+{"level":"info","message":"Creating event instance for: Living Room motion","timestamp":"2025-05-08 18:27:15"}
+{"level":"info","message":"Parsed event name \"Living Room motion\" into location: \"Living Room\", type: \"motion\", lowerType: \"motion\"","timestamp":"2025-05-08 18:27:15"}
+{"level":"info","message":"Found matching event type for motion","timestamp":"2025-05-08 18:27:15"}
+{"level":"info","message":"Creating motion event using class: MotionEvent","timestamp":"2025-05-08 18:27:15"}
+{"level":"info","message":"Created MotionEvent: Living Room motion for location: Living Room","timestamp":"2025-05-08 18:27:15"}
+{"level":"info","message":"Successfully created and registered motion event: Living Room motion","timestamp":"2025-05-08 18:27:15"}
+{"level":"info","message":"all events from getAllEvents()","timestamp":"2025-05-08 18:27:15"}
+{"level":"info","message":"Successfully fetched 3 events from https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 18:27:15"}
+{"level":"info","message":"Creating event instance for: Living Room Temperature","timestamp":"2025-05-08 18:27:15"}
+{"level":"info","message":"Parsed event name \"Living Room Temperature\" into location: \"Living Room\", type: \"Temperature\", lowerType: \"temperature\"","timestamp":"2025-05-08 18:27:15"}
+{"level":"info","message":"Found matching event type for temperature","timestamp":"2025-05-08 18:27:15"}
+{"level":"info","message":"Creating temperature event using class: TemperatureEvent","timestamp":"2025-05-08 18:27:15"}
+{"level":"info","message":"Created TemperatureEvent: Living Room Temperature for location: Living Room","timestamp":"2025-05-08 18:27:15"}
+{"level":"info","message":"Successfully created and registered temperature event: Living Room Temperature","timestamp":"2025-05-08 18:27:15"}
+{"level":"info","message":"Creating event instance for: Living Room Humidity","timestamp":"2025-05-08 18:27:15"}
+{"level":"info","message":"Parsed event name \"Living Room Humidity\" into location: \"Living Room\", type: \"Humidity\", lowerType: \"humidity\"","timestamp":"2025-05-08 18:27:15"}
+{"level":"info","message":"Found matching event type for humidity","timestamp":"2025-05-08 18:27:15"}
+{"level":"info","message":"Creating humidity event using class: HumidityEvent","timestamp":"2025-05-08 18:27:15"}
+{"level":"info","message":"Successfully created and registered humidity event: Living Room Humidity","timestamp":"2025-05-08 18:27:15"}
+{"level":"info","message":"Creating event instance for: Living Room motion","timestamp":"2025-05-08 18:27:15"}
+{"level":"info","message":"Parsed event name \"Living Room motion\" into location: \"Living Room\", type: \"motion\", lowerType: \"motion\"","timestamp":"2025-05-08 18:27:15"}
+{"level":"info","message":"Found matching event type for motion","timestamp":"2025-05-08 18:27:15"}
+{"level":"info","message":"Creating motion event using class: MotionEvent","timestamp":"2025-05-08 18:27:15"}
+{"level":"info","message":"Created MotionEvent: Living Room motion for location: Living Room","timestamp":"2025-05-08 18:27:15"}
+{"level":"info","message":"Successfully created and registered motion event: Living Room motion","timestamp":"2025-05-08 18:27:15"}
+{"level":"info","message":"all events from getAllEvents()","timestamp":"2025-05-08 18:27:15"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-08 18:27:16"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-08 18:27:17"}
+{"level":"info","message":"Fetching events from Raspberry Pi at endpoint: https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 18:27:22"}
+{"level":"info","message":"Fetching events from Raspberry Pi at endpoint: https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 18:27:22"}
+{"level":"info","message":"Successfully fetched 3 events from https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 18:27:22"}
+{"level":"info","message":"Creating event instance for: Living Room Temperature","timestamp":"2025-05-08 18:27:22"}
+{"level":"info","message":"Parsed event name \"Living Room Temperature\" into location: \"Living Room\", type: \"Temperature\", lowerType: \"temperature\"","timestamp":"2025-05-08 18:27:22"}
+{"level":"info","message":"Found matching event type for temperature","timestamp":"2025-05-08 18:27:22"}
+{"level":"info","message":"Creating temperature event using class: TemperatureEvent","timestamp":"2025-05-08 18:27:22"}
+{"level":"info","message":"Created TemperatureEvent: Living Room Temperature for location: Living Room","timestamp":"2025-05-08 18:27:22"}
+{"level":"info","message":"Successfully created and registered temperature event: Living Room Temperature","timestamp":"2025-05-08 18:27:22"}
+{"level":"info","message":"Creating event instance for: Living Room Humidity","timestamp":"2025-05-08 18:27:22"}
+{"level":"info","message":"Parsed event name \"Living Room Humidity\" into location: \"Living Room\", type: \"Humidity\", lowerType: \"humidity\"","timestamp":"2025-05-08 18:27:22"}
+{"level":"info","message":"Found matching event type for humidity","timestamp":"2025-05-08 18:27:22"}
+{"level":"info","message":"Creating humidity event using class: HumidityEvent","timestamp":"2025-05-08 18:27:22"}
+{"level":"info","message":"Successfully created and registered humidity event: Living Room Humidity","timestamp":"2025-05-08 18:27:22"}
+{"level":"info","message":"Creating event instance for: Living Room motion","timestamp":"2025-05-08 18:27:22"}
+{"level":"info","message":"Parsed event name \"Living Room motion\" into location: \"Living Room\", type: \"motion\", lowerType: \"motion\"","timestamp":"2025-05-08 18:27:22"}
+{"level":"info","message":"Found matching event type for motion","timestamp":"2025-05-08 18:27:22"}
+{"level":"info","message":"Creating motion event using class: MotionEvent","timestamp":"2025-05-08 18:27:22"}
+{"level":"info","message":"Created MotionEvent: Living Room motion for location: Living Room","timestamp":"2025-05-08 18:27:22"}
+{"level":"info","message":"Successfully created and registered motion event: Living Room motion","timestamp":"2025-05-08 18:27:22"}
+{"level":"info","message":"all events from getAllEvents()","timestamp":"2025-05-08 18:27:22"}
+{"level":"info","message":"Successfully fetched 3 events from https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 18:27:22"}
+{"level":"info","message":"Creating event instance for: Living Room Temperature","timestamp":"2025-05-08 18:27:22"}
+{"level":"info","message":"Parsed event name \"Living Room Temperature\" into location: \"Living Room\", type: \"Temperature\", lowerType: \"temperature\"","timestamp":"2025-05-08 18:27:22"}
+{"level":"info","message":"Found matching event type for temperature","timestamp":"2025-05-08 18:27:22"}
+{"level":"info","message":"Creating temperature event using class: TemperatureEvent","timestamp":"2025-05-08 18:27:22"}
+{"level":"info","message":"Created TemperatureEvent: Living Room Temperature for location: Living Room","timestamp":"2025-05-08 18:27:22"}
+{"level":"info","message":"Successfully created and registered temperature event: Living Room Temperature","timestamp":"2025-05-08 18:27:22"}
+{"level":"info","message":"Creating event instance for: Living Room Humidity","timestamp":"2025-05-08 18:27:22"}
+{"level":"info","message":"Parsed event name \"Living Room Humidity\" into location: \"Living Room\", type: \"Humidity\", lowerType: \"humidity\"","timestamp":"2025-05-08 18:27:22"}
+{"level":"info","message":"Found matching event type for humidity","timestamp":"2025-05-08 18:27:22"}
+{"level":"info","message":"Creating humidity event using class: HumidityEvent","timestamp":"2025-05-08 18:27:22"}
+{"level":"info","message":"Successfully created and registered humidity event: Living Room Humidity","timestamp":"2025-05-08 18:27:22"}
+{"level":"info","message":"Creating event instance for: Living Room motion","timestamp":"2025-05-08 18:27:22"}
+{"level":"info","message":"Parsed event name \"Living Room motion\" into location: \"Living Room\", type: \"motion\", lowerType: \"motion\"","timestamp":"2025-05-08 18:27:22"}
+{"level":"info","message":"Found matching event type for motion","timestamp":"2025-05-08 18:27:22"}
+{"level":"info","message":"Creating motion event using class: MotionEvent","timestamp":"2025-05-08 18:27:22"}
+{"level":"info","message":"Created MotionEvent: Living Room motion for location: Living Room","timestamp":"2025-05-08 18:27:22"}
+{"level":"info","message":"Successfully created and registered motion event: Living Room motion","timestamp":"2025-05-08 18:27:22"}
+{"level":"info","message":"all events from getAllEvents()","timestamp":"2025-05-08 18:27:22"}
+{"level":"info","message":"ac action constructor callllleddddd","timestamp":"2025-05-08 18:27:22"}
+{"level":"info","message":"LightAction constructor initialized for Living Room LIGHT in Living Room","timestamp":"2025-05-08 18:27:22"}
+{"level":"info","message":"ac action constructor callllleddddd","timestamp":"2025-05-08 18:27:22"}
+{"level":"info","message":"LightAction constructor initialized for Living Room LIGHT in Living Room","timestamp":"2025-05-08 18:27:22"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-08 18:27:24"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-08 18:27:24"}
+{"level":"info","message":"Fetching events from Raspberry Pi at endpoint: https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 18:27:32"}
+{"level":"info","message":"Fetching events from Raspberry Pi at endpoint: https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 18:27:32"}
+{"level":"info","message":"Successfully fetched 3 events from https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 18:27:32"}
+{"level":"info","message":"Creating event instance for: Living Room Temperature","timestamp":"2025-05-08 18:27:32"}
+{"level":"info","message":"Parsed event name \"Living Room Temperature\" into location: \"Living Room\", type: \"Temperature\", lowerType: \"temperature\"","timestamp":"2025-05-08 18:27:32"}
+{"level":"info","message":"Found matching event type for temperature","timestamp":"2025-05-08 18:27:32"}
+{"level":"info","message":"Creating temperature event using class: TemperatureEvent","timestamp":"2025-05-08 18:27:32"}
+{"level":"info","message":"Created TemperatureEvent: Living Room Temperature for location: Living Room","timestamp":"2025-05-08 18:27:32"}
+{"level":"info","message":"Successfully created and registered temperature event: Living Room Temperature","timestamp":"2025-05-08 18:27:32"}
+{"level":"info","message":"Creating event instance for: Living Room Humidity","timestamp":"2025-05-08 18:27:32"}
+{"level":"info","message":"Parsed event name \"Living Room Humidity\" into location: \"Living Room\", type: \"Humidity\", lowerType: \"humidity\"","timestamp":"2025-05-08 18:27:32"}
+{"level":"info","message":"Found matching event type for humidity","timestamp":"2025-05-08 18:27:32"}
+{"level":"info","message":"Creating humidity event using class: HumidityEvent","timestamp":"2025-05-08 18:27:32"}
+{"level":"info","message":"Successfully created and registered humidity event: Living Room Humidity","timestamp":"2025-05-08 18:27:32"}
+{"level":"info","message":"Creating event instance for: Living Room motion","timestamp":"2025-05-08 18:27:32"}
+{"level":"info","message":"Parsed event name \"Living Room motion\" into location: \"Living Room\", type: \"motion\", lowerType: \"motion\"","timestamp":"2025-05-08 18:27:32"}
+{"level":"info","message":"Found matching event type for motion","timestamp":"2025-05-08 18:27:32"}
+{"level":"info","message":"Creating motion event using class: MotionEvent","timestamp":"2025-05-08 18:27:32"}
+{"level":"info","message":"Created MotionEvent: Living Room motion for location: Living Room","timestamp":"2025-05-08 18:27:32"}
+{"level":"info","message":"Successfully created and registered motion event: Living Room motion","timestamp":"2025-05-08 18:27:32"}
+{"level":"info","message":"all events from getAllEvents()","timestamp":"2025-05-08 18:27:32"}
+{"level":"info","message":"Successfully fetched 3 events from https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 18:27:33"}
+{"level":"info","message":"Creating event instance for: Living Room Temperature","timestamp":"2025-05-08 18:27:33"}
+{"level":"info","message":"Parsed event name \"Living Room Temperature\" into location: \"Living Room\", type: \"Temperature\", lowerType: \"temperature\"","timestamp":"2025-05-08 18:27:33"}
+{"level":"info","message":"Found matching event type for temperature","timestamp":"2025-05-08 18:27:33"}
+{"level":"info","message":"Creating temperature event using class: TemperatureEvent","timestamp":"2025-05-08 18:27:33"}
+{"level":"info","message":"Created TemperatureEvent: Living Room Temperature for location: Living Room","timestamp":"2025-05-08 18:27:33"}
+{"level":"info","message":"Successfully created and registered temperature event: Living Room Temperature","timestamp":"2025-05-08 18:27:33"}
+{"level":"info","message":"Creating event instance for: Living Room Humidity","timestamp":"2025-05-08 18:27:33"}
+{"level":"info","message":"Parsed event name \"Living Room Humidity\" into location: \"Living Room\", type: \"Humidity\", lowerType: \"humidity\"","timestamp":"2025-05-08 18:27:33"}
+{"level":"info","message":"Found matching event type for humidity","timestamp":"2025-05-08 18:27:33"}
+{"level":"info","message":"Creating humidity event using class: HumidityEvent","timestamp":"2025-05-08 18:27:33"}
+{"level":"info","message":"Successfully created and registered humidity event: Living Room Humidity","timestamp":"2025-05-08 18:27:33"}
+{"level":"info","message":"Creating event instance for: Living Room motion","timestamp":"2025-05-08 18:27:33"}
+{"level":"info","message":"Parsed event name \"Living Room motion\" into location: \"Living Room\", type: \"motion\", lowerType: \"motion\"","timestamp":"2025-05-08 18:27:33"}
+{"level":"info","message":"Found matching event type for motion","timestamp":"2025-05-08 18:27:33"}
+{"level":"info","message":"Creating motion event using class: MotionEvent","timestamp":"2025-05-08 18:27:33"}
+{"level":"info","message":"Created MotionEvent: Living Room motion for location: Living Room","timestamp":"2025-05-08 18:27:33"}
+{"level":"info","message":"Successfully created and registered motion event: Living Room motion","timestamp":"2025-05-08 18:27:33"}
+{"level":"info","message":"all events from getAllEvents()","timestamp":"2025-05-08 18:27:33"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-08 18:27:34"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-08 18:27:34"}
+{"level":"info","message":"Fetching events from Raspberry Pi at endpoint: https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 18:27:35"}
+{"level":"info","message":"Fetching events from Raspberry Pi at endpoint: https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 18:27:35"}
+{"level":"info","message":"Successfully fetched 3 events from https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 18:27:36"}
+{"level":"info","message":"Creating event instance for: Living Room Temperature","timestamp":"2025-05-08 18:27:36"}
+{"level":"info","message":"Parsed event name \"Living Room Temperature\" into location: \"Living Room\", type: \"Temperature\", lowerType: \"temperature\"","timestamp":"2025-05-08 18:27:36"}
+{"level":"info","message":"Found matching event type for temperature","timestamp":"2025-05-08 18:27:36"}
+{"level":"info","message":"Creating temperature event using class: TemperatureEvent","timestamp":"2025-05-08 18:27:36"}
+{"level":"info","message":"Created TemperatureEvent: Living Room Temperature for location: Living Room","timestamp":"2025-05-08 18:27:36"}
+{"level":"info","message":"Successfully created and registered temperature event: Living Room Temperature","timestamp":"2025-05-08 18:27:36"}
+{"level":"info","message":"Creating event instance for: Living Room Humidity","timestamp":"2025-05-08 18:27:36"}
+{"level":"info","message":"Parsed event name \"Living Room Humidity\" into location: \"Living Room\", type: \"Humidity\", lowerType: \"humidity\"","timestamp":"2025-05-08 18:27:36"}
+{"level":"info","message":"Found matching event type for humidity","timestamp":"2025-05-08 18:27:36"}
+{"level":"info","message":"Creating humidity event using class: HumidityEvent","timestamp":"2025-05-08 18:27:36"}
+{"level":"info","message":"Successfully created and registered humidity event: Living Room Humidity","timestamp":"2025-05-08 18:27:36"}
+{"level":"info","message":"Creating event instance for: Living Room motion","timestamp":"2025-05-08 18:27:36"}
+{"level":"info","message":"Parsed event name \"Living Room motion\" into location: \"Living Room\", type: \"motion\", lowerType: \"motion\"","timestamp":"2025-05-08 18:27:36"}
+{"level":"info","message":"Found matching event type for motion","timestamp":"2025-05-08 18:27:36"}
+{"level":"info","message":"Creating motion event using class: MotionEvent","timestamp":"2025-05-08 18:27:36"}
+{"level":"info","message":"Created MotionEvent: Living Room motion for location: Living Room","timestamp":"2025-05-08 18:27:36"}
+{"level":"info","message":"Successfully created and registered motion event: Living Room motion","timestamp":"2025-05-08 18:27:36"}
+{"level":"info","message":"all events from getAllEvents()","timestamp":"2025-05-08 18:27:36"}
+{"level":"info","message":"Successfully fetched 3 events from https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 18:27:36"}
+{"level":"info","message":"Creating event instance for: Living Room Temperature","timestamp":"2025-05-08 18:27:36"}
+{"level":"info","message":"Parsed event name \"Living Room Temperature\" into location: \"Living Room\", type: \"Temperature\", lowerType: \"temperature\"","timestamp":"2025-05-08 18:27:36"}
+{"level":"info","message":"Found matching event type for temperature","timestamp":"2025-05-08 18:27:36"}
+{"level":"info","message":"Creating temperature event using class: TemperatureEvent","timestamp":"2025-05-08 18:27:36"}
+{"level":"info","message":"Created TemperatureEvent: Living Room Temperature for location: Living Room","timestamp":"2025-05-08 18:27:36"}
+{"level":"info","message":"Successfully created and registered temperature event: Living Room Temperature","timestamp":"2025-05-08 18:27:36"}
+{"level":"info","message":"Creating event instance for: Living Room Humidity","timestamp":"2025-05-08 18:27:36"}
+{"level":"info","message":"Parsed event name \"Living Room Humidity\" into location: \"Living Room\", type: \"Humidity\", lowerType: \"humidity\"","timestamp":"2025-05-08 18:27:36"}
+{"level":"info","message":"Found matching event type for humidity","timestamp":"2025-05-08 18:27:36"}
+{"level":"info","message":"Creating humidity event using class: HumidityEvent","timestamp":"2025-05-08 18:27:36"}
+{"level":"info","message":"Successfully created and registered humidity event: Living Room Humidity","timestamp":"2025-05-08 18:27:36"}
+{"level":"info","message":"Creating event instance for: Living Room motion","timestamp":"2025-05-08 18:27:36"}
+{"level":"info","message":"Parsed event name \"Living Room motion\" into location: \"Living Room\", type: \"motion\", lowerType: \"motion\"","timestamp":"2025-05-08 18:27:36"}
+{"level":"info","message":"Found matching event type for motion","timestamp":"2025-05-08 18:27:36"}
+{"level":"info","message":"Creating motion event using class: MotionEvent","timestamp":"2025-05-08 18:27:36"}
+{"level":"info","message":"Created MotionEvent: Living Room motion for location: Living Room","timestamp":"2025-05-08 18:27:36"}
+{"level":"info","message":"Successfully created and registered motion event: Living Room motion","timestamp":"2025-05-08 18:27:36"}
+{"level":"info","message":"all events from getAllEvents()","timestamp":"2025-05-08 18:27:36"}
+{"level":"info","message":"LightAction constructor initialized for Living Room LIGHT in Living Room","timestamp":"2025-05-08 18:27:36"}
+{"level":"info","message":"LightAction constructor initialized for Living Room LIGHT in Living Room","timestamp":"2025-05-08 18:27:36"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-08 18:27:37"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-08 18:27:37"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-08 18:29:18"}
+{"level":"info","message":"Fetching events from Raspberry Pi at endpoint: https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 18:29:51"}
+{"level":"info","message":"Fetching events from Raspberry Pi at endpoint: https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 18:29:51"}
+{"level":"info","message":"Successfully fetched 3 events from https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 18:29:51"}
+{"level":"info","message":"Creating event instance for: Living Room Temperature","timestamp":"2025-05-08 18:29:51"}
+{"level":"info","message":"Parsed event name \"Living Room Temperature\" into location: \"Living Room\", type: \"Temperature\", lowerType: \"temperature\"","timestamp":"2025-05-08 18:29:51"}
+{"level":"info","message":"Found matching event type for temperature","timestamp":"2025-05-08 18:29:51"}
+{"level":"info","message":"Creating temperature event using class: TemperatureEvent","timestamp":"2025-05-08 18:29:51"}
+{"level":"info","message":"Created TemperatureEvent: Living Room Temperature for location: Living Room","timestamp":"2025-05-08 18:29:51"}
+{"level":"info","message":"Successfully created and registered temperature event: Living Room Temperature","timestamp":"2025-05-08 18:29:51"}
+{"level":"info","message":"Creating event instance for: Living Room Humidity","timestamp":"2025-05-08 18:29:51"}
+{"level":"info","message":"Parsed event name \"Living Room Humidity\" into location: \"Living Room\", type: \"Humidity\", lowerType: \"humidity\"","timestamp":"2025-05-08 18:29:51"}
+{"level":"info","message":"Found matching event type for humidity","timestamp":"2025-05-08 18:29:51"}
+{"level":"info","message":"Creating humidity event using class: HumidityEvent","timestamp":"2025-05-08 18:29:51"}
+{"level":"info","message":"Successfully created and registered humidity event: Living Room Humidity","timestamp":"2025-05-08 18:29:51"}
+{"level":"info","message":"Creating event instance for: Living Room motion","timestamp":"2025-05-08 18:29:51"}
+{"level":"info","message":"Parsed event name \"Living Room motion\" into location: \"Living Room\", type: \"motion\", lowerType: \"motion\"","timestamp":"2025-05-08 18:29:51"}
+{"level":"info","message":"Found matching event type for motion","timestamp":"2025-05-08 18:29:51"}
+{"level":"info","message":"Creating motion event using class: MotionEvent","timestamp":"2025-05-08 18:29:51"}
+{"level":"info","message":"Created MotionEvent: Living Room motion for location: Living Room","timestamp":"2025-05-08 18:29:51"}
+{"level":"info","message":"Successfully created and registered motion event: Living Room motion","timestamp":"2025-05-08 18:29:51"}
+{"level":"info","message":"all events from getAllEvents()","timestamp":"2025-05-08 18:29:51"}
+{"level":"info","message":"Successfully fetched 3 events from https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 18:29:51"}
+{"level":"info","message":"Creating event instance for: Living Room Temperature","timestamp":"2025-05-08 18:29:51"}
+{"level":"info","message":"Parsed event name \"Living Room Temperature\" into location: \"Living Room\", type: \"Temperature\", lowerType: \"temperature\"","timestamp":"2025-05-08 18:29:51"}
+{"level":"info","message":"Found matching event type for temperature","timestamp":"2025-05-08 18:29:51"}
+{"level":"info","message":"Creating temperature event using class: TemperatureEvent","timestamp":"2025-05-08 18:29:51"}
+{"level":"info","message":"Created TemperatureEvent: Living Room Temperature for location: Living Room","timestamp":"2025-05-08 18:29:51"}
+{"level":"info","message":"Successfully created and registered temperature event: Living Room Temperature","timestamp":"2025-05-08 18:29:51"}
+{"level":"info","message":"Creating event instance for: Living Room Humidity","timestamp":"2025-05-08 18:29:51"}
+{"level":"info","message":"Parsed event name \"Living Room Humidity\" into location: \"Living Room\", type: \"Humidity\", lowerType: \"humidity\"","timestamp":"2025-05-08 18:29:51"}
+{"level":"info","message":"Found matching event type for humidity","timestamp":"2025-05-08 18:29:51"}
+{"level":"info","message":"Creating humidity event using class: HumidityEvent","timestamp":"2025-05-08 18:29:51"}
+{"level":"info","message":"Successfully created and registered humidity event: Living Room Humidity","timestamp":"2025-05-08 18:29:51"}
+{"level":"info","message":"Creating event instance for: Living Room motion","timestamp":"2025-05-08 18:29:51"}
+{"level":"info","message":"Parsed event name \"Living Room motion\" into location: \"Living Room\", type: \"motion\", lowerType: \"motion\"","timestamp":"2025-05-08 18:29:51"}
+{"level":"info","message":"Found matching event type for motion","timestamp":"2025-05-08 18:29:51"}
+{"level":"info","message":"Creating motion event using class: MotionEvent","timestamp":"2025-05-08 18:29:51"}
+{"level":"info","message":"Created MotionEvent: Living Room motion for location: Living Room","timestamp":"2025-05-08 18:29:51"}
+{"level":"info","message":"Successfully created and registered motion event: Living Room motion","timestamp":"2025-05-08 18:29:51"}
+{"level":"info","message":"all events from getAllEvents()","timestamp":"2025-05-08 18:29:51"}
+{"level":"info","message":"LightAction constructor initialized for Living Room LIGHT in Living Room","timestamp":"2025-05-08 18:29:51"}
+{"level":"info","message":"LightAction constructor initialized for Living Room LIGHT in Living Room","timestamp":"2025-05-08 18:29:52"}
+{"level":"info","message":"Updating motion state for Living Room motion: true","timestamp":"2025-05-08 18:29:53"}
+{"level":"info","message":"Updating motion state for Living Room motion: true","timestamp":"2025-05-08 18:29:53"}
+{"level":"info","message":"Fetching events from Raspberry Pi at endpoint: https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 18:31:32"}
+{"level":"info","message":"Fetching events from Raspberry Pi at endpoint: https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 18:31:32"}
+{"level":"info","message":"Successfully fetched 3 events from https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 18:31:33"}
+{"level":"info","message":"Creating event instance for: Living Room Temperature","timestamp":"2025-05-08 18:31:33"}
+{"level":"info","message":"Parsed event name \"Living Room Temperature\" into location: \"Living Room\", type: \"Temperature\", lowerType: \"temperature\"","timestamp":"2025-05-08 18:31:33"}
+{"level":"info","message":"Found matching event type for temperature","timestamp":"2025-05-08 18:31:33"}
+{"level":"info","message":"Creating temperature event using class: TemperatureEvent","timestamp":"2025-05-08 18:31:33"}
+{"level":"info","message":"Created TemperatureEvent: Living Room Temperature for location: Living Room","timestamp":"2025-05-08 18:31:33"}
+{"level":"info","message":"Successfully created and registered temperature event: Living Room Temperature","timestamp":"2025-05-08 18:31:33"}
+{"level":"info","message":"Creating event instance for: Living Room Humidity","timestamp":"2025-05-08 18:31:33"}
+{"level":"info","message":"Parsed event name \"Living Room Humidity\" into location: \"Living Room\", type: \"Humidity\", lowerType: \"humidity\"","timestamp":"2025-05-08 18:31:33"}
+{"level":"info","message":"Found matching event type for humidity","timestamp":"2025-05-08 18:31:33"}
+{"level":"info","message":"Creating humidity event using class: HumidityEvent","timestamp":"2025-05-08 18:31:33"}
+{"level":"info","message":"Successfully created and registered humidity event: Living Room Humidity","timestamp":"2025-05-08 18:31:33"}
+{"level":"info","message":"Creating event instance for: Living Room motion","timestamp":"2025-05-08 18:31:33"}
+{"level":"info","message":"Parsed event name \"Living Room motion\" into location: \"Living Room\", type: \"motion\", lowerType: \"motion\"","timestamp":"2025-05-08 18:31:33"}
+{"level":"info","message":"Found matching event type for motion","timestamp":"2025-05-08 18:31:33"}
+{"level":"info","message":"Creating motion event using class: MotionEvent","timestamp":"2025-05-08 18:31:33"}
+{"level":"info","message":"Created MotionEvent: Living Room motion for location: Living Room","timestamp":"2025-05-08 18:31:33"}
+{"level":"info","message":"Successfully created and registered motion event: Living Room motion","timestamp":"2025-05-08 18:31:33"}
+{"level":"info","message":"all events from getAllEvents()","timestamp":"2025-05-08 18:31:33"}
+{"level":"info","message":"Successfully fetched 3 events from https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 18:31:33"}
+{"level":"info","message":"Creating event instance for: Living Room Temperature","timestamp":"2025-05-08 18:31:33"}
+{"level":"info","message":"Parsed event name \"Living Room Temperature\" into location: \"Living Room\", type: \"Temperature\", lowerType: \"temperature\"","timestamp":"2025-05-08 18:31:33"}
+{"level":"info","message":"Found matching event type for temperature","timestamp":"2025-05-08 18:31:33"}
+{"level":"info","message":"Creating temperature event using class: TemperatureEvent","timestamp":"2025-05-08 18:31:33"}
+{"level":"info","message":"Created TemperatureEvent: Living Room Temperature for location: Living Room","timestamp":"2025-05-08 18:31:33"}
+{"level":"info","message":"Successfully created and registered temperature event: Living Room Temperature","timestamp":"2025-05-08 18:31:33"}
+{"level":"info","message":"Creating event instance for: Living Room Humidity","timestamp":"2025-05-08 18:31:33"}
+{"level":"info","message":"Parsed event name \"Living Room Humidity\" into location: \"Living Room\", type: \"Humidity\", lowerType: \"humidity\"","timestamp":"2025-05-08 18:31:33"}
+{"level":"info","message":"Found matching event type for humidity","timestamp":"2025-05-08 18:31:33"}
+{"level":"info","message":"Creating humidity event using class: HumidityEvent","timestamp":"2025-05-08 18:31:33"}
+{"level":"info","message":"Successfully created and registered humidity event: Living Room Humidity","timestamp":"2025-05-08 18:31:33"}
+{"level":"info","message":"Creating event instance for: Living Room motion","timestamp":"2025-05-08 18:31:33"}
+{"level":"info","message":"Parsed event name \"Living Room motion\" into location: \"Living Room\", type: \"motion\", lowerType: \"motion\"","timestamp":"2025-05-08 18:31:33"}
+{"level":"info","message":"Found matching event type for motion","timestamp":"2025-05-08 18:31:33"}
+{"level":"info","message":"Creating motion event using class: MotionEvent","timestamp":"2025-05-08 18:31:33"}
+{"level":"info","message":"Created MotionEvent: Living Room motion for location: Living Room","timestamp":"2025-05-08 18:31:33"}
+{"level":"info","message":"Successfully created and registered motion event: Living Room motion","timestamp":"2025-05-08 18:31:33"}
+{"level":"info","message":"all events from getAllEvents()","timestamp":"2025-05-08 18:31:33"}
+{"level":"info","message":"LightAction constructor initialized for Living Room LIGHT in Living Room","timestamp":"2025-05-08 18:31:33"}
+{"level":"info","message":"LightAction constructor initialized for Living Room LIGHT in Living Room","timestamp":"2025-05-08 18:31:33"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-08 18:31:34"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-08 18:31:34"}
+{"level":"info","message":"Updating motion state for Living Room motion: true","timestamp":"2025-05-08 18:33:15"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-08 18:34:55"}
+{"level":"info","message":"Updating motion state for Living Room motion: true","timestamp":"2025-05-08 18:36:35"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-08 18:38:15"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-08 18:39:55"}
+{"level":"info","message":"Fetching events from Raspberry Pi at endpoint: https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 18:40:02"}
+{"level":"info","message":"Fetching events from Raspberry Pi at endpoint: https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 18:40:02"}
+{"level":"info","message":"Successfully fetched 3 events from https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 18:40:02"}
+{"level":"info","message":"Creating event instance for: Living Room Temperature","timestamp":"2025-05-08 18:40:02"}
+{"level":"info","message":"Parsed event name \"Living Room Temperature\" into location: \"Living Room\", type: \"Temperature\", lowerType: \"temperature\"","timestamp":"2025-05-08 18:40:02"}
+{"level":"info","message":"Found matching event type for temperature","timestamp":"2025-05-08 18:40:02"}
+{"level":"info","message":"Creating temperature event using class: TemperatureEvent","timestamp":"2025-05-08 18:40:02"}
+{"level":"info","message":"Created TemperatureEvent: Living Room Temperature for location: Living Room","timestamp":"2025-05-08 18:40:02"}
+{"level":"info","message":"Successfully created and registered temperature event: Living Room Temperature","timestamp":"2025-05-08 18:40:02"}
+{"level":"info","message":"Creating event instance for: Living Room Humidity","timestamp":"2025-05-08 18:40:02"}
+{"level":"info","message":"Parsed event name \"Living Room Humidity\" into location: \"Living Room\", type: \"Humidity\", lowerType: \"humidity\"","timestamp":"2025-05-08 18:40:02"}
+{"level":"info","message":"Found matching event type for humidity","timestamp":"2025-05-08 18:40:02"}
+{"level":"info","message":"Creating humidity event using class: HumidityEvent","timestamp":"2025-05-08 18:40:02"}
+{"level":"info","message":"Successfully created and registered humidity event: Living Room Humidity","timestamp":"2025-05-08 18:40:02"}
+{"level":"info","message":"Creating event instance for: Living Room motion","timestamp":"2025-05-08 18:40:02"}
+{"level":"info","message":"Parsed event name \"Living Room motion\" into location: \"Living Room\", type: \"motion\", lowerType: \"motion\"","timestamp":"2025-05-08 18:40:02"}
+{"level":"info","message":"Found matching event type for motion","timestamp":"2025-05-08 18:40:02"}
+{"level":"info","message":"Creating motion event using class: MotionEvent","timestamp":"2025-05-08 18:40:02"}
+{"level":"info","message":"Created MotionEvent: Living Room motion for location: Living Room","timestamp":"2025-05-08 18:40:02"}
+{"level":"info","message":"Successfully created and registered motion event: Living Room motion","timestamp":"2025-05-08 18:40:02"}
+{"level":"info","message":"Successfully fetched 3 events from https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 18:40:02"}
+{"level":"info","message":"Creating event instance for: Living Room Temperature","timestamp":"2025-05-08 18:40:02"}
+{"level":"info","message":"Parsed event name \"Living Room Temperature\" into location: \"Living Room\", type: \"Temperature\", lowerType: \"temperature\"","timestamp":"2025-05-08 18:40:02"}
+{"level":"info","message":"Found matching event type for temperature","timestamp":"2025-05-08 18:40:02"}
+{"level":"info","message":"Creating temperature event using class: TemperatureEvent","timestamp":"2025-05-08 18:40:02"}
+{"level":"info","message":"Created TemperatureEvent: Living Room Temperature for location: Living Room","timestamp":"2025-05-08 18:40:02"}
+{"level":"info","message":"Successfully created and registered temperature event: Living Room Temperature","timestamp":"2025-05-08 18:40:02"}
+{"level":"info","message":"Creating event instance for: Living Room Humidity","timestamp":"2025-05-08 18:40:02"}
+{"level":"info","message":"Parsed event name \"Living Room Humidity\" into location: \"Living Room\", type: \"Humidity\", lowerType: \"humidity\"","timestamp":"2025-05-08 18:40:02"}
+{"level":"info","message":"Found matching event type for humidity","timestamp":"2025-05-08 18:40:02"}
+{"level":"info","message":"Creating humidity event using class: HumidityEvent","timestamp":"2025-05-08 18:40:02"}
+{"level":"info","message":"Successfully created and registered humidity event: Living Room Humidity","timestamp":"2025-05-08 18:40:02"}
+{"level":"info","message":"Creating event instance for: Living Room motion","timestamp":"2025-05-08 18:40:02"}
+{"level":"info","message":"Parsed event name \"Living Room motion\" into location: \"Living Room\", type: \"motion\", lowerType: \"motion\"","timestamp":"2025-05-08 18:40:02"}
+{"level":"info","message":"Found matching event type for motion","timestamp":"2025-05-08 18:40:02"}
+{"level":"info","message":"Creating motion event using class: MotionEvent","timestamp":"2025-05-08 18:40:02"}
+{"level":"info","message":"Created MotionEvent: Living Room motion for location: Living Room","timestamp":"2025-05-08 18:40:02"}
+{"level":"info","message":"Successfully created and registered motion event: Living Room motion","timestamp":"2025-05-08 18:40:02"}
+{"level":"info","message":"all events from getAllEvents()","timestamp":"2025-05-08 18:40:02"}
+{"level":"info","message":"all events from getAllEvents()","timestamp":"2025-05-08 18:40:02"}
+{"level":"info","message":"LightAction constructor initialized for Living Room LIGHT in Living Room","timestamp":"2025-05-08 18:40:02"}
+{"level":"info","message":"LightAction constructor initialized for Living Room LIGHT in Living Room","timestamp":"2025-05-08 18:40:02"}
+{"level":"info","message":"Fetching events from Raspberry Pi at endpoint: https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 19:04:40"}
+{"level":"info","message":"Fetching events from Raspberry Pi at endpoint: https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 19:04:40"}
+{"level":"info","message":"Successfully fetched 3 events from https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 19:04:40"}
+{"level":"info","message":"Creating event instance for: Living Room Temperature","timestamp":"2025-05-08 19:04:40"}
+{"level":"info","message":"Parsed event name \"Living Room Temperature\" into location: \"Living Room\", type: \"Temperature\", lowerType: \"temperature\"","timestamp":"2025-05-08 19:04:40"}
+{"level":"info","message":"Found matching event type for temperature","timestamp":"2025-05-08 19:04:40"}
+{"level":"info","message":"Creating temperature event using class: TemperatureEvent","timestamp":"2025-05-08 19:04:40"}
+{"level":"info","message":"Created TemperatureEvent: Living Room Temperature for location: Living Room","timestamp":"2025-05-08 19:04:40"}
+{"level":"info","message":"Successfully created and registered temperature event: Living Room Temperature","timestamp":"2025-05-08 19:04:40"}
+{"level":"info","message":"Creating event instance for: Living Room Humidity","timestamp":"2025-05-08 19:04:40"}
+{"level":"info","message":"Parsed event name \"Living Room Humidity\" into location: \"Living Room\", type: \"Humidity\", lowerType: \"humidity\"","timestamp":"2025-05-08 19:04:40"}
+{"level":"info","message":"Found matching event type for humidity","timestamp":"2025-05-08 19:04:40"}
+{"level":"info","message":"Creating humidity event using class: HumidityEvent","timestamp":"2025-05-08 19:04:40"}
+{"level":"info","message":"Successfully created and registered humidity event: Living Room Humidity","timestamp":"2025-05-08 19:04:40"}
+{"level":"info","message":"Creating event instance for: Living Room motion","timestamp":"2025-05-08 19:04:40"}
+{"level":"info","message":"Parsed event name \"Living Room motion\" into location: \"Living Room\", type: \"motion\", lowerType: \"motion\"","timestamp":"2025-05-08 19:04:40"}
+{"level":"info","message":"Found matching event type for motion","timestamp":"2025-05-08 19:04:40"}
+{"level":"info","message":"Creating motion event using class: MotionEvent","timestamp":"2025-05-08 19:04:40"}
+{"level":"info","message":"Created MotionEvent: Living Room motion for location: Living Room","timestamp":"2025-05-08 19:04:40"}
+{"level":"info","message":"Successfully created and registered motion event: Living Room motion","timestamp":"2025-05-08 19:04:40"}
+{"level":"info","message":"all events from getAllEvents()","timestamp":"2025-05-08 19:04:40"}
+{"level":"info","message":"Successfully fetched 3 events from https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 19:04:40"}
+{"level":"info","message":"Creating event instance for: Living Room Temperature","timestamp":"2025-05-08 19:04:40"}
+{"level":"info","message":"Parsed event name \"Living Room Temperature\" into location: \"Living Room\", type: \"Temperature\", lowerType: \"temperature\"","timestamp":"2025-05-08 19:04:40"}
+{"level":"info","message":"Found matching event type for temperature","timestamp":"2025-05-08 19:04:40"}
+{"level":"info","message":"Creating temperature event using class: TemperatureEvent","timestamp":"2025-05-08 19:04:40"}
+{"level":"info","message":"Created TemperatureEvent: Living Room Temperature for location: Living Room","timestamp":"2025-05-08 19:04:40"}
+{"level":"info","message":"Successfully created and registered temperature event: Living Room Temperature","timestamp":"2025-05-08 19:04:40"}
+{"level":"info","message":"Creating event instance for: Living Room Humidity","timestamp":"2025-05-08 19:04:40"}
+{"level":"info","message":"Parsed event name \"Living Room Humidity\" into location: \"Living Room\", type: \"Humidity\", lowerType: \"humidity\"","timestamp":"2025-05-08 19:04:40"}
+{"level":"info","message":"Found matching event type for humidity","timestamp":"2025-05-08 19:04:40"}
+{"level":"info","message":"Creating humidity event using class: HumidityEvent","timestamp":"2025-05-08 19:04:40"}
+{"level":"info","message":"Successfully created and registered humidity event: Living Room Humidity","timestamp":"2025-05-08 19:04:40"}
+{"level":"info","message":"Creating event instance for: Living Room motion","timestamp":"2025-05-08 19:04:40"}
+{"level":"info","message":"Parsed event name \"Living Room motion\" into location: \"Living Room\", type: \"motion\", lowerType: \"motion\"","timestamp":"2025-05-08 19:04:40"}
+{"level":"info","message":"Found matching event type for motion","timestamp":"2025-05-08 19:04:40"}
+{"level":"info","message":"Creating motion event using class: MotionEvent","timestamp":"2025-05-08 19:04:40"}
+{"level":"info","message":"Created MotionEvent: Living Room motion for location: Living Room","timestamp":"2025-05-08 19:04:40"}
+{"level":"info","message":"Successfully created and registered motion event: Living Room motion","timestamp":"2025-05-08 19:04:40"}
+{"level":"info","message":"all events from getAllEvents()","timestamp":"2025-05-08 19:04:40"}
+{"level":"info","message":"LightAction constructor initialized for Living Room LIGHT in Living Room","timestamp":"2025-05-08 19:04:40"}
+{"level":"info","message":"LightAction constructor initialized for Living Room LIGHT in Living Room","timestamp":"2025-05-08 19:04:41"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-08 19:04:42"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-08 19:04:42"}
+{"level":"info","message":"Fetching events from Raspberry Pi at endpoint: https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 19:04:47"}
+{"level":"info","message":"Fetching events from Raspberry Pi at endpoint: https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 19:04:47"}
+{"level":"info","message":"Successfully fetched 3 events from https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 19:04:48"}
+{"level":"info","message":"Creating event instance for: Living Room Temperature","timestamp":"2025-05-08 19:04:48"}
+{"level":"info","message":"Parsed event name \"Living Room Temperature\" into location: \"Living Room\", type: \"Temperature\", lowerType: \"temperature\"","timestamp":"2025-05-08 19:04:48"}
+{"level":"info","message":"Found matching event type for temperature","timestamp":"2025-05-08 19:04:48"}
+{"level":"info","message":"Creating temperature event using class: TemperatureEvent","timestamp":"2025-05-08 19:04:48"}
+{"level":"info","message":"Created TemperatureEvent: Living Room Temperature for location: Living Room","timestamp":"2025-05-08 19:04:48"}
+{"level":"info","message":"Successfully created and registered temperature event: Living Room Temperature","timestamp":"2025-05-08 19:04:48"}
+{"level":"info","message":"Creating event instance for: Living Room Humidity","timestamp":"2025-05-08 19:04:48"}
+{"level":"info","message":"Parsed event name \"Living Room Humidity\" into location: \"Living Room\", type: \"Humidity\", lowerType: \"humidity\"","timestamp":"2025-05-08 19:04:48"}
+{"level":"info","message":"Found matching event type for humidity","timestamp":"2025-05-08 19:04:48"}
+{"level":"info","message":"Creating humidity event using class: HumidityEvent","timestamp":"2025-05-08 19:04:48"}
+{"level":"info","message":"Successfully created and registered humidity event: Living Room Humidity","timestamp":"2025-05-08 19:04:48"}
+{"level":"info","message":"Creating event instance for: Living Room motion","timestamp":"2025-05-08 19:04:48"}
+{"level":"info","message":"Parsed event name \"Living Room motion\" into location: \"Living Room\", type: \"motion\", lowerType: \"motion\"","timestamp":"2025-05-08 19:04:48"}
+{"level":"info","message":"Found matching event type for motion","timestamp":"2025-05-08 19:04:48"}
+{"level":"info","message":"Creating motion event using class: MotionEvent","timestamp":"2025-05-08 19:04:48"}
+{"level":"info","message":"Created MotionEvent: Living Room motion for location: Living Room","timestamp":"2025-05-08 19:04:48"}
+{"level":"info","message":"Successfully created and registered motion event: Living Room motion","timestamp":"2025-05-08 19:04:48"}
+{"level":"info","message":"all events from getAllEvents()","timestamp":"2025-05-08 19:04:48"}
+{"level":"info","message":"Successfully fetched 3 events from https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 19:04:48"}
+{"level":"info","message":"Creating event instance for: Living Room Temperature","timestamp":"2025-05-08 19:04:48"}
+{"level":"info","message":"Parsed event name \"Living Room Temperature\" into location: \"Living Room\", type: \"Temperature\", lowerType: \"temperature\"","timestamp":"2025-05-08 19:04:48"}
+{"level":"info","message":"Found matching event type for temperature","timestamp":"2025-05-08 19:04:48"}
+{"level":"info","message":"Creating temperature event using class: TemperatureEvent","timestamp":"2025-05-08 19:04:48"}
+{"level":"info","message":"Created TemperatureEvent: Living Room Temperature for location: Living Room","timestamp":"2025-05-08 19:04:48"}
+{"level":"info","message":"Successfully created and registered temperature event: Living Room Temperature","timestamp":"2025-05-08 19:04:48"}
+{"level":"info","message":"Creating event instance for: Living Room Humidity","timestamp":"2025-05-08 19:04:48"}
+{"level":"info","message":"Parsed event name \"Living Room Humidity\" into location: \"Living Room\", type: \"Humidity\", lowerType: \"humidity\"","timestamp":"2025-05-08 19:04:48"}
+{"level":"info","message":"Found matching event type for humidity","timestamp":"2025-05-08 19:04:48"}
+{"level":"info","message":"Creating humidity event using class: HumidityEvent","timestamp":"2025-05-08 19:04:48"}
+{"level":"info","message":"Successfully created and registered humidity event: Living Room Humidity","timestamp":"2025-05-08 19:04:48"}
+{"level":"info","message":"Creating event instance for: Living Room motion","timestamp":"2025-05-08 19:04:48"}
+{"level":"info","message":"Parsed event name \"Living Room motion\" into location: \"Living Room\", type: \"motion\", lowerType: \"motion\"","timestamp":"2025-05-08 19:04:48"}
+{"level":"info","message":"Found matching event type for motion","timestamp":"2025-05-08 19:04:48"}
+{"level":"info","message":"Creating motion event using class: MotionEvent","timestamp":"2025-05-08 19:04:48"}
+{"level":"info","message":"Created MotionEvent: Living Room motion for location: Living Room","timestamp":"2025-05-08 19:04:48"}
+{"level":"info","message":"Successfully created and registered motion event: Living Room motion","timestamp":"2025-05-08 19:04:48"}
+{"level":"info","message":"all events from getAllEvents()","timestamp":"2025-05-08 19:04:48"}
+{"level":"info","message":"LightAction constructor initialized for Living Room LIGHT in Living Room","timestamp":"2025-05-08 19:04:48"}
+{"level":"info","message":"LightAction constructor initialized for Living Room LIGHT in Living Room","timestamp":"2025-05-08 19:04:48"}
+{"level":"info","message":"Updating motion state for Living Room motion: true","timestamp":"2025-05-08 19:04:49"}
+{"level":"info","message":"Updating motion state for Living Room motion: true","timestamp":"2025-05-08 19:04:49"}
+{"level":"info","message":"Fetching events from Raspberry Pi at endpoint: https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 19:04:52"}
+{"level":"info","message":"Fetching events from Raspberry Pi at endpoint: https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 19:04:52"}
+{"level":"info","message":"Successfully fetched 3 events from https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 19:04:52"}
+{"level":"info","message":"Creating event instance for: Living Room Temperature","timestamp":"2025-05-08 19:04:52"}
+{"level":"info","message":"Parsed event name \"Living Room Temperature\" into location: \"Living Room\", type: \"Temperature\", lowerType: \"temperature\"","timestamp":"2025-05-08 19:04:52"}
+{"level":"info","message":"Found matching event type for temperature","timestamp":"2025-05-08 19:04:52"}
+{"level":"info","message":"Creating temperature event using class: TemperatureEvent","timestamp":"2025-05-08 19:04:52"}
+{"level":"info","message":"Created TemperatureEvent: Living Room Temperature for location: Living Room","timestamp":"2025-05-08 19:04:52"}
+{"level":"info","message":"Successfully created and registered temperature event: Living Room Temperature","timestamp":"2025-05-08 19:04:52"}
+{"level":"info","message":"Creating event instance for: Living Room Humidity","timestamp":"2025-05-08 19:04:52"}
+{"level":"info","message":"Parsed event name \"Living Room Humidity\" into location: \"Living Room\", type: \"Humidity\", lowerType: \"humidity\"","timestamp":"2025-05-08 19:04:52"}
+{"level":"info","message":"Found matching event type for humidity","timestamp":"2025-05-08 19:04:52"}
+{"level":"info","message":"Creating humidity event using class: HumidityEvent","timestamp":"2025-05-08 19:04:52"}
+{"level":"info","message":"Successfully created and registered humidity event: Living Room Humidity","timestamp":"2025-05-08 19:04:52"}
+{"level":"info","message":"Creating event instance for: Living Room motion","timestamp":"2025-05-08 19:04:52"}
+{"level":"info","message":"Parsed event name \"Living Room motion\" into location: \"Living Room\", type: \"motion\", lowerType: \"motion\"","timestamp":"2025-05-08 19:04:52"}
+{"level":"info","message":"Found matching event type for motion","timestamp":"2025-05-08 19:04:52"}
+{"level":"info","message":"Creating motion event using class: MotionEvent","timestamp":"2025-05-08 19:04:52"}
+{"level":"info","message":"Created MotionEvent: Living Room motion for location: Living Room","timestamp":"2025-05-08 19:04:52"}
+{"level":"info","message":"Successfully created and registered motion event: Living Room motion","timestamp":"2025-05-08 19:04:52"}
+{"level":"info","message":"all events from getAllEvents()","timestamp":"2025-05-08 19:04:52"}
+{"level":"info","message":"Successfully fetched 3 events from https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-08 19:04:53"}
+{"level":"info","message":"Creating event instance for: Living Room Temperature","timestamp":"2025-05-08 19:04:53"}
+{"level":"info","message":"Parsed event name \"Living Room Temperature\" into location: \"Living Room\", type: \"Temperature\", lowerType: \"temperature\"","timestamp":"2025-05-08 19:04:53"}
+{"level":"info","message":"Found matching event type for temperature","timestamp":"2025-05-08 19:04:53"}
+{"level":"info","message":"Creating temperature event using class: TemperatureEvent","timestamp":"2025-05-08 19:04:53"}
+{"level":"info","message":"Created TemperatureEvent: Living Room Temperature for location: Living Room","timestamp":"2025-05-08 19:04:53"}
+{"level":"info","message":"Successfully created and registered temperature event: Living Room Temperature","timestamp":"2025-05-08 19:04:53"}
+{"level":"info","message":"Creating event instance for: Living Room Humidity","timestamp":"2025-05-08 19:04:53"}
+{"level":"info","message":"Parsed event name \"Living Room Humidity\" into location: \"Living Room\", type: \"Humidity\", lowerType: \"humidity\"","timestamp":"2025-05-08 19:04:53"}
+{"level":"info","message":"Found matching event type for humidity","timestamp":"2025-05-08 19:04:53"}
+{"level":"info","message":"Creating humidity event using class: HumidityEvent","timestamp":"2025-05-08 19:04:53"}
+{"level":"info","message":"Successfully created and registered humidity event: Living Room Humidity","timestamp":"2025-05-08 19:04:53"}
+{"level":"info","message":"Creating event instance for: Living Room motion","timestamp":"2025-05-08 19:04:53"}
+{"level":"info","message":"Parsed event name \"Living Room motion\" into location: \"Living Room\", type: \"motion\", lowerType: \"motion\"","timestamp":"2025-05-08 19:04:53"}
+{"level":"info","message":"Found matching event type for motion","timestamp":"2025-05-08 19:04:53"}
+{"level":"info","message":"Creating motion event using class: MotionEvent","timestamp":"2025-05-08 19:04:53"}
+{"level":"info","message":"Created MotionEvent: Living Room motion for location: Living Room","timestamp":"2025-05-08 19:04:53"}
+{"level":"info","message":"Successfully created and registered motion event: Living Room motion","timestamp":"2025-05-08 19:04:53"}
+{"level":"info","message":"all events from getAllEvents()","timestamp":"2025-05-08 19:04:53"}
+{"level":"info","message":"LightAction constructor initialized for Living Room LIGHT in Living Room","timestamp":"2025-05-08 19:04:53"}
+{"level":"info","message":"LightAction constructor initialized for Living Room LIGHT in Living Room","timestamp":"2025-05-08 19:04:53"}
+{"level":"info","message":"Updating motion state for Living Room motion: true","timestamp":"2025-05-08 19:04:54"}
+{"level":"info","message":"Updating motion state for Living Room motion: true","timestamp":"2025-05-08 19:04:54"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-08 19:06:35"}
+{"level":"info","message":"Pre-parsed Light action: state=true, brightness=null, color=null","timestamp":"2025-05-08 19:07:14"}
+{"level":"info","message":"Executing Light action: Living Room LIGHT (Living Room)","timestamp":"2025-05-08 19:07:14"}
+{"level":"info","message":"Getting Raspberry Pi IP for Living Room","timestamp":"2025-05-08 19:07:14"}
+{"level":"info","message":"Pre-parsed Light action: state=false, brightness=null, color=null","timestamp":"2025-05-08 19:07:18"}
+{"level":"info","message":"Executing Light action: Living Room LIGHT (Living Room)","timestamp":"2025-05-08 19:07:18"}
+{"level":"info","message":"Getting Raspberry Pi IP for Living Room","timestamp":"2025-05-08 19:07:18"}
+{"level":"info","message":"Pre-parsed Light action: state=true, brightness=null, color=null","timestamp":"2025-05-08 19:07:50"}
+{"level":"info","message":"Executing Light action: Living Room LIGHT (Living Room)","timestamp":"2025-05-08 19:07:50"}
+{"level":"info","message":"Getting Raspberry Pi IP for Living Room","timestamp":"2025-05-08 19:07:50"}
+{"level":"info","message":"Pre-parsed Light action: state=false, brightness=null, color=null","timestamp":"2025-05-08 19:07:52"}
+{"level":"info","message":"Executing Light action: Living Room LIGHT (Living Room)","timestamp":"2025-05-08 19:07:52"}
+{"level":"info","message":"Getting Raspberry Pi IP for Living Room","timestamp":"2025-05-08 19:07:52"}
+{"level":"info","message":"Pre-parsed Light action: state=true, brightness=null, color=null","timestamp":"2025-05-08 19:08:01"}
+{"level":"info","message":"Executing Light action: Living Room LIGHT (Living Room)","timestamp":"2025-05-08 19:08:01"}
+{"level":"info","message":"Getting Raspberry Pi IP for Living Room","timestamp":"2025-05-08 19:08:01"}
+{"level":"info","message":"Pre-parsed Light action: state=false, brightness=null, color=null","timestamp":"2025-05-08 19:08:04"}
+{"level":"info","message":"Executing Light action: Living Room LIGHT (Living Room)","timestamp":"2025-05-08 19:08:04"}
+{"level":"info","message":"Getting Raspberry Pi IP for Living Room","timestamp":"2025-05-08 19:08:04"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-08 19:08:14"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-08 19:09:54"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-08 19:11:34"}
+{"level":"info","message":"Updating motion state for Living Room motion: true","timestamp":"2025-05-08 19:13:14"}
+{"level":"info","message":"Updating motion state for Living Room motion: true","timestamp":"2025-05-08 19:14:55"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-08 19:16:34"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-08 19:18:15"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-08 19:19:55"}
+{"level":"info","message":"Updating motion state for Living Room motion: true","timestamp":"2025-05-08 19:21:35"}
+{"level":"info","message":"Updating motion state for Living Room motion: true","timestamp":"2025-05-08 19:23:15"}
+{"level":"info","message":"Updating motion state for Living Room motion: true","timestamp":"2025-05-08 19:24:55"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-08 19:26:35"}
+{"level":"info","message":"Updating motion state for Living Room motion: true","timestamp":"2025-05-08 19:28:15"}
+{"level":"info","message":"Updating motion state for Living Room motion: true","timestamp":"2025-05-08 19:29:55"}
+{"level":"info","message":"Updating motion state for Living Room motion: true","timestamp":"2025-05-08 19:31:37"}
+{"level":"info","message":"Updating motion state for Living Room motion: true","timestamp":"2025-05-08 19:33:15"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-08 19:34:55"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-08 19:36:35"}
+{"level":"info","message":"Updating motion state for Living Room motion: true","timestamp":"2025-05-08 19:38:15"}
+{"level":"info","message":"Updating motion state for Living Room motion: true","timestamp":"2025-05-08 19:39:55"}
+{"level":"info","message":"Updating motion state for Living Room motion: true","timestamp":"2025-05-08 19:41:35"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-08 19:43:15"}
+{"level":"info","message":"Updating motion state for Living Room motion: true","timestamp":"2025-05-08 19:44:55"}
+{"level":"info","message":"Fetching events from Raspberry Pi at endpoint: https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-09 19:52:35"}
+{"level":"info","message":"Fetching events from Raspberry Pi at endpoint: https://cb13-193-58-150-20.ngrok-free.app","timestamp":"2025-05-09 19:52:35"}
+{"endpoint":"https://cb13-193-58-150-20.ngrok-free.app","error":"AxiosError: Request failed with status code 404\n    at settle (C:\\Users\\amin\\Desktop\\smart-space\\SmartSchool-Server\\node_modules\\axios\\dist\\node\\axios.cjs:2031:12)\n    at IncomingMessage.handleStreamEnd (C:\\Users\\amin\\Desktop\\smart-space\\SmartSchool-Server\\node_modules\\axios\\dist\\node\\axios.cjs:3148:11)\n    at IncomingMessage.emit (node:events:531:35)\n    at endReadableNT (node:internal/streams/readable:1696:12)\n    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)\n    at Axios.request (C:\\Users\\amin\\Desktop\\smart-space\\SmartSchool-Server\\node_modules\\axios\\dist\\node\\axios.cjs:4258:41)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async EventRegistry.fetchEventsFromRaspberryPi (C:\\Users\\amin\\Desktop\\smart-space\\SmartSchool-Server\\interpreter\\src\\events\\EventRegistry.js:67:24)\n    at async EventRegistry.initializeEvents (C:\\Users\\amin\\Desktop\\smart-space\\SmartSchool-Server\\interpreter\\src\\events\\EventRegistry.js:46:9)\n    at async initialize (C:\\Users\\amin\\Desktop\\smart-space\\SmartSchool-Server\\interpreter\\src\\index.js:25:9)\n    at async Object.initializeInterpreter (C:\\Users\\amin\\Desktop\\smart-space\\SmartSchool-Server\\interpreter\\src\\server-integration.js:26:5)\n    at async initializeInterpreter (C:\\Users\\amin\\Desktop\\smart-space\\SmartSchool-Server\\routers\\interpreter.router.js:14:7)","level":"error","message":"Error fetching events from https://cb13-193-58-150-20.ngrok-free.app: Request failed with status code 404","timestamp":"2025-05-09 19:52:36"}
+{"endpoint":"https://cb13-193-58-150-20.ngrok-free.app","error":"AxiosError: Request failed with status code 404\n    at settle (C:\\Users\\amin\\Desktop\\smart-space\\SmartSchool-Server\\node_modules\\axios\\dist\\node\\axios.cjs:2031:12)\n    at IncomingMessage.handleStreamEnd (C:\\Users\\amin\\Desktop\\smart-space\\SmartSchool-Server\\node_modules\\axios\\dist\\node\\axios.cjs:3148:11)\n    at IncomingMessage.emit (node:events:531:35)\n    at endReadableNT (node:internal/streams/readable:1696:12)\n    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)\n    at Axios.request (C:\\Users\\amin\\Desktop\\smart-space\\SmartSchool-Server\\node_modules\\axios\\dist\\node\\axios.cjs:4258:41)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async EventRegistry.fetchEventsFromRaspberryPi (C:\\Users\\amin\\Desktop\\smart-space\\SmartSchool-Server\\interpreter\\src\\events\\EventRegistry.js:67:24)\n    at async EventRegistry.initializeEvents (C:\\Users\\amin\\Desktop\\smart-space\\SmartSchool-Server\\interpreter\\src\\events\\EventRegistry.js:46:9)\n    at async initialize (C:\\Users\\amin\\Desktop\\smart-space\\SmartSchool-Server\\interpreter\\src\\index.js:25:9)\n    at async Object.initializeInterpreter (C:\\Users\\amin\\Desktop\\smart-space\\SmartSchool-Server\\interpreter\\src\\server-integration.js:26:5)\n    at async C:\\Users\\amin\\Desktop\\smart-space\\SmartSchool-Server\\controllers\\anomalyController.js:15:7","level":"error","message":"Error fetching events from https://cb13-193-58-150-20.ngrok-free.app: Request failed with status code 404","timestamp":"2025-05-09 19:52:36"}
+{"level":"info","message":"all events from getAllEvents()","timestamp":"2025-05-09 19:52:36"}
+{"level":"info","message":"all events from getAllEvents()","timestamp":"2025-05-09 19:52:36"}
+{"level":"info","message":"Fetching events from Raspberry Pi at endpoint: https://1eb6-193-58-150-20.ngrok-free.app","timestamp":"2025-05-10 18:41:43"}
+{"level":"info","message":"Fetching events from Raspberry Pi at endpoint: https://1eb6-193-58-150-20.ngrok-free.app","timestamp":"2025-05-10 18:41:43"}
+{"level":"info","message":"Successfully fetched 3 events from https://1eb6-193-58-150-20.ngrok-free.app","timestamp":"2025-05-10 18:41:44"}
+{"level":"info","message":"Creating event instance for: Living Room Temperature","timestamp":"2025-05-10 18:41:44"}
+{"level":"info","message":"Parsed event name \"Living Room Temperature\" into location: \"Living Room\", type: \"Temperature\", lowerType: \"temperature\"","timestamp":"2025-05-10 18:41:44"}
+{"level":"info","message":"Found matching event type for temperature","timestamp":"2025-05-10 18:41:44"}
+{"level":"info","message":"Creating temperature event using class: TemperatureEvent","timestamp":"2025-05-10 18:41:44"}
+{"level":"info","message":"Created TemperatureEvent: Living Room Temperature for location: Living Room","timestamp":"2025-05-10 18:41:44"}
+{"level":"info","message":"Successfully created and registered temperature event: Living Room Temperature","timestamp":"2025-05-10 18:41:44"}
+{"level":"info","message":"Creating event instance for: Living Room Humidity","timestamp":"2025-05-10 18:41:44"}
+{"level":"info","message":"Parsed event name \"Living Room Humidity\" into location: \"Living Room\", type: \"Humidity\", lowerType: \"humidity\"","timestamp":"2025-05-10 18:41:44"}
+{"level":"info","message":"Found matching event type for humidity","timestamp":"2025-05-10 18:41:44"}
+{"level":"info","message":"Creating humidity event using class: HumidityEvent","timestamp":"2025-05-10 18:41:44"}
+{"level":"info","message":"Successfully created and registered humidity event: Living Room Humidity","timestamp":"2025-05-10 18:41:44"}
+{"level":"info","message":"Creating event instance for: Living Room motion","timestamp":"2025-05-10 18:41:44"}
+{"level":"info","message":"Parsed event name \"Living Room motion\" into location: \"Living Room\", type: \"motion\", lowerType: \"motion\"","timestamp":"2025-05-10 18:41:44"}
+{"level":"info","message":"Found matching event type for motion","timestamp":"2025-05-10 18:41:44"}
+{"level":"info","message":"Creating motion event using class: MotionEvent","timestamp":"2025-05-10 18:41:44"}
+{"level":"info","message":"Created MotionEvent: Living Room motion for location: Living Room","timestamp":"2025-05-10 18:41:44"}
+{"level":"info","message":"Successfully created and registered motion event: Living Room motion","timestamp":"2025-05-10 18:41:44"}
+{"level":"info","message":"all events from getAllEvents()","timestamp":"2025-05-10 18:41:44"}
+{"level":"info","message":"Successfully fetched 3 events from https://1eb6-193-58-150-20.ngrok-free.app","timestamp":"2025-05-10 18:41:44"}
+{"level":"info","message":"Creating event instance for: Living Room Temperature","timestamp":"2025-05-10 18:41:44"}
+{"level":"info","message":"Parsed event name \"Living Room Temperature\" into location: \"Living Room\", type: \"Temperature\", lowerType: \"temperature\"","timestamp":"2025-05-10 18:41:44"}
+{"level":"info","message":"Found matching event type for temperature","timestamp":"2025-05-10 18:41:44"}
+{"level":"info","message":"Creating temperature event using class: TemperatureEvent","timestamp":"2025-05-10 18:41:44"}
+{"level":"info","message":"Created TemperatureEvent: Living Room Temperature for location: Living Room","timestamp":"2025-05-10 18:41:44"}
+{"level":"info","message":"Successfully created and registered temperature event: Living Room Temperature","timestamp":"2025-05-10 18:41:44"}
+{"level":"info","message":"Creating event instance for: Living Room Humidity","timestamp":"2025-05-10 18:41:44"}
+{"level":"info","message":"Parsed event name \"Living Room Humidity\" into location: \"Living Room\", type: \"Humidity\", lowerType: \"humidity\"","timestamp":"2025-05-10 18:41:44"}
+{"level":"info","message":"Found matching event type for humidity","timestamp":"2025-05-10 18:41:44"}
+{"level":"info","message":"Creating humidity event using class: HumidityEvent","timestamp":"2025-05-10 18:41:44"}
+{"level":"info","message":"Successfully created and registered humidity event: Living Room Humidity","timestamp":"2025-05-10 18:41:44"}
+{"level":"info","message":"Creating event instance for: Living Room motion","timestamp":"2025-05-10 18:41:44"}
+{"level":"info","message":"Parsed event name \"Living Room motion\" into location: \"Living Room\", type: \"motion\", lowerType: \"motion\"","timestamp":"2025-05-10 18:41:44"}
+{"level":"info","message":"Found matching event type for motion","timestamp":"2025-05-10 18:41:44"}
+{"level":"info","message":"Creating motion event using class: MotionEvent","timestamp":"2025-05-10 18:41:44"}
+{"level":"info","message":"Created MotionEvent: Living Room motion for location: Living Room","timestamp":"2025-05-10 18:41:44"}
+{"level":"info","message":"Successfully created and registered motion event: Living Room motion","timestamp":"2025-05-10 18:41:44"}
+{"level":"info","message":"all events from getAllEvents()","timestamp":"2025-05-10 18:41:44"}
+{"level":"info","message":"LightAction constructor initialized for Living Room LIGHT in Living Room","timestamp":"2025-05-10 18:41:44"}
+{"level":"info","message":"LightAction constructor initialized for Living Room LIGHT in Living Room","timestamp":"2025-05-10 18:41:44"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-10 18:41:45"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-10 18:41:46"}
+{"level":"info","message":"Pre-parsed Light action: state=true, brightness=null, color=null","timestamp":"2025-05-10 18:42:25"}
+{"level":"info","message":"Executing Light action: Living Room LIGHT (Living Room)","timestamp":"2025-05-10 18:42:25"}
+{"level":"info","message":"Getting Raspberry Pi IP for Living Room","timestamp":"2025-05-10 18:42:25"}
+{"level":"info","message":"Pre-parsed Light action: state=false, brightness=null, color=null","timestamp":"2025-05-10 18:42:27"}
+{"level":"info","message":"Executing Light action: Living Room LIGHT (Living Room)","timestamp":"2025-05-10 18:42:27"}
+{"level":"info","message":"Getting Raspberry Pi IP for Living Room","timestamp":"2025-05-10 18:42:27"}
+{"level":"info","message":"Pre-parsed Light action: state=true, brightness=null, color=null","timestamp":"2025-05-10 18:43:12"}
+{"level":"info","message":"Executing Light action: Living Room LIGHT (Living Room)","timestamp":"2025-05-10 18:43:12"}
+{"level":"info","message":"Getting Raspberry Pi IP for Living Room","timestamp":"2025-05-10 18:43:12"}
+{"level":"info","message":"Pre-parsed Light action: state=false, brightness=null, color=null","timestamp":"2025-05-10 18:43:14"}
+{"level":"info","message":"Executing Light action: Living Room LIGHT (Living Room)","timestamp":"2025-05-10 18:43:14"}
+{"level":"info","message":"Getting Raspberry Pi IP for Living Room","timestamp":"2025-05-10 18:43:14"}
+{"level":"info","message":"all events from getAllEvents()","timestamp":"2025-05-10 18:43:26"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-10 18:43:27"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-10 18:45:06"}
+{"level":"info","message":"Updating motion state for Living Room motion: true","timestamp":"2025-05-10 18:46:46"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-10 18:48:26"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-10 18:50:06"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-10 18:51:46"}
+{"level":"info","message":"Updating motion state for Living Room motion: true","timestamp":"2025-05-10 18:53:26"}
+{"level":"info","message":"Updating motion state for Living Room motion: true","timestamp":"2025-05-10 18:55:06"}
+{"level":"info","message":"Updating motion state for Living Room motion: true","timestamp":"2025-05-10 18:56:46"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-10 18:58:26"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-10 19:00:06"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-10 19:01:46"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-10 19:03:26"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-10 19:05:06"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-10 19:06:46"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-10 19:08:26"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-10 19:10:06"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-10 19:11:46"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-10 19:13:26"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-10 19:15:06"}
+{"level":"info","message":"Updating motion state for Living Room motion: true","timestamp":"2025-05-10 19:17:59"}
+{"level":"info","message":"Fetching events from Raspberry Pi at endpoint: https://1eb6-193-58-150-20.ngrok-free.app","timestamp":"2025-05-10 20:46:57"}
+{"level":"info","message":"Fetching events from Raspberry Pi at endpoint: https://1eb6-193-58-150-20.ngrok-free.app","timestamp":"2025-05-10 20:46:57"}
+{"level":"info","message":"Successfully fetched 3 events from https://1eb6-193-58-150-20.ngrok-free.app","timestamp":"2025-05-10 20:46:57"}
+{"level":"info","message":"Creating event instance for: Living Room Temperature","timestamp":"2025-05-10 20:46:57"}
+{"level":"info","message":"Parsed event name \"Living Room Temperature\" into location: \"Living Room\", type: \"Temperature\", lowerType: \"temperature\"","timestamp":"2025-05-10 20:46:57"}
+{"level":"info","message":"Found matching event type for temperature","timestamp":"2025-05-10 20:46:57"}
+{"level":"info","message":"Creating temperature event using class: TemperatureEvent","timestamp":"2025-05-10 20:46:57"}
+{"level":"info","message":"Created TemperatureEvent: Living Room Temperature for location: Living Room","timestamp":"2025-05-10 20:46:57"}
+{"level":"info","message":"Successfully created and registered temperature event: Living Room Temperature","timestamp":"2025-05-10 20:46:57"}
+{"level":"info","message":"Creating event instance for: Living Room Humidity","timestamp":"2025-05-10 20:46:57"}
+{"level":"info","message":"Parsed event name \"Living Room Humidity\" into location: \"Living Room\", type: \"Humidity\", lowerType: \"humidity\"","timestamp":"2025-05-10 20:46:57"}
+{"level":"info","message":"Found matching event type for humidity","timestamp":"2025-05-10 20:46:57"}
+{"level":"info","message":"Creating humidity event using class: HumidityEvent","timestamp":"2025-05-10 20:46:57"}
+{"level":"info","message":"Successfully created and registered humidity event: Living Room Humidity","timestamp":"2025-05-10 20:46:57"}
+{"level":"info","message":"Creating event instance for: Living Room motion","timestamp":"2025-05-10 20:46:57"}
+{"level":"info","message":"Parsed event name \"Living Room motion\" into location: \"Living Room\", type: \"motion\", lowerType: \"motion\"","timestamp":"2025-05-10 20:46:57"}
+{"level":"info","message":"Found matching event type for motion","timestamp":"2025-05-10 20:46:57"}
+{"level":"info","message":"Creating motion event using class: MotionEvent","timestamp":"2025-05-10 20:46:57"}
+{"level":"info","message":"Created MotionEvent: Living Room motion for location: Living Room","timestamp":"2025-05-10 20:46:57"}
+{"level":"info","message":"Successfully created and registered motion event: Living Room motion","timestamp":"2025-05-10 20:46:57"}
+{"level":"info","message":"Successfully fetched 3 events from https://1eb6-193-58-150-20.ngrok-free.app","timestamp":"2025-05-10 20:46:57"}
+{"level":"info","message":"Creating event instance for: Living Room Temperature","timestamp":"2025-05-10 20:46:57"}
+{"level":"info","message":"Parsed event name \"Living Room Temperature\" into location: \"Living Room\", type: \"Temperature\", lowerType: \"temperature\"","timestamp":"2025-05-10 20:46:57"}
+{"level":"info","message":"Found matching event type for temperature","timestamp":"2025-05-10 20:46:57"}
+{"level":"info","message":"Creating temperature event using class: TemperatureEvent","timestamp":"2025-05-10 20:46:57"}
+{"level":"info","message":"Created TemperatureEvent: Living Room Temperature for location: Living Room","timestamp":"2025-05-10 20:46:57"}
+{"level":"info","message":"Successfully created and registered temperature event: Living Room Temperature","timestamp":"2025-05-10 20:46:57"}
+{"level":"info","message":"Creating event instance for: Living Room Humidity","timestamp":"2025-05-10 20:46:57"}
+{"level":"info","message":"Parsed event name \"Living Room Humidity\" into location: \"Living Room\", type: \"Humidity\", lowerType: \"humidity\"","timestamp":"2025-05-10 20:46:57"}
+{"level":"info","message":"Found matching event type for humidity","timestamp":"2025-05-10 20:46:57"}
+{"level":"info","message":"Creating humidity event using class: HumidityEvent","timestamp":"2025-05-10 20:46:57"}
+{"level":"info","message":"Successfully created and registered humidity event: Living Room Humidity","timestamp":"2025-05-10 20:46:57"}
+{"level":"info","message":"Creating event instance for: Living Room motion","timestamp":"2025-05-10 20:46:57"}
+{"level":"info","message":"Parsed event name \"Living Room motion\" into location: \"Living Room\", type: \"motion\", lowerType: \"motion\"","timestamp":"2025-05-10 20:46:57"}
+{"level":"info","message":"Found matching event type for motion","timestamp":"2025-05-10 20:46:57"}
+{"level":"info","message":"Creating motion event using class: MotionEvent","timestamp":"2025-05-10 20:46:57"}
+{"level":"info","message":"Created MotionEvent: Living Room motion for location: Living Room","timestamp":"2025-05-10 20:46:57"}
+{"level":"info","message":"Successfully created and registered motion event: Living Room motion","timestamp":"2025-05-10 20:46:57"}
+{"level":"info","message":"all events from getAllEvents()","timestamp":"2025-05-10 20:46:57"}
+{"level":"info","message":"all events from getAllEvents()","timestamp":"2025-05-10 20:46:57"}
+{"level":"info","message":"LightAction constructor initialized for Living Room LIGHT in Living Room","timestamp":"2025-05-10 20:46:58"}
+{"level":"info","message":"LightAction constructor initialized for Living Room LIGHT in Living Room","timestamp":"2025-05-10 20:46:58"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-10 20:46:59"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-10 20:46:59"}
+{"level":"info","message":"all events from getAllEvents()","timestamp":"2025-05-10 20:47:07"}
+{"level":"info","message":"all events from getAllEvents()","timestamp":"2025-05-10 20:47:40"}
+{"level":"info","message":"Parsed motion rule for location: \"Living Room\", eventName: \"Living Room Motion\" with condition \"true\"","timestamp":"2025-05-10 20:48:18"}
+{"level":"info","message":"Searching for motion event matching: Living Room Motion","timestamp":"2025-05-10 20:48:18"}
+{"level":"info","message":"Found exact match for motion event: Living Room Motion","timestamp":"2025-05-10 20:48:18"}
+{"level":"info","message":"Rule added as observer to motion event Living Room motion","timestamp":"2025-05-10 20:48:18"}
+{"level":"info","message":"Updated rule event name to: Living Room motion","timestamp":"2025-05-10 20:48:18"}
+{"level":"info","message":"Action Living Room LIGHT (light) now observing rule rule_1746899298435_231","timestamp":"2025-05-10 20:48:18"}
+{"level":"info","message":"Pre-parsed Light action: state=true, brightness=null, color=null","timestamp":"2025-05-10 20:48:18"}
+{"level":"info","message":"Updating motion state for Living Room motion: true","timestamp":"2025-05-10 20:48:39"}
+{"level":"info","message":"Rule rule_1746899298435_231 condition met: true","timestamp":"2025-05-10 20:48:39"}
+{"level":"info","message":"Rule rule_1746899298435_231 notifying 1 observing actions","timestamp":"2025-05-10 20:48:39"}
+{"level":"info","message":"Executing Light action: Living Room LIGHT (Living Room)","timestamp":"2025-05-10 20:48:39"}
+{"level":"info","message":"Getting Raspberry Pi IP for Living Room","timestamp":"2025-05-10 20:48:39"}
+{"level":"error","message":"Action Living Room LIGHT execution failed: Failed to set Light in Living Room: Failed to update light state","timestamp":"2025-05-10 20:48:40"}
+{"level":"info","message":"Rule rule_1746899298435_231 deactivated","timestamp":"2025-05-10 20:49:10"}
+{"level":"info","message":"Rule rule_1746899298435_231 activated and re-registered as observer for event Living Room motion","timestamp":"2025-05-10 20:49:16"}
+{"level":"info","message":"Performing immediate evaluation of rule rule_1746899298435_231 after activation (forced execution)","timestamp":"2025-05-10 20:49:16"}
+{"level":"info","message":"Rule rule_1746899298435_231 condition met: true","timestamp":"2025-05-10 20:49:16"}
+{"level":"info","message":"Rule rule_1746899298435_231 notifying 1 observing actions (forced execution)","timestamp":"2025-05-10 20:49:16"}
+{"level":"info","message":"Executing Light action: Living Room LIGHT (Living Room)","timestamp":"2025-05-10 20:49:16"}
+{"level":"info","message":"Getting Raspberry Pi IP for Living Room","timestamp":"2025-05-10 20:49:16"}
+{"level":"error","message":"Action Living Room LIGHT execution failed: Failed to set Light in Living Room: Failed to update light state","timestamp":"2025-05-10 20:49:17"}
+{"level":"info","message":"Pre-parsed Light action: state=true, brightness=null, color=null","timestamp":"2025-05-10 20:49:28"}
+{"level":"info","message":"Executing Light action: Living Room LIGHT (Living Room)","timestamp":"2025-05-10 20:49:28"}
+{"level":"info","message":"Getting Raspberry Pi IP for Living Room","timestamp":"2025-05-10 20:49:28"}
+{"level":"info","message":"Pre-parsed Light action: state=false, brightness=null, color=null","timestamp":"2025-05-10 20:49:28"}
+{"level":"info","message":"Executing Light action: Living Room LIGHT (Living Room)","timestamp":"2025-05-10 20:49:28"}
+{"level":"info","message":"Getting Raspberry Pi IP for Living Room","timestamp":"2025-05-10 20:49:28"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-10 20:50:19"}
+{"level":"info","message":"Rule rule_1746899298435_231 condition met: false","timestamp":"2025-05-10 20:50:19"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-10 20:51:59"}
+{"level":"info","message":"Rule rule_1746899298435_231 condition met: false","timestamp":"2025-05-10 20:51:59"}
+{"level":"info","message":"Updating motion state for Living Room motion: false","timestamp":"2025-05-10 20:53:39"}
+{"level":"info","message":"Rule rule_1746899298435_231 condition met: false","timestamp":"2025-05-10 20:53:39"}

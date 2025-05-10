@@ -18,6 +18,8 @@ const { handleControllers } = require('../controllers/handlersController');
 const fs = require('fs').promises;
 const path = require('path');
 
+const {getMotionSensorData} = require('../api/MotionSensor.js');
+
 // Access configurations directly from handleControllers export
 const configurations = handleControllers.configurations || [];
 
@@ -223,25 +225,37 @@ exports.sensorControllers={
           res.status(500).json({ success: false, message: err.message || "Server error occurred." });
         }
       },
-      async get_Temperature (req, res) {
-        try {
-          const raspPiIP = req.query.rasp_pi; // Assume rasp_pi is passed as a query parameter
-          if (!raspPiIP) {
-            res.status(400).send("Missing Raspberry Pi IP");
-            return;
-          }
-          const data = await getSensiboSensors(raspPiIP); // Pass raspPiIP to the function
+     // Main file
+
+async get_Temperature(req, res) {
+  try {
+    const raspPiIP = req.query.rasp_pi;
+    if (!raspPiIP) {
+      res.status(400).send("Missing Raspberry Pi IP");
+      return;
+    }
+    
+    // Get temperature data from Sensibo sensors
+    const data = await getSensiboSensors(raspPiIP);
+    
+    if (data) {
+      try {
+        const motionData = await getMotionSensorData(raspPiIP);
+        data.motion = motionData.motionDetected;
+      } catch (motionError) {
+        console.error("Error getting motion data:", motionError.message);
+        data.motion = false;
+      }
       
-          if (data) {
-            res.status(200).json(data); // Send the result if data is successfully fetched
-          } else {
-            res.status(500).send("Failed to fetch sensor data");
-          }
-        } catch (error) {
-          console.error("Error in get_Temperature function:", error.message);
-          res.status(500).send("Internal Server Error");
-        }
-      },
+      res.status(200).json(data);
+    } else {
+      res.status(500).send("Failed to fetch sensor data");
+    }
+  } catch (error) {
+    console.error("Error in get_Temperature function:", error.message);
+    res.status(500).send("Internal Server Error");
+  }
+},
       
       async update_AC_Mode(req, res) {
         const { deviceId, mode, rasp_ip } = req.body;

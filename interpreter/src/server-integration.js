@@ -473,6 +473,8 @@ function updateEventValue(eventName, value) {
     event.updateTemperature(value);
   } else if (event.type === "humidity") {
     event.updateHumidity(value);
+  } else if (event.type === "motion") {
+    event.updateMotion(value);
   } else {
     event.update(value);
   }

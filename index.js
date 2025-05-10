@@ -13,7 +13,7 @@ require('./statemanager/stateManager')
 const testRouter = require('./routers/testRouter');  // Import the test router
 
 // import Routers
-
+const lightRoutes = require('./routers/light.routes');
 const {devicesRouter} = require("./routers/devicesRouter");
 const {loginRouter} = require("./routers/loginRouter");
 const {sensorRouter} = require("./routers/sensorRouter");
@@ -50,6 +50,7 @@ server.use(bodyParser.json());
 
 
 server.use('/api-test', testRouter);  // Add the test route
+server.use('/api/lights', lightRoutes);
 
 server.use('/api-login', loginRouter);
 server.use('/api-device', devicesRouter);

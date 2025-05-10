@@ -3,7 +3,7 @@ const TemperatureEvent = require("./TemperatureEvent");
 const HumidityEvent = require("./HumidityEvent");
 const AnomalyEvent = require("./AnomalyEvent");
 const MotionEvent = require("./MotionEvent");
-const logger = require('../../../logger')
+const logger = require("../../../logger");
 
 /**
  * Registry for managing all events in the system
@@ -20,7 +20,7 @@ class EventRegistry {
       ["temperature", TemperatureEvent],
       ["humidity", HumidityEvent],
       ["anomaly", AnomalyEvent],
-      ["motion",MotionEvent]
+      ["motion", MotionEvent],
       // Add more event types here as they are implemented
     ]);
   }
@@ -95,33 +95,46 @@ class EventRegistry {
       });
     }
   }
-
-  /**
-   * Create event instances based on fetched event names
-   * @param {Array<string>} eventNames - List of event names from Raspberry Pi
-   */
   createEventInstances(eventNames) {
     eventNames.forEach((eventName) => {
-        logger.info(eventName);
+      logger.info(`Creating event instance for: ${eventName}`);
+
       // Parse event name to extract location and type
       const parts = this.parseEventName(eventName);
 
       if (!parts) {
-        console.warn(`Could not parse event name: ${eventName}`);
+        logger.warn(`Could not parse event name: ${eventName}`);
         return;
       }
 
       const { location, type } = parts;
       const lowerType = type.toLowerCase();
 
+      logger.info(
+        `Parsed event name "${eventName}" into location: "${location}", type: "${type}", lowerType: "${lowerType}"`
+      );
+
+      // Check if the type exists in our eventTypes map
+      if (this.eventTypes.has(lowerType)) {
+        logger.info(`Found matching event type for ${lowerType}`);
+      } else {
+        logger.warn(`No matching event type found for "${lowerType}"`);
+      }
+
       // Create appropriate event instance based on type using the map
       const EventClass = this.eventTypes.get(lowerType);
 
       if (EventClass) {
+        logger.info(
+          `Creating ${lowerType} event using class: ${EventClass.name}`
+        );
         const event = new EventClass(eventName, location);
         this.registerEvent(event);
+        logger.info(
+          `Successfully created and registered ${lowerType} event: ${eventName}`
+        );
       } else {
-        console.warn(`Unknown event type: ${type} for event ${eventName}`);
+        logger.warn(`Unknown event type: ${type} for event ${eventName}`);
       }
     });
   }
@@ -250,6 +263,7 @@ class EventRegistry {
    * @returns {Event|undefined} The event instance or undefined if not found
    */
   getEvent(eventName) {
+
     // If the name might be an anomaly event in simplified form, try to find the full name
     if (
       eventName.toLowerCase().includes("pointwise") ||
@@ -360,6 +374,7 @@ class EventRegistry {
    * @returns {Array<Event>} Array of all event instances
    */
   getAllEvents() {
+    logger.info("all events from getAllEvents()", this.events.values());
     return Array.from(this.events.values());
   }
 
