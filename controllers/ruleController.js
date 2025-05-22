@@ -81,9 +81,8 @@ function isAnomalyRule(ruleString) {
     // Check if the rule contains keywords related to anomalies
     const normalizedRule = ruleString.toLowerCase();
     return normalizedRule.includes('anomaly') || 
-           normalizedRule.includes('detected') ||
-           normalizedRule.includes('trend') ||
-           normalizedRule.includes('seasonality') ||
+           normalizedRule.includes('detected')  ||
+           normalizedRule.includes('collective') ||
            normalizedRule.includes('pointwise');
 }
 
@@ -110,7 +109,7 @@ function extractAnomalyDescription(ruleString) {
     conditionPart = conditionPart.replace(/\s+detected$/, '');
     
     // Remove anomaly type keywords if they exist
-    const anomalyTypes = ['pointwise', 'trend', 'seasonality'];
+    const anomalyTypes = ['pointwise', 'collective'];
     anomalyTypes.forEach(type => {
         conditionPart = conditionPart.replace(new RegExp(`\\s+${type}\\s+`, 'g'), ' ');
         conditionPart = conditionPart.replace(new RegExp(`\\s+${type}$`, 'g'), '');

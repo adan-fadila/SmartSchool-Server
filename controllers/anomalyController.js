@@ -119,7 +119,7 @@ const handleAnomalyResponse = (req, res) => {
         const metricParts = req.body.metric_name.split(' ');
         if (metricParts.length > 1) {
             const lastPart = metricParts[metricParts.length - 1].toLowerCase();
-            if (['temperature', 'humidity'].includes(lastPart)) {
+            if (['temperature', 'humidity','motion'].includes(lastPart)) {
                 potentialLocationName = metricParts.slice(0, -1).join(' ');
                 console.log(`Parsed location from metric_name '${req.body.metric_name}': ${potentialLocationName}`);
             }

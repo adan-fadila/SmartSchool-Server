@@ -84,19 +84,21 @@ exports.getLightState = async (rasp_ip, lightId) => {
       throw new Error(`IP address ${rasp_ip} not found in the configuration file`);
     }
 
+    // Don't redefine lightId, use the parameter passed to the function
+    // const lightId = 'e3cd3456-4cc1-4526-a56e-18f7db068616'; // REMOVE THIS LINE
+
     const flaskUrl = `${ngrokUrl}/api-hue/get_light_state?light_id=${lightId}`;
     console.log(`Requesting light state from: ${flaskUrl}`);
 
     // Send a GET request to the Flask app
     const response = await axios.get(flaskUrl);
+    
+    // Log the full received data for debugging
+    console.log("Full Response Data:", response.data);
     console.log("Light State Retrieved:", response.data);
 
-    if (response.data && response.data.success) {
-      return response.data.lightState;
-    } else {
-      console.log("No light state found in the response");
-      return null;
-    }
+    // Return the ENTIRE response data, not just a property that doesn't exist
+    return response.data;
   } catch (err) {
     console.error("Error retrieving light state:", err.response ? err.response.data : err.message);
     return null;

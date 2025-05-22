@@ -81,7 +81,7 @@ async function initializeSensorLogging() {
       sensorTypes.forEach((sensorType) => {
         // Ensure motion sensor has the correct column name
         if (sensorType === "motion") {
-          sensorColumns.push(`${roomName} ${sensorType} detected`); // Correct column name for motion
+          sensorColumns.push(`${roomName} ${sensorType}`); // Correct column name for motion
         } else {
           sensorColumns.push(`${roomName} ${sensorType}`);
         }
@@ -710,7 +710,7 @@ function getAnomalyEvents() {
  * Helper to create an anomaly rule with proper formatting
  * @param {string} location - Location (e.g., "Living Room")
  * @param {string} metricType - Metric type (e.g., "temperature", "humidity")
- * @param {string} anomalyType - Anomaly type (e.g., "pointwise", "trend", "seasonality")
+ * @param {string} anomalyType - Anomaly type (e.g., "pointwise", "collective")
  * @param {boolean} detected - Whether to check for detected (true) or not detected (false)
  * @param {string} actionString - The action to take when the rule triggers
  * @returns {Object} Object with success status and rule ID

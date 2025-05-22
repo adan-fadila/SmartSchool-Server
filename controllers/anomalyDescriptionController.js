@@ -39,16 +39,19 @@ const anomalyDescriptionController = {
                 
                 // Determine anomaly type
                 let anomalyType = 'pointwise'; // Default
-                if (parts.includes('seasonality')) {
-                    anomalyType = 'seasonality';
-                } else if (parts.includes('trend')) {
-                    anomalyType = 'trend';
+                if (parts.includes('collective')) {
+                    anomalyType = 'collective';
+                } else if (parts.includes('pointwise')) {
+                    anomalyType = 'pointwise';
                 }
                 
                 // Determine metric type
                 let metricType = 'temperature'; // Default
                 if (parts.includes('humidity')) {
                     metricType = 'humidity';
+                }
+                if (parts.includes('motion')) {
+                    metricType = 'motion';
                 }
                 
                 // Determine location (everything before metric type and anomaly type)

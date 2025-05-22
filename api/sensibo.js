@@ -30,10 +30,12 @@ const loadConfig = async () => {
   }
 };
 
+
 const validateDegree = (temperature) => {
   return temperature >= 16 && temperature <= 30;
 };
 
+// C:\Users\amin\Desktop\smart-space\SmartSchool-Server\api\sensibo.js
 
 const getAcState = async (rasp_ip, device_id) => {
   const config = await loadConfig();

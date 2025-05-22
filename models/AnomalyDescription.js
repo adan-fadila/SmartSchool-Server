@@ -48,7 +48,7 @@ const AnomalyDescriptionSchema = new Schema({
     anomalyType: {
         type: String,
         required: true,
-        enum: ['pointwise', 'seasonality', 'trend']
+        enum: ['pointwise', 'collective']
     },
     
     location: {

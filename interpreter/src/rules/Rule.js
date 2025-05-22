@@ -90,12 +90,12 @@ class Rule {
     if (this.eventName.toLowerCase().includes("motion")) {
       // Try different naming conventions for motion events
       let event = this.findMotionEvent(this.eventName);
-      
+
       if (event) {
         // Add this rule as an observer to the event
         event.addObserver(this);
         logger.info(`Rule added as observer to motion event ${event.name}`);
-        
+
         // Update the event name to match what was found in the registry
         this.eventName = event.name;
         logger.info(`Updated rule event name to: ${this.eventName}`);
@@ -105,7 +105,7 @@ class Rule {
 
     // Register this rule with the appropriate event
     const event = EventRegistry.getEvent(this.eventName);
-    
+
     if (!event) {
       logger.error(`Event "${this.eventName}" not found in EventRegistry`);
       throw new Error(`Event not found: ${this.eventName}`);
@@ -123,64 +123,70 @@ class Rule {
    */
   findMotionEvent(motionEventName) {
     logger.info(`Searching for motion event matching: ${motionEventName}`);
-    
+
     // Try to directly get the event first
     let event = EventRegistry.getEvent(motionEventName);
     if (event) {
       logger.info(`Found exact match for motion event: ${motionEventName}`);
       return event;
     }
-    
+
     // Extract location from motion event name
     const motionLower = motionEventName.toLowerCase();
     let location = "";
-    
+
     if (motionLower.includes("motion")) {
       // Extract location part (e.g., "Living Room" from "Living Room Motion")
       location = motionEventName.replace(/\s+motion(\s+sensor)?/i, "").trim();
       logger.info(`Extracted location from motion event: "${location}"`);
     }
-    
+
     // Try different naming conventions for motion sensors
     const possibleNames = [
       `${location} Motion`,
       `${location} Motion Sensor`,
       `${location} motion-sensor`,
-      `${location} motion`
+      `${location} motion`,
     ];
-    
-    logger.info(`Trying possible motion event names: ${possibleNames.join(", ")}`);
-    
+
+    logger.info(
+      `Trying possible motion event names: ${possibleNames.join(", ")}`
+    );
+
     // Iterate through all events in registry
     const allEvents = EventRegistry.getAllEvents();
-    
+
     for (const registeredEvent of allEvents) {
       const registeredNameLower = registeredEvent.name.toLowerCase();
-      
+
       // Check if this is a motion event
       if (registeredNameLower.includes("motion")) {
         logger.info(`Found motion event in registry: ${registeredEvent.name}`);
-        
+
         // Check if location matches
         const registeredLocation = registeredEvent.name
           .replace(/\s+motion(\s+sensor)?/i, "")
           .trim();
-        
+
         if (registeredLocation.toLowerCase() === location.toLowerCase()) {
-          logger.info(`Location match found for motion event: ${registeredEvent.name}`);
+          logger.info(
+            `Location match found for motion event: ${registeredEvent.name}`
+          );
           return registeredEvent;
         }
       }
-      
+
       // Also check if any of our possible names match directly
       for (const possibleName of possibleNames) {
         if (registeredEvent.name.toLowerCase() === possibleName.toLowerCase()) {
-          logger.info(`Found matching motion event by name: ${registeredEvent.name}`);
+          logger.info(
+            `Found matching motion event by name: ${registeredEvent.name}`
+          );
           return registeredEvent;
         }
       }
     }
-    
+
     // If we get here, create a new standard name and try again
     const standardMotionName = `${location} Motion`;
     logger.info(`Trying standard motion name: ${standardMotionName}`);
@@ -199,13 +205,7 @@ class Rule {
     }
 
     // Check if the rule string mentions anomaly
-    const anomalyKeywords = [
-      "anomaly",
-      "anomalies",
-      "pointwise",
-      "seasonality",
-      "trend",
-    ];
+    const anomalyKeywords = ["anomaly", "anomalies", "pointwise", "collective"];
     const ruleStringLower = this.ruleString.toLowerCase();
     return anomalyKeywords.some((keyword) => ruleStringLower.includes(keyword));
   }
@@ -341,10 +341,10 @@ class Rule {
       // This is a motion rule (e.g., "Living Room motion true")
       const location = motionMatch[1].trim();
       const booleanValue = motionMatch[2].toLowerCase();
-      
+
       // Construct proper motion event name
       const eventName = `${location} Motion`;
-      
+
       logger.info(
         `Parsed motion rule for location: "${location}", eventName: "${eventName}" with condition "${booleanValue}"`
       );
@@ -418,111 +418,238 @@ class Rule {
     }
   }
 
- /**
+/**
  * Evaluate the rule based on the current event value
  * Called when the observed event changes
  * @param {boolean} [forceExecute=false] - Whether to force execution of actions if condition is met
  */
 evaluate(forceExecute = false) {
-    if (!this.active) {
-      logger.info(`Rule ${this.id} is not active, skipping evaluation`);
-      return;
-    }
+  // Get component-specific logger for consistent tagging
+  const ruleLogger = logger.getComponentLogger(`Rule-${this.id}`);
   
-    // Get the current value of the event
-    const event = EventRegistry.getEvent(this.eventName);
-    if (!event) {
-      logger.error(`Event ${this.eventName} not found for rule ${this.id}`);
-      return;
-    }
+  // Log method entry
+  ruleLogger.debug('Starting rule evaluation', { 
+    forceExecute, 
+    eventName: this.eventName, 
+    active: this.active,
+    condition: this.condition
+  });
   
-    // Get the event value and handle motion sensor cases specifically
-    let eventValue = event.currentValue;
+  // Start performance timer
+  const endTimer = logger.startTimer('RuleEvaluation', { ruleId: this.id });
+  
+  if (!this.active) {
+    ruleLogger.info('Rule is not active, skipping evaluation');
+    endTimer({ skipped: true, reason: 'rule_inactive' });
+    return;
+  }
+
+  // Get the current value of the event
+  const event = EventRegistry.getEvent(this.eventName);
+  
+  if (!event) {
+    ruleLogger.error('Event not found in registry', { 
+      eventName: this.eventName
+    });
+    endTimer({ failed: true, reason: 'event_not_found' });
+    return;
+  }
+
+  ruleLogger.debug('Retrieved event from registry', { eventName: this.eventName });
+  
+  // Get the event value and handle motion sensor cases specifically
+  let eventValue = event.currentValue;
+  
+  ruleLogger.debug('Retrieved raw event value', { 
+    eventValue,
+    valueType: typeof eventValue,
+    isMotionEvent: this.eventName.toLowerCase().includes("motion")
+  });
+  
+  // Special handling for motion events - they might return different value formats
+  if (this.eventName.toLowerCase().includes("motion") && typeof eventValue !== 'boolean') {
+    const originalValue = eventValue;
     
-    // Special handling for motion events - they might return different value formats
-    if (this.eventName.toLowerCase().includes("motion") && typeof eventValue !== 'boolean') {
-      // Try to extract a boolean value from motion sensor readings
-      if (typeof eventValue === 'object' && eventValue !== null) {
-        // If the event value is an object, try to get the motion detected status
-        if ('detected' in eventValue) {
-          eventValue = eventValue.detected;
-        } else if ('value' in eventValue) {
-          eventValue = eventValue.value;
-        } else if ('status' in eventValue) {
-          eventValue = eventValue.status === 'active' || eventValue.status === 'true' || eventValue.status === true;
-        }
-      } else if (typeof eventValue === 'string') {
-        // If it's a string, try to convert to boolean
-        eventValue = eventValue.toLowerCase() === 'true' || 
-                    eventValue.toLowerCase() === 'detected' || 
-                    eventValue.toLowerCase() === 'active' ||
-                    eventValue === '1';
-      } else if (typeof eventValue === 'number') {
-        // If it's a number, 0 is false, anything else is true
-        eventValue = eventValue !== 0;
-      }
+    // Try to extract a boolean value from motion sensor readings
+    if (typeof eventValue === 'object' && eventValue !== null) {
+      ruleLogger.debug('Processing motion object', { motionObject: eventValue });
       
-      logger.debug(`Converted motion sensor value to boolean: ${eventValue}`);
+      // If the event value is an object, try to get the motion detected status
+      if ('detected' in eventValue) {
+        eventValue = eventValue.detected;
+        ruleLogger.debug('Using "detected" property from motion object', { value: eventValue });
+      } else if ('value' in eventValue) {
+        eventValue = eventValue.value;
+        ruleLogger.debug('Using "value" property from motion object', { value: eventValue });
+      } else if ('status' in eventValue) {
+        const statusValue = eventValue.status;
+        eventValue = statusValue === 'active' || statusValue === 'true' || statusValue === true;
+        ruleLogger.debug('Converted status to boolean', { status: statusValue, result: eventValue });
+      }
+    } else if (typeof eventValue === 'string') {
+      // If it's a string, try to convert to boolean
+      const stringValue = eventValue;
+      eventValue = eventValue.toLowerCase() === 'true' || 
+                  eventValue.toLowerCase() === 'detected' || 
+                  eventValue.toLowerCase() === 'active' ||
+                  eventValue === '1';
+      ruleLogger.debug('Converted string to boolean', { stringValue, result: eventValue });
+    } else if (typeof eventValue === 'number') {
+      // If it's a number, 0 is false, anything else is true
+      const numberValue = eventValue;
+      eventValue = eventValue !== 0;
+      ruleLogger.debug('Converted number to boolean', { numberValue, result: eventValue });
     }
     
-    logger.debug(
-      `Rule ${this.id} evaluation: ${this.condition.operator} ${this.condition.value} with event value ${eventValue}`
-    );
+    // Log the state change using the utility method
+    logger.logStateChange('debug', 'Motion sensor value conversion', {
+      before: originalValue,
+      after: eventValue,
+      component: `Rule-${this.id}`
+    });
+  }
   
-    // Handle true/false string values for boolean comparison
-    let normalizedEventValue = eventValue;
-    let normalizedConditionValue = this.condition.value;
+  ruleLogger.debug('Preparing for condition evaluation', {
+    operator: this.condition.operator,
+    conditionValue: this.condition.value,
+    eventValue
+  });
+
+  // Handle true/false string values for boolean comparison
+  let normalizedEventValue = eventValue;
+  let normalizedConditionValue = this.condition.value;
+  
+  // Normalize boolean values in string form for comparison
+  if (this.condition.operator === '==' || this.condition.operator === '=') {
+    ruleLogger.debug('Equality comparison detected, normalizing boolean string values');
     
-    // Normalize boolean values in string form for comparison
-    if (this.condition.operator === '==' || this.condition.operator === '=') {
-      // Convert string 'true'/'false' to actual boolean for condition value
-      if (typeof this.condition.value === 'string') {
-        if (this.condition.value.toLowerCase() === 'true') {
-          normalizedConditionValue = true;
-        } else if (this.condition.value.toLowerCase() === 'false') {
-          normalizedConditionValue = false;
-        }
+    // Track original values for transition logging
+    const originalEventValue = normalizedEventValue;
+    const originalConditionValue = normalizedConditionValue;
+    
+    // Convert string 'true'/'false' to actual boolean for condition value
+    if (typeof this.condition.value === 'string') {
+      if (this.condition.value.toLowerCase() === 'true') {
+        normalizedConditionValue = true;
+        ruleLogger.debug('Normalized condition string to boolean', { 
+          from: this.condition.value, 
+          to: true 
+        });
+      } else if (this.condition.value.toLowerCase() === 'false') {
+        normalizedConditionValue = false;
+        ruleLogger.debug('Normalized condition string to boolean', { 
+          from: this.condition.value, 
+          to: false 
+        });
       }
-      
-      // Convert event value string representations to boolean
-      if (typeof eventValue === 'string') {
-        if (eventValue.toLowerCase() === 'true') {
-          normalizedEventValue = true;
-        } else if (eventValue.toLowerCase() === 'false') {
-          normalizedEventValue = false;
-        }
-      }
-      
-      logger.debug(
-        `Normalized values for comparison - Event: ${normalizedEventValue} (${typeof normalizedEventValue}), ` +
-        `Condition: ${normalizedConditionValue} (${typeof normalizedConditionValue})`
-      );
     }
-  
-    // Evaluate the condition with normalized values
-    const conditionMet = this.evaluateCondition(
-      normalizedEventValue,
-      this.condition.operator,
-      normalizedConditionValue
-    );
-  
-    logger.info(`Rule ${this.id} condition met: ${conditionMet}`);
-  
-    // If the condition is met, notify all observing actions
-    if (conditionMet) {
-      // Create context with current values (use original values, not normalized)
-      const context = {
-        eventName: this.eventName,
-        eventValue: eventValue,
-        conditionOperator: this.condition.operator,
-        conditionValue: this.condition.value,
-        timestamp: Date.now(),
-      };
-  
-      // Notify all observing actions, passing the force execute flag
-      this.notifyObservingActions(context, forceExecute);
+    
+    // Convert event value string representations to boolean
+    if (typeof eventValue === 'string') {
+      if (eventValue.toLowerCase() === 'true') {
+        normalizedEventValue = true;
+        ruleLogger.debug('Normalized event string to boolean', { 
+          from: eventValue, 
+          to: true 
+        });
+      } else if (eventValue.toLowerCase() === 'false') {
+        normalizedEventValue = false;
+        ruleLogger.debug('Normalized event string to boolean', { 
+          from: eventValue, 
+          to: false 
+        });
+      }
+    }
+    
+    // Log state changes if values were normalized
+    if (originalEventValue !== normalizedEventValue) {
+      logger.logStateChange('debug', 'Event value normalization', {
+        before: originalEventValue,
+        after: normalizedEventValue,
+        component: `Rule-${this.id}`
+      });
+    }
+    
+    if (originalConditionValue !== normalizedConditionValue) {
+      logger.logStateChange('debug', 'Condition value normalization', {
+        before: originalConditionValue,
+        after: normalizedConditionValue,
+        component: `Rule-${this.id}`
+      });
     }
   }
+  
+  ruleLogger.debug('Final values for comparison', {
+    eventValue: normalizedEventValue,
+    eventValueType: typeof normalizedEventValue,
+    conditionValue: normalizedConditionValue,
+    conditionValueType: typeof normalizedConditionValue,
+    operator: this.condition.operator
+  });
+
+  // Evaluate the condition with normalized values
+  logger.methodEntry('evaluateCondition', {
+    eventValue: normalizedEventValue, 
+    operator: this.condition.operator, 
+    conditionValue: normalizedConditionValue
+  }, { component: `Rule-${this.id}` });
+  
+  const conditionMet = this.evaluateCondition(
+    normalizedEventValue,
+    this.condition.operator,
+    normalizedConditionValue
+  );
+
+  ruleLogger.info('Condition evaluation result', { 
+    conditionMet,
+    eventValue: normalizedEventValue,
+    operator: this.condition.operator,
+    conditionValue: normalizedConditionValue
+  });
+
+  // If the condition is met, notify all observing actions
+  if (conditionMet) {
+    ruleLogger.debug('Condition met, preparing action context');
+    
+    // Create context with current values (use original values, not normalized)
+    const context = {
+      eventName: this.eventName,
+      eventValue: eventValue,
+      conditionOperator: this.condition.operator,
+      conditionValue: this.condition.value,
+      timestamp: Date.now(),
+    };
+    
+    ruleLogger.debug('Action context created', { context });
+
+    // Notify all observing actions, passing the force execute flag
+    const actionCount = this.observingActions ? this.observingActions.length : 0;
+    ruleLogger.info('Notifying observing actions', { 
+      forceExecute,
+      actionCount
+    });
+    
+    // Log before calling method that might have side effects
+    logger.methodEntry('notifyObservingActions', { context, forceExecute }, { 
+      component: `Rule-${this.id}`,
+      actionCount
+    });
+    
+    this.notifyObservingActions(context, forceExecute);
+    
+    ruleLogger.debug('All actions have been notified');
+  } else {
+    ruleLogger.debug('Condition not met, skipping actions');
+  }
+  
+  // End performance timer and log results
+  endTimer({ 
+    conditionMet,
+    executedActions: conditionMet ? (this.observingActions ? this.observingActions.length : 0) : 0
+  });
+  
+  ruleLogger.debug('Evaluation complete');
+}
 
   /**
    * Notify all actions that are observing this rule
@@ -565,7 +692,7 @@ evaluate(forceExecute = false) {
     });
   }
 
-  /**
+/**
  * Evaluate a condition
  * @param {any} eventValue - Current value of the event
  * @param {string} operator - Condition operator (>, <, >=, <=, ==, !=, anomaly_detected)
@@ -573,111 +700,183 @@ evaluate(forceExecute = false) {
  * @returns {boolean} True if condition is met, false otherwise
  */
 evaluateCondition(eventValue, operator, conditionValue) {
-    // Special handling for anomaly events
-    if (operator === "anomaly_detected") {
-      // For anomaly events, check if the anomaly is detected or not detected
-      if (typeof eventValue === "object" && eventValue !== null) {
-        // If conditionValue is "false", we want "not detected"
-        const expectedDetectionState = conditionValue.toString().toLowerCase() !== "false";
-        return eventValue.detected === expectedDetectionState;
-      }
-      return false;
+  console.log(`[Rule-${this.id}] EvaluateCondition details: eventValue=${JSON.stringify(eventValue)}, operator=${operator}, conditionValue=${conditionValue}`);
+  
+  // Special handling for anomaly events
+  if (operator === "anomaly_detected") {
+    console.log(`[Rule-${this.id}] Processing anomaly_detected operator`);
+    
+    // For anomaly events, check if the anomaly is detected or not detected
+    if (typeof eventValue === "object" && eventValue !== null) {
+      // If conditionValue is "false", we want "not detected"
+      const expectedDetectionState = 
+        conditionValue.toString().toLowerCase() !== "false";
+      
+      console.log(`[Rule-${this.id}] Object anomaly evaluation: eventValue.detected=${eventValue.detected}, expectedState=${expectedDetectionState}`);
+      return eventValue.detected === expectedDetectionState;
     }
     
-    // Special handling for boolean values - ensure proper type comparison
-    if ((typeof eventValue === "boolean" || typeof conditionValue === "boolean") && 
-        (operator === "==" || operator === "=" || operator === "!=")) {
-      
-      // Convert both values to boolean type if we're doing boolean comparison
-      let boolEventValue = eventValue;
-      let boolConditionValue = conditionValue;
-      
-      // Convert string 'true'/'false' to boolean
-      if (typeof eventValue === "string") {
-        boolEventValue = eventValue.toLowerCase() === "true";
-      }
-      
-      if (typeof conditionValue === "string") {
-        boolConditionValue = conditionValue.toLowerCase() === "true";
-      }
-      
-      // Log the conversion for debugging
-      logger.debug(
-        `Boolean comparison: ${eventValue} (${typeof eventValue}) -> ${boolEventValue} (boolean) ` +
+    // NEW CODE: Handle primitive eventValue (non-object) for anomaly_detected
+    // This is the fix for your specific issue
+    console.log(`[Rule-${this.id}] Primitive anomaly evaluation: eventValue=${eventValue}`);
+    
+    // Convert the primitive event value to boolean
+    const isDetected = Boolean(eventValue);
+    
+    // Check if the condition expects detection or not
+    const expectedDetectionState = 
+      conditionValue.toString().toLowerCase() !== "false";
+    
+    console.log(`[Rule-${this.id}] Comparing: isDetected=${isDetected}, expectedState=${expectedDetectionState}`);
+    return isDetected === expectedDetectionState;
+  }
+
+  // Special handling for boolean values - ensure proper type comparison
+  if (
+    (typeof eventValue === "boolean" ||
+      typeof conditionValue === "boolean") &&
+    (operator === "==" || operator === "=" || operator === "!=")
+  ) {
+    // Convert both values to boolean type if we're doing boolean comparison
+    let boolEventValue = eventValue;
+    let boolConditionValue = conditionValue;
+
+    // Convert string 'true'/'false' to boolean
+    if (typeof eventValue === "string") {
+      boolEventValue = eventValue.toLowerCase() === "true";
+      console.log(`[Rule-${this.id}] Converted event string "${eventValue}" to boolean ${boolEventValue}`);
+    }
+
+    if (typeof conditionValue === "string") {
+      boolConditionValue = conditionValue.toLowerCase() === "true";
+      console.log(`[Rule-${this.id}] Converted condition string "${conditionValue}" to boolean ${boolConditionValue}`);
+    }
+
+    // Log the conversion for debugging
+    console.log(
+      `[Rule-${this.id}] Boolean comparison: ${eventValue} (${typeof eventValue}) -> ${boolEventValue} (boolean) ` +
         `${operator} ${conditionValue} (${typeof conditionValue}) -> ${boolConditionValue} (boolean)`
-      );
-      
-      // Perform boolean equality comparison
-      if (operator === "==" || operator === "=") {
-        return boolEventValue === boolConditionValue;
-      } else if (operator === "!=") {
-        return boolEventValue !== boolConditionValue;
-      }
-    }
-    
-    // Handle motion sensor events specifically - they may have special value formats
-    if (typeof eventValue === "object" && eventValue !== null && 
-        ("detected" in eventValue || "motion" in eventValue || "status" in eventValue)) {
-      
-      let actualValue = eventValue.detected;
-      if (actualValue === undefined) {
-        actualValue = eventValue.motion; 
-      }
-      if (actualValue === undefined) {
-        actualValue = eventValue.status === "active" || eventValue.status === true;
-      }
-      
-      // For motion sensors with boolean condition, compare the detected state
-      if (typeof conditionValue === "string" && 
-          (conditionValue.toLowerCase() === "true" || conditionValue.toLowerCase() === "false")) {
-        
-        const expectedState = conditionValue.toLowerCase() === "true";
-        return actualValue === expectedState;
-      }
-    }
-  
-    // Convert values to appropriate types for numeric comparison
-    let parsedEventValue = eventValue;
-    let parsedConditionValue = conditionValue;
-  
-    // Try to convert to numbers if possible for numeric comparisons
-    if (!isNaN(Number(eventValue)) && operator !== "==" && operator !== "=" && operator !== "!=") {
-      parsedEventValue = Number(eventValue);
-    }
-    
-    if (!isNaN(Number(conditionValue)) && operator !== "==" && operator !== "=" && operator !== "!=") {
-      parsedConditionValue = Number(conditionValue);
-    }
-    
-    // For string comparison, ensure we're comparing strings
-    if (typeof eventValue === "string" || typeof conditionValue === "string") {
-      if ((operator === "==" || operator === "=") && typeof eventValue !== typeof conditionValue) {
-        // Convert to strings for comparison if types don't match
-        parsedEventValue = String(parsedEventValue);
-        parsedConditionValue = String(parsedConditionValue);
-      }
-    }
-  
-    // Evaluate based on operator
-    switch (operator) {
-      case ">":
-        return parsedEventValue > parsedConditionValue;
-      case "<":
-        return parsedEventValue < parsedConditionValue;
-      case ">=":
-        return parsedEventValue >= parsedConditionValue;
-      case "<=":
-        return parsedEventValue <= parsedConditionValue;
-      case "==":
-      case "=":
-        return parsedEventValue == parsedConditionValue;
-      case "!=":
-        return parsedEventValue != parsedConditionValue;
-      default:
-        logger.error(`Unsupported operator: ${operator}`);
-        return false;
+    );
+
+    // Perform boolean equality comparison
+    if (operator === "==" || operator === "=") {
+      const result = boolEventValue === boolConditionValue;
+      console.log(`[Rule-${this.id}] Boolean equality result: ${result}`);
+      return result;
+    } else if (operator === "!=") {
+      const result = boolEventValue !== boolConditionValue;
+      console.log(`[Rule-${this.id}] Boolean inequality result: ${result}`);
+      return result;
     }
   }
+
+  // Handle motion sensor events specifically - they may have special value formats
+  if (
+    typeof eventValue === "object" &&
+    eventValue !== null &&
+    ("detected" in eventValue ||
+      "motion" in eventValue ||
+      "status" in eventValue)
+  ) {
+    console.log(`[Rule-${this.id}] Processing motion sensor object`);
+    
+    let actualValue = eventValue.detected;
+    if (actualValue === undefined) {
+      actualValue = eventValue.motion;
+    }
+    if (actualValue === undefined) {
+      actualValue =
+        eventValue.status === "active" || eventValue.status === true;
+    }
+    
+    console.log(`[Rule-${this.id}] Extracted motion sensor value: ${actualValue}`);
+
+    // For motion sensors with boolean condition, compare the detected state
+    if (
+      typeof conditionValue === "string" &&
+      (conditionValue.toLowerCase() === "true" ||
+        conditionValue.toLowerCase() === "false")
+    ) {
+      const expectedState = conditionValue.toLowerCase() === "true";
+      const result = actualValue === expectedState;
+      console.log(`[Rule-${this.id}] Motion sensor comparison result: ${result}`);
+      return result;
+    }
+  }
+
+  // Convert values to appropriate types for numeric comparison
+  let parsedEventValue = eventValue;
+  let parsedConditionValue = conditionValue;
+
+  // Try to convert to numbers if possible for numeric comparisons
+  if (
+    !isNaN(Number(eventValue)) &&
+    operator !== "==" &&
+    operator !== "=" &&
+    operator !== "!="
+  ) {
+    parsedEventValue = Number(eventValue);
+    console.log(`[Rule-${this.id}] Converted event value to number: ${parsedEventValue}`);
+  }
+
+  if (
+    !isNaN(Number(conditionValue)) &&
+    operator !== "==" &&
+    operator !== "=" &&
+    operator !== "!="
+  ) {
+    parsedConditionValue = Number(conditionValue);
+    console.log(`[Rule-${this.id}] Converted condition value to number: ${parsedConditionValue}`);
+  }
+
+  // For string comparison, ensure we're comparing strings
+  if (typeof eventValue === "string" || typeof conditionValue === "string") {
+    if (
+      (operator === "==" || operator === "=") &&
+      typeof eventValue !== typeof conditionValue
+    ) {
+      // Convert to strings for comparison if types don't match
+      parsedEventValue = String(parsedEventValue);
+      parsedConditionValue = String(parsedConditionValue);
+      console.log(`[Rule-${this.id}] Converted values to strings for comparison`);
+    }
+  }
+
+  // Evaluate based on operator
+  console.log(`[Rule-${this.id}] Final comparison: ${parsedEventValue} ${operator} ${parsedConditionValue}`);
+  
+  let result;
+  switch (operator) {
+    case ">":
+      result = parsedEventValue > parsedConditionValue;
+      console.log(`[Rule-${this.id}] Greater than result: ${result}`);
+      return result;
+    case "<":
+      result = parsedEventValue < parsedConditionValue;
+      console.log(`[Rule-${this.id}] Less than result: ${result}`);
+      return result;
+    case ">=":
+      result = parsedEventValue >= parsedConditionValue;
+      console.log(`[Rule-${this.id}] Greater than or equal result: ${result}`);
+      return result;
+    case "<=":
+      result = parsedEventValue <= parsedConditionValue;
+      console.log(`[Rule-${this.id}] Less than or equal result: ${result}`);
+      return result;
+    case "==":
+    case "=":
+      result = parsedEventValue == parsedConditionValue;
+      console.log(`[Rule-${this.id}] Equality result: ${result}`);
+      return result;
+    case "!=":
+      result = parsedEventValue != parsedConditionValue;
+      console.log(`[Rule-${this.id}] Inequality result: ${result}`);
+      return result;
+    default:
+      console.log(`[Rule-${this.id}] ERROR: Unsupported operator: ${operator}`);
+      return false;
+  }
+}
 
   /**
    * Execute the action part of the rule

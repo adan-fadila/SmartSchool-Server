@@ -267,8 +267,7 @@ class EventRegistry {
     // If the name might be an anomaly event in simplified form, try to find the full name
     if (
       eventName.toLowerCase().includes("pointwise") ||
-      eventName.toLowerCase().includes("trend") ||
-      eventName.toLowerCase().includes("seasonality")
+      eventName.toLowerCase().includes("collective") 
     ) {
       const fullEventName = this.findAnomalyEventByPartialName(eventName);
       if (fullEventName) {
@@ -320,18 +319,16 @@ class EventRegistry {
     // Check for metric type
     if (partialNameLower.includes("temperature")) {
       metricType = "temperature";
-    } else if (partialNameLower.includes("humidity")) {
-      metricType = "humidity";
+    } else if (partialNameLower.includes("motion")) {
+      metricType = "motion";
     }
 
     // Check for anomaly type
     if (partialNameLower.includes("pointwise")) {
       anomalyType = "pointwise";
-    } else if (partialNameLower.includes("trend")) {
-      anomalyType = "trend";
-    } else if (partialNameLower.includes("seasonality")) {
-      anomalyType = "seasonality";
-    }
+    } else if (partialNameLower.includes("collective")) {
+      anomalyType = "collective";
+    } 
 
     // Extract location by removing identified parts
     const parts = partialNameLower.split(" ");
