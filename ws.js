@@ -190,8 +190,8 @@ function broadcastAnomalyData(anomalyState) {
       
       // Create a single entry for the collective anomaly
       processedAnomalies = [{
-        start: ensureNumber(anomaliesObj.start),
-        end: ensureNumber(anomaliesObj.end),
+        start: (anomaliesObj.start),
+        end: (anomaliesObj.end),
         // Standardize voting_algorithms to always be a string
         voting_algorithms: standardizeVotingAlgorithms(algorithms),
         // Add default values that might be expected by frontend
