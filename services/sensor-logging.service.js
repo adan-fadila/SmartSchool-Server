@@ -61,6 +61,24 @@ const sensorLoggingService = {
         console.log("Added ac_state column to event names");
       }
 
+      if (!eventNames.includes("targetTemperature")) {
+        eventNames.push("targetTemperature");
+        fsSync.appendFileSync(
+          "./logs/sensor_debug.log",
+          `${new Date().toISOString()}: Added ac_state column to event names\n`
+        );
+        console.log("Added targetTemperature column to event names");
+      }
+
+      if (!eventNames.includes("targetAcMode")) {
+        eventNames.push("targetAcMode");
+        fsSync.appendFileSync(
+          "./logs/sensor_debug.log",
+          `${new Date().toISOString()}: Added targetAcMode column to event names\n`
+        );
+        console.log("Added targetAcMode column to event names");
+      }
+
       // Check if file already exists
       const fileExists = existsSync(this.logFilePath);
 

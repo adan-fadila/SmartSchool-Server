@@ -284,22 +284,24 @@ async updateEventsFromSensibo(raspPiIP) {
 },
 
 /**
-* Log all sensor values in a single row
-* @param {boolean} motionValue - Motion sensor value
-* @param {number} temperatureValue - Temperature value
-* @param {number} humidityValue - Humidity value
-* @param {string} roomName - Room name
-* @param {boolean} isLightOn - Whether the light is on
-* @param {boolean} acOn - Whether the AC is on
-* @returns {Object} Result of the logging operation
-*/
-logAllSensorValues(motionValue, temperatureValue, humidityValue, roomName = "Living Room", isLightOn = false, acOn = false) {
+ * Log all sensor values in a single row
+ * @param {boolean} motionValue - Motion sensor value
+ * @param {number} temperatureValue - Temperature value
+ * @param {number} humidityValue - Humidity value
+ * @param {string} roomName - Room name
+ * @param {boolean} isLightOn - Whether the light is on
+ * @param {boolean} acOn - Whether the AC is on
+ * @param {number|null} targetTemperature - AC target temperature ('N/A' if AC is off)
+ * @param {string} targetAcMode - AC target temperature ('N/A' if AC is off)
+ * @returns {Object} Result of the logging operation
+ */
+logAllSensorValues(motionValue, temperatureValue, humidityValue, roomName = "Living Room", isLightOn = false, acOn = false, targetTemperature = 'N/A',targetAcMode='N/A') {
   try {
     const timestamp = new Date().toISOString();
     
     fsSync.appendFileSync(
       "./logs/sensor_debug.log",
-      `${timestamp}: Creating a combined row with motion=${motionValue}, temp=${temperatureValue}, humidity=${humidityValue}, light=${isLightOn}, ac_on=${acOn}\n`
+      `${timestamp}: Creating a combined row with motion=${motionValue}, temp=${temperatureValue}, humidity=${humidityValue}, light=${isLightOn}, ac_on=${acOn}, target_temp=${targetTemperature}\n`
     );
     
     // Generate spaceId from roomName
@@ -332,10 +334,23 @@ logAllSensorValues(motionValue, temperatureValue, humidityValue, roomName = "Liv
         roomName,
         spaceId
       },
-      // Add just the AC on/off state
+      // Add AC on/off state
       {
         name: `ac_state`,
         value: acOn !== null ? acOn : false,
+        roomName,
+        spaceId
+      },
+      // Add target temperature (null if AC is off or not provided)
+      {
+        name: `targetTemperature`,
+        value: targetTemperature,
+        roomName,
+        spaceId
+      },
+      {
+        name: `targetACMode`,
+        value: targetAcMode,
         roomName,
         spaceId
       }
@@ -353,9 +368,9 @@ logAllSensorValues(motionValue, temperatureValue, humidityValue, roomName = "Liv
     } else {
       fsSync.appendFileSync(
         "./logs/sensor_debug.log",
-        `${timestamp}: Successfully logged combined sensor data in one row\n`
+        `${timestamp}: Successfully logged combined sensor data in one row with target temperature: ${targetTemperature}\n`
       );
-      console.log("Successfully logged combined sensor data in one row");
+      console.log("Successfully logged combined sensor data in one row with target temperature:", targetTemperature);
     }
     
     return loggingResult;
@@ -458,6 +473,112 @@ logAllSensorValues(motionValue, temperatureValue, humidityValue, roomName = "Liv
 
 // Import the light service at the top of the file
 
+
+/**
+ * Log all sensor values in a single row
+ * @param {boolean} motionValue - Motion sensor value
+ * @param {number} temperatureValue - Temperature value
+ * @param {number} humidityValue - Humidity value
+ * @param {string} roomName - Room name
+ * @param {boolean} isLightOn - Whether the light is on
+ * @param {boolean} acOn - Whether the AC is on
+ * @param {number|null} targetTemperature - AC target temperature ('N/A' if AC is off)
+ * @param {string} targetAcMode - AC target mode ('N/A' if AC is off)
+ * @returns {Object} Result of the logging operation
+ */
+logAllSensorValues(motionValue, temperatureValue, humidityValue, roomName = "Living Room", isLightOn = false, acOn = false, targetTemperature = 'N/A', targetAcMode = 'N/A') {
+  try {
+    const timestamp = new Date().toISOString();
+    
+    fsSync.appendFileSync(
+      "./logs/sensor_debug.log",
+      `${timestamp}: Creating a combined row with motion=${motionValue}, temp=${temperatureValue}, humidity=${humidityValue}, light=${isLightOn}, ac_on=${acOn}, target_temp=${targetTemperature}, target_mode=${targetAcMode}\n`
+    );
+    
+    // Generate spaceId from roomName
+    const spaceId = this.getSpaceIdFromRoomName(roomName);
+    
+    // Create events that will be logged in a single row
+    const combinedEvents = [
+      {
+        name: `${roomName.toLowerCase()} motion`,
+        value: motionValue !== null ? motionValue : false,
+        roomName,
+        spaceId
+      },
+      {
+        name: `${roomName.toLowerCase()} temperature`,
+        value: temperatureValue !== null ? temperatureValue : null,
+        roomName,
+        spaceId
+      },
+      {
+        name: `${roomName.toLowerCase()} humidity`,
+        value: humidityValue !== null ? humidityValue : null,
+        roomName,
+        spaceId
+      },
+      // Add light state as the fourth event
+      {
+        name: "light_state",
+        value: isLightOn !== null ? isLightOn : false,
+        roomName,
+        spaceId
+      },
+      // Add AC on/off state
+      {
+        name: `ac_state`,
+        value: acOn !== null ? acOn : false,
+        roomName,
+        spaceId
+      },
+      // Add target temperature (null if AC is off or not provided)
+      {
+        name: `targetTemperature`,
+        value: targetTemperature,
+        roomName,
+        spaceId
+      },
+      {
+        name: `targetAcMode`,
+        value: targetAcMode,
+        roomName,
+        spaceId
+      }
+    ];
+    
+    // Log all events in one call, which will write them to a single row
+    const loggingResult = sensorLoggingService.logSensorData(combinedEvents);
+    
+    if (!loggingResult.success) {
+      fsSync.appendFileSync(
+        "./logs/sensor_debug.log",
+        `${timestamp}: ERROR - Failed to log combined sensor data: ${loggingResult.error}\n`
+      );
+      console.warn(`Failed to log combined sensor data: ${loggingResult.error}`);
+    } else {
+      fsSync.appendFileSync(
+        "./logs/sensor_debug.log",
+        `${timestamp}: Successfully logged combined sensor data in one row with target temperature: ${targetTemperature} and target mode: ${targetAcMode}\n`
+      );
+      console.log("Successfully logged combined sensor data in one row with target temperature:", targetTemperature, "and target mode:", targetAcMode);
+    }
+    
+    return loggingResult;
+  } catch (error) {
+    const timestamp = new Date().toISOString();
+    fsSync.appendFileSync(
+      "./logs/sensor_debug.log",
+      `${timestamp}: EXCEPTION - Error logging all sensor values: ${error.message}\n`
+    );
+    console.error("Error logging all sensor values:", error);
+    return {
+      success: false,
+      error: error.message
+    };
+  }
+},
+
 /**
  * Start periodic polling for sensor data
  * @param {string} raspPiIP - Raspberry Pi IP to poll
@@ -517,8 +638,10 @@ startSensorPolling(raspPiIP, interval = 30000) {
       )}\n`
     );
     
-    // Get AC state - simple approach
+    // Get AC state - enhanced approach to extract target temperature and mode
     let acState = false;
+    let targetTemperature = "N/A";
+    let targetAcMode = "N/A";
     
     try {
       const acResult = await getAcState(raspPiIP);
@@ -530,15 +653,21 @@ startSensorPolling(raspPiIP, interval = 30000) {
         `${new Date().toISOString()}: AC state is: ${JSON.stringify(acResult)}\n`
       );
       
-      // Extract just the 'on' field - default to false if not found
-      if (acResult && acResult.acState && typeof acResult.acState.on === 'boolean') {
-        acState = acResult.acState.on;
+      // Extract the 'on' field, target temperature, and mode - default to false/"N/A" if not found
+      if (acResult && typeof acResult.on === 'boolean') {
+        acState = acResult.on;
+        if (acState && acResult.targetTemperature !== undefined) {
+          targetTemperature = acResult.targetTemperature;
+        }
+        if (acState && acResult.mode !== undefined) {
+          targetAcMode = acResult.mode;
+        }
       }
       
-      // Log the extracted AC on/off state for debugging
+      // Log the extracted AC on/off state, target temperature, and mode for debugging
       fsSync.appendFileSync(
         "./logs/sensor_debug.log",
-        `${new Date().toISOString()}: Extracted AC on state: ${acState}\n`
+        `${new Date().toISOString()}: Extracted AC on state: ${acState}, target temperature: ${targetTemperature}, target mode: ${targetAcMode}\n`
       );
     } catch (error) {
       console.error("Error getting AC state:", error);
@@ -591,14 +720,16 @@ startSensorPolling(raspPiIP, interval = 30000) {
         console.log("Light state event update result:", updateResult);
       }
       
-      // Log all sensor values including just the AC on/off state
+      // Log all sensor values including AC on/off state, target temperature, and target mode
       const loggingResult = this.logAllSensorValues(
         motionValue,
         tempValue,
         humidityValue,
         roomName,
         isLightOn,
-        acState  // Just pass the boolean AC on state
+        acState,
+        targetTemperature,
+        targetAcMode
       );
       
       fsSync.appendFileSync(
@@ -618,14 +749,16 @@ startSensorPolling(raspPiIP, interval = 30000) {
       const humidityValue = this.latestHumidityEvent ? this.latestHumidityEvent.value : null;
       const roomName = this.latestTempEvent ? this.latestTempEvent.roomName : "Living Room";
       
-      // Log sensor values without light state but with AC state
+      // Log sensor values without light state but with AC state, target temperature, and target mode
       const loggingResult = this.logAllSensorValues(
         motionValue,
         tempValue,
         humidityValue,
         roomName,
         false,
-        acState  // Just pass the boolean AC on state
+        acState,
+        targetTemperature,
+        targetAcMode
       );
       
       fsSync.appendFileSync(
@@ -658,12 +791,39 @@ startSensorPolling(raspPiIP, interval = 30000) {
     // Get AC state for initial poll
     getAcState(raspPiIP).catch(err => {
       console.error("Initial AC state error:", err.message);
-      return { success: false, acState: { on: false } };
+      return { success: false, on: false };
     })
   ]).then(([sensiboResult, motionResult, lightState, acResult]) => {
-    // Extract AC on state from result - default to false if not found
-    const acOn = acResult && acResult.acState && typeof acResult.acState.on === 'boolean' ? 
-                 acResult.acState.on : false;
+    // Extract AC on state, target temperature, and target mode from result
+    let acOn = false;
+    let targetTemp = "N/A";
+    let targetMode = "N/A";
+    
+    if (acResult && typeof acResult.on === 'boolean') {
+      acOn = acResult.on;
+      
+      // Extract target temperature only if AC is on
+      if (acOn && acResult.targetTemperature !== undefined) {
+        targetTemp = acResult.targetTemperature;
+      } else {
+        // AC is off or targetTemperature is not available
+        targetTemp = "N/A";
+      }
+      
+      // Extract target mode only if AC is on
+      if (acOn && acResult.mode !== undefined) {
+        targetMode = acResult.mode;
+      } else {
+        // AC is off or mode is not available
+        targetMode = "N/A";
+      }
+    }
+    
+    // Log the extracted values for debugging
+    fsSync.appendFileSync(
+      "./logs/sensor_debug.log",
+      `${new Date().toISOString()}: Initial poll - AC on: ${acOn}, target temp: ${targetTemp}, target mode: ${targetMode}\n`
+    );
     
     // Add central logging for initial poll
     const motionValue = this.latestMotionEvent ? this.latestMotionEvent.value : false;
@@ -690,7 +850,9 @@ startSensorPolling(raspPiIP, interval = 30000) {
       humidityValue,
       roomName,
       isLightOn,
-      acOn  // Just pass the boolean AC on state
+      acOn,
+      targetTemp,
+      targetMode
     );
     
     fsSync.appendFileSync(

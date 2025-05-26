@@ -286,3 +286,72 @@
 {"level":"error","message":"Action Living Room LIGHT execution failed: Failed to set Light in Living Room: Failed to update light state","service":"app-service","timestamp":"2025-05-22 11:49:52.284"}
 {"level":"error","message":"Action Living Room LIGHT execution failed: Failed to set Light in Living Room: Failed to update light state","service":"app-service","timestamp":"2025-05-22 11:51:18.384"}
 {"level":"error","message":"Action Living Room LIGHT execution failed: Failed to set Light in Living Room: Failed to update light state","service":"app-service","timestamp":"2025-05-22 11:53:26.103"}
+{"level":"error","message":"Action Living Room LIGHT execution failed: Failed to set Light in Living Room: Failed to update light state","service":"app-service","timestamp":"2025-05-22 13:53:36.939"}
+{"level":"error","message":"Action Living Room LIGHT execution failed: Failed to set Light in Living Room: Failed to update light state","service":"app-service","timestamp":"2025-05-22 13:53:36.961"}
+{"level":"error","message":"Action Living Room LIGHT execution failed: Failed to set Light in Living Room: Failed to update light state","service":"app-service","timestamp":"2025-05-22 13:55:18.866"}
+{"level":"error","message":"Action Living Room LIGHT execution failed: Failed to set Light in Living Room: Failed to update light state","service":"app-service","timestamp":"2025-05-22 13:55:18.888"}
+{"level":"error","message":"Action Living Room LIGHT execution failed: Failed to set Light in Living Room: Failed to update light state","service":"app-service","timestamp":"2025-05-22 13:56:54.720"}
+{"level":"error","message":"Action Living Room LIGHT execution failed: Failed to set Light in Living Room: Failed to update light state","service":"app-service","timestamp":"2025-05-22 13:56:54.837"}
+{"level":"error","message":"Action Living Room LIGHT execution failed: Failed to set Light in Living Room: Failed to update light state","service":"app-service","timestamp":"2025-05-22 14:00:24.357"}
+{"level":"error","message":"Action Living Room LIGHT execution failed: Failed to set Light in Living Room: Failed to update light state","service":"app-service","timestamp":"2025-05-22 14:00:24.377"}
+{"level":"error","message":"Action Living Room LIGHT execution failed: Failed to set Light in Living Room: Failed to update light state","service":"app-service","timestamp":"2025-05-22 14:00:40.464"}
+{"level":"error","message":"Action Living Room LIGHT execution failed: Failed to set Light in Living Room: Failed to update light state","service":"app-service","timestamp":"2025-05-22 14:00:40.528"}
+{"level":"error","message":"Action Living Room LIGHT execution failed: Failed to set Light in Living Room: Failed to update light state","service":"app-service","timestamp":"2025-05-22 14:02:04.270"}
+{"level":"error","message":"Action Living Room LIGHT execution failed: Failed to set Light in Living Room: Failed to update light state","service":"app-service","timestamp":"2025-05-22 14:02:04.313"}
+{"level":"error","message":"Action Living Room LIGHT execution failed: Failed to set Light in Living Room: Failed to update light state","service":"app-service","timestamp":"2025-05-22 14:07:57.434"}
+{"level":"error","message":"Action Living Room LIGHT execution failed: Failed to set Light in Living Room: Failed to update light state","service":"app-service","timestamp":"2025-05-22 14:08:19.099"}
+{"level":"error","message":"Action Living Room LIGHT execution failed: Failed to set Light in Living Room: Failed to update light state","service":"app-service","timestamp":"2025-05-22 14:14:00.332"}
+{"level":"error","message":"Action Living Room LIGHT execution failed: Failed to set Light in Living Room: Failed to update light state","service":"app-service","timestamp":"2025-05-22 14:14:00.361"}
+{"level":"error","message":"Action Living Room LIGHT execution failed: Failed to set Light in Living Room: Failed to update light state","service":"app-service","timestamp":"2025-05-22 14:26:17.731"}
+{"level":"error","message":"Action Living Room LIGHT execution failed: Failed to set Light in Living Room: Failed to update light state","service":"app-service","timestamp":"2025-05-22 14:26:17.796"}
+{"level":"error","message":"Event \"living room motion collective anomaly\" not found in EventRegistry","service":"app-service","timestamp":"2025-05-22 14:31:14.141"}
+{"level":"error","message":"Failed to initialize rule with custom anomaly description: Event not found: living room motion collective anomaly","service":"app-service","timestamp":"2025-05-22 14:31:14.141"}
+{"level":"error","message":"Event \"living room temperature pointwise anomaly\" not found in EventRegistry","service":"app-service","timestamp":"2025-05-22 14:31:14.236"}
+{"level":"error","message":"Failed to initialize rule with custom anomaly description: Event not found: living room temperature pointwise anomaly","service":"app-service","timestamp":"2025-05-22 14:31:14.236"}
+{"level":"error","message":"Event \"living room temperature pointwise anomaly\" not found in EventRegistry","service":"app-service","timestamp":"2025-05-22 14:31:14.238"}
+{"level":"error","message":"Failed to initialize rule with custom anomaly description: Event not found: living room temperature pointwise anomaly","service":"app-service","timestamp":"2025-05-22 14:31:14.238"}
+{"level":"error","message":"Event \"living room motion collective anomaly\" not found in EventRegistry","service":"app-service","timestamp":"2025-05-22 14:31:14.652"}
+{"level":"error","message":"Failed to initialize rule with custom anomaly description: Event not found: living room motion collective anomaly","service":"app-service","timestamp":"2025-05-22 14:31:14.653"}
+{"level":"error","message":"Action Living Room LIGHT execution failed: Failed to set Light in Living Room: Failed to update light state","service":"app-service","timestamp":"2025-05-22 15:07:13.111"}
+{"level":"error","message":"Action Living Room LIGHT execution failed: Failed to set Light in Living Room: Failed to update light state","service":"app-service","timestamp":"2025-05-22 15:10:33.170"}
+{"level":"error","message":"Action Living Room LIGHT execution failed: Failed to set Light in Living Room: Failed to update light state","service":"app-service","timestamp":"2025-05-22 15:15:33.087"}
+{"level":"error","message":"Action Living Room LIGHT execution failed: Failed to set Light in Living Room: Failed to update light state","service":"app-service","timestamp":"2025-05-22 15:17:13.350"}
+{"level":"error","message":"Action Living Room LIGHT execution failed: Failed to set Light in Living Room: Failed to update light state","service":"app-service","timestamp":"2025-05-22 15:20:33.276"}
+{"level":"error","message":"Event \"living room motion collective anomaly\" not found in EventRegistry","service":"app-service","timestamp":"2025-05-22 15:26:33.124"}
+{"level":"error","message":"Failed to initialize rule with custom anomaly description: Event not found: living room motion collective anomaly","service":"app-service","timestamp":"2025-05-22 15:26:33.124"}
+{"level":"error","message":"Event \"living room motion collective anomaly\" not found in EventRegistry","service":"app-service","timestamp":"2025-05-22 15:26:33.145"}
+{"level":"error","message":"Failed to initialize rule with custom anomaly description: Event not found: living room motion collective anomaly","service":"app-service","timestamp":"2025-05-22 15:26:33.145"}
+{"level":"error","message":"Event \"living room temperature pointwise anomaly\" not found in EventRegistry","service":"app-service","timestamp":"2025-05-22 15:26:33.236"}
+{"level":"error","message":"Failed to initialize rule with custom anomaly description: Event not found: living room temperature pointwise anomaly","service":"app-service","timestamp":"2025-05-22 15:26:33.236"}
+{"level":"error","message":"Event \"living room temperature pointwise anomaly\" not found in EventRegistry","service":"app-service","timestamp":"2025-05-22 15:26:33.653"}
+{"level":"error","message":"Failed to initialize rule with custom anomaly description: Event not found: living room temperature pointwise anomaly","service":"app-service","timestamp":"2025-05-22 15:26:33.653"}
+{"level":"error","message":"Event \"living room motion collective anomaly\" not found in EventRegistry","service":"app-service","timestamp":"2025-05-22 15:26:33.939"}
+{"level":"error","message":"Failed to initialize rule with custom anomaly description: Event not found: living room motion collective anomaly","service":"app-service","timestamp":"2025-05-22 15:26:33.939"}
+{"level":"error","message":"Event \"living room temperature pointwise anomaly\" not found in EventRegistry","service":"app-service","timestamp":"2025-05-22 15:26:34.021"}
+{"level":"error","message":"Failed to initialize rule with custom anomaly description: Event not found: living room temperature pointwise anomaly","service":"app-service","timestamp":"2025-05-22 15:26:34.021"}
+{"level":"error","message":"Event \"living room motion collective anomaly\" not found in EventRegistry","service":"app-service","timestamp":"2025-05-22 15:40:47.705"}
+{"level":"error","message":"Failed to initialize rule with custom anomaly description: Event not found: living room motion collective anomaly","service":"app-service","timestamp":"2025-05-22 15:40:47.705"}
+{"level":"error","message":"Event \"living room temperature pointwise anomaly\" not found in EventRegistry","service":"app-service","timestamp":"2025-05-22 15:40:47.796"}
+{"level":"error","message":"Failed to initialize rule with custom anomaly description: Event not found: living room temperature pointwise anomaly","service":"app-service","timestamp":"2025-05-22 15:40:47.796"}
+{"level":"error","message":"Event \"living room temperature pointwise anomaly\" not found in EventRegistry","service":"app-service","timestamp":"2025-05-22 15:40:47.856"}
+{"level":"error","message":"Failed to initialize rule with custom anomaly description: Event not found: living room temperature pointwise anomaly","service":"app-service","timestamp":"2025-05-22 15:40:47.856"}
+{"level":"error","message":"Event \"living room motion collective anomaly\" not found in EventRegistry","service":"app-service","timestamp":"2025-05-22 15:40:48.136"}
+{"level":"error","message":"Failed to initialize rule with custom anomaly description: Event not found: living room motion collective anomaly","service":"app-service","timestamp":"2025-05-22 15:40:48.136"}
+{"level":"error","message":"Action Living Room LIGHT execution failed: Failed to set Light in Living Room: Failed to update light state","service":"app-service","timestamp":"2025-05-22 16:04:23.254"}
+{"level":"error","message":"Event \"living room motion collective anomaly\" not found in EventRegistry","service":"app-service","timestamp":"2025-05-22 16:05:11.177"}
+{"level":"error","message":"Failed to initialize rule with custom anomaly description: Event not found: living room motion collective anomaly","service":"app-service","timestamp":"2025-05-22 16:05:11.178"}
+{"level":"error","message":"Event \"living room motion collective anomaly\" not found in EventRegistry","service":"app-service","timestamp":"2025-05-22 16:05:11.216"}
+{"level":"error","message":"Failed to initialize rule with custom anomaly description: Event not found: living room motion collective anomaly","service":"app-service","timestamp":"2025-05-22 16:05:11.216"}
+{"level":"error","message":"Event \"living room temperature pointwise anomaly\" not found in EventRegistry","service":"app-service","timestamp":"2025-05-22 16:05:11.333"}
+{"level":"error","message":"Failed to initialize rule with custom anomaly description: Event not found: living room temperature pointwise anomaly","service":"app-service","timestamp":"2025-05-22 16:05:11.333"}
+{"level":"error","message":"Event \"living room temperature pointwise anomaly\" not found in EventRegistry","service":"app-service","timestamp":"2025-05-22 16:05:11.760"}
+{"level":"error","message":"Failed to initialize rule with custom anomaly description: Event not found: living room temperature pointwise anomaly","service":"app-service","timestamp":"2025-05-22 16:05:11.760"}
+{"level":"error","message":"Event \"living room motion collective anomaly\" not found in EventRegistry","service":"app-service","timestamp":"2025-05-22 16:05:12.006"}
+{"level":"error","message":"Failed to initialize rule with custom anomaly description: Event not found: living room motion collective anomaly","service":"app-service","timestamp":"2025-05-22 16:05:12.006"}
+{"level":"error","message":"Event \"living room temperature pointwise anomaly\" not found in EventRegistry","service":"app-service","timestamp":"2025-05-22 16:05:12.102"}
+{"level":"error","message":"Failed to initialize rule with custom anomaly description: Event not found: living room temperature pointwise anomaly","service":"app-service","timestamp":"2025-05-22 16:05:12.102"}
+{"level":"error","message":"Action Living Room LIGHT execution failed: Failed to set Light in Living Room: Failed to update light state","service":"app-service","timestamp":"2025-05-22 16:06:45.864"}
+{"level":"error","message":"Action Living Room LIGHT execution failed: Failed to set Light in Living Room: Failed to update light state","service":"app-service","timestamp":"2025-05-22 16:06:45.887"}
+{"level":"error","message":"Action Living Room LIGHT execution failed: Failed to set Light in Living Room: Failed to update light state","service":"app-service","timestamp":"2025-05-22 16:08:16.049"}
+{"level":"error","message":"Action Living Room LIGHT execution failed: Failed to set Light in Living Room: Failed to update light state","service":"app-service","timestamp":"2025-05-22 16:08:16.064"}
+{"level":"error","message":"Action Living Room LIGHT execution failed: Failed to set Light in Living Room: Failed to update light state","service":"app-service","timestamp":"2025-05-22 16:14:56.528"}
