@@ -284,22 +284,64 @@ function isValidRuleFormat(ruleString) {
   // Get the condition part
   const conditionPart = ifThenMatch[1].trim();
 
+  // Check for multi-condition rules with AND
+  const andPattern = /\s+AND\s+/i;
+  const hasAndOperator = andPattern.test(conditionPart);
+
+  if (hasAndOperator) {
+    // Split conditions by AND and validate each one
+    const conditionStrings = conditionPart.split(andPattern).map(c => c.trim());
+    
+    // Each condition must be valid
+    for (const conditionStr of conditionStrings) {
+      if (!isValidSingleCondition(conditionStr)) {
+        return false;
+      }
+    }
+    
+    return true;
+  }
+
+  // Single condition rule - validate the single condition
+  return isValidSingleCondition(conditionPart);
+}
+
+/**
+ * Check if a single condition string is valid
+ * @param {string} conditionStr - The condition string to check
+ * @returns {boolean} True if the condition is valid, false otherwise
+ */
+function isValidSingleCondition(conditionStr) {
+  if (!conditionStr) return false;
+
   // Check if this is an anomaly rule with standard "detected" pattern
   if (
-    conditionPart.includes("anomaly detected") ||
-    conditionPart.includes("anomaly not detected")
+    conditionStr.includes("anomaly detected") ||
+    conditionStr.includes("anomaly not detected")
   ) {
     return true;
   }
 
+  // Check if this is a motion detected rule
+  const motionDetectedPattern = /(.+?)\s+motion\s+detected$/i;
+  if (motionDetectedPattern.test(conditionStr)) {
+    return true;
+  }
+
   // Check if this is a rule with custom description using "detected" pattern
-  if (conditionPart.endsWith("detected")) {
+  if (conditionStr.endsWith("detected")) {
+    return true;
+  }
+
+  // Check if this is a boolean rule (e.g., "Living Room motion true")
+  const booleanPattern = /(.+?)\s+(true|false)$/i;
+  if (booleanPattern.test(conditionStr)) {
     return true;
   }
 
   // Check that condition part has an operator for standard rules
   const operatorPattern = /(.+?)\s+([<>=!]+)\s+(.+)/;
-  const operatorMatch = conditionPart.match(operatorPattern);
+  const operatorMatch = conditionStr.match(operatorPattern);
 
   return !!operatorMatch;
 }

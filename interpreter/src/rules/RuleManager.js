@@ -78,10 +78,29 @@ class RuleManager {
     deleteRule(ruleId) {
         const rule = this.rules.get(ruleId);
         if (rule) {
-            // Remove the rule as an observer from its event
-            const event = EventRegistry.getEvent(rule.eventName);
-            if (event) {
-                event.removeObserver(rule);
+            // Handle multi-condition rules
+            if (rule.isMultiCondition && rule.eventNames && rule.eventNames.length > 0) {
+                // Remove the rule as an observer from all its events
+                for (const eventName of rule.eventNames) {
+                    if (eventName) {
+                        const event = EventRegistry.getEvent(eventName);
+                        if (event) {
+                            event.removeObserver(rule);
+                            console.log(`Removed multi-condition rule ${ruleId} from event ${eventName}`);
+                        }
+                    }
+                }
+            } 
+            // Handle single-condition rules
+            else if (rule.eventName) {
+                // Remove the rule as an observer from its event
+                const event = EventRegistry.getEvent(rule.eventName);
+                if (event) {
+                    event.removeObserver(rule);
+                    console.log(`Removed single-condition rule ${ruleId} from event ${rule.eventName}`);
+                }
+            } else {
+                console.warn(`Rule ${ruleId} has no eventName or eventNames defined during deletion`);
             }
             
             // Disconnect the rule from all actions

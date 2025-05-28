@@ -25,45 +25,70 @@ const AnomalyDescription = require('../models/AnomalyDescription');
  * @returns {boolean} True if the rule matches any of our accepted formats, false otherwise
  */
 function isValidRuleFormat(ruleString) {
-    if (!ruleString) return false;
+    if (!ruleString || typeof ruleString !== 'string') {
+        return false;
+    }
     
-    // Normalize rule string to lowercase for consistent matching
-    const normalizedRule = ruleString.toLowerCase();
+    // Basic if-then pattern
+    const ifThenPattern = /if\s+.+\s+then\s+.+/i;
+    if (!ifThenPattern.test(ruleString)) {
+        return false;
+    }
     
-    // Basic check for "if" and "then" keywords - case insensitive
-    const ifThenPattern = /if\s+(.+?)\s+then\s+(.+)/i;
-    const ifThenMatch = normalizedRule.match(ifThenPattern);
+    // Check for multi-condition rules with AND or OR
+    const andPattern = /\s+AND\s+/i;
+    const orPattern = /\s+OR\s+/i;
+    const hasAndOperator = andPattern.test(ruleString);
+    const hasOrOperator = orPattern.test(ruleString);
     
-    if (!ifThenMatch) return false;
+    // Validate that we don't have mixed operators
+    if (hasAndOperator && hasOrOperator) {
+        return false; // Mixed AND/OR not supported
+    }
     
-    // Extract the condition part and action part
-    const conditionPart = ifThenMatch[1].trim();
-    const actionPart = ifThenMatch[2].trim();
+    return true;
+}
+
+/**
+ * Check if a single condition string is valid
+ * @param {string} conditionStr - The condition string to check
+ * @returns {boolean} True if the condition is valid, false otherwise
+ */
+function isValidSingleCondition(conditionStr) {
+    if (!conditionStr || typeof conditionStr !== 'string') {
+        return false;
+    }
     
     // Check if this is an anomaly rule (contains "detected")
-    if (conditionPart.includes('anomaly') && conditionPart.includes('detected')) {
+    if (conditionStr.includes('anomaly') && conditionStr.includes('detected')) {
+        return true;
+    }
+    
+    // Check if this is a motion detected rule
+    const motionDetectedPattern = /(.+?)\s+motion\s+detected$/i;
+    if (motionDetectedPattern.test(conditionStr)) {
+        return true;
+    }
+    
+    // Check if this is a rule with custom description using "detected" pattern
+    if (conditionStr.endsWith('detected')) {
         return true;
     }
     
     // Check if this is a sensor value rule (has comparison operator)
     const operatorPattern = /(.+?)\s+([<>=!]+)\s+(.+)/;
-    const operatorMatch = conditionPart.match(operatorPattern);
+    const operatorMatch = conditionStr.match(operatorPattern);
     
     if (operatorMatch) {
         return true;
     }
     
-    // NEW FORMAT: Check for "if [Device] [Sensor] [Value] then [Device] [Action] [Value]" pattern
-    // Example: "if Living Room motion true then Living Room LIGHT on"
+    // Check for "if [Device] [Sensor] [Value]" pattern
+    // Example: "Living Room motion true"
     const deviceSensorValuePattern = /^(.+?)\s+(.+?)\s+(true|false|on|off|\d+)$/i;
-    const conditionMatch = conditionPart.match(deviceSensorValuePattern);
+    const conditionMatch = conditionStr.match(deviceSensorValuePattern);
     
-    // Action part should also follow a pattern like "[Device] [Action] [Value]"
-    const deviceActionValuePattern = /^(.+?)\s+(.+?)\s+(true|false|on|off|\d+)$/i;
-    const actionMatch = actionPart.match(deviceActionValuePattern);
-    
-    // Both condition and action parts need to match the new pattern
-    if (conditionMatch && actionMatch) {
+    if (conditionMatch) {
         return true;
     }
     
@@ -71,15 +96,49 @@ function isValidRuleFormat(ruleString) {
 }
 
 /**
- * Check if the rule is anomaly-related
+ * Check if a rule string is related to anomalies
  * @param {string} ruleString - The rule string to check
- * @returns {boolean} True if this is an anomaly-related rule
+ * @returns {boolean} True if the rule is anomaly-related, false otherwise
  */
 function isAnomalyRule(ruleString) {
-    if (!ruleString) return false;
+    if (!ruleString || typeof ruleString !== 'string') {
+        console.log('isAnomalyRule: Invalid input:', ruleString);
+        return false;
+    }
     
     // Check if the rule contains keywords related to anomalies
     const normalizedRule = ruleString.toLowerCase();
+    
+    // For multi-condition rules, check if any condition contains anomaly keywords
+    const andPattern = /\s+AND\s+/i;
+    if (andPattern.test(normalizedRule)) {
+        console.log('isAnomalyRule: Multi-condition rule detected, checking each condition');
+        
+        // Extract the condition part between "if" and "then"
+        const ifThenPattern = /if\s+(.+?)\s+then\s+(.+)/i;
+        const ifThenMatch = normalizedRule.match(ifThenPattern);
+        
+        if (ifThenMatch) {
+            const conditionPart = ifThenMatch[1].trim();
+            const conditionStrings = conditionPart.split(andPattern).map(c => c.trim());
+            
+            // Check if any condition contains anomaly keywords
+            for (const condition of conditionStrings) {
+                if (condition.includes('anomaly') || 
+                    condition.includes('detected') ||
+                    condition.includes('collective') ||
+                    condition.includes('pointwise')) {
+                    console.log('isAnomalyRule: Found anomaly condition:', condition);
+                    return true;
+                }
+            }
+        }
+        
+        console.log('isAnomalyRule: No anomaly conditions found in multi-condition rule');
+        return false;
+    }
+    
+    // For single-condition rules, check the entire rule
     return normalizedRule.includes('anomaly') || 
            normalizedRule.includes('detected')  ||
            normalizedRule.includes('collective') ||
@@ -92,7 +151,10 @@ function isAnomalyRule(ruleString) {
  * @returns {string|null} The anomaly description or null if not found
  */
 function extractAnomalyDescription(ruleString) {
-    if (!ruleString) return null;
+    if (!ruleString || typeof ruleString !== 'string') {
+        console.log('extractAnomalyDescription: Invalid input:', ruleString);
+        return null;
+    }
     
     // Convert to lowercase
     const lowerCaseRule = ruleString.toLowerCase();
@@ -101,9 +163,37 @@ function extractAnomalyDescription(ruleString) {
     const ifThenPattern = /if\s+(.+?)\s+then\s+(.+)/i;
     const ifThenMatch = lowerCaseRule.match(ifThenPattern);
     
-    if (!ifThenMatch) return null;
+    if (!ifThenMatch) {
+        console.log('extractAnomalyDescription: No if-then pattern found');
+        return null;
+    }
     
     let conditionPart = ifThenMatch[1].trim();
+    
+    // Check for multi-condition rules with AND
+    const andPattern = /\s+AND\s+/i;
+    if (andPattern.test(conditionPart)) {
+        console.log('extractAnomalyDescription: Multi-condition rule detected, splitting by AND');
+        
+        // Split conditions by AND and look for anomaly-related conditions
+        const conditionStrings = conditionPart.split(andPattern).map(c => c.trim());
+        
+        // Find the first condition that contains anomaly-related keywords
+        for (const condition of conditionStrings) {
+            if (condition.includes('anomaly') || condition.includes('detected') || 
+                condition.includes('collective') || condition.includes('pointwise')) {
+                conditionPart = condition;
+                console.log('extractAnomalyDescription: Found anomaly condition:', conditionPart);
+                break;
+            }
+        }
+        
+        // If no anomaly condition found, return null
+        if (andPattern.test(conditionPart)) {
+            console.log('extractAnomalyDescription: No anomaly condition found in multi-condition rule');
+            return null;
+        }
+    }
     
     // Remove 'detected' from the end if it exists
     conditionPart = conditionPart.replace(/\s+detected$/, '');
@@ -122,7 +212,7 @@ function extractAnomalyDescription(ruleString) {
     const description = conditionPart.replace(/\s+/g, ' ').trim();
     
     // Log the extracted description for debugging
-    console.log('Extracted description from rule:', {
+    console.log('extractAnomalyDescription: Extracted description from rule:', {
         original: lowerCaseRule,
         extracted: description
     });

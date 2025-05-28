@@ -263,6 +263,11 @@ class EventRegistry {
    * @returns {Event|undefined} The event instance or undefined if not found
    */
   getEvent(eventName) {
+    // Handle undefined or null eventName
+    if (!eventName || typeof eventName !== 'string') {
+      console.log(`EventRegistry.getEvent: Invalid eventName provided:`, eventName);
+      return undefined;
+    }
 
     // If the name might be an anomaly event in simplified form, try to find the full name
     if (
