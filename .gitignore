@@ -6,3 +6,4 @@ logs/
 debug.logs 
 error.logs 
 server.logs 
+.env
