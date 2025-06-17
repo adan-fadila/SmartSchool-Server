@@ -12129,3 +12129,242 @@
 2025-05-27T10:23:25.510Z: Successfully logged combined sensor data in one row with target temperature: N/A and target mode: N/A
 2025-05-27T10:23:25.513Z: Combined logging result: {"success":true,"message":"Sensor data logged successfully"}
 2025-05-27T10:23:25.514Z: Polling interval active: true
+2025-06-16T14:01:04.268Z: Polling for sensor data... (poll #31)
+2025-06-16T14:01:04.269Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-06-16T14:01:04.269Z: Received sensor data: {"temperature":24.4,"humidity":71.3}
+2025-06-16T14:01:04.269Z: Formatted events: [{"name":"living room temperature","value":24.4,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":71.3,"roomName":"Living Room","spaceId":"41413915"}]
+2025-06-16T14:01:04.269Z: Successfully updated event: living room temperature = 24.4
+2025-06-16T14:01:04.269Z: Successfully updated event: living room humidity = 71.3
+2025-06-16T14:01:05.088Z: Sensibo polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":24.4,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":71.3,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-06-16T14:01:05.088Z: Fetching motion sensor data from Raspberry Pi at 192.168.0.121
+2025-06-16T14:01:05.088Z: Received motion sensor data: {"motionDetected":true}
+2025-06-16T14:01:05.088Z: Formatted motion sensor events: [{"name":"living room motion","value":true,"roomName":"Living Room","spaceId":"41413915"}]
+2025-06-16T14:01:05.088Z: Successfully updated motion event: living room motion = true
+2025-06-16T14:01:05.316Z: Motion sensor polling result: {"success":true,"updatedEvents":[{"name":"living room motion","value":true,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":1,"successfulUpdates":1}
+2025-06-16T14:01:05.985Z: AC state is: {"fanLevel":"auto","horizontalSwing":"fixedCenter","mode":"dry","on":true,"swing":"fixedMiddle","targetTemperature":28,"temperatureUnit":"C","timestamp":{"secondsAgo":0,"time":"2025-06-16T14:01:05.961502Z"}}
+2025-06-16T14:01:05.985Z: Extracted AC on state: true, target temperature: 28, target mode: dry
+2025-06-16T14:01:09.281Z: Raw light state result: null
+2025-06-16T14:01:09.282Z: Creating a combined row with motion=true, temp=24.4, humidity=71.3, light=false, ac_on=true, target_temp=28, target_mode=dry
+2025-06-16T14:01:09.283Z: logSensorData called with 7 sensors
+2025-06-16T14:01:09.283Z: Column map has 7 columns: [["living room temperature",1],["living room humidity",2],["living room motion",3],["light_state",4],["ac_state",5],["targetTemperature",6],["targetAcMode",7]]
+2025-06-16T14:01:09.283Z: Setting spaceId column 8 to 41413915
+2025-06-16T14:01:09.283Z: Setting column 3 (living room motion) to true
+2025-06-16T14:01:09.283Z: Setting column 1 (living room temperature) to 24.4
+2025-06-16T14:01:09.283Z: Setting column 2 (living room humidity) to 71.3
+2025-06-16T14:01:09.283Z: Setting column 4 (light_state) to false
+2025-06-16T14:01:09.283Z: Setting column 5 (ac_state) to true
+2025-06-16T14:01:09.283Z: Setting column 6 (targetTemperature) to 28
+2025-06-16T14:01:09.283Z: Setting column 7 (targetAcMode) to dry
+2025-06-16T14:01:09.283Z: Preparing row: 2025-06-16 14:01:09,24.4,71.3,true,false,true,28,dry,41413915
+2025-06-16T14:01:09.283Z: Successfully wrote to log file using writeFileSync
+2025-06-16T14:01:09.282Z: Successfully logged combined sensor data in one row with target temperature: 28 and target mode: dry
+2025-06-16T14:01:09.286Z: Combined logging result: {"success":true,"message":"Sensor data logged successfully"}
+2025-06-16T14:01:09.286Z: Polling interval active: true
+2025-06-16T14:02:44.270Z: Polling for sensor data... (poll #32)
+2025-06-16T14:02:44.270Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-06-16T14:02:44.270Z: Received sensor data: {"temperature":24.4,"humidity":71.4}
+2025-06-16T14:02:44.270Z: Formatted events: [{"name":"living room temperature","value":24.4,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":71.4,"roomName":"Living Room","spaceId":"41413915"}]
+2025-06-16T14:02:44.270Z: Successfully updated event: living room temperature = 24.4
+2025-06-16T14:02:44.270Z: Successfully updated event: living room humidity = 71.4
+2025-06-16T14:02:45.066Z: Sensibo polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":24.4,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":71.4,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-06-16T14:02:45.066Z: Fetching motion sensor data from Raspberry Pi at 192.168.0.121
+2025-06-16T14:02:45.066Z: Received motion sensor data: {"motionDetected":false}
+2025-06-16T14:02:45.066Z: Formatted motion sensor events: [{"name":"living room motion","value":false,"roomName":"Living Room","spaceId":"41413915"}]
+2025-06-16T14:02:45.066Z: Successfully updated motion event: living room motion = false
+2025-06-16T14:02:45.303Z: Motion sensor polling result: {"success":true,"updatedEvents":[{"name":"living room motion","value":false,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":1,"successfulUpdates":1}
+2025-06-16T14:02:46.012Z: AC state is: {"fanLevel":"auto","horizontalSwing":"fixedCenter","mode":"dry","on":true,"swing":"fixedMiddle","targetTemperature":28,"temperatureUnit":"C","timestamp":{"secondsAgo":0,"time":"2025-06-16T14:02:45.979313Z"}}
+2025-06-16T14:02:46.012Z: Extracted AC on state: true, target temperature: 28, target mode: dry
+2025-06-16T14:02:49.317Z: Raw light state result: null
+2025-06-16T14:02:49.318Z: Creating a combined row with motion=false, temp=24.4, humidity=71.4, light=false, ac_on=true, target_temp=28, target_mode=dry
+2025-06-16T14:02:49.318Z: logSensorData called with 7 sensors
+2025-06-16T14:02:49.318Z: Column map has 7 columns: [["living room temperature",1],["living room humidity",2],["living room motion",3],["light_state",4],["ac_state",5],["targetTemperature",6],["targetAcMode",7]]
+2025-06-16T14:02:49.318Z: Setting spaceId column 8 to 41413915
+2025-06-16T14:02:49.318Z: Setting column 3 (living room motion) to false
+2025-06-16T14:02:49.318Z: Setting column 1 (living room temperature) to 24.4
+2025-06-16T14:02:49.318Z: Setting column 2 (living room humidity) to 71.4
+2025-06-16T14:02:49.318Z: Setting column 4 (light_state) to false
+2025-06-16T14:02:49.318Z: Setting column 5 (ac_state) to true
+2025-06-16T14:02:49.318Z: Setting column 6 (targetTemperature) to 28
+2025-06-16T14:02:49.318Z: Setting column 7 (targetAcMode) to dry
+2025-06-16T14:02:49.318Z: Preparing row: 2025-06-16 14:02:49,24.4,71.4,false,false,true,28,dry,41413915
+2025-06-16T14:02:49.318Z: Successfully wrote to log file using writeFileSync
+2025-06-16T14:02:49.318Z: Successfully logged combined sensor data in one row with target temperature: 28 and target mode: dry
+2025-06-16T14:02:49.320Z: Combined logging result: {"success":true,"message":"Sensor data logged successfully"}
+2025-06-16T14:02:49.320Z: Polling interval active: true
+2025-06-16T14:04:24.272Z: Polling for sensor data... (poll #33)
+2025-06-16T14:04:24.273Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-06-16T14:04:24.273Z: Received sensor data: {"temperature":24.4,"humidity":71.4}
+2025-06-16T14:04:24.273Z: Formatted events: [{"name":"living room temperature","value":24.4,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":71.4,"roomName":"Living Room","spaceId":"41413915"}]
+2025-06-16T14:04:24.273Z: Successfully updated event: living room temperature = 24.4
+2025-06-16T14:04:24.273Z: Successfully updated event: living room humidity = 71.4
+2025-06-16T14:04:24.999Z: Sensibo polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":24.4,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":71.4,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-06-16T14:04:24.999Z: Fetching motion sensor data from Raspberry Pi at 192.168.0.121
+2025-06-16T14:04:24.999Z: Received motion sensor data: {"motionDetected":false}
+2025-06-16T14:04:24.999Z: Formatted motion sensor events: [{"name":"living room motion","value":false,"roomName":"Living Room","spaceId":"41413915"}]
+2025-06-16T14:04:24.999Z: Successfully updated motion event: living room motion = false
+2025-06-16T14:04:25.246Z: Motion sensor polling result: {"success":true,"updatedEvents":[{"name":"living room motion","value":false,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":1,"successfulUpdates":1}
+2025-06-16T14:04:25.899Z: AC state is: {"fanLevel":"auto","horizontalSwing":"fixedCenter","mode":"dry","on":true,"swing":"fixedMiddle","targetTemperature":28,"temperatureUnit":"C","timestamp":{"secondsAgo":0,"time":"2025-06-16T14:04:25.842188Z"}}
+2025-06-16T14:04:25.899Z: Extracted AC on state: true, target temperature: 28, target mode: dry
+2025-06-16T14:04:29.192Z: Raw light state result: null
+2025-06-16T14:04:29.193Z: Creating a combined row with motion=false, temp=24.4, humidity=71.4, light=false, ac_on=true, target_temp=28, target_mode=dry
+2025-06-16T14:04:29.193Z: logSensorData called with 7 sensors
+2025-06-16T14:04:29.193Z: Column map has 7 columns: [["living room temperature",1],["living room humidity",2],["living room motion",3],["light_state",4],["ac_state",5],["targetTemperature",6],["targetAcMode",7]]
+2025-06-16T14:04:29.193Z: Setting spaceId column 8 to 41413915
+2025-06-16T14:04:29.193Z: Setting column 3 (living room motion) to false
+2025-06-16T14:04:29.193Z: Setting column 1 (living room temperature) to 24.4
+2025-06-16T14:04:29.193Z: Setting column 2 (living room humidity) to 71.4
+2025-06-16T14:04:29.193Z: Setting column 4 (light_state) to false
+2025-06-16T14:04:29.193Z: Setting column 5 (ac_state) to true
+2025-06-16T14:04:29.193Z: Setting column 6 (targetTemperature) to 28
+2025-06-16T14:04:29.193Z: Setting column 7 (targetAcMode) to dry
+2025-06-16T14:04:29.193Z: Preparing row: 2025-06-16 14:04:29,24.4,71.4,false,false,true,28,dry,41413915
+2025-06-16T14:04:29.193Z: Successfully wrote to log file using writeFileSync
+2025-06-16T14:04:29.193Z: Successfully logged combined sensor data in one row with target temperature: 28 and target mode: dry
+2025-06-16T14:04:29.195Z: Combined logging result: {"success":true,"message":"Sensor data logged successfully"}
+2025-06-16T14:04:29.195Z: Polling interval active: true
+2025-06-16T14:06:04.275Z: Polling for sensor data... (poll #34)
+2025-06-16T14:06:04.276Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-06-16T14:06:04.276Z: Received sensor data: {"temperature":24.4,"humidity":71.3}
+2025-06-16T14:06:04.276Z: Formatted events: [{"name":"living room temperature","value":24.4,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":71.3,"roomName":"Living Room","spaceId":"41413915"}]
+2025-06-16T14:06:04.276Z: Successfully updated event: living room temperature = 24.4
+2025-06-16T14:06:04.276Z: Successfully updated event: living room humidity = 71.3
+2025-06-16T14:06:05.063Z: Sensibo polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":24.4,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":71.3,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-06-16T14:06:05.063Z: Fetching motion sensor data from Raspberry Pi at 192.168.0.121
+2025-06-16T14:06:05.063Z: Received motion sensor data: {"motionDetected":false}
+2025-06-16T14:06:05.063Z: Formatted motion sensor events: [{"name":"living room motion","value":false,"roomName":"Living Room","spaceId":"41413915"}]
+2025-06-16T14:06:05.063Z: Successfully updated motion event: living room motion = false
+2025-06-16T14:06:05.324Z: Motion sensor polling result: {"success":true,"updatedEvents":[{"name":"living room motion","value":false,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":1,"successfulUpdates":1}
+2025-06-16T14:06:05.975Z: AC state is: {"fanLevel":"auto","horizontalSwing":"fixedCenter","mode":"dry","on":true,"swing":"fixedMiddle","targetTemperature":28,"temperatureUnit":"C","timestamp":{"secondsAgo":0,"time":"2025-06-16T14:06:05.943219Z"}}
+2025-06-16T14:06:05.975Z: Extracted AC on state: true, target temperature: 28, target mode: dry
+2025-06-16T14:06:09.289Z: Raw light state result: null
+2025-06-16T14:06:09.290Z: Creating a combined row with motion=false, temp=24.4, humidity=71.3, light=false, ac_on=true, target_temp=28, target_mode=dry
+2025-06-16T14:06:09.290Z: logSensorData called with 7 sensors
+2025-06-16T14:06:09.290Z: Column map has 7 columns: [["living room temperature",1],["living room humidity",2],["living room motion",3],["light_state",4],["ac_state",5],["targetTemperature",6],["targetAcMode",7]]
+2025-06-16T14:06:09.290Z: Setting spaceId column 8 to 41413915
+2025-06-16T14:06:09.290Z: Setting column 3 (living room motion) to false
+2025-06-16T14:06:09.290Z: Setting column 1 (living room temperature) to 24.4
+2025-06-16T14:06:09.290Z: Setting column 2 (living room humidity) to 71.3
+2025-06-16T14:06:09.290Z: Setting column 4 (light_state) to false
+2025-06-16T14:06:09.290Z: Setting column 5 (ac_state) to true
+2025-06-16T14:06:09.290Z: Setting column 6 (targetTemperature) to 28
+2025-06-16T14:06:09.290Z: Setting column 7 (targetAcMode) to dry
+2025-06-16T14:06:09.290Z: Preparing row: 2025-06-16 14:06:09,24.4,71.3,false,false,true,28,dry,41413915
+2025-06-16T14:06:09.290Z: Successfully wrote to log file using writeFileSync
+2025-06-16T14:06:09.290Z: Successfully logged combined sensor data in one row with target temperature: 28 and target mode: dry
+2025-06-16T14:06:09.294Z: Combined logging result: {"success":true,"message":"Sensor data logged successfully"}
+2025-06-16T14:06:09.295Z: Polling interval active: true
+2025-06-16T14:07:44.276Z: Polling for sensor data... (poll #35)
+2025-06-16T14:07:44.279Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-06-16T14:07:44.279Z: Received sensor data: {"temperature":24.4,"humidity":71.2}
+2025-06-16T14:07:44.279Z: Formatted events: [{"name":"living room temperature","value":24.4,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":71.2,"roomName":"Living Room","spaceId":"41413915"}]
+2025-06-16T14:07:44.279Z: Successfully updated event: living room temperature = 24.4
+2025-06-16T14:07:44.279Z: Successfully updated event: living room humidity = 71.2
+2025-06-16T14:07:45.180Z: Sensibo polling result: {"success":true,"updatedEvents":[{"name":"living room temperature","value":24.4,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":71.2,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":2,"successfulUpdates":2}
+2025-06-16T14:07:45.181Z: Fetching motion sensor data from Raspberry Pi at 192.168.0.121
+2025-06-16T14:07:45.181Z: Received motion sensor data: {"motionDetected":false}
+2025-06-16T14:07:45.181Z: Formatted motion sensor events: [{"name":"living room motion","value":false,"roomName":"Living Room","spaceId":"41413915"}]
+2025-06-16T14:07:45.181Z: Successfully updated motion event: living room motion = false
+2025-06-16T14:07:45.433Z: Motion sensor polling result: {"success":true,"updatedEvents":[{"name":"living room motion","value":false,"roomName":"Living Room","spaceId":"41413915"}],"totalEvents":1,"successfulUpdates":1}
+2025-06-16T14:07:46.163Z: AC state is: {"fanLevel":"auto","horizontalSwing":"fixedCenter","mode":"dry","on":true,"swing":"fixedMiddle","targetTemperature":28,"temperatureUnit":"C","timestamp":{"secondsAgo":0,"time":"2025-06-16T14:07:46.134919Z"}}
+2025-06-16T14:07:46.163Z: Extracted AC on state: true, target temperature: 28, target mode: dry
+2025-06-16T14:07:49.484Z: Raw light state result: null
+2025-06-16T14:07:49.485Z: Creating a combined row with motion=false, temp=24.4, humidity=71.2, light=false, ac_on=true, target_temp=28, target_mode=dry
+2025-06-16T14:07:49.486Z: logSensorData called with 7 sensors
+2025-06-16T14:07:49.486Z: Column map has 7 columns: [["living room temperature",1],["living room humidity",2],["living room motion",3],["light_state",4],["ac_state",5],["targetTemperature",6],["targetAcMode",7]]
+2025-06-16T14:07:49.486Z: Setting spaceId column 8 to 41413915
+2025-06-16T14:07:49.486Z: Setting column 3 (living room motion) to false
+2025-06-16T14:07:49.486Z: Setting column 1 (living room temperature) to 24.4
+2025-06-16T14:07:49.486Z: Setting column 2 (living room humidity) to 71.2
+2025-06-16T14:07:49.486Z: Setting column 4 (light_state) to false
+2025-06-16T14:07:49.486Z: Setting column 5 (ac_state) to true
+2025-06-16T14:07:49.486Z: Setting column 6 (targetTemperature) to 28
+2025-06-16T14:07:49.486Z: Setting column 7 (targetAcMode) to dry
+2025-06-16T14:07:49.486Z: Preparing row: 2025-06-16 14:07:49,24.4,71.2,false,false,true,28,dry,41413915
+2025-06-16T14:07:49.486Z: Successfully wrote to log file using writeFileSync
+2025-06-16T14:07:49.485Z: Successfully logged combined sensor data in one row with target temperature: 28 and target mode: dry
+2025-06-16T14:07:49.490Z: Combined logging result: {"success":true,"message":"Sensor data logged successfully"}
+2025-06-16T14:07:49.490Z: Polling interval active: true
+2025-06-17T11:42:26.227Z: Initializing sensor logging service
+2025-06-17T11:42:26.228Z: Log file path: /Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/logs/sensor_data.csv
+2025-06-17T11:42:26.228Z: Added light_state column to event names
+2025-06-17T11:42:26.229Z: Added ac_state column to event names
+2025-06-17T11:42:26.229Z: Added ac_state column to event names
+2025-06-17T11:42:26.229Z: Added targetAcMode column to event names
+2025-06-17T11:42:26.230Z: Using existing log file
+2025-06-17T11:42:26.232Z: Logging enabled
+2025-06-17T11:42:26.233Z: No polling was active to stop
+2025-06-17T11:42:26.234Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-06-17T11:42:26.234Z: Polling interval set with ID: 1271
+2025-06-17T11:42:26.235Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-06-17T11:42:26.236Z: Fetching motion sensor data from Raspberry Pi at 192.168.0.121
+2025-06-17T11:42:26.236Z: Received motion sensor data: {"motionDetected":false}
+2025-06-17T11:42:26.236Z: Formatted motion sensor events: [{"name":"living room motion","value":false,"roomName":"Living Room","spaceId":"41413915"}]
+2025-06-17T11:42:26.236Z: Successfully updated motion event: living room motion = false
+2025-06-17T11:42:26.883Z: Initializing sensor logging service
+2025-06-17T11:42:26.883Z: Log file path: /Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/logs/sensor_data.csv
+2025-06-17T11:42:26.884Z: Added light_state column to event names
+2025-06-17T11:42:26.884Z: Added ac_state column to event names
+2025-06-17T11:42:26.884Z: Added ac_state column to event names
+2025-06-17T11:42:26.884Z: Added targetAcMode column to event names
+2025-06-17T11:42:26.884Z: Using existing log file
+2025-06-17T11:42:26.885Z: Closing existing log stream before creating new one
+2025-06-17T11:42:26.885Z: Logging enabled
+2025-06-17T11:42:26.885Z: Stopping sensor polling interval: 1271
+2025-06-17T11:42:26.885Z: Closing logging service
+2025-06-17T11:42:26.886Z: Closing sensor logging service
+2025-06-17T11:42:26.886Z: Closing log stream
+2025-06-17T11:42:26.886Z: Logging stopped at 2025-06-17T11:42:26.886Z
+2025-06-17T11:42:26.886Z: Starting sensor polling with interval: 100000ms for IP 192.168.0.121
+2025-06-17T11:42:26.886Z: Polling interval set with ID: 1584
+2025-06-17T11:42:26.886Z: Fetching sensor data from Raspberry Pi at 192.168.0.121
+2025-06-17T11:42:26.887Z: Fetching motion sensor data from Raspberry Pi at 192.168.0.121
+2025-06-17T11:42:26.235Z: Received sensor data: {"temperature":25.7,"humidity":58.9}
+2025-06-17T11:42:26.235Z: Formatted events: [{"name":"living room temperature","value":25.7,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":58.9,"roomName":"Living Room","spaceId":"41413915"}]
+2025-06-17T11:42:26.235Z: Successfully updated event: living room temperature = 25.7
+2025-06-17T11:42:26.235Z: Successfully updated event: living room humidity = 58.9
+2025-06-17T11:42:27.283Z: Initial poll - AC on: true, target temp: 24, target mode: cool
+2025-06-17T11:42:27.284Z: Creating a combined row with motion=false, temp=25.7, humidity=58.9, light=false, ac_on=true, target_temp=24, target_mode=cool
+2025-06-17T11:42:27.285Z: logSensorData called with 7 sensors
+2025-06-17T11:42:27.285Z: WARNING - Logging is disabled but logSensorData was called
+2025-06-17T11:42:27.285Z: Attempting to re-initialize logging with existing events
+2025-06-17T11:42:27.286Z: Initializing sensor logging service
+2025-06-17T11:42:27.287Z: Log file path: /Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/logs/sensor_data.csv
+2025-06-17T11:42:27.289Z: Using existing log file
+2025-06-17T11:42:27.285Z: Column map has 7 columns: [["living room temperature",1],["living room humidity",2],["living room motion",3],["light_state",4],["ac_state",5],["targetTemperature",6],["targetAcMode",7]]
+2025-06-17T11:42:27.285Z: Setting spaceId column 8 to 41413915
+2025-06-17T11:42:27.285Z: Setting column 3 (living room motion) to false
+2025-06-17T11:42:27.285Z: Setting column 1 (living room temperature) to 25.7
+2025-06-17T11:42:27.285Z: Setting column 2 (living room humidity) to 58.9
+2025-06-17T11:42:27.285Z: Setting column 4 (light_state) to false
+2025-06-17T11:42:27.285Z: Setting column 5 (ac_state) to true
+2025-06-17T11:42:27.285Z: Setting column 6 (targetTemperature) to 24
+2025-06-17T11:42:27.285Z: Setting column 7 (targetAcMode) to cool
+2025-06-17T11:42:27.285Z: Preparing row: 2025-06-17 11:42:27,25.7,58.9,false,false,true,24,cool,41413915
+2025-06-17T11:42:27.285Z: Successfully wrote to log file using writeFileSync
+2025-06-17T11:42:27.284Z: Successfully logged combined sensor data in one row with target temperature: 24 and target mode: cool
+2025-06-17T11:42:27.293Z: Initial combined logging result: {"success":true,"message":"Sensor data logged successfully"}
+2025-06-17T11:42:27.294Z: Logging enabled
+2025-06-17T11:42:27.285Z: Re-initialization result: {"success":true,"message":"Sensor logging initialized to /Users/nourmawasi/Desktop/dev/iec/SmartSchool-Server/logs/sensor_data.csv","columns":[["living room temperature",1],["living room humidity",2],["living room motion",3],["light_state",4],["ac_state",5],["targetTemperature",6],["targetAcMode",7]]}
+2025-06-17T11:42:26.887Z: Received motion sensor data: {"motionDetected":false}
+2025-06-17T11:42:26.887Z: Formatted motion sensor events: [{"name":"living room motion","value":false,"roomName":"Living Room","spaceId":"41413915"}]
+2025-06-17T11:42:26.887Z: Successfully updated motion event: living room motion = false
+2025-06-17T11:42:26.886Z: Received sensor data: {"temperature":25.7,"humidity":58.9}
+2025-06-17T11:42:26.886Z: Formatted events: [{"name":"living room temperature","value":25.7,"roomName":"Living Room","spaceId":"41413915"},{"name":"living room humidity","value":58.9,"roomName":"Living Room","spaceId":"41413915"}]
+2025-06-17T11:42:26.886Z: Successfully updated event: living room temperature = 25.7
+2025-06-17T11:42:26.886Z: Successfully updated event: living room humidity = 58.9
+2025-06-17T11:42:27.838Z: Initial poll - AC on: true, target temp: 24, target mode: cool
+2025-06-17T11:42:27.839Z: Creating a combined row with motion=false, temp=25.7, humidity=58.9, light=false, ac_on=true, target_temp=24, target_mode=cool
+2025-06-17T11:42:27.839Z: logSensorData called with 7 sensors
+2025-06-17T11:42:27.839Z: Column map has 7 columns: [["living room temperature",1],["living room humidity",2],["living room motion",3],["light_state",4],["ac_state",5],["targetTemperature",6],["targetAcMode",7]]
+2025-06-17T11:42:27.839Z: Setting spaceId column 8 to 41413915
+2025-06-17T11:42:27.839Z: Setting column 3 (living room motion) to false
+2025-06-17T11:42:27.839Z: Setting column 1 (living room temperature) to 25.7
+2025-06-17T11:42:27.839Z: Setting column 2 (living room humidity) to 58.9
+2025-06-17T11:42:27.839Z: Setting column 4 (light_state) to false
+2025-06-17T11:42:27.839Z: Setting column 5 (ac_state) to true
+2025-06-17T11:42:27.839Z: Setting column 6 (targetTemperature) to 24
+2025-06-17T11:42:27.839Z: Setting column 7 (targetAcMode) to cool
+2025-06-17T11:42:27.839Z: Preparing row: 2025-06-17 11:42:27,25.7,58.9,false,false,true,24,cool,41413915
+2025-06-17T11:42:27.839Z: Successfully wrote to log file using writeFileSync
+2025-06-17T11:42:27.839Z: Successfully logged combined sensor data in one row with target temperature: 24 and target mode: cool
+2025-06-17T11:42:27.844Z: Initial combined logging result: {"success":true,"message":"Sensor data logged successfully"}

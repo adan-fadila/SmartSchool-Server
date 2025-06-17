@@ -144,3 +144,10 @@ timestamp,living room temperature,living room humidity,living room motion,light_
 2025-05-27 10:20:05,24,62,false,true,false,N/A,N/A,41413915
 2025-05-27 10:21:45,24,62,false,true,false,N/A,N/A,41413915
 2025-05-27 10:23:25,24,61.9,false,true,false,N/A,N/A,41413915
+2025-06-16 14:01:09,24.4,71.3,true,false,true,28,dry,41413915
+2025-06-16 14:02:49,24.4,71.4,false,false,true,28,dry,41413915
+2025-06-16 14:04:29,24.4,71.4,false,false,true,28,dry,41413915
+2025-06-16 14:06:09,24.4,71.3,false,false,true,28,dry,41413915
+2025-06-16 14:07:49,24.4,71.2,false,false,true,28,dry,41413915
+2025-06-17 11:42:27,25.7,58.9,false,false,true,24,cool,41413915
+2025-06-17 11:42:27,25.7,58.9,false,false,true,24,cool,41413915
