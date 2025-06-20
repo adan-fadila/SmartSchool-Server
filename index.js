@@ -43,7 +43,17 @@ connectDB();
 connectToWs();
 
 // server.use(cookieParser());
-server.use(cors());
+/*server.use(cors({
+    origin: [
+      'https://smart-space-react-jj6p.vercel.app',
+      'https://smartspaceshenkar.duckdns.org',
+      'http://localhost:3000',
+      'http://localhost:3001'
+    ],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+  }));*/
 server.use(express.json());
 server.use(express.urlencoded({extended: true}));  // hundel post reqs with body
 server.use(bodyParser.json());

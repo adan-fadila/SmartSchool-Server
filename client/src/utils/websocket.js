@@ -4,11 +4,11 @@ export const eventEmitter = new EventEmitter();
 
 let tempws;
 if (window.location.protocol === "https:") {
-    //tempws = new WebSocket('wss://software.shenkar.cloud:8080'); // for production    
-    tempws = new WebSocket('ws://localhost:8002'); // for development
+    tempws = new WebSocket('wss://smartspaceshenkar.duckdns.org/ws'); // Use nginx proxy path    
+    // tempws = new WebSocket('ws://localhost:8002'); // for development
 } else {
-    //tempws = new WebSocket('ws://software.shenkar.cloud:8001'); // for production
-    tempws = new WebSocket('ws://localhost:8002'); // for development
+    tempws = new WebSocket('ws://smartspaceshenkar.duckdns.org/ws'); // Use nginx proxy path
+    // tempws = new WebSocket('ws://localhost:8002'); // for development
 }
 export const ws = tempws;
 

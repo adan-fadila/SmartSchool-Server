@@ -29,7 +29,10 @@ const configRoomName = defaultConfig.roomName || 'Living Room';
 console.log(`WebSocket using configuration: Room=${configRoomName}, RoomID=${configRoomId}, SpaceID=${configSpaceId}`);
 
 const connectToWs = () => {
-  const wss = new WebSocket.Server({ port: 8002 });
+  const wss = new WebSocket.Server({ 
+    port: 8002,
+    path: '/ws'
+  });
 
   wss.on("connection", (ws) => {
     clients.push(ws);
